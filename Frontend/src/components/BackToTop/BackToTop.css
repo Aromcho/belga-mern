@@ -1,0 +1,43 @@
+.backToTopContainer {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99999999999999;
+    position: fixed;
+    bottom: 13%;
+    right: 30px;
+  }
+  
+  .backToTopContainer:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  
+  .backToTopContainer.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .icon--arrow {
+    width: 30px;
+    height: auto;
+    transform: rotate(90deg);
+  }
+  
+  .backToTopContainer.red .icon--arrow {
+    color: var(--secondary-color); /* Reemplaza con tu variable o color específico */
+  }
+  
+  .backToTopContainer.black .icon--arrow {
+    color: var(--black-color); /* Reemplaza con tu variable o color específico */
+  }
+  
+  .backToTopContainer.yellow .icon--arrow {
+    color: var(--primary-color); /* Reemplaza con tu variable o color específico */
+  }
+  

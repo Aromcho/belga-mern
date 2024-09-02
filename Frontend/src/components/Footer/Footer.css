@@ -1,0 +1,125 @@
+.footer-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 999997;
+  clip: rect(0, auto, auto, 0);
+  bottom: 0;
+  left: 0;
+}
+
+.back-container {
+  width: 100%;
+  position: absolute;
+  clip: rect(0, auto, auto, 0);
+  top: 0;
+  left: 0;
+}
+
+.footer-wrapper {
+  width: 100%;
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  clip: rect(0, auto, auto, 0);
+}
+
+.footer-left, .footer-right {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background-color: #000;
+}
+
+.footer-info {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  min-height: 700px;
+  padding-top: 80px;
+}
+
+.footer-info-bottom {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  min-height: 200px;
+}
+
+.footer-center {
+  width: 450px;
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.footer-center .footer-info {
+  height: 100%;
+  display: flex;
+  background-color: #f00;
+  padding-top: 0;
+}
+
+.footer-center .footer-info-bottom {
+  align-items: center;
+  background-color: #f00;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.contact-item, .location-item {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.left-info {
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+.left-contact {
+  width: 100%;
+  margin: 70px 0 60px;
+}
+
+.head-location, .body-location, .contact-item .info--link {
+  color: #fff;
+}
+
+.head-location svg, .contact-item svg {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.social-list, .social-list-mobile-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social--link {
+  transition: all 0.3s ease-in-out;
+  color: #fff;
+}
+
+.social--link:hover {
+  color: #f00;
+}
+
+.brand-footer, .brand-mobile-wrapper img {
+  width: 100%;
+  max-width: 230px;
+  height: auto;
+  display: block;
+}
+
+.legal-text, .legal-link, .mp {
+  max-width: 430px;
+  margin-bottom: 20px;
+  color: #fff;
+}

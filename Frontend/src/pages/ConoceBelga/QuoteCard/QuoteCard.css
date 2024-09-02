@@ -1,0 +1,40 @@
+.quote-logo {
+    width: 100%;
+    max-width: 20px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .quote-author {
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .quote-text {
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+    margin-bottom: 30px;
+  }
+  
+  .quote-rating {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .quote-container {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid var(--black-color);
+    color: var(--black-color);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .quote-container:hover {
+    cursor: pointer;
+    transform: translateY(-8px);
+  }
+  

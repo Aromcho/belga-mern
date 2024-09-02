@@ -1,0 +1,50 @@
+.quiero-vender-container {
+    width: 100%;
+    padding: 150px 0 80px;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .quiero-vender-container {
+      padding: 120px 0 0;
+    }
+  }
+  
+  .back-wrapper {
+    display: table;
+    margin-bottom: 40px;
+  }
+  
+  .back--link {
+    align-items: center;
+    display: inline-flex;
+    color: #000;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .back--link svg {
+    width: 24px;
+    height: auto;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    margin-right: 5px;
+  }
+  
+  .back--link:hover svg {
+    transform: translateX(-5px);
+  }
+  
+  .form-wrapper {
+    width: 100%;
+    margin: 30px auto 100px;
+    display: block;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .form-wrapper {
+      margin: 60px auto 100px;
+    }
+  }
+  

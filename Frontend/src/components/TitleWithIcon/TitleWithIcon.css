@@ -1,0 +1,40 @@
+.footer-title-text {
+    width: 100%;
+    max-width: 280px;
+    height: 42px;
+    align-items: center;
+    border: 1px solid var(--white-color);
+    border-radius: 0 5px 5px 5px;
+    color: var(--white-color);
+    display: flex;
+    font-size: 16px;
+    font-weight: 500;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  
+  .title-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .title-container svg {
+    width: 30px;
+    height: auto;
+    color: var(--white-color);
+    display: block;
+    flex: 0 0 auto;
+    margin-right: 10px;
+    position: relative;
+    top: -5px;
+  }
+  
+  .title-container.black svg {
+    color: var(--black-color);
+  }
+  
+  .title-container.black .footer-title-text {
+    border-color: var(--black-color);
+    color: var(--black-color);
+  }
+  

@@ -1,0 +1,54 @@
+.icon-wrapper {
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 100%;
+    border: 1px solid black;
+    background-color: transparent;
+    margin-left: 8px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+  }
+  
+  .icon-wrapper svg {
+    width: 12px;
+    height: auto;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+  }
+  
+  .icon-wrapper svg path {
+    fill: black;
+  }
+  
+  .icon-wrapper:hover {
+    transform: scale(1.2);
+  }
+  
+  .save-text {
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+  }
+  
+  .save-search-container {
+    align-items: center;
+    display: flex;
+  }
+  
+  .save-search-container.saved .icon-wrapper {
+    background-color: black;
+  }
+  
+  .save-search-container.saved .icon-wrapper svg path {
+    fill: white;
+  }
+  
+  .save-search-container.saved:hover .icon-wrapper {
+    transform: scale(0.8);
+    background-color: black;
+  }
+  

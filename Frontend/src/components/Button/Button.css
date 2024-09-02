@@ -1,0 +1,136 @@
+.text {
+    width: 220px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+    font-size: 14px;
+  }
+  
+  .wrapper-text {
+    width: 660px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    transition: transform 0.9s cubic-bezier(0.96, -0.25, 0, 1.27),
+      opacity 0.3s linear;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  a {
+    width: 100%;
+    min-width: 200px;
+    max-width: 219px;
+    height: 40px;
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid var(--white-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+    white-space: nowrap;
+    margin: 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+  }
+  
+  a:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    border-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.black {
+    border-color: var(--black-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--black-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.black:hover {
+    text-shadow: 0 0 3px var(--white-color)60; /* Reemplazar con el color correspondiente */
+  }
+  
+  a.secondary {
+    border-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.secondary:hover {
+    border-color: var(--primary-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--primary-color); /* Reemplazar con el color correspondiente */
+    color: var(--black-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.secondary.shine:hover {
+    border-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+    text-shadow: 0 0 8px var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline {
+    border: 1px solid var(--secondary-color); /* Reemplazar con el color correspondiente */
+    background-color: transparent;
+    color: var(--black-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline:hover {
+    border-color: var(--primary-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--primary-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline.black {
+    border: 1px solid var(--black-color); /* Reemplazar con el color correspondiente */
+    color: var(--black-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline.black:hover {
+    background-color: var(--black-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline.red {
+    border: 1px solid var(--secondary-color); /* Reemplazar con el color correspondiente */
+    color: var(--black-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.outline.red:hover {
+    border-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    background-color: var(--secondary-color); /* Reemplazar con el color correspondiente */
+    color: var(--white-color); /* Reemplazar con el color correspondiente */
+  }
+  
+  a.send,
+  a.sending,
+  a.sent {
+    width: 220px;
+    overflow: hidden;
+  }
+  
+  a.send .wrapper-text {
+    opacity: 1;
+    transform: translateX(-440px);
+  }
+  
+  a.sending .wrapper-text {
+    transform: translateX(-220px);
+  }
+  
+  a.gone .wrapper-text {
+    opacity: 0;
+    transform: translateX(-440px);
+  }
+  
+  a.sent .wrapper-text {
+    transform: translateX(0);
+  }
+  

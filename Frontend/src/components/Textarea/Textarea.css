@@ -1,0 +1,73 @@
+.error-text {
+    color: var(--error-color);
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 500;
+    position: absolute;
+    top: calc(100% + 1px);
+  }
+  
+  .bottom-text {
+    color: var(--gray45-color);
+    font-size: var(--table-header-font-size);
+    display: block;
+    margin-top: 5px;
+    padding-left: 8px;
+    white-space: nowrap;
+  }
+  
+  .label {
+    font-weight: 700;
+    color: var(--gray50-color);
+    display: block;
+    font-size: var(--text-small-font-size);
+    margin-bottom: 5px;
+    padding-left: 8px;
+  }
+  
+  .textarea-styled {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+    align-items: center;
+    border: 1px solid var(--black-color);
+    border-radius: 6px;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    transition: all 0.3s ease-in-out;
+    margin: 0 auto;
+    padding: 15px 25px;
+    resize: none;
+  }
+  
+  .textarea-styled:focus,
+  .textarea-styled:focus-within,
+  .textarea-styled:not(:placeholder-shown) {
+    background-color: var(--white-color);
+    border-color: var(--first-color) !important;
+    outline: none;
+  }
+  
+  .textarea-styled::placeholder {
+    color: var(--black-color);
+    opacity: 1;
+  }
+  
+  .input-wrapper {
+    width: 100%;
+    margin: 0 auto 15px;
+    position: relative;
+  }
+  
+  .input-wrapper.error {
+    margin: 0 auto 20px;
+  }
+  
+  .input-wrapper.error .textarea-styled {
+    border-color: var(--error-color);
+  }
+  
