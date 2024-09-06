@@ -9,15 +9,15 @@ const Error404 = () => {
   return (
     <Layout menuTheme="light">
       <div className="error-container">
-        <Container>
+        <div className="container">
           <div className="row-content bold">
             <Link to="/">
               <ArrowBackIcon className="left" /> VOLVER AL INICIO
             </Link>
           </div>
-        </Container>
+        </div>
 
-        <Container>
+        <div className="container">
           <div className="wrapper-content">
             <div className="wrapper-image">
               <img src="/images/404_image.svg" className="image" alt="Error 404" />
@@ -41,7 +41,7 @@ const Error404 = () => {
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </div>
     </Layout>
   );

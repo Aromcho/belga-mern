@@ -1,0 +1,18 @@
+.item-list {
+  margin-top: ¿50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .item-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .item-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

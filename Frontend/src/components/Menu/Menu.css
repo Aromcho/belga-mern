@@ -357,6 +357,7 @@
   text-align: center;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
+  text-decoration: none;
   white-space: nowrap;
   position: relative;
 }

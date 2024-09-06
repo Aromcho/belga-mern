@@ -14,6 +14,7 @@ import {
   HeartIcon,
   EmprendimientosIcon,
 } from "../Icons/Icons.jsx";
+import { Link } from "react-router-dom";
 
 export const Menu = ({ theme = "transparent" }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -66,7 +67,7 @@ export const Menu = ({ theme = "transparent" }) => {
 
       <div className={`menu-wrapper ${scrollTop > 0 ? 'scrolled' : ''}`}>
         <div className="container-nav menu--container">
-          <a href={PATHS.ROOT}>
+          <Link to={"/"}>
             <div className="menu-brand-wrapper">
               <img
                 className="menu-brand"
@@ -76,13 +77,13 @@ export const Menu = ({ theme = "transparent" }) => {
               />
               <BelgaIsoIcon className="isobrand--img" />
             </div>
-          </a>
+          </Link>
 
           <ul className="menu-list ">
             <li className="menu-item">
-              <a href={PATHS.VENTA} className="menu--link">
+              <Link to={"propertylist"} className="menu--link">
                 Quiero comprar <div className="underline-link" />
-              </a>
+              </Link>
             </li>
             <li className="menu-item">
               <a href={PATHS.EMPRENDIMIENTOS} className="menu--link">

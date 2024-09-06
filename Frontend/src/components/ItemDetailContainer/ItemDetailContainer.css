@@ -1,0 +1,20 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #F2D8A7;
+}
+
+.loading-container p {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1.2rem;
+}

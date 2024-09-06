@@ -1,70 +1,49 @@
 import PropertyManager from '../manager/property.manager.js';
 
+// controllers/property.controller.js
+
 const getProperties = async (req, res) => {
   try {
-    const { limit = 20, offset = 0, order = 'DESC', ...filters } = req.query;
+    const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, limit = 20, offset = 0, order = 'DESC' } = req.query;
 
     // Create the filter object
     const filterObj = {};
 
     // Filtering by operation type
-    if (filters.operation_type && filters.operation_type.length > 0) {
-      filterObj['operations.operation_type'] = { $in: filters.operation_type };
+    if (operation_type && operation_type.length > 0) {
+      filterObj['operations.operation_type'] = operation_type;
     }
 
-    // Filtering by custom tags (e.g., property type)
-    if (filters.property_type && filters.property_type !== '-1') {
-      const typesArray = filters.property_type.split(',').map(Number);
-      filterObj['custom_tags.id'] = { $in: typesArray };
+    // Filtering by property type
+    if (property_type && property_type !== '-1') {
+      filterObj['custom_tags.name'] = property_type;
     }
 
-    // Filtering by location
-    if (filters.locations && filters.locations.length > 0) {
-      filterObj['location.divisions.name'] = { $in: filters.locations };
+    // Filtering by room count
+    if (minRooms || maxRooms) {
+      filterObj['operations.suite_amount'] = {};
+      if (minRooms) {
+        filterObj['operations.suite_amount'].$gte = parseInt(minRooms);
+      }
+      if (maxRooms) {
+        filterObj['operations.suite_amount'].$lte = parseInt(maxRooms);
+      }
     }
 
     // Filtering by price range
-    if (filters.price_from || filters.price_to) {
+    if (minPrice || maxPrice) {
       filterObj['operations.prices.price'] = {};
-      if (filters.price_from) {
-        filterObj['operations.prices.price'].$gte = parseInt(filters.price_from);
+      if (minPrice) {
+        filterObj['operations.prices.price'].$gte = parseInt(minPrice);
       }
-      if (filters.price_to) {
-        filterObj['operations.prices.price'].$lte = parseInt(filters.price_to);
-      }
-    }
-
-    // Filtering by number of rooms
-    if (filters.min_rooms || filters.max_rooms) {
-      filterObj['operations.suite_amount'] = {};
-      if (filters.min_rooms) {
-        filterObj['operations.suite_amount'].$gte = parseInt(filters.min_rooms);
-      }
-      if (filters.max_rooms) {
-        filterObj['operations.suite_amount'].$lte = parseInt(filters.max_rooms);
+      if (maxPrice) {
+        filterObj['operations.prices.price'].$lte = parseInt(maxPrice);
       }
     }
 
-    // Filtering by number of bathrooms
-    if (filters.min_baths || filters.max_baths) {
-      filterObj['operations.bathroom_amount'] = {};
-      if (filters.min_baths) {
-        filterObj['operations.bathroom_amount'].$gte = parseInt(filters.min_baths);
-      }
-      if (filters.max_baths) {
-        filterObj['operations.bathroom_amount'].$lte = parseInt(filters.max_baths);
-      }
-    }
-
-    // Filtering by parking lots
-    if (filters.parking_lot_from || filters.parking_lot_to) {
-      filterObj['operations.parking_lot_amount'] = {};
-      if (filters.parking_lot_from) {
-        filterObj['operations.parking_lot_amount'].$gte = parseInt(filters.parking_lot_from);
-      }
-      if (filters.parking_lot_to) {
-        filterObj['operations.parking_lot_amount'].$lte = parseInt(filters.parking_lot_to);
-      }
+    // Filtering by neighborhood
+    if (barrio && barrio.length > 0) {
+      filterObj['location.divisions.name'] = barrio;
     }
 
     // Sorting the results
@@ -94,6 +73,7 @@ const getProperties = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener propiedades', error });
   }
 };
+
 
 const getPropertyById = async (req, res) => {
   try {
@@ -198,6 +178,19 @@ const sendContactEmail = async (req, res) => {
     res.status(400).json({ code: 0, error: error.statusCode, body: error.body });
   }
 };
+const getAllPropertyIds = async (req, res) => {
+  try {
+    // Buscar todas las propiedades y devolver solo los IDs
+    const properties = await PropertyManager.read({}, { id: 1 }); // Solo obtenemos el campo 'id'
+    
+    const ids = properties.map(property => property.id); // Crear una lista solo de los IDs
+    
+    res.status(200).json(ids);
+  } catch (error) {
+    console.error('Error al obtener los IDs de las propiedades:', error);
+    res.status(500).json({ message: 'Error al obtener los IDs de las propiedades', error });
+  }
+};
 
 export {
   getProperties,
@@ -206,4 +199,5 @@ export {
   getNeighborhoods,
   getFavorites,
   sendContactEmail,
+  getAllPropertyIds,
 };

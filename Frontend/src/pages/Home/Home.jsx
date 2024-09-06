@@ -16,8 +16,10 @@ import { useMergeState } from "../../helpers/hooks";
 import { getSearchUrl, propertiesSelectOptions } from "../../helpers/tokko.js";
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx"; 
 import Select from "../../components/Select/Select.jsx";
+import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 
 import "./Home.css"; 
+import Item from "../../components/Item/Item.jsx";
 
 const Home = observer(() => {
   const { favorites, toggleFavorite } = UserStore;
@@ -78,7 +80,7 @@ const Home = observer(() => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(getSearchUrl(formData));
+    navigate("/propertylist");
   };
 
   return (
@@ -274,15 +276,7 @@ const Home = observer(() => {
             buttonStyle="outline red"
           />
           <div className="prop-list">
-            {(Array.isArray(properties) ? properties : []).map((item, k) => (
-              <CardProp
-                key={k}
-                className="card--prop-home"
-                property={item}
-                liked={favorites.includes(item.id)}
-                onLiked={() => toggleFavorite(item.id)}
-              />
-            ))}
+           <SelectionListContainer></SelectionListContainer>
           </div>
           <Button
             className="button--mobile"

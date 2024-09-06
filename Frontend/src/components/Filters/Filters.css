@@ -1,0 +1,27 @@
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-input {
+  height: 40px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.search-button {
+  background-color: #d9534f;
+  border: none;
+  height: 40px;
+  width: 100px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.search-button:hover {
+  background-color: #c9302c;
+}

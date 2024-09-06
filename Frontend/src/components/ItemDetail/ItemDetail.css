@@ -1,0 +1,40 @@
+.img-thumbnail-small {
+  width: 20%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.img-thumbnail-small.active {
+  border: 2px solid #F2D8A7;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-custom {
+  width: 100%;
+  height: auto;
+}
+
+.custom-button {
+  background-color: #F2D8A7 !important;
+  color: black !important;
+}
+
+.custom-button:hover {
+  background-color: #e6c08c !important;
+}
+
+.property-features, .property-info, .property-description {
+  margin-top: 20px;
+}
+
+.property-detail h1 {
+  font-size: 2rem;
+}
+
+.property-detail h2 {
+  font-size: 1.5rem;
+}
