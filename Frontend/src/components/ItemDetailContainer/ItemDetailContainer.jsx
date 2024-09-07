@@ -13,7 +13,7 @@ const ItemDetailContainer = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(`/api/${propertyId}`);
+        const response = await axios.get(`/api/api/${propertyId}`);
         setProperty(response.data);
       } catch (error) {
         setError(error.message);

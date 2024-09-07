@@ -5,13 +5,15 @@ import { FaBed, FaBath, FaCarAlt } from "react-icons/fa";
 import './Item.css';
 
 const Item = ({ property }) => {
-  const mainImage = property.photos[0]?.url || 'default-image.jpg';
+  const mainImage = property.photos[0]?.image || 'default-image.jpg';
   const price = property.operations[0]?.prices[0]?.price || 'Precio no disponible';
   const operationType = property.operations[0]?.operation_type || 'Tipo de operación no disponible';
   const bedrooms = property.operations[0]?.suite_amount || 0;
   const bathrooms = property.operations[0]?.bathroom_amount || 0;
   const parkingLots = property.operations[0]?.parking_lot_amount || 0;
   const size = property.size || 0;
+  const type = property.type || 'Tipo de propiedad no disponible';
+  console.log(type);
   
 
   return (

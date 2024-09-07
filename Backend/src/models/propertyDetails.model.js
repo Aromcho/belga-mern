@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
+
 
 // Schema para los detalles de la sucursal (branch)
 const branchSchema = new mongoose.Schema({
@@ -154,6 +156,8 @@ const propertyDetailsSchema = new mongoose.Schema({
   web_price: Boolean,
   zonification: String,
 }, { timestamps: true }); // timestamps añade createdAt y updatedAt automáticamente
+
+propertyDetailsSchema.plugin(mongoosePaginate);
 
 const propertyDetail = mongoose.model('PropertyDetails', propertyDetailsSchema);
 export default propertyDetail;

@@ -9,12 +9,14 @@ import './ItemDetail.css';
 const ItemDetail = ({ property }) => {
   const [propertyApi, setPropertyApi] = useState(null); // Estado para los detalles de la propiedad desde la API
   const [mainImage, setMainImage] = useState(null);
-  const idTokko = property.id; // ID de la propiedad pasada por prop
+  const idTokko = property._id; // ID de la propiedad pasada por prop
+  const type = property.type || 'Tipo de propiedad no disponible';
+  console.log(type);
 
   // Realizamos la solicitud GET a la API pasando el ID de la propiedad
   const fetchPropertyDetails = async () => {
     try {
-      const response = await axios.get(`/api/propertyDetail/${idTokko}`);
+      const response = await axios.get(`/api/api/${idTokko}`);
       const propertyData = response.data;
       setPropertyApi(propertyData); // Guardamos la propiedad en el estado
       setMainImage(propertyData.photos?.[0]?.image); // Establecemos la imagen principal si hay fotos
@@ -22,7 +24,6 @@ const ItemDetail = ({ property }) => {
       console.error('Error al obtener los detalles de la propiedad:', error);
     }
   };
-  console.log(property);
   // Usamos useEffect para ejecutar la solicitud una vez que el componente se monta
   useEffect(() => {
     fetchPropertyDetails();

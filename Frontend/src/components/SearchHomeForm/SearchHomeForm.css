@@ -1,0 +1,139 @@
+.search-form-wrapper {
+    width: 100%;
+    max-width: 688px;
+    margin: 0 auto;
+    z-index: 6;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .search-form-wrapper {
+      max-width: 500px;
+    }
+  }
+  
+  .search-row {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .search-row {
+      flex-flow: column;
+    }
+  }
+  
+  .search-row.first--row .first--row-input,
+  .search-row.second--row .second--row-input {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 15px 0;
+  }
+  
+  .search-row.first--row input,
+  .search-row.second--row input {
+    height: 45px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+  }
+  
+  .search-row.first--row input:focus,
+  .search-row.first--row input:not(:placeholder-shown),
+  .search-row.second--row input:focus,
+  .search-row.second--row input:not(:placeholder-shown) {
+    color: #ffffff;
+  }
+  
+  .search-row.first--row input::placeholder,
+  .search-row.second--row input::placeholder {
+    color: #ffffff;
+  }
+  
+  .search-row.third--row {
+    margin-top: -10px;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .search-row.third--row {
+      margin-top: 0;
+    }
+  }
+  
+  .search-row.third--row .third--row-button {
+    width: 100%;
+    height: 38px;
+    max-width: 100%;
+  }
+  
+  .search-row.fourth--row {
+    display: none;
+    margin-top: 80px;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .search-row.fourth--row {
+      display: block;
+    }
+  }
+  
+  .search-row.fourth--row .fourth--row-button {
+    width: 100%;
+    max-width: 100%;
+    height: 38px;
+  }
+  
+  .range-wrapper {
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    top: -1px;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .range-wrapper {
+      display: none;
+    }
+  }
+  
+  .price-range {
+    width: 100%;
+    height: 40px;
+    max-width: 336px;
+  }
+  
+  .input-divider {
+    width: 10px;
+    height: 2px;
+    margin: 0 20px;
+    background-color: #ffffff;
+  }
+  
+  .price-input-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .input--price {
+    pointer-events: none;
+    margin-bottom: 0;
+  }
+  
+  .input--price input {
+    height: 25px !important;
+    font-size: 13px;
+  }
+  
+  .price-text {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 30px;
+  }
+  

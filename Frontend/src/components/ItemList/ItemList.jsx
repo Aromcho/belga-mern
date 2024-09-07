@@ -18,7 +18,7 @@ const ItemList = ({ properties }) => {
   const fetchProperties = async (filters = {}) => {
     try {
       // Solicitar propiedades con filtros y paginación
-      const response = await axios.get('/api/properties', {
+      const response = await axios.get('/api/api/properties', {
         params: {
           operation_type: filters.operationType,
           property_type: filters.propertyType,

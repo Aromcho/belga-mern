@@ -52,8 +52,8 @@ const Filters = ({ onSubmit }) => {
                 onChange={(e) => setPropertyType(e.target.value)}
               >
                 <option value="">Tipo de Propiedad</option>
-                <option value="Casa">Casa</option>
-                <option value="Departamento">Departamento</option>
+                <option value="House">Casa</option>
+                <option value="Apartment">Departamento</option>
               </Form.Control>
             </Form.Group>
           </Col>

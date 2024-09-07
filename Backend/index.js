@@ -4,9 +4,9 @@ import morgan from 'morgan';
 import cron from 'node-cron';
 import cors from 'cors'; // Importa CORS
 import connectDB from './src/config/db.js';
-import propertyRoutes from './src/routes/property.routes.js';
 import { syncWithTokko } from './src/utils/syncWithTokko.js';
 import { syncWithTokkoid } from './src/utils/syncWithTokkoid.js';
+import router from './src/routes/index.router.js';
 
 dotenv.config();
 
@@ -22,12 +22,17 @@ connectDB();
 
 app.use(express.static('public'));
 
-app.use('/api', propertyRoutes);
+app.use('/api', router);
 
+cron.schedule('0 */6 * * *', () => {
+  console.log('Running cron job to sync with Tokko');
+  syncWithTokko();
+});
 cron.schedule('0 */6 * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncWithTokkoid();
 });
+
 
 
 const PORT = process.env.PORT || 8080;

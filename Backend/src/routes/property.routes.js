@@ -12,15 +12,19 @@ import {  getpropertyDetailById } from '../controllers/propertyDetail.controller
 
 
 
-const router = express.Router();
+const propertyRouter = express.Router();
 
-router.get('/properties', getProperties);
-router.get('/propertyDetail/:id', getpropertyDetailById);
-router.get('/neighborhoods', getNeighborhoods);
-router.get('/:id', getPropertyById);
-router.get('/related', getRelatedProperties);
-router.get('/favorites', getFavorites);
-router.post('/contact', sendContactEmail);
-router.get('/properties/ids', getAllPropertyIds);
+ propertyRouter.get('/properties', getProperties);
+ propertyRouter.get('/propertyDetail/:id', getpropertyDetailById);
+ propertyRouter.get('/neighborhoods', getNeighborhoods);
+ propertyRouter.get('/:id', getPropertyById);
+ propertyRouter.get('/related', getRelatedProperties);
+ propertyRouter.get('/favorites', getFavorites);
+ propertyRouter.post('/contact', sendContactEmail);
+ propertyRouter.get('/properties/ids', getAllPropertyIds);
 
-export default router;
+// details routes
+
+
+
+export default propertyRouter;

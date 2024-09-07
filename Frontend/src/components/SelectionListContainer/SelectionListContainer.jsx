@@ -11,7 +11,7 @@ const SelectionListContainer = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('/api/properties');
+        const response = await axios.get('/api/api/properties');
         // Limitar a solo 2 propiedades
         setProperties(response.data.objects.slice(0, 2));
       } catch (error) {
