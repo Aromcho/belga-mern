@@ -28,6 +28,8 @@ const ItemList = ({ properties }) => {
           property_type: filters.propertyType,
           minRooms: filters.minRooms,
           maxRooms: filters.maxRooms,
+          garages: filters.garages, // Asegurarse de que cocheras se envíen al backend
+
           minPrice: filters.minPrice,
           maxPrice: filters.maxPrice,
           barrio: filters.barrio,

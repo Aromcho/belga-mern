@@ -25,77 +25,86 @@ import PropertyManager from '../manager/propertyDetail.manager.js';
   }
 }
 
-  const getProperties = async (req, res) => {
-    try {
-      const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, limit = 20, offset = 0, order = 'DESC' } = req.query;
-  
-      // Crear un objeto con los filtros a aplicar
-      const filterObj = {};
-  
-      // Filtro por tipo de operación
-      if (operation_type && operation_type.length > 0) {
-        filterObj['operations.operation_type'] = operation_type;
-      }
-  
-      // Filtro por tipo de propiedad
-      if (property_type && property_type !== '-1') {
-        filterObj['type.name'] = property_type;
-      }
-  
-      // Filtro por cantidad de habitaciones
-      if (minRooms || maxRooms) {
-        filterObj['suite_amount'] = {};
-        if (minRooms) {
-          filterObj['suite_amount'].$gte = parseInt(minRooms);
-        }
-        if (maxRooms) {
-          filterObj['suite_amount'].$lte = parseInt(maxRooms);
-        }
-      }
-  
-      // Filto por rango de precios
-      if (minPrice || maxPrice) {
-        filterObj['operations.prices.price'] = {};
-        if (minPrice) {
-          filterObj['operations.prices.price'].$gte = parseInt(minPrice);
-        }
-        if (maxPrice) {
-          filterObj['operations.prices.price'].$lte = parseInt(maxPrice);
-        }
-      }
-  
-      // Filtering by neighborhood
-      if (barrio && barrio.length > 0) {
-        filterObj['location.divisions.name'] = barrio;
-      }
-  
-      // Ordenar por precio
-      const sortObj = order === 'DESC' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
-  
-      const properties = await PropertyManager.paginate({
-        filter: filterObj,
-        opts: {
-          sort: sortObj,
-          limit: parseInt(limit, 10),
-          offset: parseInt(offset, 10),
-        },
-      });
-  
-      const total_count = properties.totalDocs;
-  
-      res.json({
-        meta: {
-          limit: parseInt(limit, 10),
-          offset: parseInt(offset, 10),
-          total_count,
-        },
-        objects: properties.docs,
-      });
-    } catch (error) {
-      console.error('Error al obtener propiedades:', error);
-      res.status(500).json({ message: 'Error al obtener propiedades', error });
+const getProperties = async (req, res) => {
+  try {
+    const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, garages, limit = 20, offset = 0, order = 'DESC' } = req.query;
+
+    // Crear un objeto con los filtros a aplicar
+    const filterObj = {};
+
+    // Filtro por tipo de operación
+    if (operation_type && operation_type.length > 0) {
+      filterObj['operations.operation_type'] = operation_type;
     }
-  };
+
+    // Filtro por tipo de propiedad
+    if (property_type && property_type !== '-1') {
+      filterObj['type.name'] = property_type;
+    }
+
+    // Filtro por cantidad de habitaciones
+    if (minRooms || maxRooms) {
+      filterObj['suite_amount'] = {};
+      if (minRooms) {
+        filterObj['suite_amount'].$gte = parseInt(minRooms);
+      }
+      if (maxRooms) {
+        filterObj['suite_amount'].$lte = parseInt(maxRooms);
+      }
+    }
+
+    // Filtro por rango de precios
+    if (minPrice || maxPrice) {
+      filterObj['operations.prices.price'] = {};
+      if (minPrice) {
+        filterObj['operations.prices.price'].$gte = parseInt(minPrice);
+      }
+      if (maxPrice) {
+        filterObj['operations.prices.price'].$lte = parseInt(maxPrice);
+      }
+    }
+
+    // Filtro por barrio
+    if (barrio && barrio.length > 0) {
+      filterObj['location.divisions.name'] = barrio;
+    }
+
+    // Filtro por cocheras (garages)
+    if (garages && parseInt(garages) > 0) {
+      filterObj['parking_lot_amount'] = parseInt(garages) ; // Asegurarte de que tu modelo use `parking_lot_amount` o similar
+      console.log('Filtros:', filterObj);
+
+    }
+
+    // Ordenar por precio
+    const sortObj = order === 'DESC' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
+
+    const properties = await PropertyManager.paginate({
+      filter: filterObj,
+      opts: {
+        sort: sortObj,
+        limit: parseInt(limit, 10),
+        offset: parseInt(offset, 10),
+      },
+    });
+
+    const total_count = properties.totalDocs;
+
+    res.json({
+      meta: {
+        limit: parseInt(limit, 10),
+        offset: parseInt(offset, 10),
+        total_count,
+      },
+      objects: properties.docs,
+    });
+  } catch (error) {
+    console.error('Error al obtener propiedades:', error);
+    res.status(500).json({ message: 'Error al obtener propiedades', error });
+  }
+};
+
+
   
   
   const getPropertyById = async (req, res) => {

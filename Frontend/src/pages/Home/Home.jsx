@@ -12,6 +12,7 @@ import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
+import FormContact from "../../components/FormContact/FormContact.jsx";
 
 const Home = observer(() => {
   const { favorites, toggleFavorite } = UserStore;
@@ -161,6 +162,10 @@ const Home = observer(() => {
             link="/emprendimientos"
           />
         </div>
+      </div>
+      {/* Agregar el componente Fromcontact aquí */}
+      <div className="contact-section">
+        <FormContact />
       </div>
     </div>
   );

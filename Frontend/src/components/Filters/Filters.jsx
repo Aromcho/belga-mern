@@ -110,15 +110,16 @@ const Filters = ({ onSubmit }) => {
           </Col>
 
           <Col>
-            <Form.Group controlId="garages">
-              <Form.Control
-                type="number"
-                className="filter-input"
-                value={garages}
-                placeholder="Cocheras"
-                onChange={(e) => setGarages(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="garages">
+  <Form.Control
+    type="number"
+    className="filter-input"
+    value={garages}
+    placeholder="Cocheras"
+    onChange={(e) => setGarages(e.target.value)}
+  />
+</Form.Group>
+
           </Col>
           <Col>
             <Form.Group controlId="minPrice">
