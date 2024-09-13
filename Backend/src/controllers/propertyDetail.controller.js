@@ -29,31 +29,31 @@ import PropertyManager from '../manager/propertyDetail.manager.js';
     try {
       const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, limit = 20, offset = 0, order = 'DESC' } = req.query;
   
-      // Create the filter object
+      // Crear un objeto con los filtros a aplicar
       const filterObj = {};
   
-      // Filtering by operation type
+      // Filtro por tipo de operación
       if (operation_type && operation_type.length > 0) {
         filterObj['operations.operation_type'] = operation_type;
       }
   
-      // Filtering by property type
+      // Filtro por tipo de propiedad
       if (property_type && property_type !== '-1') {
         filterObj['type.name'] = property_type;
       }
   
-      // Filtering by room count
+      // Filtro por cantidad de habitaciones
       if (minRooms || maxRooms) {
-        filterObj['operations.suite_amount'] = {};
+        filterObj['suite_amount'] = {};
         if (minRooms) {
-          filterObj['operations.suite_amount'].$gte = parseInt(minRooms);
+          filterObj['suite_amount'].$gte = parseInt(minRooms);
         }
         if (maxRooms) {
-          filterObj['operations.suite_amount'].$lte = parseInt(maxRooms);
+          filterObj['suite_amount'].$lte = parseInt(maxRooms);
         }
       }
   
-      // Filtering by price range
+      // Filto por rango de precios
       if (minPrice || maxPrice) {
         filterObj['operations.prices.price'] = {};
         if (minPrice) {
@@ -69,7 +69,7 @@ import PropertyManager from '../manager/propertyDetail.manager.js';
         filterObj['location.divisions.name'] = barrio;
       }
   
-      // Sorting the results
+      // Ordenar por precio
       const sortObj = order === 'DESC' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
   
       const properties = await PropertyManager.paginate({

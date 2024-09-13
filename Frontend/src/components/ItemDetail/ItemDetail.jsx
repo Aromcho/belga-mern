@@ -20,6 +20,7 @@ const ItemDetail = ({ property }) => {
       const propertyData = response.data;
       setPropertyApi(propertyData); // Guardamos la propiedad en el estado
       setMainImage(propertyData.photos?.[0]?.image); // Establecemos la imagen principal si hay fotos
+      console.log(propertyData);
     } catch (error) {
       console.error('Error al obtener los detalles de la propiedad:', error);
     }

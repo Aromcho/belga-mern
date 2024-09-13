@@ -33,9 +33,11 @@ cron.schedule('0 */6 * * *', () => {
   syncWithTokkoid();
 });
 
-
-
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+
+const ready = () => {
   console.log(`Server running on port ${PORT}`);
-});
+};
+
+
+app.listen(PORT, ready);

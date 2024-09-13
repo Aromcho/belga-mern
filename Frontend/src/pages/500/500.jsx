@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button.jsx";
-import { ArrowBackIcon } from "../../components/Icons/icons.jsx";
-import Layout from "../../components/Layout/Layout.jsx";
+import { ArrowBackIcon } from "../../components/Icons/Icons.jsx";
+//import Layout from "../../components/Layout/Layout.jsx";
 import "./500.css"; // Importar el CSS de forma clásica
 
 const Error500 = () => {
   return (
-    <Layout menuTheme="light">
       <div className="error-container">
         <Container>
           <div className="row-content bold">
@@ -41,7 +40,6 @@ const Error500 = () => {
           </div>
         </Container>
       </div>
-    </Layout>
   );
 };
 

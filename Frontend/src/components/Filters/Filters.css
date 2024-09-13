@@ -1,8 +1,37 @@
-
-.filter-row {
+.dorms-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  border: 1px solid #000000;
+}
+
+.dorms-label {
+  font-size: 14px;
+  color: #6c757d;
+  padding: 0 10px;
+}
+
+.dorms-dropdowns {
+  display: flex;
+  align-items: center;
+}
+
+.min-max-input {
+  width: 80px; /* Ajustado para hacer espacio al separador */
+  height: 38px;
+  border-radius: 0;
+  font-size: 14px;
+  border: 0;
+  color: #6c757d;
+  text-align: center;
+  appearance: none; /* Eliminar el estilo predeterminado de select */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="gray" d="M0 0l2 2 2-2"/></svg>') no-repeat right 10px center;
+  background-size: 12px;
+}
+
+.separator {
+  margin: 0 10px;
+  font-size: 18px;
+  color: #6c757d;
 }
 
 .filter-input {

@@ -1,30 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import './Dropdown.css'; // Importa el archivo CSS común
+import React from 'react';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
+import './Dropdown.css';
 
-const Dropdown = ({ value, className, placeholder, children, close }) => {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (typeof close === 'boolean') {
-      setOpen(false);
-    }
-  }, [close]);
+const DormDropdown = ({ value, onChange, placeholder }) => {
+  const options = [1, 2, 3, 4, 5];
 
   return (
-    <div className={`dropdown-styled ${className}`}>
+    <div className="dropdown-custom-wrapper">
       <span className="dropdown-label" onClick={() => setOpen(!open)}>
-        {value || placeholder}
+        {value || placeholder} <span className="dropdown-arrow">▾</span>
       </span>
-      {open && (
-        <>
-          <div className="dropdown-div-close" onClick={() => setOpen(false)} />
-          <div className="dropdown-list" onMouseLeave={() => setOpen(false)}>
-            {children}
-          </div>
-        </>
-      )}
+      <DropdownButton
+        id="dropdown-basic-button"
+        title={value || placeholder}
+        className="dropdown-custom"
+        variant="light"
+      >
+        {options.map((option, index) => (
+          <Dropdown.Item
+            key={index}
+            onClick={() => onChange(option)}
+            className="dropdown-item-custom"
+          >
+            {option}
+          </Dropdown.Item>
+        ))}
+      </DropdownButton>
+      
     </div>
   );
 };
 
-export default Dropdown;
+export default DormDropdown;

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CardProp from "../../components/CardProp/CardProp.jsx";
-import Title from "../../components/Title/Title.jsx";
-import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import UserStore from "../../store/UserStore.jsx";
 import { useMergeState } from "../../helpers/hooks";
+import "./Home.css";
+
+import Title from "../../components/Title/Title.jsx";
+import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
-
-import "./Home.css";
 
 const Home = observer(() => {
   const { favorites, toggleFavorite } = UserStore;
@@ -37,7 +36,6 @@ const Home = observer(() => {
   const [barrios, setBarrios] = useState([]);
 
   useEffect(() => {
-    // Obtener propiedades
     axios('/api/properties')
       .then(({ data }) => {
         setProperties(Array.isArray(data) ? data : []);
@@ -47,7 +45,6 @@ const Home = observer(() => {
         setProperties([]);
       });
 
-    // Obtener emprendimientos
     axios('/api/properties')
       .then(({ data }) => {
         setEmprendimientos(Array.isArray(data) ? data : []);
@@ -57,7 +54,6 @@ const Home = observer(() => {
         setEmprendimientos([]);
       });
 
-    // Obtener barrios
     axios('/api/neighborhoods')
       .then(({ data }) => {
         setBarrios(data);
@@ -77,19 +73,28 @@ const Home = observer(() => {
 
   return (
     <div className="layout transparent">
+      {/* Hero Section */}
       <div className="hero-wrapper">
         <video autoPlay muted loop className="video">
           <source src="/home-video.mp4" type="video/mp4" />
         </video>
         <img
+          src="/Frame 1.png"
+          alt="Superposición PNG"
+          className="w-100 h-100 position-absolute top-0 start-0"
+        />
+        {/* Background Image */}
+        <img
           src="/Foto_Portada.jpg"
           alt="Portada"
           className="background-image"
         />
+        {/* Hero Content */}
         <div className="overlay"></div>
         <div className="hero">
           <SocialSidebar />
         </div>
+        {/* Search Form */}
         <div className="container-form-serch align--center">
           <SearchHomeForm
             formData={formData}
@@ -101,6 +106,8 @@ const Home = observer(() => {
           />
         </div>
       </div>
+
+      {/* Section 8: Selección Section */}
       <div className="seleccion-section">
         <div className="seleccion">
           <SocialSidebar color="red" />
@@ -112,17 +119,20 @@ const Home = observer(() => {
             linkButton="/highlighted"
             buttonStyle="outline red"
           />
-          <div className="prop-list">
-            <SelectionListContainer></SelectionListContainer>
-          </div>
+         
           <Button
             className="button--mobile"
             text="Ver más"
             type="outline red"
             link="/highlighted"
           />
+           <div className="prop-list">
+            <SelectionListContainer></SelectionListContainer>
+          </div>
         </div>
       </div>
+
+      {/* Section 9: Inversion Section */}
       <div className="inversion-section">
         <div className="inversion">
           <SocialSidebar color="black" />

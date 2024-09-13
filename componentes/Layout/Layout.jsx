@@ -1,8 +1,8 @@
 import React from "react";
 import "./Layout.css"; // Archivo CSS para los estilos globales y específicos
-import { Menu } from "../Menu/Menu.jsx";
-import Footer from "../Footer/Footer.jsx";
-import { MailIconSend, TelIcon, WhatsappIcon } from "../Icons/Icons.jsx";
+//import { Menu } from "../../Frontend/src/components/Menu/Menu.jsx";
+//import Footer from "../../Frontend/src/components/Footer/Footer.jsx";
+//import { MailIconSend, TelIcon, WhatsappIcon } from "../../Frontend/src/components/Icons/Icons.jsx";
 
 const Layout = ({ children, menuTheme, footerSmall }) => {
   return (

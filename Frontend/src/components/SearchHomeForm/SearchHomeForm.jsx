@@ -1,178 +1,125 @@
 import React from 'react';
-import Dropdown from "../Dropdown/Dropdown.jsx";
-import { Input } from "../Input/Input.jsx";
-import { MultiRange } from "../MultiRange/MultiRange.jsx";
-import Button from "../Button/Button.jsx";
-import Select from "../Select/Select.jsx";
-import { formatToMoney, getDropdownValue } from "../../helpers/index.js";
-import "./SearchHomeForm.css";
+import { Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap';
+import { FaSearch, FaHome, FaBed, FaCity, FaDollarSign } from 'react-icons/fa'; // Iconos
+import { MultiRange } from '../MultiRange/MultiRange'; // Sistema de precios previo
+import './SearchHomeForm.css';
 
-const SearchHomeForm = ({ formData, setFormData, localidades, close, setClose, handleSubmit }) => {
-  
+const SearchHomeForm = ({ formData, setFormData, localidades, handleSubmit }) => {
   return (
-    <div className="search-form-wrapper">
-      <div className="search-row first--row">
-        <Select
-          className="white first--row-input input--general"
-          options={[
-            { value: 1, label: "Venta" },
-            { value: 2, label: "Alquiler" },
-          ]}
-          isSearchable={false}
-          isMulti={true}
-          placeholder="Tipo de Operación"
-          onChange={(opt) => {
-            setFormData({
-              operation_type: opt.map((item) => item.value),
-            });
-          }}
-          fixes={true}
-        />
-        <Select
-          className="white first--row-input input--general"
-          options={[] /* Aquí puedes usar propertiesSelectOptions */}
-          isSearchable={false}
-          placeholder="Tipo de Propiedad"
-          onChange={(opt) => {
-            setFormData({ property_type: opt.value });
-          }}
-          fixes={true}
-        />
-        <Dropdown
-          className="white first--row-input"
-          placeholder="Dormitorios"
-          close={close.rooms}
-          value={getDropdownValue(
-            formData?.min_rooms,
-            formData?.max_rooms,
-            "Dorms."
-          )}
-        >
-          <div className="dropdown-row">
-            <span className="row-label">Min.</span>
-            <Input
-              className="input--general"
-              type="number"
-              placeHolder="-"
-              min={0}
-              value={formData?.min_rooms}
-              onChange={(e) => {
-                setFormData({ min_rooms: e?.currentTarget?.value });
-              }}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  setFormData({ min_rooms: e?.currentTarget?.value });
-                  setClose({ rooms: !close.rooms });
-                }
-              }}
-            />
-          </div>
-          <div className="dropdown-row">
-            <span className="row-label">Max.</span>
-            <Input
-              className="input--general"
-              type="number"
-              placeHolder="-"
-              min={formData?.min_rooms}
-              value={formData?.max_rooms}
-              onChange={(e) => {
-                setFormData({ max_rooms: e?.currentTarget?.value });
-              }}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  setFormData({ max_rooms: e?.currentTarget?.value });
-                  setClose({ rooms: !close.rooms });
-                }
-              }}
-            />
-          </div>
-        </Dropdown>
-      </div>
-      <div className="search-row second--row">
-        <Select
-          options={localidades}
-          isMulti={true}
-          placeholder="Barrios"
-          hideSelectedOptions={true}
-          styles={{
-            container: (provided, state) => ({
-              ...provided,
-              marginBottom: 15,
-            }),
-          }}
-          onChange={(opt) => {
-            setFormData({
-              locations: opt.map((item) => item.value),
-            });
-          }}
-        />
-      </div>
-      <div className="search-row third--row">
-        <div className="range-wrapper">
-          <span className="price-text">Precio</span>
-          <div className="price-range range--home">
-            <MultiRange
-              customWidth={336}
-              min={0}
-              max={3000000}
-              step={20000}
-              onChange={({ minVal, maxVal }) => {
-                setFormData({ price_from: minVal, price_to: maxVal });
-              }}
-            />
-            <div className="price-input-wrapper">
-              <Input
-                className="input--price bottomLine"
-                type="text"
-                maxLength={15}
-                value={formatToMoney(
-                  formData.price_from.toString(),
-                  true,
-                  "USD",
-                  false
-                )}
-                onChange={() => {}}
+    <Container className="search-form w-75">
+      <Form onSubmit={handleSubmit} className="filter-form">
+        <Row className="filter-row mb-2">
+          <Col>
+            <InputGroup className="input-group-custom">
+              <InputGroup.Text className="input-icon">
+                <FaHome />
+              </InputGroup.Text>
+              <Form.Select
+                className="filter-input"
+                value={formData.operation_type}
+                onChange={(e) => setFormData({ ...formData, operation_type: e.target.value })}
+              >
+                <option value="">Tipo de Operación</option>
+                <option value="Venta">Venta</option>
+                <option value="Alquiler">Alquiler</option>
+              </Form.Select>
+            </InputGroup>
+          </Col>
+
+          <Col>
+            <InputGroup className="input-group-custom">
+              <InputGroup.Text className="input-icon">
+                <FaCity />
+              </InputGroup.Text>
+              <Form.Select
+                className="filter-input"
+                value={formData.property_type}
+                onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
+              >
+                <option value="">Tipo de Propiedad</option>
+                <option value="Casa">Casa</option>
+                <option value="Departamento">Departamento</option>
+                <option value="PH">PH</option>
+                <option value="Terrenos">Terrenos</option>
+                <option value="Oficinas">Oficinas</option>
+              </Form.Select>
+            </InputGroup>
+          </Col>
+
+          <Col>
+            <InputGroup className="input-group-custom">
+              <InputGroup.Text className="input-icon">
+                <FaBed />
+              </InputGroup.Text>
+              <Form.Control
+                type="number"
+                className="filter-input"
+                value={formData.min_rooms}
+                placeholder="Dormitorios"
+                onChange={(e) => setFormData({ ...formData, min_rooms: e.target.value })}
               />
-              <div className="input-divider" />
-              <Input
-                className="input--price bottomLine"
-                type="text"
-                maxLength={15}
-                value={
-                  formData.price_to >= 3000000
-                    ? formatToMoney(
-                        formData.price_to.toString(),
-                        true,
-                        "USD +",
-                        false
-                      )
-                    : formatToMoney(
-                        formData.price_to.toString(),
-                        true,
-                        "USD",
-                        false
-                      )
-                }
-                onChange={() => {}}
+            </InputGroup>
+          </Col>
+        </Row>
+
+        {/* Sistema de precios con animación y icono */}
+        <Row className="filter-row mb-2">
+          <Col>
+            <div className="price-range-wrapper">
+              <span className="price-text">
+                <FaDollarSign className="price-icon" /> Precio
+              </span>
+              <MultiRange
+                customWidth={336}
+                min={0}
+                max={3000000}
+                step={20000}
+                onChange={({ minVal, maxVal }) => {
+                  setFormData({ price_from: minVal, price_to: maxVal });
+                }}
               />
+              <div className="price-input-wrapper">
+                <input
+                  className="input--price"
+                  type="text"
+                  value={formData.price_from || 0}
+                  readOnly
+                />
+                <div className="input-divider" />
+                <input
+                  className="input--price"
+                  type="text"
+                  value={formData.price_to || 3000000}
+                  readOnly
+                />
+              </div>
             </div>
-          </div>
-        </div>
-        <Button
-          className="third--row-button"
-          text="Buscar"
-          type="secondary shine"
-          onClick={handleSubmit}
-        />
-      </div>
-      <div className="search-row fourth--row">
-        <Button
-          className="fourth--row-button"
-          text="Quiero vender"
-          link="/quiero-vender"
-        />
-      </div>
-    </div>
+          </Col>
+        </Row>
+
+        <Row className="filter-row">
+          <Col>
+            <InputGroup className="input-group-custom">
+              <InputGroup.Text className="input-icon">
+                <FaSearch />
+              </InputGroup.Text>
+              <Form.Control
+                type="text"
+                className="filter-input"
+                value={formData.barrio}
+                placeholder="Buscar..."
+                onChange={(e) => setFormData({ ...formData, barrio: e.target.value })}
+              />
+            </InputGroup>
+          </Col>
+          <Col md="auto">
+            <Button className="search-button" type="submit">
+              Buscar
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    </Container>
   );
 };
 

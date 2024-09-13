@@ -1,5 +1,35 @@
+.pagination-arrow {
+  font-size: 2rem;
+  color: black;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.pagination-arrow:hover {
+  color: #333;
+}
+
+.pagination-page {
+  margin: 0 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-page.active {
+  background-color: #D9D9D9;
+  color: black;
+  border-radius: 5px;
+}
+
+.pagination-page:hover {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
 .item-list {
-  margin-top: ¿50px;
+  margin-top: 50px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
@@ -7,12 +37,12 @@
 
 @media (min-width: 768px) {
   .item-list {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 2fr;
   }
 }
 
 @media (min-width: 1024px) {
   .item-list {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 2fr;
   }
 }
