@@ -11,7 +11,7 @@ import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
-
+import Fromcontact from "./Fromcontact.jsx";
 import "./Home.css";
 
 const Home = observer(() => {
@@ -151,6 +151,10 @@ const Home = observer(() => {
             link="/emprendimientos"
           />
         </div>
+      </div>
+      {/* Agregar el componente Fromcontact aquí */}
+      <div className="contact-section">
+        <Fromcontact />
       </div>
     </div>
   );
