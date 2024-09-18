@@ -223,6 +223,38 @@ const getProperties = async (req, res) => {
       res.status(500).json({ message: 'Error al obtener los IDs de las propiedades', error });
     }
   };
+  const autocompleteProperties = async (req, res) => {
+    const { query } = req.query; // Tomamos la consulta del usuario
+  
+    try {
+      if (!query) {
+        return res.status(400).json({ message: 'Query is required' });
+      }
+  
+      const properties = await propertyDetail.find({
+        $or: [
+          { publication_title: { $regex: query, $options: 'i' } }, // Búsqueda por título
+          { 'location.full_location': { $regex: query, $options: 'i' } }, // Búsqueda por ubicación
+          { address: { $regex: query, $options: 'i' } }, // Búsqueda por dirección
+          { 'operations.operation_type': { $regex: query, $options: 'i' } }, // Búsqueda por tipo de operación
+          { description: { $regex: query, $options: 'i' } }, // Búsqueda por descripción
+          { 'type.name': { $regex: query, $options: 'i' } }, // Búsqueda por tipo de propiedad
+        ],
+      }).limit(10); // Limitamos a 10 resultados
+  
+      res.json(properties.map((property) => ({
+        id: property.id,
+        title: property.publication_title,
+        location: property.location.full_location,
+        type: property.type.name,
+        address: property.address,
+      })));
+    } catch (error) {
+      console.error('Error en autocompletado:', error);
+      res.status(500).json({ message: 'Error en autocompletado', error });
+    }
+  };
+  
   
   export {
     getProperties,
@@ -233,6 +265,7 @@ const getProperties = async (req, res) => {
     sendContactEmail,
     getAllPropertyIds,
     getpropertyDetailById,
+    autocompleteProperties,
   };
   
 

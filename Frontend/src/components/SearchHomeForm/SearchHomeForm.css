@@ -1,45 +1,52 @@
-/* Estilos generales para los select e inputs */
-.filter-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.search-form {
+  z-index: 9999999;
+}
+
+.input-icon-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-with-icon {
+  padding-left: 40px; /* Espacio para el ícono */
+}
+
+/* Estilo para los íconos */
+.input-icon-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #6c757d;
+  z-index: 9999999;
+
 }
 
 .filter-input {
   height: 40px;
-  border: 1px solid #000000;
-  border-radius: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 14px;
   color: #6c757d;
-  transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  background-color: #fff;
 }
 
 .filter-input:hover,
 .filter-input:focus {
   border-color: #f1b332;
-  background-color: #ffffff;
   outline: none;
-}
-
-/* Icono dentro del input */
-.input-group-custom .input-icon {
-  background-color: transparent;
-  border: none;
-  color: #6c757d;
 }
 
 /* Botón de búsqueda */
 .search-button {
-  background-color: #d9534f;
+  background-color: #C62025;
   border: none;
   border-radius: 0;
   height: 40px;
-  width: 100px;
+  width: 200px;
   color: #ffffff;
   font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .search-button:hover {
@@ -47,26 +54,33 @@
 }
 
 /* Sistema de precios */
-.price-input-wrapper {
+.price-range-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+
+/* src/components/SearchHomeForm/SearchHomeForm.css */
+.autocomplete-suggestions {
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
   width: 100%;
+  z-index: 1000;
 }
 
-.input--price {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 12%;
-  background-color: transparent;
-  border: none;
-  color: #ffffff;
+.autocomplete-suggestions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.input-divider {
-  width: 10px;
-  height: 2px;
-  margin: 0 20px;
-  background-color: #ffffff;
+.autocomplete-suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestions li:hover {
+  background-color: #f0f0f0;
 }

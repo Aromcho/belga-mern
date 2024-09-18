@@ -1,37 +1,83 @@
-.dorms-container {
-  display: flex;
-  align-items: center;
-  border: 1px solid #000000;
+.input-icon-wrapper {
+  position: relative;
+  width: 100%;
 }
 
-.dorms-label {
+.input-with-icon {
+  padding-left: 40px; /* Espacio para el ícono */
+}
+.input-with-icon div {
+  border: white ;
+}
+
+/* Estilo para los íconos dentro de los inputs */
+.input-icon-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+/* Para la palabra "Dorms." en el input de dormitorios */
+.dorms-wrapper {
+  position: relative;
+}
+
+.dorms-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 40px; /* Ajuste según el diseño */
+  transform: translateY(-50%);
   font-size: 14px;
   color: #6c757d;
-  padding: 0 10px;
 }
 
 .dorms-dropdowns {
   display: flex;
+  padding-left: 90px;
   align-items: center;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+
+/* Para cocheras min/max */
+.garages-wrapper {
+  position: relative;
+}
+
+.garages-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 40px; /* Ajuste según el diseño */
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.garages-dropdowns {
+  display: flex;
+  padding-left: 80px;
+  align-items: center;
+  border: 1px solid #000;
+}
+
+.separator {
+  margin: 0 5px;
+  font-size: 18px;
+  color: #6c757d;
 }
 
 .min-max-input {
-  width: 80px; /* Ajustado para hacer espacio al separador */
+  width: 75px;
   height: 38px;
   border-radius: 0;
   font-size: 14px;
   border: 0;
   color: #6c757d;
   text-align: center;
-  appearance: none; /* Eliminar el estilo predeterminado de select */
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="gray" d="M0 0l2 2 2-2"/></svg>') no-repeat right 10px center;
-  background-size: 12px;
-}
-
-.separator {
-  margin: 0 10px;
-  font-size: 18px;
-  color: #6c757d;
+  margin-left: 10px;
 }
 
 .filter-input {
@@ -43,10 +89,11 @@
 }
 
 .search-button {
-  background-color: #d9534f;
+  background-color: #C62025;
   border: none;
+  border-radius: 0;
   height: 40px;
-  width: 100px;
+  width: 200px;
   color: #ffffff;
   font-weight: bold;
 }

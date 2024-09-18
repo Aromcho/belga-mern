@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-
 // Schema para los detalles de la sucursal (branch)
 const branchSchema = new mongoose.Schema({
   address: String,
@@ -17,10 +16,10 @@ const branchSchema = new mongoose.Schema({
   geo_lat: Number,
   geo_long: Number,
   gm_location_type: String,
-  id: Number,
+  id: { type: Number, index: true },
   is_default: Boolean,
   logo: String,
-  name: String,
+  name: { type: String, index: true },
   pdf_footer_text: String,
   phone: String,
   phone_area: String,
@@ -31,13 +30,13 @@ const branchSchema = new mongoose.Schema({
 
 // Schema para las operaciones de la propiedad
 const operationSchema = new mongoose.Schema({
-  operation_id: Number,
-  operation_type: String,
+  operation_id: { type: Number, index: true },
+  operation_type: { type: String, index: true }, // Tipo de operación indexado
   prices: [
     {
       currency: String,
       period: String,
-      price: Number,
+      price: { type: Number, index: true }, // Precio indexado
     },
   ],
 });
@@ -56,7 +55,7 @@ const photoSchema = new mongoose.Schema({
 // Schema para los tags personalizados
 const tagSchema = new mongoose.Schema({
   id: Number,
-  name: String,
+  name: { type: String, index: true }, // Nombre del tag indexado
   type: Number,
 });
 
@@ -75,8 +74,8 @@ const videoSchema = new mongoose.Schema({
 
 // Schema principal para PropertyDetails
 const propertyDetailsSchema = new mongoose.Schema({
-  id: { type: Number, required: true, unique: true }, // ID de la propiedad de Tokko
-  address: String,
+  id: { type: Number, required: true, unique: true, index: true }, // ID indexado
+  address: { type: String, index: true }, // Dirección indexada
   age: Number,
   bathroom_amount: Number,
   branch: branchSchema,
@@ -85,7 +84,7 @@ const propertyDetailsSchema = new mongoose.Schema({
   custom_tags: [tagSchema],
   deleted_at: Date,
   depth_measure: String,
-  description: String,
+  description: { type: String, index: true }, // Descripción indexada
   description_only: String,
   development: Object,
   development_excel_extra_data: String,
@@ -97,18 +96,18 @@ const propertyDetailsSchema = new mongoose.Schema({
   floors_amount: Number,
   footer: String,
   front_measure: String,
-  geo_lat: Number,
-  geo_long: Number,
+  geo_lat: { type: Number, index: true }, // Latitud indexada
+  geo_long: { type: Number, index: true }, // Longitud indexada
   gm_location_type: String,
   has_temporary_rent: Boolean,
   is_denounced: Boolean,
   is_starred_on_web: Boolean,
   legally_checked: String,
   location: {
-    divisions: Array,
-    full_location: String,
+    divisions: { type: Array, index: true }, // Divisiones de ubicación indexadas
+    full_location: { type: String, index: true }, // Ubicación completa indexada
     id: Number,
-    name: String,
+    name: { type: String, index: true }, // Nombre de ubicación indexada
     parent_division: String,
     short_location: String,
     state: String,
@@ -117,39 +116,39 @@ const propertyDetailsSchema = new mongoose.Schema({
   occupation: Array,
   operations: [operationSchema],
   orientation: String,
-  parking_lot_amount: Number,
+  parking_lot_amount: { type: Number, index: true }, // Cantidad de cocheras indexada
   photos: [photoSchema],
   producer: {
     cellphone: String,
     email: String,
     id: Number,
-    name: String,
+    name: { type: String, index: true }, // Nombre del productor indexado
     phone: String,
     picture: String,
     position: String,
   },
   property_condition: String,
   public_url: String,
-  publication_title: String,
+  publication_title: { type: String, index: true }, // Título de la publicación indexado
   real_address: String,
   reference_code: String,
   rich_description: String,
   roofed_surface: String,
-  room_amount: Number,
+  room_amount: { type: Number, index: true }, // Cantidad de habitaciones indexada
   semiroofed_surface: String,
   situation: String,
   status: Number,
-  suite_amount: Number,
+  suite_amount: { type: Number, index: true }, // Cantidad de suites indexada
   surface: String,
   surface_measurement: String,
   tags: [tagSchema],
   toilet_amount: Number,
-  total_surface: String,
+  total_surface: { type: String, index: true }, // Superficie total indexada
   transaction_requirements: String,
   type: {
     code: String,
     id: Number,
-    name: String,
+    name: { type: String, index: true }, // Tipo de propiedad indexado
   },
   unroofed_surface: String,
   videos: [videoSchema],
@@ -160,4 +159,5 @@ const propertyDetailsSchema = new mongoose.Schema({
 propertyDetailsSchema.plugin(mongoosePaginate);
 
 const propertyDetail = mongoose.model('PropertyDetails', propertyDetailsSchema);
+
 export default propertyDetail;

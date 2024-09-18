@@ -12,9 +12,12 @@ import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailCont
 // import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
+import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto
+
 
 function App() {
   return (
+    <FiltersProvider>
     <Router>
       <Menu/>
       <Routes>
@@ -37,6 +40,7 @@ function App() {
         */}
       </Routes>
     </Router>
+    </FiltersProvider>
   );
 }
 

@@ -19,5 +19,6 @@
   font-size: 1.2rem;
 }
 .item-list-container {
+  max-width: 100vw;
   margin-top: 100px;
 }

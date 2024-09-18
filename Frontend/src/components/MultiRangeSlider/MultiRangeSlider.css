@@ -1,0 +1,39 @@
+.multi-range-slider {
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+}
+
+.price-text {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.price-icon {
+  margin-right: 10px;
+  color: #F1B332; /* Color del ícono */
+}
+
+.price-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input--price {
+  width: 180px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #F1B332; /* Borde con el color personalizado */
+  border-radius: 4px;
+  background-color: transparent;
+  color: #333; /* Color del texto */
+}
+
+.input-divider {
+  width: 10px;
+  height: 2px;
+  margin: 0 10px;
+  background-color: #F1B332; /* Color del separador */
+}

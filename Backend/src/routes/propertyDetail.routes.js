@@ -9,11 +9,13 @@ import {
   getAllPropertyIds, // new function
 } from '../controllers/propertyDetail.controller.js';
 import { getpropertyDetailById  } from '../controllers/propertyDetail.controller.js'
+import { autocompleteProperties } from '../controllers/propertyDetail.controller.js';
 
 
 
 const propertyDetail = express.Router();
 
+propertyDetail.get('/autocomplete', autocompleteProperties);
 propertyDetail.get('/properties', getProperties);
 propertyDetail.get('/propertyDetail/:id', getpropertyDetailById);
 propertyDetail.get('/neighborhoods', getNeighborhoods);
