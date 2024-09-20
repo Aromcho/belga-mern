@@ -66,7 +66,7 @@ const Item = ({ property }) => {
   const parkingLots = property.parking_lot_amount || 0;
   const size = property.total_surface || 0; // Usando superficie total
   const address = property.address || 'Dirección no disponible'; // Dirección del branch
-
+  const barrio = property.location.name || 'Barrio no disponible'; // Nombre del barrio
   const settings = {
     dots: false, 
     infinite: true,
@@ -98,7 +98,7 @@ const Item = ({ property }) => {
           <span>{operationType.toUpperCase()}</span>
           <span className="text-muted">USD {price}</span>
         </div>
-        <h5 className="card-title-bold mb-3">{property.branch.display_name}</h5>
+        <h5 className="card-title-bold mb-3 text-dark">{barrio}</h5>
         <p className="location-text text-muted mb-3">{address}</p>
 
         <div className="property-info d-flex justify-content-around">

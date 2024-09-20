@@ -27,7 +27,7 @@ import PropertyManager from '../manager/propertyDetail.manager.js';
 
 const getProperties = async (req, res) => {
   try {
-    const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, garages, limit = 20, offset = 0, order = 'DESC' } = req.query;
+    const { operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice, barrio, searchQuery, garages, limit = 20, offset = 0, order = 'DESC' } = req.query;
 
     // Crear un objeto con los filtros a aplicar
     const filterObj = {};
@@ -66,14 +66,26 @@ const getProperties = async (req, res) => {
 
     // Filtro por barrio
     if (barrio && barrio.length > 0) {
-      filterObj['location.divisions.name'] = barrio;
+      filterObj['location.name'] = barrio;
     }
+
+    // Filtro de búsqueda general
+    if (searchQuery && searchQuery.length > 0) {
+      filterObj.$or = [
+        { address: { $regex: searchQuery, $options: 'i' } },  // Buscar por dirección
+        { 'location.full_location': { $regex: searchQuery, $options: 'i' } },  // Buscar por ubicación completa
+        { 'location.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por barrio
+        { 'type.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por tipo de propiedad
+        { 'producer.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por productor
+        { 'publication_title': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por título
+        { 'real_address': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por dirección real
+      ];
+    }
+    
 
     // Filtro por cocheras (garages)
     if (garages && parseInt(garages) > 0) {
-      filterObj['parking_lot_amount'] = parseInt(garages) ; // Asegurarte de que tu modelo use `parking_lot_amount` o similar
-      console.log('Filtros:', filterObj);
-
+      filterObj['parking_lot_amount'] = parseInt(garages);
     }
 
     // Ordenar por precio
@@ -103,6 +115,9 @@ const getProperties = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener propiedades', error });
   }
 };
+
+
+
 
 
   
@@ -231,21 +246,21 @@ const getProperties = async (req, res) => {
         return res.status(400).json({ message: 'Query is required' });
       }
   
+      // Buscamos solo en los campos relevantes: address, location.name, type.name y producer.name
       const properties = await propertyDetail.find({
         $or: [
-          { publication_title: { $regex: query, $options: 'i' } }, // Búsqueda por título
-          { 'location.full_location': { $regex: query, $options: 'i' } }, // Búsqueda por ubicación
           { address: { $regex: query, $options: 'i' } }, // Búsqueda por dirección
-          { 'operations.operation_type': { $regex: query, $options: 'i' } }, // Búsqueda por tipo de operación
-          { description: { $regex: query, $options: 'i' } }, // Búsqueda por descripción
+          { 'location.full_location': { $regex: query, $options: 'i' } }, // Búsqueda por ubicación
+          { 'location.name': { $regex: query, $options: 'i' } }, // Búsqueda por barrio
           { 'type.name': { $regex: query, $options: 'i' } }, // Búsqueda por tipo de propiedad
+          { 'producer.name': { $regex: query, $options: 'i' } }, // Búsqueda por productor
         ],
       }).limit(10); // Limitamos a 10 resultados
   
       res.json(properties.map((property) => ({
         id: property.id,
-        title: property.publication_title,
-        location: property.location.full_location,
+        location: property.location.name,
+        full_location: property.location.full_location,
         type: property.type.name,
         address: property.address,
       })));
@@ -254,6 +269,7 @@ const getProperties = async (req, res) => {
       res.status(500).json({ message: 'Error en autocompletado', error });
     }
   };
+  
   
   
   export {

@@ -1,5 +1,5 @@
 .pagination-arrow {
-  font-size: 2rem;
+  font-size: 1rem;
   color: black;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -34,7 +34,13 @@
   grid-template-columns: 1fr;
   gap: 1rem;
 }
-
+.gost {
+  max-width: 100vw;
+  display: grid;
+  grid-template-columns: 2fr;
+  grid-row: 2fr ;  
+  gap: 1rem;
+}
 @media (min-width: 768px) {
   .item-list {
     grid-template-columns: 2fr 2fr;

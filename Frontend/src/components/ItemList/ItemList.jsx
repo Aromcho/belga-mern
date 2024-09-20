@@ -1,31 +1,34 @@
-import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Importando las flechas
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import axios from 'axios';
 import Item from '../Item/Item.jsx';
 import Filters from '../Filters/Filters.jsx';
-import { FiltersContext } from '../../context/FiltersContext'; // Importar el contexto
+import { FiltersContext } from '../../context/FiltersContext';
+import Skeleton from '@mui/material/Skeleton'; // Importa el Skeleton de Material UI
 import './ItemList.css';
 
 const ItemList = () => {
-  const { filters, updateFilters } = useContext(FiltersContext); // Usar el contexto de filtros
+  const { filters, updateFilters } = useContext(FiltersContext);
   const [filteredProperties, setFilteredProperties] = useState([]);
-  const [limit, setLimit] = useState(20); // Número de propiedades por página
-  const [offset, setOffset] = useState(0); // Para el desplazamiento
-  const [totalProperties, setTotalProperties] = useState(0); // Total de propiedades en la base de datos
-  const [currentPage, setCurrentPage] = useState(1); // Página actual
+  const [limit, setLimit] = useState(20);
+  const [offset, setOffset] = useState(0);
+  const [totalProperties, setTotalProperties] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false); // Estado para manejar la carga
 
-  const totalPages = Math.ceil(totalProperties / limit); // Calcular el número total de páginas
+  const totalPages = Math.ceil(totalProperties / limit);
 
   useEffect(() => {
-    fetchProperties(filters); // Filtrar usando los filtros del contexto
+    fetchProperties(filters);
   }, [filters, limit, offset]);
 
   const fetchProperties = async (filters = {}) => {
+    setLoading(true); // Mostrar el loader
     try {
       const response = await axios.get('/api/api/properties', {
         params: {
-          operation_type: filters.operation_type, // Enviar los filtros desde el contexto
+          operation_type: filters.operation_type,
           property_type: filters.property_type,
           minRooms: filters.min_rooms,
           maxRooms: filters.max_rooms,
@@ -34,44 +37,45 @@ const ItemList = () => {
           minPrice: filters.price_from,
           maxPrice: filters.price_to,
           barrio: filters.barrio,
+          searchQuery: filters.searchQuery,
           limit,
           offset,
         },
       });
 
       setFilteredProperties(response.data.objects);
-      setTotalProperties(response.data.meta.total_count); // Total de propiedades devueltas por el backend
+      setTotalProperties(response.data.meta.total_count);
     } catch (error) {
       console.error('Error al aplicar filtros:', error);
+    } finally {
+      setLoading(false); // Ocultar el loader después de cargar
     }
   };
 
-  // Esta función se llama al aplicar nuevos filtros desde el componente Filters
   const handleFilterApply = (newFilters) => {
-    updateFilters(newFilters); // Actualizar los filtros en el contexto
-    setOffset(0); // Reiniciar la paginación al aplicar filtros
-    setCurrentPage(1); // Reiniciar la página a 1
+    updateFilters(newFilters);
+    setOffset(0);
+    setCurrentPage(1);
   };
 
   const handleNextPage = () => {
     if (offset + limit < totalProperties && currentPage < totalPages) {
       setOffset(offset + limit);
-      setCurrentPage(currentPage + 1); // Cambiar a la siguiente página
+      setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (offset > 0 && currentPage > 1) {
       setOffset(offset - limit);
-      setCurrentPage(currentPage - 1); // Cambiar a la página anterior
+      setCurrentPage(currentPage - 1);
     }
   };
 
-  // Calcular las páginas que se van a mostrar (página actual + 3)
   const getPagesToShow = () => {
     const pages = [];
     const startPage = currentPage;
-    const endPage = Math.min(currentPage + 3, totalPages); // Mostrar solo las próximas 3 páginas
+    const endPage = Math.min(currentPage + 3, totalPages);
 
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
@@ -82,10 +86,28 @@ const ItemList = () => {
 
   return (
     <Container className="p-0 mb-1">
-      {/* Componente de filtros */}
       <Filters onSubmit={handleFilterApply} />
       <div className="item-list">
-        {filteredProperties.length > 0 ? (
+        {loading ? (
+          // Mostrar el loader mientras se cargan las propiedades
+          <>
+            {[...Array(4)].map((_, index) => (
+              <div className="Item" key={index}>
+                <Skeleton variant="rectangular" height={300} />
+                <div className="card-body">
+                  <Skeleton variant="text" width="80%" height={30} />
+                  <Skeleton variant="text" width="60%" />
+                  <div className="property-info d-flex justify-content-around mt-2 mb-2">
+                    <Skeleton variant="rectangular" width={50} height={50} />
+                    <Skeleton variant="rectangular" width={50} height={50} />
+                    <Skeleton variant="rectangular" width={50} height={50} />
+                    <Skeleton variant="rectangular" width={50} height={50} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : filteredProperties.length > 0 ? (
           filteredProperties.map((property) => (
             <Item className="Item" key={property._id} property={property} />
           ))
@@ -94,7 +116,6 @@ const ItemList = () => {
         )}
       </div>
 
-      {/* Paginación */}
       <Row className="mt-3 align-items-center">
         <Col className="text-start">
           {currentPage > 1 && (
@@ -111,7 +132,7 @@ const ItemList = () => {
               className={`pagination-page ${page === currentPage ? 'active' : ''}`}
               onClick={() => {
                 setCurrentPage(page);
-                setOffset((page - 1) * limit); // Ajustar el offset basado en la página seleccionada
+                setOffset((page - 1) * limit);
               }}
             >
               {page}

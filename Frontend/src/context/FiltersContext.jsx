@@ -14,7 +14,8 @@ export const FiltersProvider = ({ children }) => {
     max_garages: undefined,
     price_from: 0,
     price_to: 3000000,
-    barrio: ''
+    searchQuery: '',
+    barrio: '',
   });
 
   // Función para actualizar los filtros

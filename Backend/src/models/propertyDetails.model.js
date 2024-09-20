@@ -75,7 +75,7 @@ const videoSchema = new mongoose.Schema({
 // Schema principal para PropertyDetails
 const propertyDetailsSchema = new mongoose.Schema({
   id: { type: Number, required: true, unique: true, index: true }, // ID indexado
-  address: { type: String, index: true }, // Dirección indexada
+  address: { type: String, text: true }, // Dirección con índice de texto
   age: Number,
   bathroom_amount: Number,
   branch: branchSchema,
@@ -84,7 +84,7 @@ const propertyDetailsSchema = new mongoose.Schema({
   custom_tags: [tagSchema],
   deleted_at: Date,
   depth_measure: String,
-  description: { type: String, index: true }, // Descripción indexada
+  description: { type: String, text: true }, // Descripción con índice de texto
   description_only: String,
   development: Object,
   development_excel_extra_data: String,
@@ -105,9 +105,8 @@ const propertyDetailsSchema = new mongoose.Schema({
   legally_checked: String,
   location: {
     divisions: { type: Array, index: true }, // Divisiones de ubicación indexadas
-    full_location: { type: String, index: true }, // Ubicación completa indexada
-    id: Number,
-    name: { type: String, index: true }, // Nombre de ubicación indexada
+    full_location: { type: String, text: true }, // Ubicación completa con índice de texto
+    name: { type: String, index: true }, // Nombre de ubicación indexado
     parent_division: String,
     short_location: String,
     state: String,
@@ -122,14 +121,14 @@ const propertyDetailsSchema = new mongoose.Schema({
     cellphone: String,
     email: String,
     id: Number,
-    name: { type: String, index: true }, // Nombre del productor indexado
+    name: { type: String, text: true }, // Nombre del productor con índice de texto
     phone: String,
     picture: String,
     position: String,
   },
-  property_condition: String,
+  property_condition: { type: String, text: true }, // Condición de la propiedad con índice de texto
   public_url: String,
-  publication_title: { type: String, index: true }, // Título de la publicación indexado
+  publication_title: { type: String, text: true }, // Título de la publicación con índice de texto
   real_address: String,
   reference_code: String,
   rich_description: String,
@@ -148,7 +147,7 @@ const propertyDetailsSchema = new mongoose.Schema({
   type: {
     code: String,
     id: Number,
-    name: { type: String, index: true }, // Tipo de propiedad indexado
+    name: { type: String, text: true }, // Tipo de propiedad con índice de texto
   },
   unroofed_surface: String,
   videos: [videoSchema],
@@ -156,7 +155,26 @@ const propertyDetailsSchema = new mongoose.Schema({
   zonification: String,
 }, { timestamps: true }); // timestamps añade createdAt y updatedAt automáticamente
 
+// Añadir el plugin de paginación
 propertyDetailsSchema.plugin(mongoosePaginate);
+
+// Añadir más campos al índice de texto
+propertyDetailsSchema.index({
+  address: "text",
+  "location.full_location": "text",
+  "location.name": "text", // Nombre del barrio
+  "type.name": "text", // Tipo de propiedad
+  "producer.name": "text", // Nombre del productor
+  property_condition: "text", // Condición de la propiedad
+});
+
+// Crear índices compuestos para mejorar consultas de filtrado
+propertyDetailsSchema.index({
+  "operations.operation_type": 1,
+  "type.name": 1,
+  "operations.prices.price": 1,
+  "room_amount": 1
+});
 
 const propertyDetail = mongoose.model('PropertyDetails', propertyDetailsSchema);
 

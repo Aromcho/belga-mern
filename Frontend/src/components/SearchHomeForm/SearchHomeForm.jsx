@@ -11,7 +11,6 @@ const SearchHomeForm = ({ handleSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
 
-
   const operationTypeOptions = [
     { value: 'Sale', label: 'Venta' },
     { value: 'Rent', label: 'Alquiler' }
@@ -30,26 +29,29 @@ const SearchHomeForm = ({ handleSubmit }) => {
   const handleFormChange = (field, value) => {
     updateFilters({ [field]: value });
   };
+
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
-      boxShadow: 'none', // Eliminar el sombreado por defecto
-      borderColor: state.isFocused ? '#ccc' : '#ddd', // Cambiar el color del borde cuando está enfocado
+      boxShadow: 'none',
+      borderColor: state.isFocused ? '#ccc' : '#ddd',
       '&:hover': {
-        borderColor: '#ccc', // Color del borde al pasar el mouse
+        borderColor: '#ccc',
       },
     }),
   };
+
   const handleSearchChange = async (e) => {
     const query = e.target.value;
-    handleFormChange('barrio', query);
+    handleFormChange('barrio', query);  // Cambiado a 'barrio'
 
-    if (query.length > 2) { // Hacer la búsqueda solo si hay más de 2 caracteres
+    if (query.length > 2) {
       try {
         const response = await axios.get('/api/api/autocomplete', {
           params: { query }
         });
-        setAutocompleteSuggestions(response.data); // Actualizar las sugerencias
+        setAutocompleteSuggestions(response.data);
+        console.log('Sugerencias de autocompletado:', response.data);
       } catch (error) {
         console.error('Error en el autocompletado:', error);
       }
@@ -58,6 +60,11 @@ const SearchHomeForm = ({ handleSubmit }) => {
     }
   };
 
+  const handleSuggestionSelect = (suggestion) => {
+    const { location } = suggestion;
+    handleFormChange('barrio', location); // Cambiado a actualizar 'barrio'
+    setAutocompleteSuggestions([]); // Limpiar sugerencias
+  };
 
   return (
     <Container className="search-form w-75">
@@ -151,20 +158,19 @@ const SearchHomeForm = ({ handleSubmit }) => {
               <Form.Control
                 type="text"
                 className="filter-input input-with-icon"
-                value={filters.barrio}
+                value={filters.barrio}  // Cambiado a 'barrio'
                 placeholder="Buscar..."
                 onChange={handleSearchChange}
               />
-              {/* Mostrar sugerencias de autocompletado */}
               {autocompleteSuggestions.length > 0 && (
                 <div className="autocomplete-suggestions">
                   <ul>
                     {autocompleteSuggestions.map((suggestion) => (
                       <li
                         key={suggestion.id}
-                        onClick={() => handleFormChange('barrio', suggestion.title)}
+                        onClick={() => handleSuggestionSelect(suggestion)}
                       >
-                        {suggestion.title} - {suggestion.location}
+                        {suggestion.address} - {suggestion.location}
                       </li>
                     ))}
                   </ul>
