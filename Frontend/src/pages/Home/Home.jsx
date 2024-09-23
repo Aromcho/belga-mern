@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react"; // Importar el hook
 import { FiltersContext } from '../../context/FiltersContext'; // Importar el contexto
+import 'leaflet/dist/leaflet.css';
 import "./Home.css";
 
 import Title from "../../components/Title/Title.jsx";
@@ -11,6 +12,8 @@ import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
 import FormContact from "../../components/FormContact/FormContact.jsx";
+import MapaInteractivo from "../../components/MapaInteractivo/MapaInteractivo.jsx";
+import HomeMap from "../../components/HomeMap/HomeMap.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -83,6 +86,10 @@ const Home = () => {
       <div className="contact-section">
         <FormContact />
       </div>
+      
+      {/*seccion de mapa*/}
+      <div className="mapa">
+<HomeMap/>      </div>
     </div>
   );
 };

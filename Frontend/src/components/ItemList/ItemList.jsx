@@ -92,7 +92,7 @@ const ItemList = () => {
           // Mostrar el loader mientras se cargan las propiedades
           <>
             {[...Array(4)].map((_, index) => (
-              <div className="Item" key={index}>
+              <div className="Item mb-2" key={index}>
                 <Skeleton variant="rectangular" height={300} />
                 <div className="card-body">
                   <Skeleton variant="text" width="80%" height={30} />

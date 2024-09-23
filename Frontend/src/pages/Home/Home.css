@@ -43,6 +43,16 @@
   padding: 0 15px;
   box-sizing: border-box;
 }
+.mapa {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  z-index: 99999999999999999;
+  width: 98;
+  height: 100vh;
+}
 
 @media screen and (max-width: 992px) {
   .hero-wrapper video {

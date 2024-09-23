@@ -19,12 +19,14 @@
 }
 
 .custom-button {
-  background-color: #F2D8A7 !important;
+  background-color: transparent !important;
   color: black !important;
+  border-radius: 0 !important;
+  border: none !important;
 }
 
 .custom-button:hover {
-  background-color: #e6c08c !important;
+  background-color: transparent !important;
 }
 
 .property-features, .property-info, .property-description {
@@ -37,4 +39,7 @@
 
 .property-detail h2 {
   font-size: 1.5rem;
+}
+.image-wrapper-detail {
+  height: 600px;
 }
