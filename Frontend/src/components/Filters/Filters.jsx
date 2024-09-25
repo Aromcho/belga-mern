@@ -12,18 +12,18 @@ const Filters = ({ onSubmit }) => {
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
 
   const operationTypeOptions = [
-    { value: 'Sale', label: 'Venta' },
-    { value: 'Rent', label: 'Alquiler' }
+    { value: 'Venta', label: 'Venta' },
+    { value: 'Alquiler', label: 'Alquiler' }
   ];
 
   const propertyTypeOptions = [
-    { value: 'House', label: 'Casa' },
-    { value: 'Apartment', label: 'Departamento' },
-    { value: 'Condo', label: 'PH' },
-    { value: 'Land', label: 'Terrenos' },
-    { value: 'Office', label: 'Oficinas' },
-    { value: 'Garage', label: 'Cocheras' },
-    { value: 'Bussiness Premises', label: 'Locales' },
+    { value: 'Casa', label: 'Casa' },
+    { value: 'Departamento', label: 'Departamento' },
+    { value: 'PH', label: 'PH' },
+    { value: 'Terrenos', label: 'Terrenos' },
+    { value: 'Oficinas', label: 'Oficinas' },
+    { value: 'Cocheras', label: 'Cocheras' },
+    { value: 'Locales', label: 'Locales' },
   ];
 
   // Función para manejar la búsqueda con debounce

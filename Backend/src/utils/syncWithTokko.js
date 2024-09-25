@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from 'axios'; 
 import Property from '../models/property.model.js';
 
 export const syncWithTokko = async () => {
-  const limit = 20;
+  const limit = 200;
   let offset = 0;
   let total_count = 0;
 
@@ -17,6 +17,8 @@ export const syncWithTokko = async () => {
           key: process.env.TOKKO_TOKEN,
           limit,
           offset,
+          lang: 'es_ar',
+          format: 'json',
         },
       });
 
@@ -29,12 +31,12 @@ export const syncWithTokko = async () => {
         // Procesamiento de imágenes
         if (property.photos && Array.isArray(property.photos)) {
           property.photos = property.photos.map(img => ({
-            url: img.image || '',
+            image: img.image || '',
             description: img.description || '',
             is_blueprint: img.is_blueprint || false,
           }));
         } else {
-          property.photos = []; // Si no hay imágenes, inicializamos un array vacío
+          property.photos = [];
         }
 
         // Validación y procesamiento de operations
@@ -48,7 +50,7 @@ export const syncWithTokko = async () => {
             }))
           }));
         } else {
-          property.operations = []; // Si no hay operaciones, inicializamos un array vacío
+          property.operations = [];
         }
 
         // Otras validaciones para branch, location, etc.
@@ -61,6 +63,10 @@ export const syncWithTokko = async () => {
             phone: property.branch.phone || '',
           };
         }
+
+        // Asegurarse de incluir la descripción completa
+        property.description = property.description || '';
+        property.rich_description = property.rich_description || '';
 
         // Construir el objeto para la operación bulkWrite
         return {

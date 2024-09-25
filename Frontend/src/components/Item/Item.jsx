@@ -60,7 +60,7 @@ const PrevArrow = (props) => {
 const Item = ({ property }) => {
   const mainImages = property.photos?.slice(0, 5) || [{ image: 'default-image.jpg' }];
   const price = property.operations[0]?.prices[0]?.price || 'Precio no disponible';
-  const operationType = property.operations[0]?.operation_type === 'Sale' ? 'Venta' : 'Alquiler';
+  const operationType = property.operations[0]?.operation_type;
   const bedrooms = property.suite_amount || 0;
   const bathrooms = property.bathroom_amount || 0;
   const parkingLots = property.parking_lot_amount || 0;

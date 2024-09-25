@@ -6,25 +6,27 @@ import {
   getNeighborhoods,
   getFavorites,
   sendContactEmail,
-  getAllPropertyIds // new function
+  getAllPropertyIds, // new function
 } from '../controllers/property.controller.js';
-import {  getpropertyDetailById } from '../controllers/propertyDetail.controller.js'
+import { getpropertyById  } from '../controllers/property.controller.js'
+import { autocompleteProperties } from '../controllers/property.controller.js';
 
 
 
-const propertyRouter = express.Router();
+const propertyDetail = express.Router();
 
- propertyRouter.get('/properties', getProperties);
- propertyRouter.get('/propertyDetail/:id', getpropertyDetailById);
- propertyRouter.get('/neighborhoods', getNeighborhoods);
- propertyRouter.get('/:id', getPropertyById);
- propertyRouter.get('/related', getRelatedProperties);
- propertyRouter.get('/favorites', getFavorites);
- propertyRouter.post('/contact', sendContactEmail);
- propertyRouter.get('/properties/ids', getAllPropertyIds);
+propertyDetail.get('/autocomplete', autocompleteProperties);
+propertyDetail.get('/properties', getProperties);
+propertyDetail.get('/propertyDetail/:id', getpropertyById);
+propertyDetail.get('/neighborhoods', getNeighborhoods);
+propertyDetail.get('/:id', getPropertyById);
+propertyDetail.get('/related', getRelatedProperties);
+propertyDetail.get('/favorites', getFavorites);
+propertyDetail.post('/contact', sendContactEmail);
+propertyDetail.get('/properties/ids', getAllPropertyIds);
 
 // details routes
 
 
 
-export default propertyRouter;
+export default propertyDetail;
