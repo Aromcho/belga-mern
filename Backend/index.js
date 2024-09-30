@@ -21,7 +21,7 @@ app.use(express.static('public'));
 app.use('/api', router);
 
 // Configurar los cron jobs para sincronización
-cron.schedule('* * * * *', () => {
+cron.schedule('0 * * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncWithTokko();
 });

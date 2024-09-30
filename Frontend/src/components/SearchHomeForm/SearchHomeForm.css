@@ -1,5 +1,6 @@
 .search-form {
   z-index: 9999999;
+  padding: 15px; /* Añadir un poco de padding para dar espacio en mobile */
 }
 
 .input-icon-wrapper {
@@ -20,7 +21,6 @@
   font-size: 1.2rem;
   color: #6c757d;
   z-index: 9999999;
-
 }
 
 .filter-input {
@@ -44,7 +44,7 @@
   border: none;
   border-radius: 0;
   height: 40px;
-  width: 200px;
+  width: 100%; /* Hacer el botón más ancho en mobile */
   color: #ffffff;
   font-weight: bold;
 }
@@ -57,6 +57,47 @@
 .price-range-wrapper {
   display: flex;
   flex-direction: column;
+}
+
+/* Ocultar rango de precios en móviles */
+@media screen and (max-width: 768px) {
+  .price-range-wrapper {
+    display: none;
+  }
+
+  /* Estilo para los campos de selección */
+  .filter-row .col {
+    margin-bottom: 15px; /* Añadir margen entre columnas en mobile */
+  }
+
+  /* Ajuste de los dropdowns para habitaciones */
+  .dorms-dropdowns {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px; /* Reducir espacio para evitar que se salga */
+  }
+
+  .min-max-input {
+    width: 45%; /* Ajustar el tamaño en mobile */
+  }
+
+  /* Hacer que los inputs ocupen el ancho completo */
+  .filter-input {
+    width: 100%;
+  }
+
+  /* Alinear el botón de búsqueda centrado */
+  .search-button {
+    width: 100% !important; /* Botón de búsqueda ocupa todo el ancho */
+  }
+
+  /* Asegurar que los elementos ocupen toda la pantalla */
+  .filter-row {
+    display: block; /* Cada filtro se muestra como un bloque */
+  }
+  .search-form {
+    width: 100% !important ; /* Asegurar que el formulario ocupe todo el ancho */
+  }
 }
 
 /* src/components/SearchHomeForm/SearchHomeForm.css */

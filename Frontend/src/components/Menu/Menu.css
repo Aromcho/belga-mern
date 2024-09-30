@@ -4,82 +4,83 @@
   margin: 0;
   background-color: transparent;
   transition: all 0.4s cubic-bezier(0.74, 0.04, 0.24, 1.04);
-  z-index: 99999999;
+  z-index: 999999999;
   position: fixed;
   top: 0;
   left: 0;
-  
 }
 
 .menu-container.sticky {
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  background-color: #fff; /* Fondo blanco cuando es sticky */
+  background-color: #fff;
 }
 
 /* Flex container para el layout */
 .nav-flex-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between ;
   align-items: center;
   width: 100%;
-  padding: 0 20px; /* Ajustar padding según se necesite */
+  padding: 0 20px;
 }
+
 .logo-img {
   width: 150px;
 }
-/* Contenedor de la marca */
+
+.isobrand--img {
+  width: 50px;
+  height: 50px;
+}
+
 .menu-brand-wrapper {
-  width: 280px;
+  width: 100%;
   height: 65px;
-  padding: 0 10%;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: #F1B332;
   margin-left: 25px;
   transition: all 0.4s cubic-bezier(0.74, 0.04, 0.24, 1.04);
   cursor: pointer;
 }
 
-.menu-brand {
-  width: 100%;
-  max-width: 140px;
-  transition: all 0.4s cubic-bezier(0.74, 0.04, 0.24, 1.04);
+.menu-brand-wrapper:hover {
+  background-color: #F1B332;
 }
-
-/* Estilos de los enlaces del menú */
+.isobrand--img {
+  color: #C62025;
+}
 .menu-nav .menu--link {
   margin-right: 20px;
   font-size: 16px;
   text-transform: uppercase;
-  color: #fff; /* Blanco en la parte superior */
-  position: relative; /* Necesario para la línea subrayada */
+  color: #fff;
+  position: relative;
   transition: color 0.3s ease-in-out;
 }
 
-/* Estilos cuando está sticky o no es home */
 .menu-container.sticky .menu-nav .menu--link,
 .menu-container.sticky .button--menu,
 .menu-nav .sticky-link {
-  color: #333; /* Cambia a negro cuando está sticky o en otra página */
+  color: #333;
 }
 
-/* Efecto de subrayado animado en hover */
 .menu-nav .menu--link::after {
   content: '';
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: #f1b332; /* Color de la línea */
+  background-color: #f1b332;
   left: 0;
   bottom: -5px;
   transition: width 0.3s ease-in-out;
 }
 
 .menu-nav .menu--link:hover::after {
-  width: 100%; /* La línea se extiende completamente al hacer hover */
+  width: 100%;
 }
 
-/* Botón de menú */
 .button--menu {
   border-radius: 0;
   font-size: 16px;
@@ -90,20 +91,16 @@
 .button--menu:hover {
   color: #fff;
   background-color: #C62025;
-  border-color: #00000000;
-}
-
-/* Ajustes del menú hamburguesa */
-.menu-hamburguesa {
-  margin-left: 20px;
+  border-color: transparent;
 }
 
 .menu-nav {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 40px;
 }
+
 /* Estilos para el botón de menú hamburguesa */
 .burger-button {
   width: 65px;
@@ -115,121 +112,134 @@
   transition: all 0.3s ease-in-out;
   margin-right: 5px;
   cursor: pointer;
+  z-index: 10000;
 }
 
-/* Cambio de color al hacer scroll */
-.menu-wrapper.scrolled .burger-button .line {
-  background-color: #000;
-}
-
-.burger-button.active .line {
-  background-color: #000;
-}
-
-/* Wrapper de los íconos del botón de menú */
 .icon-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.icon-wrapper svg {
   width: 30px;
-  height: auto;
-  color: #fff;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
-
-/* Estilos para la cruz del menú */
-.burger-cross-custom.burger {
-  display: flex;
-  flex-direction: column;
-}
-
-.burger-cross-custom.cross .line {
-  background-color: #fff;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.burger-cross-custom.cross .line:nth-of-type(2) {
-  transform-origin: center;
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.burger-cross-custom.cross .line:last-of-type {
-  opacity: 0;
-}
-
-/* Menú desplegable */
-.burger-menu {
-  width: 360px;
-  height: 0;
-  align-items: center;
-  display: flex;
-  background-color: #fff;
-  justify-content: center;
-  transform-origin: top;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 2;
-  position: absolute;
-  transition: all 0.3s ease-in-out;
-  top: 97px;
-  right: 0;
-}
-
-.burger-menu.active {
-  height: 230px;
-  pointer-events: all;
-  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.05);
+  height: 25px;
+  position: relative;
 }
 
 /* Líneas del icono hamburguesa */
 .burger-cross-custom .line {
   width: 100%;
-  max-width: 30px;
-  height: 2px;
-  background-color: #fff;
-  border-radius: 100px;
-  transition: all 0.3s ease-in-out;
-  transform-origin: center;
-  transform: translate(-50%, -50%) rotate(0);
+  height: 3px;
+  background-color: #fff; /* No cambio este color */
+  border-radius: 2px;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  left: 0;
+  transition: all 0.3s ease-in-out;
 }
 
-.burger-cross-custom.burger .line:first-of-type {
-  transform-origin: top left;
-  transform: translate(-50%, -60%) rotate(0);
+/* Posicionamiento de las líneas */
+.burger-cross-custom .line:nth-child(1) {
+  top: 0;
+}
+
+.burger-cross-custom .line:nth-child(2) {
+  top: 11px;
+}
+
+.burger-cross-custom .line:nth-child(3) {
   top: 22px;
 }
 
-.burger--menu-link {
-  color: #333;
+/* Cambiar el color de las líneas cuando el fondo sea blanco (sticky) */
+.menu-container.sticky .burger-cross-custom .line,
+.menu-container.sticky .burger-button .line {
+  background-color: #333; /* No cambiaré esto tampoco */
 }
-.link-text {
-  margin-left:10px ;
 
+/* Animación al hacer clic */
+.burger-cross-custom.cross .line:nth-child(1) {
+  transform: rotate(45deg);
+  top: 11px;
 }
-/* Para pantallas pequeñas */
-@media screen and (max-width: 840px) {
-  .menu-wrapper {
-    height: 55px;
+
+.burger-cross-custom.cross .line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-cross-custom.cross .line:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 11px;
+}
+
+/* Menú desplegable */
+.burger-menu {
+  position: absolute;
+  top: 65px;
+  right: 0;
+  background-color: #fff;
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out;
+  z-index: 9999999999;
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.05);
+}
+
+.burger-menu.active {
+  max-height: 500px;
+}
+
+.burger-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.burger-menu-item {
+  padding: 15px 20px;
+}
+.burger-menu-item .burger--menu-link {
+  max-width: 319px !important;
+}
+
+.burger-menu-item a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.burger-menu-item a:hover {
+  background-color: #f1f1f1;
+}
+
+.link-text {
+  margin-left: 10px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .menu-nav {
+    display: none;
+  }
+
+  .nav-flex-container {
+    padding: 0 15px;
   }
 
   .menu-brand-wrapper {
-    max-width: 180px;
-    height: 55px;
-    margin-left: 24px;
+    margin-left: 0;
   }
 
-  .menu-brand {
-    max-width: 115px;
+  .logo-img {
+    width: 120px;
+  }
+
+  .burger-menu {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Líneas visibles en móvil */
+  .burger-cross-custom .line {
+    background-color: #fff; /* Mantengo el color original */
+    display: block; /* Asegurar que se vea */
   }
 }
