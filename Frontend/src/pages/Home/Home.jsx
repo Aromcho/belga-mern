@@ -1,7 +1,7 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react"; // Importar el hook
-import { FiltersContext } from '../../context/FiltersContext'; // Importar el contexto
+import { useContext } from "react";
+import { FiltersContext } from '../../context/FiltersContext';
 import 'leaflet/dist/leaflet.css';
 import "./Home.css";
 
@@ -12,36 +12,62 @@ import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
 import FormContact from "../../components/FormContact/FormContact.jsx";
-import MapaInteractivo from "../../components/MapaInteractivo/MapaInteractivo.jsx";
 import HomeMap from "../../components/HomeMap/HomeMap.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { filters, updateFilters } = useContext(FiltersContext); // Obtener el estado y la función de actualización
+  const { filters, updateFilters } = useContext(FiltersContext);
+  const [isMobile, setIsMobile] = useState(false); // Nuevo estado para detectar si es mobile
+
+  useEffect(() => {
+    // Función para verificar el tamaño de la pantalla
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 992); // Definir si es mobile con ancho <= 992px
+    };
+
+    checkIsMobile(); // Verificar en el primer renderizado
+
+    // Agregar un listener para cambios de tamaño de pantalla
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => {
+      // Limpiar el listener al desmontar el componente
+      window.removeEventListener("resize", checkIsMobile);
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/propertylist", { state: { filters} }); // Redirigir a la lista de propiedades
+    navigate("/propertylist", { state: { filters } }); // Redirigir a la lista de propiedades
   };
 
   return (
     <div className="layout transparent">
       <div className="hero-wrapper">
-        <video autoPlay muted loop className="video">
-          <source src="/home-video.mp4" type="video/mp4" />
-        </video>
+        {!isMobile ? (
+          <video autoPlay muted loop className="video" src="/home-video.mp4">
+          </video>
+        ) : (
+          <img
+            src="/Foto_Portada.jpg"
+            alt="Portada"
+            className="w-100 h-100 position-absolute top-0 start-0"
+          />
+        )}
+
+        {/* Imagen de superposición que siempre cubre el video o la imagen */}
         <img
           src="/Frame 1.png"
           alt="Superposición PNG"
-          className="w-100 h-100 position-absolute top-0 start-0"
+          className="overlay-image"
         />
-        <img src="/Foto_Portada.jpg" alt="Portada" className="background-image" />
+
         <div className="overlay"></div>
         <div className="hero">
           <SocialSidebar />
         </div>
         <div className="container-form-serch align--center">
-        <SearchHomeForm formData={filters} setFormData={updateFilters} handleSubmit={handleSubmit} />
+          <SearchHomeForm formData={filters} setFormData={updateFilters} handleSubmit={handleSubmit} />
         </div>
       </div>
 
@@ -87,9 +113,9 @@ const Home = () => {
         <FormContact />
       </div>
       
-      {/*seccion de mapa*/}
       <div className="mapa">
-<HomeMap/>      </div>
+        <HomeMap/>
+      </div>
     </div>
   );
 };

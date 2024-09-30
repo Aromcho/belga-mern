@@ -5,7 +5,8 @@
   position: relative;
 }
 
-.hero-wrapper video {
+/* Video y imagen de fondo */
+.hero-wrapper video, .hero-wrapper img {
   position: fixed;
   top: 0;
   right: 0;
@@ -14,27 +15,29 @@
   object-fit: cover;
 }
 
-.hero-wrapper .background-image {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+/* Overlay que oscurece el fondo */
 .hero-wrapper .overlay {
-  display: none;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
 
+/* Imagen de superposición que cubre el fondo (video o imagen) */
+.overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* Siempre encima del video o imagen */
+}
+
+/* Contenedor del formulario de búsqueda */
 .container-form-serch {
   display: flex;
   justify-content: center;
@@ -42,30 +45,36 @@
   height: 100vh;
   padding: 0 15px;
   box-sizing: border-box;
+  z-index: 4; /* Para estar por encima de la superposición */
 }
+
+/* Mapa de la sección de abajo */
 .mapa {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #fff;
   position: relative;
-  z-index:99999999;
-  width: 98;
+  z-index: 99999999;
+  width: 98%;
   height: 100vh;
 }
 
 @media screen and (max-width: 992px) {
   .hero-wrapper video {
-    display: none;
+    display: none; /* Ocultar el video en pantallas pequeñas */
   }
+
   .hero-wrapper .background-image {
     display: block;
   }
+
   .hero-wrapper .overlay {
     display: block;
   }
 }
 
+/* Sección de la lista de propiedades destacadas */
 .prop-list {
   width: 100%;
   display: flex;
@@ -87,6 +96,7 @@
   }
 }
 
+/* Sección de inversiones */
 .inversion-item {
   width: 30%;
   height: 100%;
@@ -118,6 +128,7 @@
   }
 }
 
+/* Listado de inversiones */
 .inversion-list {
   width: 100%;
   height: 730px;
@@ -168,6 +179,7 @@
   }
 }
 
+/* Selección de propiedades */
 .seleccion {
   width: 100%;
   height: 100%;
@@ -207,6 +219,7 @@
   }
 }
 
+/* Capas para superposiciones oscuras */
 .black-layer {
   width: 100%;
   height: 100%;
@@ -223,6 +236,7 @@
   }
 }
 
+/* Rango de precios */
 .price-range {
   width: 100%;
   height: 40px;
@@ -373,13 +387,7 @@
   font-weight: 300;
 }
 
-
-
-
-/* contact secction*/
-
-
-
+/* Sección de contacto */
 .contact-section {
   width: 100%;
   height: 100vh;
