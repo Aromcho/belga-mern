@@ -1,13 +1,12 @@
 .quiero-vender-container {
   width: 100%;
-  padding: 150px 0 80px;
+  padding: 100px 0 80px;
   background-color: #f7f7f7;
 }
 
 .back-wrapper {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 30px;
 }
 
 .back-link {
@@ -37,28 +36,40 @@
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 500;
-  color: #C62025;
+  color: #6c757d; /* Texto gris */
+}
+
+.custom-stepper .MuiStepLabel-label.Mui-active {
+  color: #F1B332 !important; /* Texto amarillo suave cuando activo */
+}
+
+.custom-stepper .MuiStepLabel-label.Mui-completed {
+  color: #F1B332 !important; /* Texto amarillo suave cuando completado */
 }
 
 .custom-stepper .MuiStepIcon-root.Mui-completed {
-  color: #C62025 !important;
+  color: #F1B332 !important; /* Ícono amarillo suave cuando completado */
 }
 
 .custom-stepper .MuiStepIcon-root.Mui-active {
-  color: #9F1A1D !important;
+  color: #F1B332 !important; /* Ícono amarillo suave cuando activo */
+}
+
+.custom-stepper .MuiStepIcon-root {
+  color: #9F9F9F !important; /* Ícono gris cuando inactivo */
 }
 
 .step-item.active-step-item .step-icon {
-  color: #C62025;
-  animation: icon-bounce 0.8s infinite;
+  color: #F1B332;
+  animation: bounce 0.6s infinite alternate;
 }
 
-@keyframes icon-bounce {
-  0%, 100% {
+@keyframes bounce {
+  0% {
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-5px);
+  100% {
+    transform: translateY(-8px);
   }
 }
 
@@ -75,31 +86,60 @@
 
 .custom-input {
   margin-bottom: 20px;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .stepper-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
 }
 
-.btn-back-step, .btn-next-step, .btn-submit {
+.btn-back-step,
+.btn-next-step,
+.btn-submit {
   background-color: #C62025;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
+  border-radius: 0;
+  padding: 12px 24px;
+  transition: transform 0.2s, background-color 0.3s;
+
 }
 
+.btn-back-step:hover,
+.btn-next-step:hover,
 .btn-submit:hover {
   background-color: #9F1A1D;
+  transform: scale(1.05);
 }
+.btn-back {
+  text-decoration: none !important;
 
+}
 .celebration-container {
+  height: 100vh;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 100px 20px;
   text-align: center;
+  animation: fade-in 1.5s ease;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .celebration-text {
@@ -118,4 +158,3 @@
 .go-back-link .btn-back:hover {
   background-color: #9F1A1D;
 }
-

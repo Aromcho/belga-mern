@@ -6,12 +6,10 @@ import {
   Stepper,
   Step,
   StepLabel,
-  Button,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useSpring, animated } from "react-spring";
-import { Container } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import {
   FaUser,
   FaEnvelope,
@@ -30,26 +28,22 @@ const steps = [
   },
   {
     label: "Email",
-    message:
-      "Queremos enviarte la información completa. ¿Cuál es tu correo?",
+    message: "Queremos enviarte la información completa. ¿Cuál es tu correo?",
     icon: <FaEnvelope />,
   },
   {
     label: "Teléfono",
-    message:
-      "Por si necesitamos contactarte más rápido, danos tu número.",
+    message: "Por si necesitamos contactarte más rápido, danos tu número.",
     icon: <FaPhoneAlt />,
   },
   {
     label: "Dirección",
-    message:
-      "¿Dónde está ubicada la propiedad que quieres vender?",
+    message: "¿Dónde está ubicada la propiedad que quieres vender?",
     icon: <FaMapMarkerAlt />,
   },
   {
     label: "Tipo de Propiedad",
-    message:
-      "¿Qué tipo de propiedad es? (Casa, apartamento, etc.)",
+    message: "¿Qué tipo de propiedad es? (Casa, apartamento, etc.)",
     icon: <FaBuilding />,
   },
 ];
@@ -72,7 +66,6 @@ const QuieroVender = () => {
 
   const handleSubmit = () => {
     setIsSubmitted(true);
-    // Aquí puedes agregar la lógica para enviar el formulario
   };
 
   // Animación de entrada suave para el formulario
@@ -86,7 +79,6 @@ const QuieroVender = () => {
   const celebrationMessage =
     "¡Felicidades! Ya casi sabemos cuánto vale tu propiedad. Te contactaremos pronto con todos los detalles.";
 
-  // Si ya se ha enviado el formulario, mostramos la animación y el confeti
   if (isSubmitted) {
     return (
       <div className="celebration-container">
@@ -94,11 +86,10 @@ const QuieroVender = () => {
         <Typography variant="h4" className="celebration-text">
           {celebrationMessage}
         </Typography>
-        <Link to="/" className="go-back-link">
-          <Button variant="outlined" className="btn-back">
-            Volver al inicio
+
+          <Button variant="outline-dark" as={Link} to="/" className="btn-back-step pt-2 pb-1">
+            <p >Volver al inicio</p>
           </Button>
-        </Link>
       </div>
     );
   }
@@ -106,120 +97,137 @@ const QuieroVender = () => {
   return (
     <Layout>
       <div className="quiero-vender-container">
-        <div className="back-wrapper">
-          <Link to="/" className="back-link">
-            <ArrowBackIcon />
-            Volver al inicio
-          </Link>
-        </div>
+        <Container>
+          <div className="back-wrapper mb-4">
+            <Link to="/" className="back-link">
+              <ArrowBackIcon />
+              Volver al inicio
+            </Link>
+          </div>
 
-        <Container className="stepper-container">
-          <Stepper activeStep={activeStep} alternativeLabel className="custom-stepper">
-            {steps.map((step, index) => (
-              <Step
-                key={index}
-                className={`step-item ${
-                  activeStep === index ? "active-step-item" : ""
-                }`}
-              >
-                <StepLabel
-                  icon={
-                    <animated.div className="step-icon">
-                      {step.icon}
-                    </animated.div>
-                  }
-                  className="step-label"
+          <Container className="stepper-container">
+            <Stepper activeStep={activeStep} alternativeLabel className="custom-stepper">
+              {steps.map((step, index) => (
+                <Step
+                  key={index}
+                  className={`step-item ${
+                    activeStep === index ? "active-step-item" : ""
+                  }`}
                 >
-                  {step.label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+                  <StepLabel
+                    icon={
+                      <animated.div className="step-icon">
+                        {step.icon}
+                      </animated.div>
+                    }
+                    className="step-label"
+                  >
+                    {step.label}
+                  </StepLabel>
+                </Step>
+              ))}
+            </Stepper>
 
-          <animated.div style={slideIn}>
-            <Typography variant="h6" className="step-message">
-              {steps[activeStep].message}
-            </Typography>
-            <div className="form-step-content">
-              {activeStep === 0 && (
-                <TextField
-                  label="Nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  fullWidth
-                  className="custom-input"
-                />
-              )}
-              {activeStep === 1 && (
-                <TextField
-                  label="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  fullWidth
-                  className="custom-input"
-                />
-              )}
-              {activeStep === 2 && (
-                <TextField
-                  label="Teléfono"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  fullWidth
-                  className="custom-input"
-                />
-              )}
-              {activeStep === 3 && (
-                <TextField
-                  label="Dirección"
-                  name="direccion"
-                  value={formData.direccion}
-                  onChange={handleChange}
-                  fullWidth
-                  className="custom-input"
-                />
-              )}
-              {activeStep === 4 && (
-                <TextField
-                  label="Tipo de Propiedad"
-                  name="tipoPropiedad"
-                  value={formData.tipoPropiedad}
-                  onChange={handleChange}
-                  fullWidth
-                  className="custom-input"
-                />
+            <animated.div style={slideIn} className="animated-form-step mt-4">
+              <Typography variant="h6" className="step-message mb-4">
+                {steps[activeStep].message}
+              </Typography>
+              <Form>
+                <Row>
+                  <Col>
+                    {activeStep === 0 && (
+                      <Form.Group>
+                        <Form.Label>Nombre</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="nombre"
+                          value={formData.nombre}
+                          onChange={handleChange}
+                          className="custom-input"
+                        />
+                      </Form.Group>
+                    )}
+                    {activeStep === 1 && (
+                      <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="custom-input"
+                        />
+                      </Form.Group>
+                    )}
+                    {activeStep === 2 && (
+                      <Form.Group>
+                        <Form.Label>Teléfono</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="telefono"
+                          value={formData.telefono}
+                          onChange={handleChange}
+                          className="custom-input"
+                        />
+                      </Form.Group>
+                    )}
+                    {activeStep === 3 && (
+                      <Form.Group>
+                        <Form.Label>Dirección</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="direccion"
+                          value={formData.direccion}
+                          onChange={handleChange}
+                          className="custom-input"
+                        />
+                      </Form.Group>
+                    )}
+                    {activeStep === 4 && (
+                      <Form.Group>
+                        <Form.Label>Tipo de Propiedad</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="tipoPropiedad"
+                          value={formData.tipoPropiedad}
+                          onChange={handleChange}
+                          className="custom-input"
+                        />
+                      </Form.Group>
+                    )}
+                  </Col>
+                </Row>
+              </Form>
+            </animated.div>
+
+            <div className="stepper-buttons mt-4">
+              <Button
+                variant="outline-dark"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className="btn-back-step"
+              >
+                Atrás
+              </Button>
+              {activeStep === steps.length - 1 ? (
+                <Button
+                  variant="dark"
+                  className="btn-submit"
+                  onClick={handleSubmit}
+                >
+                  Enviar
+                </Button>
+              ) : (
+                <Button
+                  variant="dark"
+                  className="btn-next-step"
+                  onClick={handleNext}
+                >
+                  Siguiente
+                </Button>
               )}
             </div>
-          </animated.div>
-
-          <div className="stepper-buttons">
-            <Button
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              className="btn-back-step"
-            >
-              Atrás
-            </Button>
-            {activeStep === steps.length - 1 ? (
-              <Button
-                variant="contained"
-                className="btn-submit"
-                onClick={handleSubmit}
-              >
-                Enviar
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                className="btn-next-step"
-                onClick={handleNext}
-              >
-                Siguiente
-              </Button>
-            )}
-          </div>
+          </Container>
         </Container>
       </div>
     </Layout>

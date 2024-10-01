@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet"; 
 import "./MapaInteractivo.css";
-import customIconUrl from "/images/pin_new.png";
+import customIconUrl from "/images/pin.svg";
 
 // Definir un ícono personalizado
 const customIcon = new L.Icon({
   iconUrl: customIconUrl,
-  iconSize: [38, 60],
+  iconSize: [38, 40],
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
 });
