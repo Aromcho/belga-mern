@@ -2,17 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { PATHS } from "../../../config/index.js";
-import { classes, truncateWithEllipsis } from "../helpers";
-import { useMergeState } from "../helpers/hooks";
+import { classes, truncateWithEllipsis } from "../../helpers/index.js";
+import { useMergeState } from "../../helpers/hooks.js";
 import Lightbox from "react-spring-lightbox";
-import { Layout, Container } from "../components/Layout/Layout.jsx";
-import { ArrowBackIcon, ArrowSubmitIcon, CloseIcon } from "../components/Icons/Icons.jsx";
-import { SocialSidebar } from "../components/SocialSidebar/SocialSidebar.jsx";
-import { BackToTop } from "../components/BackToTop/BackToTop.jsx";
-import { MemberCard } from "../components/Pages/Conoce/MemberCard.jsx";
-import { QuoteCard } from "../components/Pages/Conoce/QuoteCard.jsx";
-import { ContactForm } from "../components/Forms/ContactForm.jsx";
+import Layout from "../../components/Layout/Layout.jsx";
+import { ArrowBackIcon, ArrowSubmitIcon, CloseIcon } from "../../components/Icons/Icons.jsx";
+import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
+import BackToTop from "../../components/BackToTop/BackToTop.jsx";
+import { MemberCard } from "./MemberCard/MemberCard.jsx";
+import { QuoteCard } from "./QuoteCard/QuoteCard.jsx";
+import FormContact from "../../components/FormContact/FormContact.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Container } from "react-bootstrap";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -34,35 +35,35 @@ const ConoceBelga = observer(() => {
 
   return (
     <Layout menuTheme="light" footerSmall backToTopFooter>
-      <div className="conoce-belga-container">
-        <div className="hero-wrapper" style={{ backgroundImage: `url(/images/nosotros_hero.jpg)` }}>
-          <div className="black-layer"></div>
-          <div className="hero">
+      <div className="cb-container">
+        <div className="cb-hero-wrapper" style={{ backgroundImage: `url(/images/nosotros_hero.jpg)` }}>
+          <div className="cb-black-layer"></div>
+          <div className="cb-hero">
             <SocialSidebar />
           </div>
           <Container>
-            <div className="menu-hero">
+            <div className="cb-menu-hero">
               <a className={classes({ active: activeSection === "historia" })} href="#historia">
-                <div className="menu-hero-text">Historia</div>
+                <div className="cb-menu-hero-text">Historia</div>
               </a>
               <a className={classes({ active: activeSection === "valores" })} href="#valores">
-                <div className="menu-hero-text">Valores</div>
+                <div className="cb-menu-hero-text">Valores</div>
               </a>
               <a className={classes({ active: activeSection === "belga" })} href="#belga">
-                <div className="menu-hero-text">Somos Belga</div>
+                <div className="cb-menu-hero-text">Somos Belga</div>
               </a>
               <a className={classes({ active: activeSection === "servicios" })} href="#servicios">
-                <div className="menu-hero-text">Servicios</div>
+                <div className="cb-menu-hero-text">Servicios</div>
               </a>
               <a className={classes({ active: activeSection === "oficinas" })} href="#oficinas">
-                <div className="menu-hero-text">Oficinas</div>
+                <div className="cb-menu-hero-text">Oficinas</div>
               </a>
             </div>
           </Container>
         </div>
 
         <Container>
-          <div className="back-wrapper">
+          <div className="cb-back-wrapper">
             <Link to={PATHS.ROOT}>
               <ArrowBackIcon />
               Volver al inicio
@@ -70,88 +71,85 @@ const ConoceBelga = observer(() => {
           </div>
         </Container>
 
-        <div className="sidebar-container">
-          <div className="sidebar-red">
+        <div className="cb-sidebar-container">
+          <div className="cb-sidebar-red">
             <SocialSidebar color="red" />
             <BackToTop color="red" />
           </div>
 
           <section
-            className="historia-section"
+            className="cb-historia-section"
             id="historia"
             onMouseOver={() => setActiveSection("historia")}
             onMouseLeave={() => setActiveSection("")}
           >
             <Container>
-              <div className="historia-wrapper">
-                <div className="historia-left">
-                  <img className="historia-gif" src="/images/65_historia.gif" loading="lazy" />
+              <div className="cb-historia-wrapper">
+                <div className="cb-historia-left">
+                  <img className="cb-historia-gif" src="/images/65_historia.gif" loading="lazy" />
                 </div>
-                <div className="historia-right">
-                  <div className="historia-text-wrapper">
-                    <div className="underline-title">
+                <div className="cb-historia-right">
+                  <div className="cb-historia-text-wrapper">
+                    <div className="cb-underline-title">
                       Una <u>Historia</u> Belga
                     </div>
-                    <p className="historia-text">
+                    <p className="cb-historia-text">
                       Belga comienza su historia con nuestro fundador Jorge Jooris en 1957...
                     </p>
-                    {/* Rest of the text */}
                   </div>
                 </div>
               </div>
             </Container>
           </section>
 
-          <section className="valores-section">
+          <section className="cb-valores-section">
             <Container>
-              <div className="underline-title">Los <u>Valores</u> que heredamos</div>
-              <div className="valores-list">
-                <div className="valores-wrapper">
-                  <div className="valores-list-title">Una tradición familiar.</div>
-                  <div className="valores-list-text">Somos una empresa reconocida por su trato familiar...</div>
+              <div className="cb-underline-title">Los <u>Valores</u> que heredamos</div>
+              <div className="cb-valores-list">
+                <div className="cb-valores-wrapper">
+                  <div className="cb-valores-list-title">Una tradición familiar.</div>
+                  <div className="cb-valores-list-text">Somos una empresa reconocida por su trato familiar...</div>
                 </div>
-                {/* More valores */}
               </div>
             </Container>
           </section>
 
-          <section className="quotes-section">
+          <section className="cb-quotes-section">
             <Container>
-              <div className="quote-list">
-                <QuoteCard className="quote" rating={4} quote={truncateWithEllipsis("Hoy 22/6 se concretó la operación...", 400)} author="Andrea Gallis" logo="/images/google_logo.png" link="#" />
-                <QuoteCard className="quote" rating={5} quote={truncateWithEllipsis("Profesionalismo y calidez humana...", 400)} author="Favio Novello" logo="/images/google_logo.png" link="#" />
+              <div className="cb-quote-list">
+                <QuoteCard className="cb-quote" rating={4} quote={truncateWithEllipsis("Hoy 22/6 se concretó la operación...", 400)} author="Andrea Gallis" logo="/images/google_logo.png" link="#" />
+                <QuoteCard className="cb-quote" rating={5} quote={truncateWithEllipsis("Profesionalismo y calidez humana...", 400)} author="Favio Novello" logo="/images/google_logo.png" link="#" />
               </div>
             </Container>
           </section>
 
-          <section className="somos-belga-section">
+          <section className="cb-somos-belga-section">
             <Container>
-              <div className="underline-title"><u>Somos Belga</u></div>
-              <div className="staff-list">
-                <div className="staff-item">
-                  <div className="left-content">
-                    <span className="name">Martín Gallegos</span>
-                    <span className="low-name desktop">CEO | CUCICBA 5111 - CMCPSI 6528</span>
-                    <span className="low-name mobile">CEO</span>
-                    <span className="low-name mobile">CUCICBA 5111 - CMCPSI 6528</span>
+              <div className="cb-underline-title"><u>Somos Belga</u></div>
+              <div className="cb-staff-list">
+                <div className="cb-staff-item">
+                  <div className="cb-left-content">
+                    <span className="cb-name">Martín Gallegos</span>
+                    <span className="cb-low-name cb-desktop">CEO | CUCICBA 5111 - CMCPSI 6528</span>
+                    <span className="cb-low-name cb-mobile">CEO</span>
+                    <span className="cb-low-name cb-mobile">CUCICBA 5111 - CMCPSI 6528</span>
                   </div>
-                  <div className="right-content">
-                    <img className="staff-image" src="/images/new/martin.png" loading="lazy" />
+                  <div className="cb-right-content">
+                    <img className="cb-staff-image" src="/images/new/martin.png" loading="lazy" />
                   </div>
                 </div>
-                {/* More staff items */}
               </div>
             </Container>
           </section>
 
-          <section className="servicios-section">
+          <section className="cb-servicios-section">
             <Container>
-              <div className="underline-title">Los <u>Servicios</u> que ofrecemos</div>
+              <div className="cb-underline-title">Los <u>Servicios</u> que ofrecemos</div>
             </Container>
 
             <Container>
               <Lightbox
-                className="servicios-gallery"
+                className="cb-servicios-gallery"
                 isOpen={modalContent.open}
                 onPrev={gotoPrevious}
                 onNext={gotoNext}
@@ -161,28 +159,28 @@ const ConoceBelga = observer(() => {
                 style={{ background: "rgba(0,0,0,0.95)", zIndex: 99999999 }}
                 singleClickToZoom
                 renderPrevButton={() => (
-                  <div className={classes("arrow-gallery arrow-prev", { disabled: currentImageIndex === 0 })} onClick={gotoPrevious}>
-                    <ArrowSubmitIcon className="gallery-arrow" />
+                  <div className={classes("cb-arrow-gallery cb-arrow-prev", { disabled: currentImageIndex === 0 })} onClick={gotoPrevious}>
+                    <ArrowSubmitIcon className="cb-gallery-arrow" />
                   </div>
                 )}
                 renderNextButton={() => (
-                  <div className={classes("arrow-gallery arrow-next", { disabled: currentImageIndex + 1 === photoGallery.length })} onClick={gotoNext}>
-                    <ArrowSubmitIcon className="gallery-arrow" />
+                  <div className={classes("cb-arrow-gallery cb-arrow-next", { disabled: currentImageIndex + 1 === photoGallery.length })} onClick={gotoNext}>
+                    <ArrowSubmitIcon className="cb-gallery-arrow" />
                   </div>
                 )}
                 renderHeader={() => (
-                  <div className="header-gallery">
-                    <div className="index-counter">
+                  <div className="cb-header-gallery">
+                    <div className="cb-index-counter">
                       {currentImageIndex + 1} de {photoGallery.length}
                     </div>
-                    <CloseIcon onClick={onClose} className="gallery-close-icon" />
+                    <CloseIcon onClick={onClose} className="cb-gallery-close-icon" />
                   </div>
                 )}
               />
 
-              <div className="swiper-container-gallery">
+              <div className="cb-swiper-container-gallery">
                 <Swiper
-                  className="swiper-services-gallery"
+                  className="cb-swiper-services-gallery"
                   modules={[]}
                   loop={true}
                   centeredSlides={false}
@@ -197,71 +195,68 @@ const ConoceBelga = observer(() => {
                   }}
                 >
                   <SwiperSlide>
-                    <div className="service-wrapper">
-                      <div className="service-title">Video Drone</div>
-                      <div className="service-media">
+                    <div className="cb-service-wrapper">
+                      <div className="cb-service-title">Video Drone</div>
+                      <div className="cb-service-media">
                         <iframe src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
                       </div>
                     </div>
                   </SwiperSlide>
                   <SwiperSlide onClick={() => { setModalContent({ open: true }); setCurrentIndex(0); }}>
-                    <div className="service-wrapper">
-                      <div className="service-title">Fotos</div>
-                      <div className="service-media">
-                        <div className="service-media-img" style={{ backgroundImage: `url(/images/servicios_fotos.jpg)` }}></div>
+                    <div className="cb-service-wrapper">
+                      <div className="cb-service-title">Fotos</div>
+                      <div className="cb-service-media">
+                        <div className="cb-service-media-img" style={{ backgroundImage: `url(/images/servicios_fotos.jpg)` }}></div>
                       </div>
                     </div>
                   </SwiperSlide>
-                  {/* More slides */}
                 </Swiper>
               </div>
             </Container>
 
             <Container>
-              <div className="portales-container">
-                <div className="portales-list">
-                  <div className="portal-item">
-                    <img className="portal-img" src="/images/portales_zonaprop.png" />
-                    <div className="portal-name">Zona Prop</div>
+              <div className="cb-portales-container">
+                <div className="cb-portales-list">
+                  <div className="cb-portal-item">
+                    <img className="cb-portal-img" src="/images/portales_zonaprop.png" />
+                    <div className="cb-portal-name">Zona Prop</div>
                   </div>
-                  {/* More portals */}
                 </div>
-                <div className="portales-footer">PUBLICACIÓN EN PORTALES</div>
+                <div className="cb-portales-footer">PUBLICACIÓN EN PORTALES</div>
               </div>
             </Container>
           </section>
 
-          <section className="oficinas-section">
+          <section className="cb-oficinas-section">
             <Container>
-              <div className="underline-title">Nuestras <u>Oficinas</u>, nuestras casas</div>
+              <div className="cb-underline-title">Nuestras <u>Oficinas</u>, nuestras casas</div>
             </Container>
 
-            <div className="main-office">
-              <div className="main-office-img" style={{ backgroundImage: `url(/images/oficina_la_imprenta.jpg)` }}></div>
-              <div className="office-main-text">
-                <div className="office-text-wrapper">
-                  <div className="office-text-name">La Imprenta</div>
-                  <div className="office-text-loc">Gorostiaga 1601</div>
-                  <div className="office-text">Nuestra oficina sede, nuestra casa central...</div>
+            <div className="cb-main-office">
+              <div className="cb-main-office-img" style={{ backgroundImage: `url(/images/oficina_la_imprenta.jpg)` }}></div>
+              <div className="cb-office-main-text">
+                <div className="cb-office-text-wrapper">
+                  <div className="cb-office-text-name">La Imprenta</div>
+                  <div className="cb-office-text-loc">Gorostiaga 1601</div>
+                  <div className="cb-office-text">Nuestra oficina sede, nuestra casa central...</div>
                 </div>
               </div>
             </div>
 
-            <div className="office-list">
-              <div className="office-list-item">
-                <div className="office-text-wrapper">
-                  <div className="office-text-name">BELGRANO C</div>
-                  <div className="office-text-loc">Juramento 2102</div>
-                  <div className="office-text">Te esperamos en el centro de Belgrano...</div>
+            <div className="cb-office-list">
+              <div className="cb-office-list-item">
+                <div className="cb-office-text-wrapper">
+                  <div className="cb-office-text-name">BELGRANO C</div>
+                  <div className="cb-office-text-loc">Juramento 2102</div>
+                  <div className="cb-office-text">Te esperamos en el centro de Belgrano...</div>
                 </div>
               </div>
-              {/* More offices */}
             </div>
           </section>
 
-          <div className="form-wrapper">
+          <div className="cb-form-wrapper">
             <Container>
-              <ContactForm full />
+              <FormContact full />
             </Container>
           </div>
         </div>

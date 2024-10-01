@@ -1,50 +1,121 @@
 .quiero-vender-container {
-    width: 100%;
-    padding: 150px 0 80px;
+  width: 100%;
+  padding: 150px 0 80px;
+  background-color: #f7f7f7;
+}
+
+.back-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #C62025;
+}
+
+.back-link svg {
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.back-link:hover svg {
+  transform: translateX(-5px);
+}
+
+.stepper-container {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.custom-stepper .MuiStepLabel-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #C62025;
+}
+
+.custom-stepper .MuiStepIcon-root.Mui-completed {
+  color: #C62025 !important;
+}
+
+.custom-stepper .MuiStepIcon-root.Mui-active {
+  color: #9F1A1D !important;
+}
+
+.step-item.active-step-item .step-icon {
+  color: #C62025;
+  animation: icon-bounce 0.8s infinite;
+}
+
+@keyframes icon-bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  @media screen and (max-width: 1100px) {
-    .quiero-vender-container {
-      padding: 120px 0 0;
-    }
+  50% {
+    transform: translateY(-5px);
   }
-  
-  .back-wrapper {
-    display: table;
-    margin-bottom: 40px;
-  }
-  
-  .back--link {
-    align-items: center;
-    display: inline-flex;
-    color: #000;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  
-  .back--link svg {
-    width: 24px;
-    height: auto;
-    display: block;
-    transition: all 0.3s ease-in-out;
-    margin-right: 5px;
-  }
-  
-  .back--link:hover svg {
-    transform: translateX(-5px);
-  }
-  
-  .form-wrapper {
-    width: 100%;
-    margin: 30px auto 100px;
-    display: block;
-  }
-  
-  @media screen and (max-width: 1100px) {
-    .form-wrapper {
-      margin: 60px auto 100px;
-    }
-  }
-  
+}
+
+.form-step-content {
+  margin-top: 20px;
+}
+
+.step-message {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.custom-input {
+  margin-bottom: 20px;
+}
+
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-back-step, .btn-next-step, .btn-submit {
+  background-color: #C62025;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.btn-submit:hover {
+  background-color: #9F1A1D;
+}
+
+.celebration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.celebration-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #333;
+}
+
+.go-back-link .btn-back {
+  margin-top: 30px;
+  background-color: #C62025;
+  color: #fff;
+}
+
+.go-back-link .btn-back:hover {
+  background-color: #9F1A1D;
+}
+
