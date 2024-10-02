@@ -2,7 +2,7 @@ import axios from 'axios';
 import Property from '../models/property.model.js';
 
 export const syncWithTokko = async () => {
-  const limit = 200;
+  const limit = 20;
   let offset = 0;
   let total_count = 0;
 

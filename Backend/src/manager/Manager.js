@@ -1,5 +1,6 @@
 // src/managers/Manager.js
 
+
 class Manager {
     constructor(Model) {
       this.Model = Model;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../Button/Button.jsx';
 import { classes } from '../../helpers/index.js';
-import './title.css';
+import './Title.css';
 
 const Title = ({
   className,

@@ -1,35 +1,8 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
-// Schema para los detalles de la sucursal (branch)
-const branchSchema = new mongoose.Schema({
-  address: String,
-  alternative_phone: String,
-  alternative_phone_area: String,
-  alternative_phone_country_code: String,
-  alternative_phone_extension: String,
-  branch_type: String,
-  contact_time: String,
-  created_date: Date,
-  display_name: String,
-  email: String,
-  geo_lat: Number,
-  geo_long: Number,
-  gm_location_type: String,
-  id: { type: Number, index: true },
-  is_default: Boolean,
-  logo: String,
-  name: { type: String, index: true },
-  pdf_footer_text: String,
-  phone: String,
-  phone_area: String,
-  phone_country_code: String,
-  phone_extension: String,
-  use_pdf_footer: Boolean,
-});
-
 // Schema para las operaciones de la propiedad
-const operationSchema = new mongoose.Schema({
+const operationSchema = new Schema({
   operation_id: { type: Number, index: true },
   operation_type: { type: String, index: true }, // Tipo de operación indexado
   prices: [
@@ -42,7 +15,7 @@ const operationSchema = new mongoose.Schema({
 });
 
 // Schema para las imágenes de la propiedad
-const photoSchema = new mongoose.Schema({
+const photoSchema = new Schema({
   description: String,
   image: String,
   is_blueprint: Boolean,
@@ -53,14 +26,14 @@ const photoSchema = new mongoose.Schema({
 });
 
 // Schema para los tags personalizados
-const tagSchema = new mongoose.Schema({
+const tagSchema = new Schema({
   id: Number,
   name: { type: String, index: true }, // Nombre del tag indexado
   type: Number,
 });
 
 // Schema para los videos
-const videoSchema = new mongoose.Schema({
+const videoSchema = new Schema({
   description: String,
   id: Number,
   order: Number,
@@ -73,12 +46,36 @@ const videoSchema = new mongoose.Schema({
 });
 
 // Schema principal para PropertyDetails
-const propertySchema = new mongoose.Schema({
+const propertySchema = new Schema({
   id: { type: Number, required: true, unique: true, index: true }, // ID indexado
   address: { type: String, text: true }, // Dirección con índice de texto
   age: Number,
   bathroom_amount: Number,
-  branch: branchSchema,
+  branch: {
+    address: String,
+    alternative_phone: String,
+    alternative_phone_area: String,
+    alternative_phone_country_code: String,
+    alternative_phone_extension: String,
+    branch_type: String,
+    contact_time: String,
+    created_date: Date,
+    display_name: String,
+    email: String,
+    geo_lat: Number,
+    geo_long: Number,
+    gm_location_type: String,
+    id: { type: Number, index: true },
+    is_default: Boolean,
+    logo: String,
+    name: { type: String, index: true },
+    pdf_footer_text: String,
+    phone: String,
+    phone_area: String,
+    phone_country_code: String,
+    phone_extension: String,
+    use_pdf_footer: Boolean,
+  },
   created_at: Date,
   custom1: String,
   custom_tags: [tagSchema],
@@ -176,6 +173,6 @@ propertySchema.index({
   "room_amount": 1
 });
 
-const property = mongoose.model('Property', propertySchema);
+const property = model('Property', propertySchema);
 
 export default property;

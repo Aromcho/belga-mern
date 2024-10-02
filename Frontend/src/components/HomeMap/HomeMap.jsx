@@ -2,20 +2,20 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "./HomeMap.css";
-import customIconUrl from "/images/pin_new.png"; // Cambia esta ruta si tienes un ícono diferente
+import customIconUrl from "/images/pin.svg"; // Cambia esta ruta si tienes un ícono diferente
 
 // Definir un ícono personalizado
 const customIcon = new L.Icon({
   iconUrl: customIconUrl,
-  iconSize: [38, 60],
+  iconSize: [38, 40],
   iconAnchor: [19, 38],
   popupAnchor: [0, -38],
 });
 
 const HomeMap = ({ geo_lat, geo_long, address }) => {
   // Valores predeterminados para Buenos Aires
-  const defaultLat = -34.603722; // Latitud de Buenos Aires
-  const defaultLng = -58.381592; // Longitud de Buenos Aires
+  const defaultLat = -34.564221; // Latitud de Buenos Aires
+  const defaultLng = -58.46208; // Longitud de Buenos Aires
   const defaultAddress = "Buenos Aires, Argentina";
 
   // Usamos las coordenadas recibidas o las predeterminadas
