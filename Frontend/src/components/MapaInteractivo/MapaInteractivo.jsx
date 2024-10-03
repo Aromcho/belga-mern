@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import L from "leaflet"; 
 import "./MapaInteractivo.css";
 import customIconUrl from "/images/pin.svg";
@@ -13,17 +13,17 @@ const customIcon = new L.Icon({
 });
 
 const MapaInteractivo = ({ property }) => {
-  // Asignamos valores predeterminados si los datos de la propiedad no están disponibles
+  // Valores predeterminados
   const defaultLat = -34.603722; // Latitud de Buenos Aires por defecto
   const defaultLng = -58.381592; // Longitud de Buenos Aires por defecto
   const defaultAddress = "Buenos Aires, Argentina";
 
-  // Estado para la latitud, longitud y dirección
+  // Estado para latitud, longitud y dirección
   const geo_lat = property.geo_lat || defaultLat;
   const geo_long = property.geo_long || defaultLng;
   const direccion = property.address || defaultAddress;
 
-  // Inicializar el estado con las coordenadas pasadas como props
+  // Estado de la posición inicial
   const [position, setPosition] = useState({ lat: geo_lat, lng: geo_long });
 
   // Actualizar la posición cuando las props cambian
@@ -44,9 +44,13 @@ const MapaInteractivo = ({ property }) => {
           attribution='&copy; <a href="https://carto.com/attributions">CartoDB</a> contributors'
         />
         <Marker position={[position.lat, position.lng]} icon={customIcon}>
-          <Popup>
-            <h1>{direccion}</h1>
-          </Popup>
+          <Tooltip
+            permanent
+            className="custom-tooltip"
+            offset={[0, -40]} // Ajuste del tooltip
+          >
+            <h4>{direccion}</h4>
+          </Tooltip>
         </Marker>
       </MapContainer>
     </div>

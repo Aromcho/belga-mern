@@ -1,8 +1,82 @@
+.map-section {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+
+}
+
 .home-map-container {
-position: relative;  
-z-index: 999999999;
-margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+.home-map-container {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+}
+.home-map-title {
+  display: flex;
+    align-items: center;
+    padding: 0 80px ;
+
+    text-transform: uppercase;
+}
+.map-navbar {
+  margin-bottom: 20px;
+}
+
+.navbar .nav-link {
+  color: #6c757d;
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.navbar .nav-link.active {
+  color: #F1B332;
+}
+
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #F1B332;
+  left: 0;
+  bottom: -5px;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar .nav-link.active::after {
+  width: 100%;
+}
+
+.map-slide {
+  width: 100%;
+}
+
+.map-info {
+  text-align: center;
+  color: #333;
+}
+
+/* Estilo personalizado para el Tooltip */
+.custom-tooltip {
+  background-color: #F1B332;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Ajustar el tamaño del mapa en dispositivos más pequeños */
+@media (max-width: 768px) {
+  .leaflet-map {
+    height: 300px;
   }
-  
+}

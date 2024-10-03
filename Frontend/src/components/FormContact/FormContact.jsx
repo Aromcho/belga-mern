@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./FormContact.css"; // Asegúrate de que el archivo CSS también esté correctamente referenciado
-
+import { BelgaIsoIcon } from "../Icons/Icons.jsx";
 const FormContact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -33,9 +33,7 @@ const FormContact = () => {
     <div className="contact-form-wrapper">
       <form onSubmit={handleSubmit} className="contact-form">
         <h2 className="form-title">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            {/* SVG content */}
-          </svg>
+        <BelgaIsoIcon className="isobrand--img" />
           ¿Cómo te podemos ayudar?
         </h2>
 
