@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Layout from "../../components/layout/Layout.jsx";
 import { ArrowBackIcon } from "../../components/Icons/Icons.jsx";
 import {
   Stepper,
@@ -95,7 +94,7 @@ const QuieroVender = () => {
   }
 
   return (
-    <Layout>
+    <>
       <div className="quiero-vender-container">
         <Container>
           <div className="back-wrapper mb-4">
@@ -230,7 +229,7 @@ const QuieroVender = () => {
           </Container>
         </Container>
       </div>
-    </Layout>
+    </>
   );
 };
 
