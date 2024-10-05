@@ -49,8 +49,8 @@ const videoSchema = new Schema({
 const propertySchema = new Schema({
   id: { type: Number, required: true, unique: true, index: true }, // ID indexado
   address: { type: String, text: true }, // Dirección con índice de texto
-  age: Number,
-  bathroom_amount: Number,
+  age: { type: Number, index: true }, // Índice en edad
+  bathroom_amount: { type: Number, index: true }, // Índice en cantidad de baños
   branch: {
     address: String,
     alternative_phone: String,
@@ -126,7 +126,7 @@ const propertySchema = new Schema({
   property_condition: { type: String, text: true }, // Condición de la propiedad con índice de texto
   public_url: String,
   publication_title: { type: String, text: true }, // Título de la publicación con índice de texto
-  real_address: String,
+  real_address: {type: String, text:true}, // Dirección real con índice de texto,
   reference_code: String,
   rich_description: String,
   roofed_surface: String,
@@ -144,7 +144,7 @@ const propertySchema = new Schema({
   type: {
     code: String,
     id: Number,
-    name: { type: String, text: true }, // Tipo de propiedad con índice de texto
+    name: { type: String, index: true }, // Tipo de propiedad con índice de texto
   },
   unroofed_surface: String,
   videos: [videoSchema],
@@ -159,10 +159,10 @@ propertySchema.plugin(mongoosePaginate);
 propertySchema.index({
   address: "text",
   "location.full_location": "text",
-  "location.name": "text", // Nombre del barrio
-  "type.name": "text", // Tipo de propiedad
-  "producer.name": "text", // Nombre del productor
-  property_condition: "text", // Condición de la propiedad
+  "location.name": "text",
+  "type.name": "text",
+  "producer.name": "text",
+  property_condition: "text",
 });
 
 // Crear índices compuestos para mejorar consultas de filtrado
@@ -170,9 +170,18 @@ propertySchema.index({
   "operations.operation_type": 1,
   "type.name": 1,
   "operations.prices.price": 1,
-  "room_amount": 1
+  "room_amount": 1,
+  "bathroom_amount": 1,
+  "suite_amount": 1,
 });
 
-const property = model('Property', propertySchema);
 
-export default property;
+// Índice compuesto para geo_lat y geo_long para optimizar consultas geoespaciales
+propertySchema.index({
+  geo_lat: 1,
+  geo_long: 1,
+});
+
+const Property = model('Property', propertySchema);
+
+export default Property;
