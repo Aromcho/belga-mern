@@ -1,13 +1,18 @@
 .contact-form-container {
     width: 100%;
+    height: 100vh;
     border: none;
+    border-radius: 0;
   }
   
   .contact-form-wrapper {
     width: 100%;
+    height: 100vh;
+
     max-width: 330px;
     margin: 60px auto 0;
     position: relative;
+    border-radius: 0;
   }
   
   .wrapper-inputs {

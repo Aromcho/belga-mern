@@ -19,7 +19,7 @@ const MultiRangeSlider = ({ min, max, step, onChange }) => {
       <Typography className="price-text" gutterBottom>
         <FaDollarSign className="price-icon" /> Precio
       </Typography>
-      <Slider
+      <div><Slider
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"
@@ -54,7 +54,7 @@ const MultiRangeSlider = ({ min, max, step, onChange }) => {
           value={formatNumber(value[1])} // Formatear con puntos
           readOnly
         />
-      </div>
+      </div></div>
     </Box>
   );
 };

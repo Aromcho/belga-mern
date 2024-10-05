@@ -1,6 +1,6 @@
 .map-section {
   width: 100%;
-  padding: 20px;
+  height: 100vh;
   text-align: center;
 
 }
@@ -8,14 +8,13 @@
 .home-map-container {
   position: relative;
   z-index: 1;
-  border-radius: 10px;
   overflow: hidden;
   width: 100%;
+  padding: 0 !important;
 }
 .home-map-container {
   position: relative;
   z-index: 1;
-  border-radius: 10px;
   overflow: hidden;
   width: 100%;
 }
@@ -73,7 +72,8 @@
   border-radius: 5px;
   font-size: 14px;
 }
-
+.leaflet-map {
+}
 /* Ajustar el tamaño del mapa en dispositivos más pequeños */
 @media (max-width: 768px) {
   .leaflet-map {

@@ -1,7 +1,9 @@
 .multi-range-slider {
   width: 100%;
-  max-width: 350px;
+  max-width: 550px;
   margin: auto;
+  display: flex;
+  gap: 20px;
 }
 
 .price-text {
@@ -9,6 +11,8 @@
   align-items: center;
   font-size: 1.2rem;
   font-weight: bold;
+  margin: 0 30px;
+
 }
 
 .price-icon {

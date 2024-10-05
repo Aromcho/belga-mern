@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home.jsx";
 import Menu from "./components/Menu/Menu.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer.jsx";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
 // import BusquedasGuardadas from "./pages/BusquedasGuardadas/BusquedasGuardadas.jsx";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
         */}
       </Routes>
+      <Footer/>
     </Router>
     </FiltersProvider>
   );

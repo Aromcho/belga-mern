@@ -14,6 +14,7 @@ import {
   WhatsappIcon,
   YoutubeCircleIcon,
 } from "../Icons/Icons.jsx";
+import HomeMap from "../HomeMap/HomeMap.jsx";
 import BackToTop from "../BackToTop/BackToTop.jsx";
 import ContactForm from "../Forms/ContactForm/ContactForm.jsx";
 import './Footer.css';
@@ -86,123 +87,32 @@ export const Footer = ({ small = true, id, backToTopFooter }) => {
   }, [windowDimensions]);
 
   return (
-    <footer className={`footer-container ${classes({ small })}`} id={id}>
-      {backToTopFooter && (
-        <div className="back-container" style={{ height: BackContainerHeight }}>
-          <BackToTop color="yellow" />
-        </div>
-      )}
-      <div className="footer-wrapper" ref={footerWrapper}>
+    <footer className="footer-container" id={id}>
+      <div className="footer-wrapper">
+        {/* Sección de redes sociales */}
         <div className="footer-left">
-          <div className="footer-info">
-            <div className="left-info">
-              <TitleWithIcon text="¿Querés contactarnos?" />
-
-              <ul className="left-contact">
-                <li className="contact-item">
-                  <Link to="tel:+541152633393">
-                    <span className="info--link">
-                      <TelIcon /> +54 11 5263 3393
-                    </span>
-                  </Link>
-                </li>
-                <li className="contact-item">
-                  <Link to="https://api.whatsapp.com/send?phone=5491152633393&text=Hola%20Belga!%20%F0%9F%91%8B%20Quisiera%20hacerles%20una%20consulta.">
-                    <span className="info--link" target="_blank">
-                      <WhatsappIcon /> +54 11 5263 3393
-                    </span>
-                  </Link>
-                </li>
-                <li className="contact-item">
-                  <Link to="mailto:info@belga.com.ar">
-                    <span className="info--link mail">
-                      <MailIcon />
-                      info@belga.com.ar
-                    </span>
-                  </Link>
-                </li>
-              </ul>
-
-              <ul className="left-location">
-                {data.map(item => (
-                  <li
-                    className="location-item"
-                    key={item.id}
-                    onMouseEnter={() => setHigh(item.id)}
-                    onMouseLeave={() => setHigh(0)}
-                  >
-                    <div className="head-location">
-                      <LocationIcon />
-                      {item.name}
-                    </div>
-                    <div className="body-location">
-                      <div className="loc">{item.direction}</div>
-                      <div className="loc">{item.direction_b}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="footer-info-bottom">
-            <div className="social-list">
-              {socialInfo.map((i, k) => (
-                <Link to={`${i?.link.toString()}`} key={k}>
-                  <span className="social--link" target="_blank">
-                    {i.icon}
-                  </span>
-                </Link>
-              ))}
-            </div>
+          <div className="social-list">
+            {socialInfo.map((i, k) => (
+              <Link to={`${i?.link.toString()}`} key={k} target="_blank">
+                <span className="social--link">{i.icon}</span>
+              </Link>
+            ))}
           </div>
         </div>
 
+        {/* Sección del logotipo */}
         <div className="footer-center">
-          <div className="footer-info">
-            {/* Se eliminó la sección de DynamicMap */}
-          </div>
-          <div className="footer-info-bottom">
-            <img
-              className="brand-footer"
-              src="/images/brand_red.svg"
-              alt="Belga inmobiliaria"
-              title="Belga inmobiliaria"
-              loading="lazy"
-            />
-            <div className="social-list-mobile-wrapper">
-              <div className="social-list">
-                {socialInfo.map((i, k) => (
-                  <Link to={`${i?.link.toString()}`} key={k}>
-                    <span className="social--link" target="_blank">
-                      {i.icon}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+          <img
+            className="brand-footer"
+            src="/images/brand_red.svg"
+            alt="Belga inmobiliaria"
+            title="Belga inmobiliaria"
+            loading="lazy"
+          />
         </div>
 
+        {/* Sección de términos y condiciones */}
         <div className="footer-right">
-          <div className="footer-info">
-            <div className="right-info">
-              <ContactForm className="contact--form-footer" />
-            </div>
-          </div>
-          <div className="footer-info-bottom">
-            <div className="right-info">
-              <div className="legal-text">{legalInfo.text}</div>
-              <div className="legal-link">
-                <Link to={legalInfo.link}>
-                  <span>{legalInfo.linkText}</span>
-                </Link>
-              </div>
-              <div className="mp">{legalInfo.mp}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="right-info-mobile">
           <div className="legal-text">{legalInfo.text}</div>
           <div className="legal-link">
             <Link to={legalInfo.link}>
@@ -210,29 +120,6 @@ export const Footer = ({ small = true, id, backToTopFooter }) => {
             </Link>
           </div>
           <div className="mp">{legalInfo.mp}</div>
-        </div>
-
-        <div className="footer-info-bottom brand--mobile">
-          <div className="social-list-mobile-wrapper">
-            <div className="social-list">
-              {socialInfo.map((i, k) => (
-                <Link to={`${i?.link.toString()}`} key={k}>
-                  <span className="social--link" target="_blank">
-                    {i.icon}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="brand-mobile-wrapper">
-            <img
-              className="brand-footer"
-              src="/images/brand_red.svg"
-              alt="Belga inmobiliaria"
-              title="Belga inmobiliaria"
-              loading="lazy"
-            />
-          </div>
         </div>
       </div>
     </footer>

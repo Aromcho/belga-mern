@@ -139,20 +139,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
           </Col>
         </Row>
         <Row className="filter-row">
-          <Col>
-            <div className="price-range-wrapper">
-              <MultiRangeSlider
-                customWidth={336}
-                min={0}
-                max={3000000}
-                step={20000}
-                onChange={({ minVal, maxVal }) => handleFormChange('price_from', minVal, 'price_to', maxVal)}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row className="filter-row">
-          <Col>
+        <Col>
             <div className="input-icon-wrapper">
               <FaSearch className="input-icon-placeholder" />
               <Form.Control
@@ -176,6 +163,22 @@ const SearchHomeForm = ({ handleSubmit }) => {
                   </ul>
                 </div>
               )}
+            </div>
+            </Col>
+        </Row>
+
+        <Row className="filter-row">
+          
+            
+          <Col>
+            <div className="price-range-wrapper">
+              <MultiRangeSlider
+                customWidth={336}
+                min={0}
+                max={3000000}
+                step={20000}
+                onChange={({ minVal, maxVal }) => handleFormChange('price_from', minVal, 'price_to', maxVal)}
+              />
             </div>
           </Col>
           <Col md="auto">

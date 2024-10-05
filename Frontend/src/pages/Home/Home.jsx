@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom"; // Corregir el import de Link
 import { FiltersContext } from '../../context/FiltersContext';
 import 'leaflet/dist/leaflet.css';
 import "./Home.css";
-
+import FooterInfo from "../../components/FooterInfo/FooterInfo.jsx"
 import Title from "../../components/Title/Title.jsx";
 import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
 import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
-import FormContact from "../../components/FormContact/FormContact.jsx";
+import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
 import HomeMap from "../../components/HomeMap/HomeMap.jsx";
+import { Container } from "react-bootstrap";
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -41,6 +42,29 @@ const Home = () => {
     navigate("/propertylist", { state: { filters } }); // Redirigir a la lista de propiedades
   };
 
+  const data = [
+    {
+      id: 1,
+      name: "Casa Central LA IMPRENTA",
+      direction: "Gorostiaga 1601",
+      direction_b: "(Esquina Migueletes)",
+      loc: { lat: -34.5652519, lon: -58.4364415 },
+    },
+    {
+      id: 2,
+      name: "BELGRANO C",
+      direction: "Juramento 2102",
+      direction_b: "1426 CABA",
+      loc: { lat: -34.56051641836724, lon: -58.45384234503877 },
+    },
+    {
+      id: 3,
+      name: "BELGRANO R",
+      direction: "Superí 1485",
+      direction_b: "(Esquina Av. de los Incas)",
+      loc: { lat: -34.5735786974359, lon: -58.46109912564103 },
+    },
+  ];
   return (
     <div className="layout transparent">
       <div className="hero-wrapper">
@@ -56,12 +80,7 @@ const Home = () => {
         )}
 
         {/* Imagen de superposición que siempre cubre el video o la imagen */}
-        <img
-          src="/Frame 1.png"
-          alt="Superposición PNG"
-          className="overlay-image"
-        />
-
+        
         <div className="overlay"></div>
         <div className="hero">
           <SocialSidebar />
@@ -110,11 +129,9 @@ const Home = () => {
       </div>
 
       <div className="contact-section">
-        <FormContact />
-      </div>
-      
-      <div className="mapa">
+        <FooterInfo/>
         <HomeMap/>
+        <ContactForm />
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import axios from 'axios';
 import Item from '../Item/Item.jsx';
 import Filters from '../Filters/Filters.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
@@ -9,73 +8,41 @@ import Skeleton from '@mui/material/Skeleton'; // Importa el Skeleton de Materia
 import './ItemList.css';
 
 const ItemList = () => {
-  const { filters, updateFilters } = useContext(FiltersContext);
-  const [filteredProperties, setFilteredProperties] = useState([]);
-  const [limit, setLimit] = useState(20);
-  const [offset, setOffset] = useState(0);
-  const [totalProperties, setTotalProperties] = useState(0);
+  const { properties, loading, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
+
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false); // Estado para manejar la carga
-
-  const totalPages = Math.ceil(totalProperties / limit);
-
-  useEffect(() => {
-    fetchProperties(filters);
-  }, [filters, limit, offset]);
-
-  const fetchProperties = async (filters = {}) => {
-    setLoading(true); // Mostrar el loader
-    try {
-      const response = await axios.get('/api/api/properties', {
-        params: {
-          operation_type: filters.operation_type,
-          property_type: filters.property_type,
-          minRooms: filters.min_rooms,
-          maxRooms: filters.max_rooms,
-          minGarages: filters.min_garages,
-          maxGarages: filters.max_garages,
-          minPrice: filters.price_from,
-          maxPrice: filters.price_to,
-          barrio: filters.barrio,
-          searchQuery: filters.searchQuery,
-          limit,
-          offset,
-        },
-      });
-
-      setFilteredProperties(response.data.objects);
-      setTotalProperties(response.data.meta.total_count);
-    } catch (error) {
-      console.error('Error al aplicar filtros:', error);
-    } finally {
-      setLoading(false); // Ocultar el loader después de cargar
-    }
-  };
-
-  const handleFilterApply = (newFilters) => {
-    updateFilters(newFilters);
-    setOffset(0);
-    setCurrentPage(1);
-  };
+  const totalPages = Math.ceil(totalProperties / limit); // Número total de páginas
 
   const handleNextPage = () => {
-    if (offset + limit < totalProperties && currentPage < totalPages) {
-      setOffset(offset + limit);
+    if (currentPage < totalPages) {
+      setOffset((currentPage) * limit);
       setCurrentPage(currentPage + 1);
     }
   };
 
   const handlePreviousPage = () => {
-    if (offset > 0 && currentPage > 1) {
-      setOffset(offset - limit);
+    if (currentPage > 1) {
+      setOffset((currentPage - 2) * limit);
       setCurrentPage(currentPage - 1);
     }
   };
 
+  const handlePageClick = (page) => {
+    setOffset((page - 1) * limit);
+    setCurrentPage(page);
+  };
+
   const getPagesToShow = () => {
     const pages = [];
-    const startPage = currentPage;
-    const endPage = Math.min(currentPage + 3, totalPages);
+    const maxPagesToShow = 5; // Máximo número de páginas que queremos mostrar a la vez
+    let startPage = currentPage - Math.floor(maxPagesToShow / 2);
+    startPage = Math.max(startPage, 1); // Asegura que no haya números negativos
+    let endPage = startPage + maxPagesToShow - 1;
+    endPage = Math.min(endPage, totalPages); // Asegura que no haya más páginas de las permitidas
+
+    if (endPage - startPage + 1 < maxPagesToShow) {
+      startPage = Math.max(endPage - maxPagesToShow + 1, 1); // Ajusta el startPage si es necesario
+    }
 
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
@@ -86,7 +53,7 @@ const ItemList = () => {
 
   return (
     <Container className="p-0 mb-1">
-      <Filters onSubmit={handleFilterApply} />
+      <Filters onSubmit={updateFilters} />
       <div className="item-list">
         {loading ? (
           // Mostrar el loader mientras se cargan las propiedades
@@ -107,8 +74,8 @@ const ItemList = () => {
               </div>
             ))}
           </>
-        ) : filteredProperties.length > 0 ? (
-          filteredProperties.map((property) => (
+        ) : properties.length > 0 ? (
+          properties.map((property) => (
             <Item className="Item" key={property._id} property={property} />
           ))
         ) : (
@@ -116,6 +83,7 @@ const ItemList = () => {
         )}
       </div>
 
+      {/* Paginación */}
       <Row className="mt-3 align-items-center">
         <Col className="text-start">
           {currentPage > 1 && (
@@ -130,10 +98,7 @@ const ItemList = () => {
             <span
               key={page}
               className={`pagination-page ${page === currentPage ? 'active' : ''}`}
-              onClick={() => {
-                setCurrentPage(page);
-                setOffset((page - 1) * limit);
-              }}
+              onClick={() => handlePageClick(page)}
             >
               {page}
             </span>

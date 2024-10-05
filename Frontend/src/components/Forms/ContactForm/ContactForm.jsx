@@ -90,11 +90,12 @@ const ContactForm = ({ className = "", full = false }) => {
 
   return (
     <div className={`contact-form-container ${className} ${full ? 'full' : ''}`}>
+      <div className="contact-form-wrapper ">
       <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
-      <div className="contact-form-wrapper">
+
         <div className="wrapper-inputs">
           <Input
-            className="input--form"
+            className="input--form "
             placeholder="Nombre *"
             type="text"
             value={data.name}

@@ -1,0 +1,57 @@
+.footer-info {
+    width: 100%;
+}
+
+.body-location {
+    color: #fff;
+    font-size: 12px; /* Ajustar tamaño de fuente para mayor legibilidad */
+    line-height: 1.6; /* Añadir espacio entre líneas */
+    margin-top: 5px; /* Un poco de margen entre el título y el cuerpo */
+    margin-left: 40px;
+}
+
+.left-info {
+    width: 100%;
+    max-width: 330px;
+    margin: 0 auto;
+
+}
+
+.left-contact {
+    width: 100%;
+    margin: 70px 0 60px;
+}
+
+/* Quitar los puntitos de la lista */
+ul {
+    list-style-type: none; /* Remover los puntitos */
+    padding: 0; /* Opcional: remover el padding para ajustar mejor */
+    margin: 0; /* Opcional: remover el margen */
+}
+
+.head-location {
+    font-size: 14px; /* Tamaño de fuente más grande para títulos */
+    font-weight: bold; /* Resaltar el título */
+    text-transform: uppercase; /* Convertir el texto en mayúsculas */
+    color: #fff; /* Añadir un color dorado para resaltar el título */
+    margin-bottom: 5px; /* Espacio entre el título y el contenido */
+    display: flex; /* Para alinear ícono y texto en fila */
+    align-items: center; /* Alinear verticalmente */
+}
+
+.head-location svg, .contact-item svg {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.contact-item .info--link {
+    color: #fff;
+    font-size: 14px;
+    transition: color 0.3s ease; /* Añadir una transición suave al color */
+}
+
+li a {
+    text-decoration: none;
+
+}
