@@ -63,7 +63,7 @@ const PrevArrow = (props) => {
 };
 
 const ItemDetail = ({ property }) => {
-  const [propertyApi, setPropertyApi] = useState(null);
+  //const [property, setproperty] = useState(null);
   const idTokko = property?._id || ''; // Verificación de seguridad en case _id no esté definido
   const total_surface = property?.total_surface || 0;
   const roofed_surface = property?.roofed_surface || 0;
@@ -77,23 +77,11 @@ const ItemDetail = ({ property }) => {
   const barrio = property?.location?.name || 'Ubicación no disponible';
   const tags = property?.tags?.length ? property.tags : [];
 
-  const fetchPropertyDetails = async () => {
-    try {
-      const response = await axios.get(`/api/api/${idTokko}`);
-      const propertyData = response.data;
-      setPropertyApi(propertyData);
-    } catch (error) {
-      console.error('Error al obtener los detalles de la propiedad:', error);
-    }
-  };
+  
 
-  useEffect(() => {
-    if (idTokko) {
-      fetchPropertyDetails();
-    }
-  }, [idTokko]);
+  
 
-  if (!propertyApi) {
+  if (!property) {
     return <div>Loading...</div>;
   }
 
@@ -138,10 +126,10 @@ const ItemDetail = ({ property }) => {
             </Button>
             <h1 className="display-5">{address}</h1>
             <h4>{barrio}</h4>
-            {propertyApi.operations && propertyApi.operations[0]?.prices[0] && (
+            {property.operations && property.operations[0]?.prices[0] && (
               <h2 className="text-end fw-light">
-                {propertyApi.operations[0].prices[0].currency === 'USD' ? 'USD' : 'ARS'}{' '}
-                {propertyApi.operations[0].prices[0].price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
+                {property.operations[0].prices[0].currency === 'USD' ? 'USD' : 'ARS'}{' '}
+                {property.operations[0].prices[0].price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
               </h2>
             )}
           </div>
@@ -152,7 +140,7 @@ const ItemDetail = ({ property }) => {
       <Row className="align-items-center">
         <Col>
           <Slider {...sliderSettings} className="image-wrapper-detail">
-            {propertyApi.photos?.map((image, index) => (
+            {property.photos?.map((image, index) => (
               <div key={index} className="image-wrapper-detail">
                 <img
                   src={image.image || '/path/to/default-image.jpg'}
@@ -220,27 +208,27 @@ const ItemDetail = ({ property }) => {
           <Row className="property-info p-4">
             <h2 className="mb-4 text-dark">Información</h2>
             <div className="info-details d-flex flex-column gap-4">
-              {propertyApi.disposition && (
+              {property.disposition && (
                 <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
                   <FaRulerCombined className="icon me-3" />
                   <p className="mb-0">
-                    <strong>Disposición: </strong>{propertyApi.disposition}
+                    <strong>Disposición: </strong>{property.disposition}
                   </p>
                 </div>
               )}
-              {propertyApi.orientation && (
+              {property.orientation && (
                 <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
                   <FaCompass className="icon me-3" />
                   <p className="mb-0">
-                    <strong>Orientación: </strong>{propertyApi.orientation}
+                    <strong>Orientación: </strong>{property.orientation}
                   </p>
                 </div>
               )}
-              {propertyApi.property_condition && (
+              {property.property_condition && (
                 <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
                   <FaBuilding className="icon me-3" />
                   <p className="mb-0">
-                    <strong>Condición: </strong>{propertyApi.property_condition}
+                    <strong>Condición: </strong>{property.property_condition}
                   </p>
                 </div>
               )}
@@ -289,7 +277,7 @@ const ItemDetail = ({ property }) => {
         <Col>
           <div className="property-description bg-white p-4 rounded-3 shadow">
             <h2>Descripción</h2>
-            <p dangerouslySetInnerHTML={{ __html: propertyApi.rich_description }}></p>
+            <p dangerouslySetInnerHTML={{ __html: property.rich_description }}></p>
           </div>
         </Col>
       </Row>

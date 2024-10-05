@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Spinner } from 'react-bootstrap';
 import ItemDetail from '../ItemDetail/ItemDetail.jsx';
@@ -9,7 +9,6 @@ const ItemDetailContainer = () => {
   const [property, setProperty] = useState(null);
   const [error, setError] = useState(null);
   const { propertyId } = useParams();  // Obtén el id de la propiedad desde la URL
-
   useEffect(() => {
     const fetchProperty = async () => {
       try {

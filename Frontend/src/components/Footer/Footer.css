@@ -1,6 +1,6 @@
 .footer-container {
   width: 100%;
-  height: auto; /* Ajustar altura automáticamente */
+  height: 30vh; /* Ajustar altura automáticamente */
   position: relative;
   background-color: #000; /* Fondo negro */
   color: #fff;
@@ -33,7 +33,7 @@
   align-items: center;
   flex-direction: column;
   background-color: #F1B332;
-  padding: 20px 0; /* Añadir padding para espacio */
+  padding: 60px 20px; /* Añadir padding para espacio */
 }
 
 .footer-center img {
@@ -96,8 +96,11 @@
 @media (max-width: 480px) {
   .footer-container {
     padding: 10px 0; /* Reducir padding para pantallas muy pequeñas */
+    height: 60vh;
   }
-
+  .footer-right {
+    height: 30vh;
+  }
   .footer-center img {
     width: 80%; /* Ajustar tamaño de la imagen para pantallas muy pequeñas */
   }

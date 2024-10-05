@@ -67,6 +67,7 @@ const Item = ({ property }) => {
   const size = property.total_surface || 0; // Usando superficie total
   const address = property.address || 'Dirección no disponible'; // Dirección del branch
   const barrio = property.location.name || 'Barrio no disponible'; // Nombre del barrio
+  const propertyId = property._id;
   const settings = {
     dots: false, 
     infinite: true,
@@ -80,7 +81,7 @@ const Item = ({ property }) => {
 
   return (
     <Card className="card-item shadow-lg rounded overflow-hidden text-black">
-      <Link to={`/propiedad/${property._id}`} className="link-full">
+      <Link to={`/propiedad/${propertyId}`} className="link-full">
       <Slider {...settings} className="image-wrapper">
         {mainImages.map((img, index) => (
           <div key={index}>

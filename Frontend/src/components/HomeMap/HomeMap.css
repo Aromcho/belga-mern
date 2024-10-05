@@ -76,7 +76,7 @@
 }
 /* Ajustar el tamaño del mapa en dispositivos más pequeños */
 @media (max-width: 768px) {
-  .leaflet-map {
-    height: 300px;
+  .map-section, .home-map-container, .leaflet-map {
+    height: 50vh;
   }
 }
