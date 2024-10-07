@@ -64,9 +64,9 @@ const Item = ({ property }) => {
   const bedrooms = property.suite_amount || 0;
   const bathrooms = property.bathroom_amount || 0;
   const parkingLots = property.parking_lot_amount || 0;
-  const size = property.total_surface || 0; // Usando superficie total
-  const address = property.address || 'Dirección no disponible'; // Dirección del branch
-  const barrio = property.location.name || 'Barrio no disponible'; // Nombre del barrio
+  const size = property.total_surface || 0; 
+  const address = property.address || 'Dirección no disponible'; 
+  const barrio = property.location.name || 'Barrio no disponible'; 
   const propertyId = property._id;
   const settings = {
     dots: false, 
@@ -80,47 +80,49 @@ const Item = ({ property }) => {
   };
 
   return (
-    <Card className="card-item shadow-lg rounded overflow-hidden text-black">
-      <Link to={`/propiedad/${propertyId}`} className="link-full">
-      <Slider {...settings} className="image-wrapper">
-        {mainImages.map((img, index) => (
-          <div key={index}>
-            <img
-              className="d-block w-100 img-rounded"
-              src={img.image}
-              alt={`Slide ${index}`}
-            />
+    <Card className="card-item shadow-lg  overflow-hidden text-black">
+      {/* Pasar los datos de la propiedad con el estado */}
+      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full">
+      <div className="head-prop d-flex justify-content-between m-2 px-4">
+            <span>{operationType.toUpperCase()}</span>
+            <span className="text-muted">USD {price}</span>
           </div>
-        ))}
-      </Slider>
+        <Slider {...settings} className="image-wrapper">
+          {mainImages.map((img, index) => (
+            <div key={index}>
+              <img
+                className="d-block w-100 img-rounded"
+                src={img.image}
+                alt={`Slide ${index}`}
+              />
+            </div>
+          ))}
+        </Slider>
 
-      <Card.Body>
-        <div className="head-prop d-flex justify-content-between mb-2">
-          <span>{operationType.toUpperCase()}</span>
-          <span className="text-muted">USD {price}</span>
-        </div>
-        <h5 className="card-title-bold mb-3 text-dark">{barrio}</h5>
-        <p className="location-text text-muted mb-3">{address}</p>
+        <Card.Body>
+          
+          <h5 className="card-title-bold mb-3 text-dark">{barrio}</h5>
+          <p className="location-text text-muted mb-3">{address}</p>
 
-        <div className="property-info d-flex justify-content-around">
-          <div className="info-item d-flex flex-column">
-            <span className="text-muted">{size}</span>
-            <span className="text-muted">M2</span>
+          <div className="property-info d-flex justify-content-around">
+            <div className="info-item d-flex flex-column">
+              <span className="text-muted">{size}</span>
+              <span className="text-muted">M2</span>
+            </div>
+            <div className="info-item d-flex flex-column">
+              <FaBed className="icon" />
+              <span className="text-muted">{bedrooms}</span>
+            </div>
+            <div className="info-item d-flex flex-column">
+              <FaBath className="icon" />
+              <span className="text-muted">{bathrooms}</span>
+            </div>
+            <div className="info-item d-flex flex-column">
+              <FaCarAlt className="icon" />
+              <span className="text-muted">{parkingLots}</span>
+            </div>
           </div>
-          <div className="info-item d-flex flex-column">
-            <FaBed className="icon" />
-            <span className="text-muted">{bedrooms}</span>
-          </div>
-          <div className="info-item d-flex flex-column">
-            <FaBath className="icon" />
-            <span className="text-muted">{bathrooms}</span>
-          </div>
-          <div className="info-item d-flex flex-column">
-            <FaCarAlt className="icon" />
-            <span className="text-muted">{parkingLots}</span>
-          </div>
-        </div>
-      </Card.Body>
+        </Card.Body>
       </Link>
     </Card>
   );

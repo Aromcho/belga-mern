@@ -140,7 +140,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
         </Row>
         <Row className="filter-row">
         <Col>
-            <div className="input-icon-wrapper">
+            <div className="input-icon-wrapper mb-3">
               <FaSearch className="input-icon-placeholder" />
               <Form.Control
                 type="text"
@@ -171,7 +171,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
           
             
           <Col>
-            <div className="price-range-wrapper">
+            <div className="price-range-wrapper ">
               <MultiRangeSlider
                 customWidth={336}
                 min={0}

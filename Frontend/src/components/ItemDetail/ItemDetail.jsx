@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Slider from 'react-slick';
@@ -8,7 +7,6 @@ import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import { FaBed, FaBath, FaCarAlt, FaHome, FaToilet } from 'react-icons/fa';
 import { FaCompass, FaRulerCombined, FaBuilding } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';
@@ -63,27 +61,19 @@ const PrevArrow = (props) => {
 };
 
 const ItemDetail = ({ property }) => {
-  //const [property, setproperty] = useState(null);
-  const idTokko = property?._id || ''; // Verificación de seguridad en case _id no esté definido
-  const total_surface = property?.total_surface || 0;
-  const roofed_surface = property?.roofed_surface || 0;
-  const room_amount = property?.room_amount || 0;
-  const address = property?.address || 'Dirección no disponible';
-  const bathroom_amount = property?.bathroom_amount || 0;
-  const bedrooms = property?.suite_amount || 0;
-  const parking_lot_amount = property?.parking_lot_amount || 0;
-  const age = property?.age || 0;
-  const toilet_amount = property?.toilet_amount || 0;
-  const barrio = property?.location?.name || 'Ubicación no disponible';
-  const tags = property?.tags?.length ? property.tags : [];
-
-  
-
-  
-
-  if (!property) {
-    return <div>Loading...</div>;
-  }
+  // Datos ya pasados por el componente padre
+  const idTokko = property._id;
+  const total_surface = property.total_surface;
+  const roofed_surface = property.roofed_surface;
+  const room_amount = property.room_amount;
+  const address = property.address;
+  const bathroom_amount = property.bathroom_amount;
+  const bedrooms = property.suite_amount;
+  const parking_lot_amount = property.parking_lot_amount;
+  const age = property.age;
+  const toilet_amount = property.toilet_amount;
+  const barrio = property.location.name;
+  const tags = property.tags;
 
   const sliderSettings = {
     dots: true,
@@ -143,7 +133,7 @@ const ItemDetail = ({ property }) => {
             {property.photos?.map((image, index) => (
               <div key={index} className="image-wrapper-detail">
                 <img
-                  src={image.image || '/path/to/default-image.jpg'}
+                  src={image.image || "/path/to/default-image.jpg"}
                   alt={`Property Image ${index}`}
                   className="img-fluid rounded-3 mb-2 main-image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -154,6 +144,7 @@ const ItemDetail = ({ property }) => {
         </Col>
       </Row>
 
+      {/* Detalles de la propiedad */}
       <Row className="mt-3">
         <Col md={6}>
           <div className="property-features bg-white p-4 rounded-3 shadow">
@@ -237,43 +228,41 @@ const ItemDetail = ({ property }) => {
         </Col>
       </Row>
 
+      {/* Descripción y etiquetas */}
       <Row className="mt-3">
         <Col>
-          <Row className="mt-3">
-            <Col>
-              {tags.length > 0 && (
-                <div className="property-tags bg-white p-4 rounded-3 shadow">
-                  <h2 className="mb-4">Etiquetas</h2>
-                  <div className="tags-container d-flex flex-wrap gap-2 justify-content-start">
-                    {tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="tag-badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm"
-                        style={{
-                          fontSize: '0.9rem',
-                          fontWeight: '500',
-                          border: '1px solid #ddd',
-                          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                          transition: 'transform 0.2s',
-                          cursor: 'pointer',
-                        }}
-                        onMouseEnter={(e) => (e.target.style.transform = 'scale(1.1)')}
-                        onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
-                      >
-                        {tag.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="map-container bg-white p-4 rounded-3 shadow mt-3">
-                <h2>Ubicación</h2>
-                <MapaInteractivo property={property} />
+          {tags && tags.length > 0 && (
+            <div className="property-tags bg-white p-4 rounded-3 shadow">
+              <h2 className="mb-4">Etiquetas</h2>
+              <div className="tags-container d-flex flex-wrap gap-2 justify-content-start">
+                {tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="tag-badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm"
+                    style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '500',
+                      border: '1px solid #ddd',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                      transition: 'transform 0.2s',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.transform = 'scale(1.1)')}
+                    onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
+                  >
+                    {tag.name}
+                  </span>
+                ))}
               </div>
-            </Col>
-          </Row>
+            </div>
+          )}
+
+          <div className="map-container bg-white p-4 rounded-3 shadow mt-3">
+            <h2>Ubicación</h2>
+            <MapaInteractivo property={property} />
+          </div>
         </Col>
+
         <Col>
           <div className="property-description bg-white p-4 rounded-3 shadow">
             <h2>Descripción</h2>
