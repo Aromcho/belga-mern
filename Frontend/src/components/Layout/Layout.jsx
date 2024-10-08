@@ -1,17 +1,14 @@
 import React from "react";
 import "./Layout.css"; // Archivo CSS para los estilos globales y específicos
-import Menu from "../../components/Menu/Menu.jsx"; // Importar el componente Menu
-//import { Menu } from "../../Frontend/src/components/Menu/Menu.jsx";
 //import Footer from "../../Frontend/src/components/Footer/Footer.jsx";
 import { MailIconSend, TelIcon, WhatsappIcon } from "../../components/Icons/Icons.jsx";
 
 const Layout = ({ children, menuTheme, footerSmall }) => {
   return (
     <div className="layout-wrapper">
-      <Menu theme={menuTheme} />
       {children} {/* Aquí se renderizan las rutas */}
       <div className="hero-footer" id="menuFooter">
-        <a href="tel:+541152633393" className="head-footer-link phone">
+        <a href="tel:+541152633393" className="head-footer-link phone w-50">
           <TelIcon />
         </a>
         <a href="mailto:info@belga.com.ar" className="head-footer-link mail">

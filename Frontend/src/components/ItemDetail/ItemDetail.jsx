@@ -62,7 +62,8 @@ const PrevArrow = (props) => {
 
 const ItemDetail = ({ property }) => {
   // Datos ya pasados por el componente padre
-  const idTokko = property._id;
+  console.log('Propiedad:', property);  
+  const idTokko = property.id;
   const total_surface = property.total_surface;
   const roofed_surface = property.roofed_surface;
   const room_amount = property.room_amount;

@@ -1,5 +1,5 @@
 .pagination-arrow {
-  font-size: 1rem;
+  font-size: 2rem;      /* Aumenta el tamaño para ser más visibles en móvil */
   color: black;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -50,5 +50,44 @@
 @media (min-width: 1024px) {
   .item-list {
     grid-template-columns: 2fr 2fr;
+  }
+}
+/* Estilos móviles para la paginación */
+/* Estilos móviles para la paginación */
+@media (max-width: 767px) {
+  .pagination-arrow {
+    font-size: 2rem;      /* Aumenta el tamaño para ser más visibles en móvil */
+    color: #333;          /* Cambia el color a algo más oscuro para contrastar mejor */
+    padding: 10px;        /* Aumenta el área de clic */
+    cursor: pointer;      /* Asegúrate de que el cursor sea pointer */
+    display: inline-block; /* Asegúrate de que las flechas estén visibles */
+    transition: color 0.3s ease;
+  }
+
+  .pagination-arrow:hover {
+    color: #555;          /* Color al pasar el cursor */
+  }
+
+  .pagination-page {
+    font-size: 1rem;      /* Tamaño de fuente ajustado para pantallas pequeñas */
+    padding: 0.3rem 0.7rem;  /* Menos padding para evitar que ocupe mucho espacio */
+    margin: 0 3px;        /* Menos espacio entre páginas */
+    border-radius: 3px;   /* Bordes ligeramente redondeados */
+    background-color: #f2f2f2;  /* Fondo suave para los números de página */
+    color: #333;          /* Color de texto más oscuro */
+  }
+
+  .pagination-page.active {
+    color: white;              /* Texto blanco para mejor contraste */
+    border-radius: 5px;
+  }
+
+  .pagination-page:hover {
+    color: white;
+  }
+
+  .item-list {
+    grid-template-columns: 1fr;  /* Un solo elemento por fila en pantallas pequeñas */
+    gap: 1rem;
   }
 }

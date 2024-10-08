@@ -35,7 +35,7 @@ export const FiltersProvider = ({ children }) => {
   const fetchProperties = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get('/api/api/properties', {
+      const response = await axios.get('/api/property/properties', {
         params: {
           operation_type: filters.operation_type,
           property_type: filters.property_type,

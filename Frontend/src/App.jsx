@@ -7,20 +7,22 @@ import ItemListContainer from "./components/ItemListContainer/ItemListContainer.
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
 // import BusquedasGuardadas from "./pages/BusquedasGuardadas/BusquedasGuardadas.jsx";
 import ConoceBelga from "./pages/ConoceBelga/ConoceBelga.jsx";
-// import Emprendimientos from "./pages/Emprendimientos";
+import Emprendimientos from "./pages/Emprendimientos/Emprendimientos.jsx";
 // import Favorites from "./pages/Favorites/Favorites.jsx";
 import QuieroVender from "./pages/QuieroVender/QuieroVender.jsx";
 // import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
 import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto
-
+import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDetail.jsx";
+import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
   return (
     <FiltersProvider>
     <Router>
       <Menu/>
+      <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/propertylist" element={<ItemListContainer />} />
@@ -28,6 +30,8 @@ function App() {
         <Route path="/404" element={<Error404 />} />
         <Route path="/500" element={<Error500 />} /> 
         <Route path="/quiero-vender" element={<QuieroVender />} />
+        <Route path="/emprendimientos" element={<Emprendimientos />} />
+        <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
 
 
         {/* Ruta catch-all para URLs no definidas */}
@@ -36,11 +40,11 @@ function App() {
 
         {/* Rutas comentadas */}
         {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
-        <Route path="/emprendimientos" element={<Emprendimientos />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
         */}
       </Routes>
+      </Layout>
       <Footer/>
     </Router>
     </FiltersProvider>

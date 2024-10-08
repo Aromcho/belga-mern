@@ -1,0 +1,49 @@
+
+
+/* Layout specific styles */
+.layout-wrapper {
+    width: 100%;
+}
+
+.hero-footer {
+    width: 100%;
+    max-width: 87%;
+    display: none;
+}
+
+@media screen and (max-width: 992px) {
+    .hero-footer {
+        justify-content: space-between;
+        position: fixed;
+        display: flex;
+        bottom: 5%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 999999999;
+    }
+    .hero-footer a {
+        padding: 0 !important;
+        min-width: none !important;
+    }
+}
+
+.head-footer-link {
+    width: 89px;
+    height: 38px;
+    align-items: center;
+    flex: 0 0 auto;
+    background-color: #c62025; /* Reemplazar con el color adecuado */
+    display: flex;
+    justify-content: center;
+}
+
+.head-footer-link svg {
+    width: 20px;
+    height: auto;
+    color: #ffffff;
+}
+
+.head-footer-link.wsp {
+    background-color: #25D366; /* Color de WhatsApp */
+}

@@ -77,6 +77,14 @@ class Manager {
         throw error;
       }
     }
+    async readByCustomId(id) {
+      try {
+        const one = await this.Model.findOne({ id: id }).lean(); // Buscar por el campo 'id' (no _id)
+        return one;
+      } catch (error) {
+        throw error;
+      }
+    }
   }
   
   export default Manager;

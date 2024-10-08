@@ -4,14 +4,14 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Item from '../Item/Item.jsx';
 import Filters from '../Filters/Filters.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
-import Skeleton from '@mui/material/Skeleton'; // Importa el Skeleton de Material UI
+import Skeleton from '@mui/material/Skeleton'; 
 import './ItemList.css';
 
 const ItemList = () => {
   const { properties, loading, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(totalProperties / limit); // Número total de páginas
+  const totalPages = Math.ceil(totalProperties / limit);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -34,14 +34,14 @@ const ItemList = () => {
 
   const getPagesToShow = () => {
     const pages = [];
-    const maxPagesToShow = 5; // Máximo número de páginas que queremos mostrar a la vez
+    const maxPagesToShow = 4; // Mostramos 5 páginas a la vez
     let startPage = currentPage - Math.floor(maxPagesToShow / 2);
-    startPage = Math.max(startPage, 1); // Asegura que no haya números negativos
+    startPage = Math.max(startPage, 1);
     let endPage = startPage + maxPagesToShow - 1;
-    endPage = Math.min(endPage, totalPages); // Asegura que no haya más páginas de las permitidas
+    endPage = Math.min(endPage, totalPages);
 
     if (endPage - startPage + 1 < maxPagesToShow) {
-      startPage = Math.max(endPage - maxPagesToShow + 1, 1); // Ajusta el startPage si es necesario
+      startPage = Math.max(endPage - maxPagesToShow + 1, 1);
     }
 
     for (let i = startPage; i <= endPage; i++) {
@@ -56,7 +56,7 @@ const ItemList = () => {
       <Filters onSubmit={updateFilters} />
       <div className="item-list">
         {loading ? (
-          // Mostrar el loader mientras se cargan las propiedades
+          // Skeleton mientras carga
           <>
             {[...Array(4)].map((_, index) => (
               <div className="Item mb-2" key={index}>
@@ -76,43 +76,43 @@ const ItemList = () => {
           </>
         ) : properties.length > 0 ? (
           properties.map((property) => (
-            <Item className="Item" key={property._id} property={property} />
+            <Item className="Item" key={property.id} property={property} />
           ))
         ) : (
           <p>No se encontraron propiedades.</p>
         )}
       </div>
 
-      {/* Paginación */}
-      <Row className="mt-3 align-items-center">
-        <Col className="text-start">
-          {currentPage > 1 && (
-            <FaChevronLeft
-              className="pagination-arrow w-25 h-25 p-4"
-              onClick={handlePreviousPage}
-            />
-          )}
-        </Col>
-        <Col className="text-center">
-          {getPagesToShow().map((page) => (
-            <span
-              key={page}
-              className={`pagination-page ${page === currentPage ? 'active' : ''}`}
-              onClick={() => handlePageClick(page)}
-            >
-              {page}
-            </span>
-          ))}
-        </Col>
-        <Col className="text-end">
-          {currentPage < totalPages && (
-            <FaChevronRight
-              className="pagination-arrow w-25 h-25 p-4"
-              onClick={handleNextPage}
-            />
-          )}
-        </Col>
-      </Row>
+      <Row className="mt-3 mb-3 align-items-center justify-content-between">
+        <Col xs="auto" className="text-start"> {/* Usamos xs="auto" para ajustar mejor en pantallas pequeñas */}s
+    {currentPage > 1 && (
+      <FaChevronLeft
+        className="pagination-arrow"
+        onClick={handlePreviousPage}
+      />
+    )}
+  </Col>
+  <Col xs="auto" className="text-center">
+    {getPagesToShow().map((page) => (
+      <span
+        key={page}
+        className={`pagination-page ${page === currentPage ? 'active' : ''}`}
+        onClick={() => handlePageClick(page)}
+      >
+        {page}
+      </span>
+    ))}
+  </Col>
+  <Col xs="auto" className="text-end">
+    {currentPage < totalPages && (
+      <FaChevronRight
+        className="pagination-arrow"
+        onClick={handleNextPage}
+      />
+    )}
+  </Col>
+</Row>
+
     </Container>
   );
 };

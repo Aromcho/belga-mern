@@ -9,6 +9,7 @@ import router from './src/routes/index.router.js';
 import pathHandler from './src/middelwares/pathHandler.mid.js';
 import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
+import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
 
 dotenv.config();
 
@@ -27,6 +28,11 @@ app.use('/api', router);
 cron.schedule('0 * * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncWithTokko();
+});
+// Configurar los cron jobs para sincronización Development
+cron.schedule('* * * * *', () => {
+  console.log('Running cron job to sync with Tokko');
+  syncDevelopmentsWithTokko();
 });
 
 const PORT = process.env.PORT || 8080;

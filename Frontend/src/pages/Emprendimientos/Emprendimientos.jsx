@@ -1,57 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getDevelopmentById, getDevelopmentProperties, getProperties } from "../services";
-import Layout from "../components/Layout";
-import BackToTop from "../components/BackToTop";
-import SocialSidebar from "../components/SocialSidebar";
-import Error500 from "../pages/500";
-import Error404 from "../pages/404";
-import DevelopmentsDetail from "../components/DevelopmentsDetail/DevelopmentsDetail";
+import DevelopmentItem from "../../components/DevelopmentsItem/DevelopmentsItem";
+import axios from "axios";
+import { Row, Col, Container, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const Emprendimientos = () => {
-  const { id } = useParams();
-  const [property, setProperty] = useState(null);
-  const [properties, setProperties] = useState([]);
-  const [propertySubs, setPropertySubs] = useState([]);
-  const [statusCode, setStatusCode] = useState(200);
+  const [loading, setLoading] = useState(false);
+  const [devProperties, setDevProperties] = useState([]);
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const propertyData = await getDevelopmentById(parseInt(id));
-        setProperty(propertyData);
+  useEffect(() => {
+    fetchDevProperty();
+  }, []);  // Se ejecuta cuando el componente se monta
 
-        const propertySubsData = await getDevelopmentProperties(propertyData.id);
-        setPropertySubs(propertySubsData.objects);
+  const fetchDevProperty = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`/api/development`);
+      setDevProperties(response.data); // Asegúrate de acceder a `response.data`
+      setLoading(false);
+    } catch (error) {
+      console.error('Error al obtener propiedades:', error);
+      setLoading(false);
+    }
+  };
 
-        const { objects } = await getProperties({
-          params: {
-            filters: [["is_starred_on_web", "=", true]],
-            operation_types: [1],
-          },
-        });
-        setProperties(objects);
-      } catch (error) {
-        setStatusCode(error.response ? error.response.status : 500);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  if (statusCode === 404) return <Error404 />;
-  if (statusCode >= 500) return <Error500 />;
+  console.log('Propiedades de desarrollos:', devProperties);
 
   return (
-    <Layout menuTheme="dark">
-      <BackToTop color="black" />
-      <SocialSidebar color="black" showWithOffset />
-      <DevelopmentsDetail
-        property={property}
-        properties={properties}
-        propertySubs={propertySubs}
-      />
-    </Layout>
+    <div className="mt-5 p-5">
+      <Button as={Link} to="/" variant="primary" className="mt-3 w-100 custom-button">
+        <FaArrowLeft className="me-2" />
+        Volver al inicio
+      </Button>
+
+      {/* Mostrar la cantidad de resultados */}
+      <p className="m-4">{devProperties.length} Resultados</p>
+
+      <Row>
+        {devProperties.map((devProperty) => (
+          <Col key={devProperty.id} xs={12} sm={6} md={4} lg={4}>
+            <DevelopmentItem development={devProperty} />
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 };
 

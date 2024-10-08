@@ -21,10 +21,11 @@ const Filters = ({ onSubmit }) => {
     { value: 'Casa', label: 'Casa' },
     { value: 'Departamento', label: 'Departamento' },
     { value: 'PH', label: 'PH' },
-    { value: 'Terrenos', label: 'Terrenos' },
-    { value: 'Oficinas', label: 'Oficinas' },
-    { value: 'Cocheras', label: 'Cocheras' },
-    { value: 'Locales', label: 'Locales' },
+    { value: 'Terreno', label: 'Terrenos' },
+    { value: 'Oficina', label: 'Oficinas' },
+    { value: 'Cochera', label: 'Cocheras' },
+    { value: 'Local', label: 'Locales' },
+    { value: 'Edificio', label: 'Edificios' },
   ];
 
   const performSearch = async (query) => {

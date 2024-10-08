@@ -13,6 +13,7 @@ import Button from "../../components/Button/Button.jsx";
 import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
 import HomeMap from "../../components/HomeMap/HomeMap.jsx";
 import { Container } from "react-bootstrap";
+import InversionSection from "../../components/InvertionHome/InvertionHome.jsx";
 
 
 const Home = () => {
@@ -107,27 +108,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/*inversion sectin*/}
 
-      <div className="inversion-section">
-        <div className="inversion">
-          <SocialSidebar color="black" />
-          <BackToTop color="black" />
-        </div>
-        <div className="container inversion--container">
-          <div className="inversion-list">
-            <div className="inversion-item item--text">
-              <Title
-                title="TU PRÓXIMA INVERSIÓN"
-                buttonStyle="outline black"
-                vertical
-                linkButton="/emprendimientos"
-              />
-            </div>
-          </div>
-          <Button className="button--mobile" text="Ver más" type="outline black" link="/emprendimientos" />
-        </div>
-      </div>
-
+      <InversionSection/>
       <div className="contact-section">
         <FooterInfo/>
         <HomeMap/>

@@ -1,0 +1,110 @@
+/* Contenedor general */
+.development-detail-container {
+  background-color: #000;  /* Fondo negro */
+  color: #fff;  /* Texto blanco */
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+/* Título del desarrollo */
+.development-detail-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #f2d8a7;  /* Color de acento */
+  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Ubicación */
+.development-detail-location {
+  font-size: 18px;
+  color: #f2d8a7;
+  text-align: center;
+}
+
+/* Slider */
+.slider-row {
+  margin-top: 20px;
+}
+
+.development-slider {
+  margin-top: 20px;
+}
+
+.development-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Sección de características y descripción */
+.development-features, .development-description {
+  background-color: #111;
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.feature-title, .description-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #f2d8a7;
+}
+
+/* Lista de características */
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.feature-list li svg {
+  margin-right: 10px;
+  color: #f2d8a7;
+}
+
+/* Flechas del slider personalizadas */
+.custom-arrow {
+  background-color: #f2d8a7;
+  color: #000;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.custom-arrow-left {
+  left: 10px;
+}
+
+.custom-arrow-right {
+  right: 10px;
+}
+
+/* Botón de volver */
+.back-button {
+  margin-bottom: 20px;
+  color: #000;
+  background-color: #f2d8a7;
+  border-radius: 0;
+  font-weight: bold;
+}
+
+.back-button:hover {
+  background-color: #f5e0b9;
+}
+
+/* Mensaje de error */
+.error-message {
+  text-align: center;
+  font-size: 20px;
+  color: #ff4c4c;
+}

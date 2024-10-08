@@ -67,7 +67,7 @@ const Item = ({ property }) => {
   const size = property.total_surface || 0; 
   const address = property.address || 'Dirección no disponible'; 
   const barrio = property.location.name || 'Barrio no disponible'; 
-  const propertyId = property._id;
+  const propertyId = property.id;
   const settings = {
     dots: false, 
     infinite: true,
