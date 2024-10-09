@@ -20,10 +20,10 @@ const SearchHomeForm = ({ handleSubmit }) => {
     { value: 'Casa', label: 'Casa' },
     { value: 'Departamento', label: 'Departamento' },
     { value: 'PH', label: 'PH' },
-    { value: 'Terrenos', label: 'Terrenos' },
-    { value: 'Oficinas', label: 'Oficinas' },
-    { value: 'Cocheras', label: 'Cocheras' },
-    { value: 'Locales', label: 'Locales' },
+    { value: 'Terreno', label: 'Terrenos' },
+    { value: 'Oficina', label: 'Oficinas' },
+    { value: 'Cochera', label: 'Cocheras' },
+    { value: 'Locale', label: 'Locales' },
   ];
 
   const handleFormChange = (field, value) => {
@@ -47,7 +47,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
 
     if (query.length > 2) {
       try {
-        const response = await axios.get('/api/api/autocomplete', {
+        const response = await axios.get('/api/property/autocomplete', {
           params: { query }
         });
         setAutocompleteSuggestions(response.data);

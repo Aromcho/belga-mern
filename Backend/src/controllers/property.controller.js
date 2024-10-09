@@ -1,5 +1,7 @@
 import property from '../models/property.model.js';
 import PropertyManager from '../manager/property.manager.js';
+import Fuse from 'fuse.js';
+
 
 // Buscar propiedad por ID
 const getpropertyById = async (req, res) => {
@@ -242,26 +244,33 @@ const autocompleteProperties = async (req, res) => {
       return res.status(400).json({ message: 'Query is required' });
     }
 
-    const properties = await property.find({
-      $or: [
-        { address: { $regex: query, $options: 'i' } },
-        { 'location.full_location': { $regex: query, $options: 'i' } },
-        { 'location.name': { $regex: query, $options: 'i' } },
-        { 'type.name': { $regex: query, $options: 'i' } },
-        { 'producer.name': { $regex: query, $options: 'i' } },
-      ],
-    }).limit(10).lean(); // Usamos lean()
+    // Consulta para obtener las propiedades relevantes desde MongoDB
+    const properties = await property.find({}, 'id address location.name type.name').lean();
 
-    res.json(properties.map((property) => ({
-      id: property.id,
-      location: property.location.name,
-      full_location: property.location.full_location,
-      type: property.type.name,
-      address: property.address,
-    })));
+    // Configuración de Fuse.js
+    const options = {
+      keys: ['address',  'location.name', 'type.name'],
+      threshold: 0.3, // Nivel de coincidencia para errores tipográficos
+    };
+
+    // Inicializa Fuse.js con las propiedades obtenidas   
+    const fuse = new Fuse(properties, options);
+
+    // Realiza la búsqueda difusa
+    const results = fuse.search(query);
+
+    // Mapea los resultados a la estructura que necesitas para la respuesta
+    const response = results.map(({ item }) => ({
+      id: item.id,
+      location: item.location.name,
+      type: item.type.name,
+      address: item.address,
+    }));
+
+    res.json(response);
   } catch (error) {
-    console.error('Error en autocompletado:', error);
-    res.status(500).json({ message: 'Error en autocompletado', error });
+    console.error('Error en autocompletado con Fuse.js:', error);
+    res.status(500).json({ message: 'Error en autocompletado con Fuse.js', error });
   }
 };
 

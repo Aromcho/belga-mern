@@ -11,6 +11,7 @@ const Filters = ({ onSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
+  const [query, setQuery] = useState(''); // Estado independiente del campo de búsqueda
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -28,13 +29,13 @@ const Filters = ({ onSubmit }) => {
     { value: 'Edificio', label: 'Edificios' },
   ];
 
+  // Esta función solo busca sugerencias sin actualizar los filtros
   const performSearch = async (query) => {
     if (query.length > 2) {
       try {
-        const response = await axios.get('/api/api/properties', {
+        const response = await axios.get('/api/property/properties', {
           params: {
-            searchQuery: query,
-            ...filters,
+            searchQuery: query
           },
         });
         setAutocompleteSuggestions(response.data.objects);
@@ -48,26 +49,29 @@ const Filters = ({ onSubmit }) => {
 
   const debouncedSearch = useCallback(debounce((query) => {
     performSearch(query);
-  }, 500), [filters]);
+  }, 500), []);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
-    handleFormChange('searchQuery', query);
+    setQuery(query); // Actualizamos solo el estado de búsqueda
     debouncedSearch(query);
+  };
+
+  // Esta función se llama cuando se selecciona una sugerencia
+  const handleSuggestionSelect = (suggestion) => {
+    // Aquí actualizamos los filtros con la sugerencia seleccionada
+    updateFilters({ searchQuery: suggestion.address || suggestion.location });
+    setAutocompleteSuggestions([]); // Limpiamos las sugerencias
+    setQuery(''); // Limpiamos el campo de búsqueda después de seleccionar
   };
 
   const handleFormChange = (field, value) => {
     updateFilters({ [field]: value });
   };
 
-  const handleSuggestionSelect = (suggestion) => {
-    handleFormChange('searchQuery', suggestion.address || suggestion.location);
-    setAutocompleteSuggestions([]);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(filters);
+    onSubmit(filters); // Disparar la búsqueda con los filtros seleccionados
   };
 
   const customStyles = {
@@ -91,7 +95,7 @@ const Filters = ({ onSubmit }) => {
             <Form.Control
               type="text"
               className="filter-input input-with-icon"
-              value={filters.searchQuery || ''}
+              value={query} // Usamos el estado local "query"
               placeholder="Buscar dirección, título, barrio, etc..."
               onChange={handleSearchChange}
             />

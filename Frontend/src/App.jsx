@@ -15,6 +15,7 @@ import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
 import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto
 import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDetail.jsx";
+import Admin from "./pages/Admin/Admin.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         <Route path="/quiero-vender" element={<QuieroVender />} />
         <Route path="/emprendimientos" element={<Emprendimientos />} />
         <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
-
+        <Route path="/admin" element={<Admin/>} />
 
         {/* Ruta catch-all para URLs no definidas */}
         <Route path="*" element={<Navigate to="/404" />} /> 
