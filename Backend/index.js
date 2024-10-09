@@ -10,6 +10,7 @@ import pathHandler from './src/middelwares/pathHandler.mid.js';
 import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
 import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
+//import { generateJSON } from './src/utils/jsonGenerator.js';
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ cron.schedule('* * * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncDevelopmentsWithTokko();
 });
+
 
 const PORT = process.env.PORT || 8080;
 

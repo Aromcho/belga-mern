@@ -1,7 +1,8 @@
 import property from '../models/property.model.js';
 import PropertyManager from '../manager/property.manager.js';
 import Fuse from 'fuse.js';
-
+import fs from 'fs';
+import path from 'path';
 
 // Buscar propiedad por ID
 const getpropertyById = async (req, res) => {
@@ -37,12 +38,12 @@ const getProperties = async (req, res) => {
 
     // Filtro por tipo de operación
     if (operation_type && operation_type.length > 0) {
-      filterObj['operations.operation_type'] = operation_type;
+      filterObj['operations.operation_type'] = { $in: operation_type };
     }
 
     // Filtro por tipo de propiedad
     if (property_type && property_type !== '-1') {
-      filterObj['type.name'] = property_type;
+      filterObj['type.name'] = { $in: property_type };
     }
 
     // Filtro por cantidad de habitaciones
@@ -69,7 +70,7 @@ const getProperties = async (req, res) => {
 
     // Filtro por barrio
     if (barrio && barrio.length > 0) {
-      filterObj['location.name'] = barrio;
+      filterObj['location.name'] = { $regex: barrio, $options: 'i' };
     }
 
     // Filtro de búsqueda general
@@ -78,7 +79,6 @@ const getProperties = async (req, res) => {
         { address: { $regex: searchQuery, $options: 'i' } },  // Buscar por dirección
         { 'location.full_location': { $regex: searchQuery, $options: 'i' } },  // Buscar por ubicación completa
         { 'location.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por barrio
-        //{ 'type.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por tipo de propiedad
         { 'publication_title': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por título
         { 'real_address': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por dirección real
       ];
@@ -118,6 +118,7 @@ const getProperties = async (req, res) => {
     res.status(500).json({ message: 'Error al obtener propiedades', error });
   }
 };
+
 
 const getPropertyById = async (req, res) =>    {
   try {
@@ -236,6 +237,7 @@ const getAllPropertyIds = async (req, res) => {
   }
 };
 
+
 const autocompleteProperties = async (req, res) => {
   const { query } = req.query;
 
@@ -244,16 +246,18 @@ const autocompleteProperties = async (req, res) => {
       return res.status(400).json({ message: 'Query is required' });
     }
 
-    // Consulta para obtener las propiedades relevantes desde MongoDB
-    const properties = await property.find({}, 'id address location.name type.name').lean();
+    // Cargar el archivo JSON
+    const filePath = path.join(process.cwd(), 'src', 'utils', 'direcciones_y_barrios.json');
+    const jsonData = fs.readFileSync(filePath, 'utf-8');
+    const properties = JSON.parse(jsonData);
 
     // Configuración de Fuse.js
     const options = {
-      keys: ['address',  'location.name', 'type.name'],
-      threshold: 0.3, // Nivel de coincidencia para errores tipográficos
+      keys: ['value'], // Solo buscamos en el campo 'value'
+      threshold: 0.3,  // Nivel de coincidencia para errores tipográficos
     };
 
-    // Inicializa Fuse.js con las propiedades obtenidas   
+    // Inicializa Fuse.js con los datos del archivo JSON
     const fuse = new Fuse(properties, options);
 
     // Realiza la búsqueda difusa
@@ -261,10 +265,7 @@ const autocompleteProperties = async (req, res) => {
 
     // Mapea los resultados a la estructura que necesitas para la respuesta
     const response = results.map(({ item }) => ({
-      id: item.id,
-      location: item.location.name,
-      type: item.type.name,
-      address: item.address,
+      value: item.value,
     }));
 
     res.json(response);
@@ -273,6 +274,8 @@ const autocompleteProperties = async (req, res) => {
     res.status(500).json({ message: 'Error en autocompletado con Fuse.js', error });
   }
 };
+
+
 
 export {
   getProperties,

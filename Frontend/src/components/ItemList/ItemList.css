@@ -29,7 +29,7 @@
 }
 
 .item-list {
-  margin-top: 50px;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;

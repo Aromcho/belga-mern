@@ -49,6 +49,7 @@ export const FiltersProvider = ({ children }) => {
           searchQuery: filters.searchQuery,
           limit,  // Incluyendo límite de resultados por página
           offset, // Offset para controlar el desplazamiento en paginación
+          order: filters.sortOrder, // Aquí enviamos el orden de los precios
         },
       });
       setProperties(response.data.objects); // Propiedades actuales para la página solicitada
@@ -59,6 +60,7 @@ export const FiltersProvider = ({ children }) => {
       setLoading(false);
     }
   }, [filters, limit, offset]);
+  
 
   // Llamada a fetchProperties cuando cambian los filtros o el offset
   useEffect(() => {

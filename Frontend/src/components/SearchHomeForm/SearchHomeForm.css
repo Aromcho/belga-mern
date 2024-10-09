@@ -58,7 +58,15 @@
   display: flex;
   flex-direction: column;
 }
+.button--vender {
+  display: none;
+}
 
+.button--vender:hover {
+  color: #fff;
+  background-color: #C62025;
+  border-color: transparent;
+}
 /* Ocultar rango de precios en móviles */
 @media screen and (max-width: 768px) {
   .price-range-wrapper {
@@ -97,6 +105,22 @@
   }
   .search-form {
     width: 100% !important ; /* Asegurar que el formulario ocupe todo el ancho */
+  }
+  .button--vender {
+    margin-top: 50px;
+    width: 100%;
+    border-radius: 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button--vender:hover {
+    color: #fff;
+    background-color: #C62025;
+    border-color: transparent;
   }
 }
 

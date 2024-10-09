@@ -105,22 +105,30 @@ const Item = ({ property }) => {
           <p className="location-text text-muted mb-3">{address}</p>
 
           <div className="property-info d-flex justify-content-around">
-            <div className="info-item d-flex flex-column">
-              <span className="text-muted">{size}</span>
-              <span className="text-muted">M2</span>
-            </div>
-            <div className="info-item d-flex flex-column">
-              <FaBed className="icon" />
-              <span className="text-muted">{bedrooms}</span>
-            </div>
-            <div className="info-item d-flex flex-column">
-              <FaBath className="icon" />
-              <span className="text-muted">{bathrooms}</span>
-            </div>
-            <div className="info-item d-flex flex-column">
-              <FaCarAlt className="icon" />
-              <span className="text-muted">{parkingLots}</span>
-            </div>
+            {size > 0 && (
+              <div className="info-item d-flex flex-column">
+                <span className="text-muted">{size}</span>
+                <img className="card-icons" src='/images/icons/prop_m2.svg' />
+              </div>
+            )}
+            {bedrooms > 0 && (
+              <div className="info-item d-flex flex-column">
+                <span className="text-muted">{bedrooms}</span>
+                <img className="card-icons" src='/images/icons/prop_cuarto.svg' />
+              </div>
+            )}
+            {bathrooms > 0 && (
+              <div className="info-item d-flex flex-column">
+                <span className="text-muted">{bathrooms}</span>
+                <img className="card-icons" src='/images/icons/prop_ducha.svg' />
+              </div>
+            )}
+            {parkingLots > 0 && (
+              <div className="info-item d-flex flex-column">
+                <span className="text-muted">{parkingLots}</span>
+                <img className="card-icons" src='/images/icons/prop_cochera.svg' />
+              </div>
+            )}
           </div>
         </Card.Body>
       </Link>

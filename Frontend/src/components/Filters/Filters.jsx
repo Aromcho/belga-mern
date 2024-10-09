@@ -1,17 +1,20 @@
 import React, { useContext, useState, useCallback } from 'react';
 import { Form, Button, Row, Col, Collapse } from 'react-bootstrap';
 import Select from 'react-select';
-import { FaHome, FaCity, FaBed, FaCar, FaSearch } from 'react-icons/fa';
+import { FaHome, FaCity, FaBed, FaCar, FaSearch, FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { FiltersContext } from '../../context/FiltersContext';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import './Filters.css';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const Filters = ({ onSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
   const [query, setQuery] = useState(''); // Estado independiente del campo de búsqueda
+  const [sortOrder, setSortOrder] = useState('asc'); // Estado para manejar el orden del precio
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -29,16 +32,15 @@ const Filters = ({ onSubmit }) => {
     { value: 'Edificio', label: 'Edificios' },
   ];
 
-  // Esta función solo busca sugerencias sin actualizar los filtros
   const performSearch = async (query) => {
     if (query.length > 2) {
       try {
-        const response = await axios.get('/api/property/properties', {
+        const response = await axios.get('/api/property/autocomplete', {
           params: {
-            searchQuery: query
+            query: query
           },
         });
-        setAutocompleteSuggestions(response.data.objects);
+        setAutocompleteSuggestions(response.data);
       } catch (error) {
         console.error('Error en la búsqueda:', error);
       }
@@ -53,21 +55,27 @@ const Filters = ({ onSubmit }) => {
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
-    setQuery(query); // Actualizamos solo el estado de búsqueda
+    setQuery(query); // Actualizamos el estado de búsqueda
     debouncedSearch(query);
   };
 
-  // Esta función se llama cuando se selecciona una sugerencia
   const handleSuggestionSelect = (suggestion) => {
-    // Aquí actualizamos los filtros con la sugerencia seleccionada
-    updateFilters({ searchQuery: suggestion.address || suggestion.location });
+    updateFilters({ searchQuery: suggestion.value });
     setAutocompleteSuggestions([]); // Limpiamos las sugerencias
-    setQuery(''); // Limpiamos el campo de búsqueda después de seleccionar
+    setQuery(suggestion.value); // Actualizamos el campo de búsqueda con la selección
   };
 
   const handleFormChange = (field, value) => {
     updateFilters({ [field]: value });
   };
+
+  // Cambiar el orden de los precios
+const toggleSortOrder = () => {
+  const newOrder = sortOrder === 'ASC' ? 'DESC' : 'ASC';
+  setSortOrder(newOrder);
+  updateFilters({ sortOrder: newOrder }); // Actualizamos el estado en los filtros
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,10 +112,10 @@ const Filters = ({ onSubmit }) => {
                 <ul>
                   {autocompleteSuggestions.map((suggestion) => (
                     <li
-                      key={suggestion.id}
+                      key={suggestion.value}
                       onClick={() => handleSuggestionSelect(suggestion)}
                     >
-                      {suggestion.address} - {suggestion.location.name}
+                      {suggestion.value}
                     </li>
                   ))}
                 </ul>
@@ -252,6 +260,8 @@ const Filters = ({ onSubmit }) => {
         </div>
       </Collapse>
 
+      
+
       {/* Filtros siempre visibles en escritorio */}
       <Row className="filter-row d-none d-md-flex mt-3">
         {/* Filtro por tipo de operación */}
@@ -361,6 +371,21 @@ const Filters = ({ onSubmit }) => {
             </div>
           </div>
         </Col>
+      </Row>
+      {/* Ordenar por precio */}
+      <Row className="filter-row d-none d-md-flex mt-3">
+      <Col>
+        <Button as={Link} to="/" variant="light" className="w-100 custom-button">
+              <FaArrowLeft className="me-2" />
+              Volver al inicio
+            </Button>
+        </Col>
+        <Col md="auto">
+          <Button onClick={toggleSortOrder} variant="light" className="w-100 custom-button">
+            Ordenar por precio {sortOrder === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
+          </Button>
+        </Col>
+        
       </Row>
     </Form>
   );
