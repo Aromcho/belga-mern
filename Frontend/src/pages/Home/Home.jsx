@@ -104,7 +104,7 @@ const Home = () => {
           />
           <Button as={Link} to="/propertylist" className="button--mobile" text="Ver más" type="outline red" />
           <div className="prop-list">
-            <SelectionListContainer></SelectionListContainer>
+            <SelectionListContainer/>
           </div>
         </div>
       </div>

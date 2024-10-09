@@ -8,7 +8,7 @@ const Layout = ({ children, menuTheme, footerSmall }) => {
   return (
     <div className="layout-wrapper">
       {children} {/* Aquí se renderizan las rutas */}
-      <div className="hero-footer p-2" id="menuFooter">
+      <div className="hero-footer" id="menuFooter">
         <span href="tel:+541152633393" className="head-footer-link phone ">
           <TelIcon />
         </span>

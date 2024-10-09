@@ -7,11 +7,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0; /* Añadir padding para espacio */
+  padding: 0px 0; /* Añadir padding para espacio */
 }
 
 .footer-wrapper {
   width: 100%;
+  height: 30vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,19 +22,20 @@
 .footer-left,
 .footer-center,
 .footer-right {
+  height: 30vh;
   flex: 1; /* Espacio equitativo para cada columna */
   padding: 0 20px;
 }
 
 .footer-center {
   width: 100%;
-  height: auto;
+  height: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #F1B332;
-  padding: 60px 20px; /* Añadir padding para espacio */
+  padding: 50px 20px; /* Reducir padding */
 }
 
 .footer-center img {
@@ -44,6 +46,7 @@
 .footer-right .legal-text {
   font-size: 0.7rem;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .social-list {
@@ -75,6 +78,7 @@
   text-decoration: underline;
 }
 
+/* Ajustes para pantallas medianas (max-width: 768px) */
 @media (max-width: 768px) {
   .footer-wrapper {
     flex-direction: column-reverse; /* Para pantallas más pequeñas, organizar en una sola columna en orden inverso */
@@ -86,23 +90,35 @@
   .footer-right {
     padding: 10px;
     flex: 100%;
+    height: auto; /* Ajustar la altura automáticamente */
   }
 
   .social-list {
     justify-content: center;
   }
+
+  .footer-center img {
+    width: 70%; /* Ajustar el tamaño de la imagen */
+  }
 }
 
+/* Ajustes para pantallas muy pequeñas (max-width: 480px) */
 @media (max-width: 480px) {
   .footer-container {
     padding: 10px 0; /* Reducir padding para pantallas muy pequeñas */
-    height: 60vh;
+    height: auto; /* Ajustar la altura automáticamente */
   }
-  .footer-right {
-    height: 30vh;
+
+  .footer-wrapper {
+    height: auto; /* Ajustar la altura automáticamente */
   }
+
+  .footer-center {
+    padding: 30px 10px; /* Reducir padding */
+  }
+
   .footer-center img {
-    width: 80%; /* Ajustar tamaño de la imagen para pantallas muy pequeñas */
+    width: 60%; /* Ajustar tamaño de la imagen para pantallas muy pequeñas */
   }
 
   .social--link {

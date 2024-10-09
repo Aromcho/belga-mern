@@ -6,6 +6,7 @@ import SocialSidebar from '../SocialSidebar/SocialSidebar';
 import BackToTop from '../BackToTop/BackToTop';
 import Title from '../Title/Title';
 import Button from '../Button/Button';
+import './InvertionHome.css';
 
 const InversionSection = ({}) => {
     const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ const InversionSection = ({}) => {
                             linkButton="/emprendimientos"
                         />
                     </div>
-                    <div className='d-flex gap-3'>{devProperties.slice(0, 2).map((devProperty, index) => (
+                    <div className='dev-item-container gap-3'>{devProperties.slice(0, 2).map((devProperty, index) => (
                         <DevelopmentItem key={index} development={devProperty} />
                     ))}</div>
                     

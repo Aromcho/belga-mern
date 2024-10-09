@@ -1,0 +1,12 @@
+.dev-item-container {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    
+    .dev-item-container {
+        width: 80vw;
+
+        flex-direction: column;
+    }
+}
