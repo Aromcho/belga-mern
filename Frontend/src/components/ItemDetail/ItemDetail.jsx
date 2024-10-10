@@ -64,6 +64,8 @@ const PrevArrow = (props) => {
 
 const ItemDetail = ({ property }) => {
   // Datos ya pasados por el componente padre
+  const {  suite_amount, location,  photos, type,  rich_description } = property;
+
   console.log('Propiedad:', property);  
   const idTokko = property.id;
   const total_surface = property.total_surface;
@@ -78,7 +80,8 @@ const ItemDetail = ({ property }) => {
   const barrio = property.location.name;
   const tags = property.tags;
   const property_type = property.type.name;
-  
+  const operations = property.operations && property.operations[0] ? property.operations : [];
+
   const sliderSettings = {
     dots: true,
     infinite: true,
