@@ -152,10 +152,51 @@ const ItemDetail = ({ property }) => {
 
       {/* Detalles de la propiedad */}
       <Row className="mt-3">
-        <Col md={6}>
+      <Col md={6}>
           <div className="property-features bg-white p-4 rounded-3">
             <div className="property-info row">
-              {/* Agrega más detalles aquí según sea necesario */}
+              {age > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaHome className="icon" />
+                  <p className="text-muted">Antigüedad</p>
+                  <span className="text-muted">{age} años</span>
+                </Col>
+              )}
+              {total_surface > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaRulerCombined className="icon me-3" />
+                  <span className="text-muted">{total_surface}</span>
+                  <p className="text-muted">M2 Totales</p>
+                </Col>
+              )}
+              {bedrooms > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaBed className="icon" />
+                  <p className="text-muted">Dormitorios</p>
+                  <span className="text-muted">{bedrooms}</span>
+                </Col>
+              )}
+              {bathroom_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaBath className="icon" />
+                  <p className="text-muted">Baños</p>
+                  <span className="text-muted">{bathroom_amount}</span>
+                </Col>
+              )}
+              {parking_lot_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaCarAlt className="icon" />
+                  <p className="text-muted">Cochera</p>
+                  <span className="text-muted">{parking_lot_amount}</span>
+                </Col>
+              )}
+              {toilet_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <FaToilet className="icon" />
+                  <p className="text-muted">Toilettes</p>
+                  <span className="text-muted">{toilet_amount}</span>
+                </Col>
+              )}
             </div>
           </div>
         </Col>
@@ -164,7 +205,30 @@ const ItemDetail = ({ property }) => {
           <Row className="property-info p-4">
             <h2 className="mb-4 text-dark">Información</h2>
             <div className="info-details d-flex flex-column gap-4">
-              {/* Añadir más detalles */}
+              {property.disposition && (
+                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
+                  <FaRulerCombined className="icon me-3" />
+                  <p className="mb-0">
+                    <strong>Disposición: </strong>{property.disposition}
+                  </p>
+                </div>
+              )}
+              {property.orientation && (
+                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
+                  <FaCompass className="icon me-3" />
+                  <p className="mb-0">
+                    <strong>Orientación: </strong>{property.orientation}
+                  </p>
+                </div>
+              )}
+              {property.property_condition && (
+                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
+                  <FaBuilding className="icon me-3" />
+                  <p className="mb-0">
+                    <strong>Condición: </strong>{property.property_condition}
+                  </p>
+                </div>
+              )}
             </div>
           </Row>
         </Col>
