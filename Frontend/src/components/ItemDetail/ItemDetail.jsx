@@ -63,10 +63,22 @@ const PrevArrow = (props) => {
 };
 
 const ItemDetail = ({ property }) => {
-  const { address, suite_amount, location, operations, photos, type, tags, rich_description } = property;
-  const barrio = location.name;
-  const property_type = type.name;
-
+  // Datos ya pasados por el componente padre
+  console.log('Propiedad:', property);  
+  const idTokko = property.id;
+  const total_surface = property.total_surface;
+  const roofed_surface = property.roofed_surface;
+  const room_amount = property.room_amount;
+  const address = property.address;
+  const bathroom_amount = property.bathroom_amount;
+  const bedrooms = property.suite_amount;
+  const parking_lot_amount = property.parking_lot_amount;
+  const age = property.age;
+  const toilet_amount = property.toilet_amount;
+  const barrio = property.location.name;
+  const tags = property.tags;
+  const property_type = property.type.name;
+  
   const sliderSettings = {
     dots: true,
     infinite: true,
