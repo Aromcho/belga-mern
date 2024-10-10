@@ -1,6 +1,6 @@
 import React from 'react';
 import { BelgaIsoIcon } from '../Icons/Icons';
-import './titlewithicon.css';
+import './TitleWithIcon.css';
 
 export const TitleWithIcon = ({ className, text }) => {
   return (

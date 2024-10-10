@@ -80,10 +80,6 @@
 
 
 
-h2 {
-  font-weight: 700;
-}
-
 @media (max-width: 768px) {
   .image-wrapper-detail {
     left: 0;
@@ -108,7 +104,7 @@ h2 {
   border: 1px solid black !important;
 }
 
-.text-muted {
+.mt {
   font-size: 1.1rem;
 }
 

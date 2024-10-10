@@ -122,7 +122,7 @@ const ItemDetail = ({ property }) => {
           <hr className="my-3" />
         </Col>
         <Col className="d-flex justify-content-between align-items-center">
-          <h5 className="text-muted">{property_type} en {barrio}</h5>
+          <h5 className="text-muted mt">{property_type} en {barrio}</h5>
           <div className="d-flex align-items-center">
             <span className="me-3">Enviar por:</span>
             < WhatsappIcon className="mx-2" style={{ cursor: 'pointer' }} />
