@@ -1,0 +1,10 @@
+/* ItemBlog.css */
+.blog-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-summary {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  

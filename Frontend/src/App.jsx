@@ -16,6 +16,7 @@ import Error500 from "./pages/500/500.jsx";
 import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto
 import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDetail.jsx";
 import Admin from "./pages/Admin/Admin.jsx";
+import Blog from "./pages/Blog/Blog.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/emprendimientos" element={<Emprendimientos />} />
         <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
         <Route path="/admin" element={<Admin/>} />
+        <Route path="/blog" element={<Blog/>} />
 
         {/* Ruta catch-all para URLs no definidas */}
         <Route path="*" element={<Navigate to="/404" />} /> 

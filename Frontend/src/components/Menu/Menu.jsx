@@ -60,6 +60,7 @@ export const Menu = () => {
           >
             Quiero comprar
           </Nav.Link>
+          
           <Nav.Link
             as={Link}
             to="emprendimientos"
@@ -67,7 +68,13 @@ export const Menu = () => {
           >
             <EmprendimientosIcon /> Emprendimientos
           </Nav.Link>
-
+          <Nav.Link
+            as={Link}
+            to="blog"
+            className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
+          >
+            Blog
+          </Nav.Link>
           <Button
             className={`button--menu me-3 ${
               sticky || !isHome ? "sticky-link" : ""

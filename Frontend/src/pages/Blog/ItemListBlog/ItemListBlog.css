@@ -1,0 +1,10 @@
+/* ItemListBlog.css */
+.blog-list {
+    margin-top: 20px;
+  }
+  
+  .blog-list .col-md-4 {
+    display: flex;
+    justify-content: center;
+  }
+  

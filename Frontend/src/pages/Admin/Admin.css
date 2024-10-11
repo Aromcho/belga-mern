@@ -1,0 +1,17 @@
+.admin-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.d-flex {
+    display: flex;
+}
+a:hover, button:hover {
+    background-color: transparent;
+}
