@@ -1,5 +1,5 @@
 import axios from 'axios'; 
-import Property from '../models/property.model.js';
+import Property from '../models/Property.model.js';
 
 export const syncWithTokko = async () => {
   const limit = 20;

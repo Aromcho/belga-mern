@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import Confetti from "react-confetti";
 import "./QuieroVender.css";
+import VenderForm from "../../components/Forms/VenderForm/VenderForm.jsx"
 
 const steps = [
   {
@@ -95,6 +96,8 @@ const QuieroVender = () => {
 
   return (
     <>
+    <VenderForm className="mt-5 pt-5"/>
+    {/*
       <div className="quiero-vender-container">
         <Container>
           <div className="back-wrapper mb-4">
@@ -228,7 +231,7 @@ const QuieroVender = () => {
             </div>
           </Container>
         </Container>
-      </div>
+      </div>*/}
     </>
   );
 };

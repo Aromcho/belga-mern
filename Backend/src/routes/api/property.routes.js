@@ -7,9 +7,9 @@ import {
   getFavorites,
   sendContactEmail,
   getAllPropertyIds, // new function
-} from '../controllers/property.controller.js';
-import { getpropertyById  } from '../controllers/property.controller.js'
-import { autocompleteProperties } from '../controllers/property.controller.js';
+} from '../../controllers/property.controller.js';
+import { getpropertyById } from '../../controllers/property.controller.js';
+import { autocompleteProperties } from '../../controllers/property.controller.js';
 
 
 

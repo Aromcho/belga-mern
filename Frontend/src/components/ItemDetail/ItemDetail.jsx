@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,6 +8,7 @@ import { FaBed, FaBath, FaCarAlt, FaHome, FaToilet, FaCompass, FaRulerCombined, 
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import Title from '../Title/Title';
 import SelectionListContainer from '../SelectionListContainer/SelectionListContainer';
+import Button from '../Button/Button';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';

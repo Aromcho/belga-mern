@@ -6,8 +6,7 @@ import {
   getDevelopmentByCustomId, // Importar la nueva función
   updateDevelopment,
   deleteDevelopment,
-} from '../controllers/development.controller.js';
-
+} from '../../controllers/development.controller.js';
 const developmentRoutes = express.Router();
 
 developmentRoutes.get('/custom/:id', getDevelopmentByCustomId);

@@ -45,7 +45,7 @@ const SideBar = () => {
 
   return (
     <Box className="d-flex">
-      <Box className="sidebar-container" sx={{ width: 250, bgcolor: '#f5f5f5', borderRight: 1, borderColor: 'divider' }}>
+      <Box className="sidebar-container" sx={{ bgcolor: '#f5f5f5', borderRight: 1, borderColor: 'divider' }}>
         <div className="user-section text-center p-4">
           <Avatar alt="Camila Fella" src="/static/images/avatar/1.jpg" className="mx-auto" />
           <Typography variant="h6">Camila Fella</Typography>

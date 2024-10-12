@@ -31,7 +31,7 @@ cron.schedule('0 * * * *', () => {
   syncWithTokko();
 });
 // Configurar los cron jobs para sincronización Development
-cron.schedule('* * * * *', () => {
+cron.schedule('0 * * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncDevelopmentsWithTokko();
 });

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "../../Button/Button.jsx";
+import Button from "../../Button/Button.jsx";
 import { Input } from "../../Input/Input.jsx";
-import Textarea from "../../Textarea/Textarea.jsx";
+import {Textarea} from "../../Textarea/Textarea.jsx";
 import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
-import { Select } from "../../Select/Select.jsx";
-import { propertiesSelectOptions } from "../../../helpers/index.js";
+import { propertiesSelectOptions } from "../../../helpers/tokko.js";
+import Select from 'react-select';  // Importar react-select
 import "./VenderForm.css";
 
 export const VenderForm = ({ className = "" }) => {

@@ -1,4 +1,4 @@
-import property from '../models/property.model.js';
+import property from '../models/Property.model.js';
 import PropertyManager from '../manager/property.manager.js';
 import Fuse from 'fuse.js';
 import fs from 'fs';
