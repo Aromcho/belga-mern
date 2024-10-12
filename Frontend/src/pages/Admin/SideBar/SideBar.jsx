@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import NavBar from '../BlogAdmin/NavBar/NavBar';
 import UserManagement from '../UserManagement/UserManagement';
-import './SideBar.css'; // Archivo CSS personalizado
-
+import './SideBar.css';
+import { theme } from '../../../helpers/theme';
 const SideBar = () => {
-  const [value, setValue] = useState(0); // Estado para controlar la pestaña activa
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,7 +25,7 @@ const SideBar = () => {
         id={`vertical-tabpanel-${index}`}
         aria-labelledby={`vertical-tab-${index}`}
         {...other}
-        style={{ flexGrow: 1 }} // Para que el contenido crezca adecuadamente al lado de las pestañas
+        style={{ flexGrow: 1 }}
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
@@ -44,8 +44,7 @@ const SideBar = () => {
   };
 
   return (
-    <Box className="d-flex" >
-      {/* Barra lateral */}
+    <Box className="d-flex">
       <Box className="sidebar-container" sx={{ width: 250, bgcolor: '#f5f5f5', borderRight: 1, borderColor: 'divider' }}>
         <div className="user-section text-center p-4">
           <Avatar alt="Camila Fella" src="/static/images/avatar/1.jpg" className="mx-auto" />
@@ -53,13 +52,24 @@ const SideBar = () => {
           <Typography variant="body2">Administrador</Typography>
         </div>
 
-        {/* Pestañas verticales */}
         <Tabs
           orientation="vertical"
           value={value}
           onChange={handleChange}
           aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: 'divider', flexGrow: 1 }}
+          sx={{
+            borderRight: 1,
+            borderColor: 'divider',
+            '.Mui-selected': {
+              color: theme.primary,  // Cambia el color del tab activo
+            },
+            '& .MuiTabs-indicator': {
+              backgroundColor: theme.primary,  // Cambia el color del indicador activo
+            },
+            '& .MuiTab-root.Mui-selected': {
+              color: theme.primary,  // Cambia el color del texto activo de las pestañas
+            },
+          }}
         >
           <Tab label={<span className="tab-text"><i className="bi bi-journal-text"></i> Blog de noticias</span>} {...a11yProps(0)} />
           <Tab label={<span className="tab-text"><i className="bi bi-people"></i> Usuarios</span>} {...a11yProps(1)} />
@@ -68,13 +78,12 @@ const SideBar = () => {
         </Tabs>
       </Box>
 
-      {/* Contenido dinámico a la derecha */}
-      <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <TabPanel value={value} index={0}>
-          <NavBar /> {/* Aquí puedes agregar contenido dinámico */}
+          <NavBar />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <UserManagement/>
+          <UserManagement />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Typography variant="h6">Contenido de Envíos de mails</Typography>

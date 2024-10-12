@@ -1,0 +1,54 @@
+.add-card {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.add-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-icon-container {
+  background-color: #F1B332;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-icon {
+  color: white;
+  font-size: 30px;
+}
+
+.image-upload-placeholder {
+  width: 100%;
+  height: 150px;
+  background-color: #b7b8b9;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus-icon {
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.form-input {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 16px;
+}
+.input-icon {
+  width: 100%;
+}
