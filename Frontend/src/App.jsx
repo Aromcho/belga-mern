@@ -18,6 +18,7 @@ import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDeta
 import Admin from "./pages/Admin/Admin.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import Layout from "./components/Layout/Layout.jsx";
+import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail.jsx";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
         <Route path="/admin" element={<Admin/>} />
         <Route path="/blog" element={<Blog/>} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
 
         {/* Ruta catch-all para URLs no definidas */}
         <Route path="*" element={<Navigate to="/404" />} /> 

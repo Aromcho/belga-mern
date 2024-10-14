@@ -10,7 +10,6 @@ import pathHandler from './src/middelwares/pathHandler.mid.js';
 import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
 import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
-//import { generateJSON } from './src/utils/jsonGenerator.js';
 
 dotenv.config();
 
@@ -21,6 +20,9 @@ const __dirname = path.dirname(__filename);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+
+// Servir la carpeta de imágenes de manera estática
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.static('public'));
 app.use('/api', router);
@@ -35,7 +37,6 @@ cron.schedule('0 * * * *', () => {
   console.log('Running cron job to sync with Tokko');
   syncDevelopmentsWithTokko();
 });
-
 
 const PORT = process.env.PORT || 8080;
 

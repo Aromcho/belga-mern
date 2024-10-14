@@ -5,6 +5,7 @@
     border: 1px solid #000000;
     transition: box-shadow 0.3s ease;
     border-radius: 0;
+    overflow: hidden;
   }
   
   .custom-card:hover {
@@ -49,8 +50,10 @@
   }
   
   .title {
-    font-size: 16px;
     margin: 0;
+    font-size: 20px;
+    text-transform: none;
+
   }
   
   .date {

@@ -1,47 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ItemBlogAdmin from '../ItemBlogAdmin/ItemBlogAdmin';
 import AddCard from '../AddCard/AddCard';
 
 const ItemListBlogAdmin = () => {
-  const blogPosts = [
-    {
-      title: 'Impacto en el mercado inmobiliario por la baja del dólar.',
-      date: '15/20/2024',
-      imageUrl: 'https://impulsapopular.com/wp-content/uploads/2021/08/4984-Pasos-para-crear-una-empresa-o-agencia-inmobiliaria-.jpg',
-    },
-    {
-      title: 'Impacto en el mercado inmobiliario por la baja del dólar.',
-      date: '15/20/2024',
-      imageUrl: 'https://impulsapopular.com/wp-content/uploads/2021/08/4984-Pasos-para-crear-una-empresa-o-agencia-inmobiliaria-.jpg',
-    },
-    {
-      title: 'Impacto en el mercado inmobiliario por la baja del dólar.',
-      date: '15/20/2024',
-      imageUrl: 'https://impulsapopular.com/wp-content/uploads/2021/08/4984-Pasos-para-crear-una-empresa-o-agencia-inmobiliaria-.jpg',
-    },
-    {
-      title: 'Impacto en el mercado inmobiliario por la baja del dólar.',
-      date: '15/20/2024',
-      imageUrl: 'https://impulsapopular.com/wp-content/uploads/2021/08/4984-Pasos-para-crear-una-empresa-o-agencia-inmobiliaria-.jpg',
-    },
-    {
-      title: 'Impacto en el mercado inmobiliario por la baja del dólar.',
-      date: '15/20/2024',
-      imageUrl: 'https://via.placeholder.com/150',
-    },
-  ];
+  const [blogPosts, setBlogPosts] = useState([]);
+
+  // Función para obtener los artículos desde el backend
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get('/api/articule'); // Ruta de tu API
+      setBlogPosts(response.data); // Guardamos los artículos obtenidos
+    } catch (error) {
+      console.error('Error al obtener los artículos:', error);
+    }
+  };
+
+  // Llamamos a la función fetchArticles al cargar el componente
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  // Función para manejar el borrado
+  const handleDelete = (id) => {
+    setBlogPosts((prevPosts) => prevPosts.filter((post) => post._id !== id));
+  };
 
   return (
     <div className="row blog-posts-list">
-       <div className="col-md-4 mb-4">
-        <AddCard />  {/* Aquí se muestra la tarjeta de "Agregar" */}
+      <div className="col-md-4 mb-4">
+        <AddCard onAdd={fetchArticles} /> {/* Aquí se muestra la tarjeta de "Agregar" */}
       </div>
       {blogPosts.map((post, index) => (
         <div className="col-md-4 mb-4" key={index}>
-          <ItemBlogAdmin 
-            title={post.title} 
-            date={post.date} 
-            imageUrl={post.imageUrl} 
+          <ItemBlogAdmin
+            id={post._id}
+            title={post.title}
+            date={post.createdAt} // Asegúrate de ajustar la fecha según el formato de tu respuesta
+            imageUrl={post.photos[0]} // Si estás usando varias fotos, usa la primera
+            onDelete={handleDelete} // Pasamos la función handleDelete para borrar
           />
         </div>
       ))}

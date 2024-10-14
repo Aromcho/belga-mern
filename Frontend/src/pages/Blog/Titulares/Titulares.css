@@ -1,0 +1,34 @@
+.titulares {
+  height: 100%; /* Tamaño definido para el carrusel */
+  width: 100%;   /* Ancho completo del contenedor */
+  overflow: hidden; /* Oculta cualquier contenido que exceda el contenedor */
+  position: relative;
+}
+
+.titulares-img {
+  object-fit: cover; /* Para que la imagen mantenga su proporción */
+  width: 100%; /* Forzar que la imagen ocupe el 100% del ancho */
+  height: 380px; /* Tamaño fijo para todas las imágenes */
+  min-height: 380px; /* Asegura que no sea más pequeño que el contenedor */
+}
+
+.caption-bg {
+  padding: 15px;
+  text-align: left;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .titulares-img {
+    height: 200px; /* Reduce the height for smaller screens */
+    min-height: 200px; /* Ensure it doesn't get smaller than this */
+  }
+
+  .caption-bg {
+    padding: 10px; /* Adjust padding for smaller screens */
+    text-align: left; /* Center text for better readability on mobile */
+  }
+  .subtitle-titulares {
+    display: none;
+  }
+}

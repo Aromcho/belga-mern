@@ -1,13 +1,12 @@
-import  { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const collection = 'articules';
 const schema = new Schema({
-
-    title: { type: String, require: true, unique: true, index: true },
-    subtitle: { type: String, require: true },
-    description: { type: String, require: true },
-    photo: { type: String, require: true },
-    category: { type: String, require: true },
+    title: { type: String, required: true, unique: true, index: true },
+    subtitle: { type: String, required: true },
+    description: { type: String, required: true },
+    photos: [{ type: String, required: false }], // Cambiado para ser un array de URLs de imágenes
+    category: { type: String, required: true },
 }, {
     timestamps: true
 });

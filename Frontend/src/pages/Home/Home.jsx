@@ -111,7 +111,7 @@ const Home = () => {
       {/*inversion sectin*/}
 
       <InversionSection/>
-      <div className="contact-section">
+      <div className="contact-section pt-5">
         <FooterInfo/>
         <HomeMap/>
         <ContactForm />

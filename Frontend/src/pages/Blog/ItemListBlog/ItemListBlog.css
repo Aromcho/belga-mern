@@ -1,11 +1,17 @@
-/* ItemListBlog.css */
-.blog-list {
-  width: 100%;
-    margin-top: 20px;
+.blog-list-container {
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+.blog-post-item {
+  display: flex;
+  padding: 0 10px;
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 576px) {
+  .blog-post-item {
+    flex: 0 0 50%; /* Ocupar el 50% del ancho del contenedor */
+    max-width: 50%;
   }
-  
-  .blog-list .col-md-4 {
-    display: flex;
-    justify-content: center;
-  }
-  
+}
