@@ -1,3 +1,8 @@
+.nombre-precio-container, .barrio-compartir-container, .compartir-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .img-thumbnail-small {
   width: 20%;
   margin-bottom: 1rem;
@@ -28,7 +33,13 @@
 .custom-button:hover {
   background-color: transparent !important;
 }
+.btn-go-back {
+  background-color: transparent !important;
 
+}
+.property-price {
+  justify-content: end;
+}
 .property-features, .property-info, .property-description {
   margin-top: 20px;
 }
@@ -148,4 +159,33 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
+}
+@media (max-width: 768px) {
+  .nombre-precio-container, .barrio-compartir-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .compartir-container {
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .property-price {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+
+  .property-address {
+    font-size: 1.5rem;
+  }
+
+  .property-type {
+    font-size: 1rem;
+  }
+
+  .icon {
+    font-size: 1.2rem;
+  }
 }

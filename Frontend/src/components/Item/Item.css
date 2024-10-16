@@ -2,7 +2,14 @@
   width: 100% !important;
   height: 100%;
 }
-
+.card-header-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.direction-container {
+  text-align: start;
+}
 .link-full {
   display: block;
   max-width: 100%;

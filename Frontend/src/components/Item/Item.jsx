@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { Card } from "react-bootstrap";
-import { FaBed, FaBath, FaCarAlt } from "react-icons/fa";
+import { FaBed, FaBath, FaCarAlt, FaHeart } from "react-icons/fa";
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './Item.css';
 import "slick-carousel/slick/slick.css";
@@ -100,10 +100,13 @@ const Item = ({ property }) => {
         </Slider>
 
         <Card.Body>
-          
-          <h5 className="card-title-bold mb-3 text-dark">{barrio}</h5>
-          <p className="location-text text-muted mb-3">{address}</p>
-
+          <div className="card-header-item mt-3 p-2">
+            <div className="direction-container">
+              <h5 className="card-title-bold  text-dark">{barrio}</h5>
+              <p className="location-text text-muted ">{address}</p>
+            </div>
+            <FaHeart className="text-dark" />
+          </div>
           <div className="property-info d-flex justify-content-around">
             {size > 0 && (
               <div className="info-item d-flex flex-column">

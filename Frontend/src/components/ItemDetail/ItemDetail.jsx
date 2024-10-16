@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
@@ -82,9 +82,32 @@ const ItemDetail = ({ property }) => {
   const tags = property.tags;
   const property_type = property.type.name;
   const operations = property.operations && property.operations[0] ? property.operations : [];
+  
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // Función para volver a la página anterior
+  };
+
+  const shareOnWhatsApp = () => {
+    const message = `Mira esta propiedad: ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price} https://belga.com.ar/propiedad/${idTokko}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const shareByEmail = () => {
+    const subject = `Interesante propiedad en ${address}`;
+    const body = `Te comparto esta propiedad en ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price}. Mira más detalles aquí: https://belga.com.ar/propiedad/${idTokko}`;
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
+  const handlePrint = () => {
+    window.print(); // Abre la ventana de impresión del navegador
+  };
 
   const sliderSettings = {
-    dots: true,
+    dots: false, // Desactiva los puntitos
     infinite: true,
     speed: 500,
     slidesToShow: 1.5,
@@ -111,19 +134,20 @@ const ItemDetail = ({ property }) => {
       },
     ],
   };
+  
 
   return (
     <Container className="my-5 text-dark property-detail">
       {/* Botón de regreso */}
-      <Button as={Link} to="/propertylist" variant="primary" className="mt-3 w-100 custom-button">
+      <button onClick={goBack} variant="primary" className="btn-go-back custom-button">
         <FaArrowLeft className="me-2" />
         Volver a la lista
-      </Button>
+      </button>
 
       {/* Encabezado */}
       <Row className="encabezado my-5">
         <Col md={12}>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="nombre-precio-container">
             <div className="d-flex align-items-center">
               <h4 className="display-6 me-3">{address}</h4>
               <FavoriteBorderIcon className="icon" />
@@ -137,13 +161,27 @@ const ItemDetail = ({ property }) => {
         <Col md={12}>
           <hr className="my-3" />
         </Col>
-        <Col className="d-flex justify-content-between align-items-center">
+        <Col className="barrio-compartir-container">
           <h5 className="text-muted mt">{property_type} en {barrio}</h5>
-          <div className="d-flex align-items-center">
+          <div className="compartir-container">
             <span className="me-3">Enviar por:</span>
-            < WhatsappIcon className="mx-2" style={{ cursor: 'pointer' }} />
-            < MailIcon className="mx-2 " style={{ cursor: 'pointer' }} />
-            < PrintIcon className="mx-2" style={{ cursor: 'pointer' }} />
+            <div>
+            <FaWhatsapp
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
+              />      
+              <FaEnvelope
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={shareByEmail} // Manejador para compartir por correo
+              />
+               <FaPrint
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={handlePrint} // Manejador para imprimir
+              />
+            </div>
           </div>
         </Col>
       </Row>

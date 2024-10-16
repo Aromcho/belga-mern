@@ -36,7 +36,7 @@ const MapaInteractivo = ({ property }) => {
       {/* Contenedor del Mapa */}
       <MapContainer
         center={[position.lat, position.lng]}
-        zoom={13}
+        zoom={15}
         style={{ height: "500px", width: window.innerWidth <= 768 ? "100%" : "80vw" }}
       >
         <TileLayer

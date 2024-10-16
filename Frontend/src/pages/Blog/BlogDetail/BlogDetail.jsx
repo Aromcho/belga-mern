@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './BlogDetail.css'; // Puedes definir los estilos personalizados aquí
+import './BlogDetail.css';
 
 const BlogDetail = () => {
-  const { id } = useParams(); // Obtener el ID del artículo desde la URL
+  const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,11 +24,11 @@ const BlogDetail = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Cargando...</div>; // Mostrar un indicador de carga
+    return <div>Cargando...</div>;
   }
 
   if (!article) {
-    return <div>Artículo no encontrado</div>; // Manejar el caso en que no se encuentre el artículo
+    return <div>Artículo no encontrado</div>;
   }
 
   return (
@@ -42,8 +42,9 @@ const BlogDetail = () => {
       <h6 className="subtitle">{article.subtitle}</h6>
       <p className="date">Fecha: {new Date(article.createdAt).toLocaleDateString()}</p>
       <p className="author">Publicado por Belga Inmobiliaria</p>
-      <p className="content">{article.description}</p>
-     
+
+      {/* Usamos dangerouslySetInnerHTML para renderizar el HTML */}
+      <div dangerouslySetInnerHTML={{ __html: article.description }} />
     </div>
   );
 };

@@ -28,8 +28,21 @@
   color: white;
   font-size: 30px;
 }
+.modal-flotador .modal-dialog {
+  width: 80vw; /* Make the modal 80% of the viewport width */
+  height: auto;
+  max-width: 100%; /* Ensure it doesn't overflow the viewport */
+  margin: auto; /* Center the modal */
+  margin-top: 40px;
+}
 
-.image-upload-placeholder {
+.modal-flotador .modal-content {
+  border-radius: 0; /* Optional: to give a rounded look */
+  padding: 20px; /* Optional: Add padding inside the modal */
+}
+
+.image-upload-container {
+  position: relative;
   width: 100%;
   height: 150px;
   background-color: #b7b8b9;
@@ -39,16 +52,47 @@
   justify-content: center;
 }
 
-.plus-icon {
-  font-size: 40px;
-  color: #ffffff;
+.image-upload-input {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+}
+
+.icon-plus {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.icon-image {
+  font-size: 32px;
+}
+
+.preview-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-image {
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .form-input {
   border: 1px solid #ddd;
   padding: 10px;
   font-size: 16px;
-}
-.input-icon {
-  width: 100%;
 }

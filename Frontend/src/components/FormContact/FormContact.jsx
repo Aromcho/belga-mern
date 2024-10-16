@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./FormContact.css"; // Asegúrate de que el archivo CSS también esté correctamente referenciado
 import { BelgaIsoIcon } from "../Icons/Icons.jsx";
+import { TitleWithIcon } from "../TitleWithIcon/TitleWithIcon.jsx";
+import { Input } from "../Input/Input.jsx";
 const FormContact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -32,14 +34,12 @@ const FormContact = () => {
   return (
     <div className="contact-form-wrapper">
       <form onSubmit={handleSubmit} className="contact-form">
-        <h2 className="form-title">
-        <BelgaIsoIcon className="isobrand--img" />
-          ¿Cómo te podemos ayudar?
-        </h2>
+      <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
+
 
         <label>
           Nombre:
-          <input
+          <Input
             type="text"
             name="name"
             value={formData.name}
@@ -50,7 +50,7 @@ const FormContact = () => {
 
         <label>
           Correo Electrónico:
-          <input
+          <Input
             type="email"
             name="email"
             value={formData.email}
@@ -61,7 +61,7 @@ const FormContact = () => {
 
         <label>
           Teléfono:
-          <input
+          <Input
             type="tel"
             name="phone"
             value={formData.phone}
@@ -80,7 +80,7 @@ const FormContact = () => {
           ></textarea>
         </label>
 
-        <button type="submit">Enviar</button>
+        <button  type="submit">Enviar</button>
       </form>
 
       {showWarning && (

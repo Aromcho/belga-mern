@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Button from "../../Button/Button";
+import { Button } from "react-bootstrap";
 import { Input } from "../../Input/Input";
 import { Textarea } from "../../Textarea/Textarea";
 import { FeedbackMsg } from "../FeedbackMsg/FeedbackMsg";
@@ -135,14 +135,14 @@ const ContactForm = ({ className = "", full = false }) => {
         {status.status && (
           <FeedbackMsg className={status.status} msg={status.text} />
         )}
-      </div>
-
-      <Button
-        type="button"
-        className={`button--send ${full ? 'full' : ''}`}
+         <Button
+        className="search-button"
         sendStatus={state}
         onClick={handleSubmit}
       />
+      </div>
+ 
+     
     </div>
   );
 };

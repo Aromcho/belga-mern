@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Card, Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { Plus, Save, Send } from 'react-bootstrap-icons';
+import { FaImage, FaPlus } from 'react-icons/fa';  // Import image and plus icons
 import './AddCard.css';
 import axios from 'axios';
-import Swal from 'sweetalert2'; // Para mostrar alertas
+import Swal from 'sweetalert2'; 
+import ReactQuill from 'react-quill'; 
+import 'react-quill/dist/quill.snow.css'; 
 
-const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
+const AddCard = ({ onAdd }) => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
@@ -13,10 +16,17 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
     description: '',
     category: '',
   });
-  const [images, setImages] = useState([]);
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [previewImage1, setPreviewImage1] = useState(null);
+  const [previewImage2, setPreviewImage2] = useState(null);
 
   const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);
+  const handleClose = () => {
+    setShowModal(false);
+    setPreviewImage1(null);
+    setPreviewImage2(null);
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -25,8 +35,25 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
     });
   };
 
-  const handleImageChange = (e) => {
-    setImages([...e.target.files]);
+  const handleDescriptionChange = (value) => {
+    setFormData({
+      ...formData,
+      description: value,
+    });
+  };
+
+  // Manejar la carga de la primera imagen
+  const handleImageChange1 = (e) => {
+    const file = e.target.files[0];
+    setImage1(file);
+    setPreviewImage1(URL.createObjectURL(file)); 
+  };
+
+  // Manejar la carga de la segunda imagen
+  const handleImageChange2 = (e) => {
+    const file = e.target.files[0];
+    setImage2(file);
+    setPreviewImage2(URL.createObjectURL(file)); 
   };
 
   const handleSubmit = async () => {
@@ -36,10 +63,8 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
     data.append('description', formData.description);
     data.append('category', formData.category);
 
-    // Agregar las imágenes al FormData
-    images.forEach((image) => {
-      data.append('photos', image);
-    });
+    if (image1) data.append('photos', image1);
+    if (image2) data.append('photos', image2);
 
     try {
       const response = await axios.post('/api/articule', data, {
@@ -54,8 +79,8 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
           title: 'Artículo creado',
           text: 'El artículo se ha creado con éxito.',
         });
-        handleClose(); // Cierra el modal
-        onAdd(); // Actualiza la lista de artículos llamando a fetchArticles
+        handleClose();
+        onAdd(); 
       } else {
         Swal.fire({
           icon: 'error',
@@ -74,28 +99,60 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
 
   return (
     <>
-      {/* Card para abrir el modal */}
       <Card className="add-card" onClick={handleShow}>
         <div className="add-icon-container">
           <Plus className="add-icon" />
         </div>
       </Card>
 
-      {/* Modal que aparece cuando se hace clic en la tarjeta */}
-      <Modal show={showModal} onHide={handleClose} centered>
+      <Modal className='modal-flotador mt-3' show={showModal} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Agregar nueva publicación</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row className="mb-4">
             <Col md={6}>
-              <div className="image-upload-placeholder">
-                <input type="file" name="photos" multiple onChange={handleImageChange} />
+              <div className="image-upload-container">
+                <input 
+                  type="file" 
+                  name="photos1" 
+                  onChange={handleImageChange1} 
+                  className="image-upload-input" 
+                />
+                {!previewImage1 && (
+                  <div className="upload-placeholder">
+                    <FaPlus className="icon-plus" />
+                    <FaImage className="icon-image" />
+                    <p>Subir imagen</p>
+                  </div>
+                )}
+                {previewImage1 && (
+                  <div className="preview-overlay">
+                    <img src={previewImage1} alt="preview1" className="preview-image" />
+                  </div>
+                )}
               </div>
             </Col>
             <Col md={6}>
-              <div className="image-upload-placeholder">
-                <input type="file" name="photos" multiple onChange={handleImageChange} />
+              <div className="image-upload-container">
+                <input 
+                  type="file" 
+                  name="photos2" 
+                  onChange={handleImageChange2} 
+                  className="image-upload-input" 
+                />
+                {!previewImage2 && (
+                  <div className="upload-placeholder">
+                    <FaPlus className="icon-plus" />
+                    <FaImage className="icon-image" />
+                    <p>Subir imagen</p>
+                  </div>
+                )}
+                {previewImage2 && (
+                  <div className="preview-overlay">
+                    <img src={previewImage2} alt="preview2" className="preview-image" />
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
@@ -121,13 +178,9 @@ const AddCard = ({ onAdd }) => { // Recibimos la función onAdd como prop
               />
             </Form.Group>
             <Form.Group controlId="formDescription" className="mt-3">
-              <Form.Control
-                as="textarea"
-                rows={6}
-                placeholder="Descripción de la publicación..."
-                name="description"
+              <ReactQuill
                 value={formData.description}
-                onChange={handleInputChange}
+                onChange={handleDescriptionChange}
                 className="form-input"
               />
             </Form.Group>

@@ -13,5 +13,10 @@
   .blog-post-item {
     flex: 0 0 50%; /* Ocupar el 50% del ancho del contenedor */
     max-width: 50%;
+    padding: 0 5px;
+
+  }
+  .titulares-container {
+    padding: 0 5px;
   }
 }

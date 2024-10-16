@@ -61,7 +61,7 @@
   .contact-form-wrapper {
     max-width: 100%;
     margin: 20px auto;
-    height: auto;
+    height: 100vh;
   }
 
   .full {

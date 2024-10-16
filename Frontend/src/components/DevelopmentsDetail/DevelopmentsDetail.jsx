@@ -1,10 +1,12 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate} from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { FaBed, FaBath, FaCarAlt, FaHome, FaToilet, FaArrowLeft, FaCompass, FaRulerCombined, FaBuilding } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { FaWhatsapp, FaEnvelope, FaPrint } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './DevelopmentsDetail.css';  // Estilos personalizados
@@ -66,6 +68,28 @@ const DevelopmentsDetail = () => {
     return <div className="text-light">No se encontraron detalles del desarrollo.</div>;
   }
 
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // Función para volver a la página anterior
+  };
+
+  const shareOnWhatsApp = () => {
+    const message = `Mira esta propiedad: ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price} https://belga.com.ar/propiedad/${idTokko}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const shareByEmail = () => {
+    const subject = `Interesante propiedad en ${address}`;
+    const body = `Te comparto esta propiedad en ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price}. Mira más detalles aquí: https://belga.com.ar/propiedad/${idTokko}`;
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
+  const handlePrint = () => {
+    window.print(); // Abre la ventana de impresión del navegador
+  };
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -96,23 +120,48 @@ const DevelopmentsDetail = () => {
   };
 
   return (
-    <Container className="my-5 text-light property-detail">
+    <Container className="my-5 pt-5 text-light property-detail bg-dark">
       {/* Información del inmueble */}
-      <Row className="my-3">
+      <button onClick={goBack} variant="primary" className="btn-go-back custom-button">
+        <FaArrowLeft className="me-2" />
+        Volver a la lista
+      </button>
+      <Row className="my-5 bg-dark shadow p-3">
         <Col md={12}>
-          <div className="p-3 bg-dark rounded-3 shadow">
-            <Button as={Link} to="/emprendimientos" variant="light" className="mt-3 w-100 custom-button">
-              <FaArrowLeft className="me-2" />
-              Volver a la lista
-            </Button>
+          <div className="">
             <h1 className="display-5">{development.address}</h1>
-            <h4>{development.location?.name}</h4>
+          </div>
+          <div>
             {development.operations && development.operations[0]?.prices[0] && (
               <h2 className="text-end fw-light">
                 {development.operations[0].prices[0].currency === 'USD' ? 'USD' : 'ARS'}{' '}
                 {development.operations[0].prices[0].price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
               </h2>
             )}
+          </div>
+          <Col md={12}>
+          <hr className="my-3" />
+        </Col>
+        <h4>{development.location?.name}</h4>
+        <div className="compartir-container mb-5">
+            <span className="me-3">Enviar por:</span>
+            <div>
+            <FaWhatsapp
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
+              />      
+              <FaEnvelope
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={shareByEmail} // Manejador para compartir por correo
+              />
+               <FaPrint
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={handlePrint} // Manejador para imprimir
+              />
+            </div>
           </div>
         </Col>
       </Row>
@@ -143,26 +192,13 @@ const DevelopmentsDetail = () => {
           {development.tags && development.tags.length > 0 && (
             <div className="property-tags bg-dark p-4 rounded-3 shadow">
               <h2 className="mb-4 text-light">Adicionales</h2>
-              <div className="tags-container d-flex flex-wrap gap-2 justify-content-start">
-                {development.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="tag-badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm"
-                    style={{
-                      fontSize: '0.9rem',
-                      fontWeight: '500',
-                      border: '1px solid #ddd',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                      transition: 'transform 0.2s',
-                      cursor: 'pointer',
-                    }}
-                    onMouseEnter={(e) => (e.target.style.transform = 'scale(1.1)')}
-                    onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
-                  >
+              <Row>
+                                {development.tags.map((tag, index) => (
+                  <Col xs={6} key={index} className="tag-item bg-dark p-2 rounded mb-2">
                     {tag.name}
-                  </span>
+                  </Col>
                 ))}
-              </div>
+              </Row>
             </div>
           )}
 

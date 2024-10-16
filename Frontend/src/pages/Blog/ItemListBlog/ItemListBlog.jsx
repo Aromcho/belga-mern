@@ -24,7 +24,7 @@ const ItemListBlog = () => {
     <Container className="blog-list-container">
       <Row>
         {/* Slider de Titulares ocupando dos columnas en pantallas grandes */}
-        <Col md={8} xs={12} className="mb-4">
+        <Col md={8} xs={12} className=" titulares-container mb-4">
           <Titulares />
         </Col>
 

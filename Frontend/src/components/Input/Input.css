@@ -33,7 +33,7 @@
   .input-styled:focus-within,
   .input-styled:not(:placeholder-shown) {
     background-color: #fff; /* Cambia este color a tu preferencia */
-    border-color: #007bff; /* Cambia este color a tu preferencia */
+    border-color: #000; /* Cambia este color a tu preferencia */
   }
   
   .input-styled::placeholder {

@@ -14,7 +14,7 @@ import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
 import HomeMap from "../../components/HomeMap/HomeMap.jsx";
 import { Container } from "react-bootstrap";
 import InversionSection from "../../components/InvertionHome/InvertionHome.jsx";
-
+import FromContact from "../../components/FormContact/FormContact.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -111,10 +111,10 @@ const Home = () => {
       {/*inversion sectin*/}
 
       <InversionSection/>
-      <div className="contact-section pt-5">
+      <div className="contact-section">
         <FooterInfo/>
         <HomeMap/>
-        <ContactForm />
+        <FromContact/>
       </div>
     </div>
   );

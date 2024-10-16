@@ -95,7 +95,7 @@ const QuieroVender = () => {
   }
 
   return (
-    <>
+    <div className="quiero-vender-container">
     <VenderForm className="mt-5 pt-5"/>
     {/*
       <div className="quiero-vender-container">
@@ -232,7 +232,7 @@ const QuieroVender = () => {
           </Container>
         </Container>
       </div>*/}
-    </>
+    </div>
   );
 };
 
