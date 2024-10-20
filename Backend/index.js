@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cluster from 'cluster';
+import { cpus } from 'os';
 import morgan from 'morgan';
 import cron from 'node-cron';
 import cors from 'cors'; 
@@ -13,9 +15,25 @@ import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko
 
 dotenv.config();
 
+const PORT = process.env.PORT || 8080;
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const isPrimary = cluster.isPrimary;
+const numCPUs = cpus().length;
+
+if (isPrimary) {
+  for (let i = 1; i <=numCPUs; i++){
+    cluster.fork();
+  }
+  console.log('proseso primario');
+} else {
+  console.log('proseso worker');
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    connectDB();
+  });
+}
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -38,12 +56,9 @@ cron.schedule('0 * * * *', () => {
   syncDevelopmentsWithTokko();
 });
 
-const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB();
-});
+
+
 
 // Ruta catch-all para servir index.html
 app.get("*", (req, res) => {

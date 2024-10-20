@@ -19,6 +19,7 @@ import Admin from "./pages/Admin/Admin.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail.jsx";
+import Print from "./components/Print/Print.jsx";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/admin" element={<Admin/>} />
         <Route path="/blog" element={<Blog/>} />
         <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/print" element={<Print />} />
 
         {/* Ruta catch-all para URLs no definidas */}
         <Route path="*" element={<Navigate to="/404" />} /> 

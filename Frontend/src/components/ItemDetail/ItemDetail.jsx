@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
@@ -12,6 +12,7 @@ import Button from '../Button/Button';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';
+import Print from '../Print/Print';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
 
 // Custom arrows for the carousel
@@ -64,8 +65,9 @@ const PrevArrow = (props) => {
 };
 
 const ItemDetail = ({ property }) => {
-  // Datos ya pasados por el componente padre
-  const {  suite_amount, location,  photos, type,  rich_description } = property;
+  const printRef = useRef();
+
+  const { suite_amount, location, photos, type, rich_description } = property;
 
   console.log('Propiedad:', property);  
   const idTokko = property.id;
@@ -103,7 +105,13 @@ const ItemDetail = ({ property }) => {
   };
 
   const handlePrint = () => {
-    window.print(); // Abre la ventana de impresión del navegador
+    const printContent = printRef.current.innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+    window.location.reload();
   };
 
   const sliderSettings = {
@@ -329,6 +337,12 @@ const ItemDetail = ({ property }) => {
           </div>
         </div>
       </Row>
+
+      {/* Componente Print */}
+      <div ref={printRef} className="d-none">
+        <Print property={property} />
+      </div>
+
     </Container>
   );
 };
