@@ -1,16 +1,15 @@
-// src/routes/index.js
 import express from 'express';
 import propertyRoutes from './api/property.routes.js';
 import developmentRoutes from './api/Development.routes.js';
 import userRouter from './api/User.router.js';
 import articuleRouter from './api/Articule.router.js';
-
+import sessionsRouter from './api/session.router.js'; // Aquí importas el router de sesiones
 const router = express.Router();
 
-// Combina las rutas de propiedades y detalles de propiedades
-router.use('/property', propertyRoutes); // Rutas para los detalles de propiedades
-router.use('/development', developmentRoutes); // Rutas para las propiedades
-router.use('/user', userRouter); // Rutas para los usuarios
-router.use('/articule', articuleRouter); // Rutas para los articulos
+router.use('/property', propertyRoutes);
+router.use('/development', developmentRoutes);
+router.use('/sessions', sessionsRouter); // Aquí asegúrate de tener las rutas para sesiones
+router.use('/user', userRouter);
+router.use('/articule', articuleRouter);
 
 export default router;

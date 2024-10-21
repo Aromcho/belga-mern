@@ -12,6 +12,7 @@ import pathHandler from './src/middelwares/pathHandler.mid.js';
 import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
 import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ if (isPrimary) {
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser(process.env.SECRET));
 
 // Servir la carpeta de imágenes de manera estática
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
