@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2'; // Importar SweetAlert
 import './Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('/api/sessions/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Guardar el token en localStorage o en las cookies
-                localStorage.setItem('token', data.token);
-
-                // Redirigir a /admin
-                navigate('/admin');
-
-                console.log('Login successful:', data);
+            const response = await login(email, password);
+            if (response.role === 'ADMIN') {
+                navigate('/admin'); // Redirigir a /admin si es ADMIN
             } else {
-                // Manejar errores de autenticación
-                console.error('Login failed:', data.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Acceso denegado',
+                    text: 'No tienes permisos para acceder a esta sección.',
+                });
             }
         } catch (error) {
-            console.error('Error during login:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Credenciales incorrectas. Intenta de nuevo.',
+            });
         }
     };
 

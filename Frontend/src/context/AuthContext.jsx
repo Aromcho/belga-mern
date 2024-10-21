@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar si el usuario está autenticado al cargar la aplicación
     const checkAuth = async () => {
       try {
         const response = await axios.get('/api/sessions/online', { withCredentials: true });
@@ -27,31 +26,25 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/sessions/login', { email, password }, { withCredentials: true });
       setUser(response.data.user);
+      return response.data;  // Devolver los datos de respuesta para su uso
     } catch (error) {
       throw new Error('Login failed');
     }
   };
 
-  const isOnline = async () => {
-    try {
-      const response = await axios.get('/api/sessions/online');
-      return response.data;
-    } catch (error) {
-      return error.response; 
-    }
-  }
   const logout = async () => {
     try {
-      await axios.post('/api/sessions/logout', {}, { withCredentials: true });
+      await axios.delete('/api/sessions/logout', {}, { withCredentials: true });
       setUser(null);
     } catch (error) {
       throw new Error('Logout failed');
     }
   };
-  // crear is admin para revisar el rol del usuario
-  
+
+  const isAdmin = () => user && user.role === 'ADMIN'; // Método para verificar si el usuario es ADMIN
+
   return (
-    <AuthContext.Provider value={{ user, loading, login,isOnline, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, isAdmin }}>
       {children}
     </AuthContext.Provider>
   );
