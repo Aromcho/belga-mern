@@ -49,7 +49,6 @@ import UserManager from '../manager/user.manager.js';
     }
   }
 
-  // controlador para revisar si el usuario esta logeado(buscando si hay una cookie llamad jwt)
   const online = (req, res, next) => {
     try {
       const token = req.signedCookies.jwt;

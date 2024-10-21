@@ -13,48 +13,52 @@ import QuieroVender from "./pages/QuieroVender/QuieroVender.jsx";
 // import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
-import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto
+import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto de filtros
+import { AuthProvider } from './context/AuthContext'; // Importar el contexto de autenticación
 import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDetail.jsx";
 import Admin from "./pages/Admin/Admin.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail.jsx";
 import Print from "./components/Print/Print.jsx";
+import Login from "./components/Login/Login.jsx";
 
 function App() {
   return (
-    <FiltersProvider>
-    <Router>
-      <Menu/>
-      <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/propertylist" element={<ItemListContainer />} />
-        <Route path="/propiedad/:propertyId" element={<ItemDetailContainer/>}/>
-        <Route path="/404" element={<Error404 />} />
-        <Route path="/500" element={<Error500 />} /> 
-        <Route path="/quiero-vender" element={<QuieroVender />} />
-        <Route path="/emprendimientos" element={<Emprendimientos />} />
-        <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
-        <Route path="/admin" element={<Admin/>} />
-        <Route path="/blog" element={<Blog/>} />
-        <Route path="/blog/:id" element={<BlogDetail />} />
-        <Route path="/print" element={<Print />} />
+    <AuthProvider>
+      <FiltersProvider>
+        <Router>
+          <Menu/>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/propertylist" element={<ItemListContainer />} />
+              <Route path="/propiedad/:propertyId" element={<ItemDetailContainer/>}/>
+              <Route path="/404" element={<Error404 />} />
+              <Route path="/500" element={<Error500 />} /> 
+              <Route path="/quiero-vender" element={<QuieroVender />} />
+              <Route path="/emprendimientos" element={<Emprendimientos />} />
+              <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
+              <Route path="/admin" element={<Admin/>} />
+              <Route path="/blog" element={<Blog/>} />
+              <Route path="/blog/:id" element={<BlogDetail />} />
+              <Route path="/print" element={<Print />} />
+              <Route path="/login" element={<Login />} />
+              {/* Ruta catch-all para URLs no definidas */}
+              <Route path="*" element={<Navigate to="/404" />} /> 
+              <Route path="/conoce-belga" element={<ConoceBelga />} />
 
-        {/* Ruta catch-all para URLs no definidas */}
-        <Route path="*" element={<Navigate to="/404" />} /> 
-        <Route path="/conoce-belga" element={<ConoceBelga />} />
-
-        {/* Rutas comentadas */}
-        {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
-        */}
-      </Routes>
-      </Layout>
-      <Footer/>
-    </Router>
-    </FiltersProvider>
+              {/* Rutas comentadas */}
+              {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
+              */}
+            </Routes>
+          </Layout>
+          <Footer/>
+        </Router>
+      </FiltersProvider>
+    </AuthProvider>
   );
 }
 
