@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import Swal from 'sweetalert2'; // Importar SweetAlert
+import Swal from 'sweetalert2';
 import './Login.css';
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
         try {
             const response = await login(email, password);
             if (response.role === 'ADMIN') {
-                navigate('/admin'); // Redirigir a /admin si es ADMIN
+                navigate('/admin');
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -35,29 +35,29 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <center className="login-title">Iniciar Sesión</center>
                 <div className="form-group">
-                    <label htmlFor="email">Email:</label>
                     <input
                         type="email"
-                        id="email"
+                        placeholder="Email:"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        className="login-input"
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
                     <input
                         type="password"
-                        id="password"
+                        placeholder="Contraseña:"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        className="login-input"
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="login-button">Ingresar</button>
             </form>
         </div>
     );
