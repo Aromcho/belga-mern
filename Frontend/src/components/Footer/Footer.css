@@ -52,6 +52,8 @@
 .social-list {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  height: 100%;
   margin-bottom: 20px;
 }
 
@@ -59,8 +61,8 @@
   min-width: 0 !important;
 }
 
-.social--link {
-  color: #fff;
+.social--link svg {
+  color: #fff ;
   font-size: 1.5rem;
   transition: color 0.3s ease;
 }

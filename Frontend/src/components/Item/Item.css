@@ -9,6 +9,7 @@
 }
 .direction-container {
   text-align: start;
+  text-transform: none;
 }
 .link-full {
   display: block;
@@ -48,7 +49,6 @@
 }
 
 .head-prop {
-  font-weight: bold;
   color: #333;
 }
 

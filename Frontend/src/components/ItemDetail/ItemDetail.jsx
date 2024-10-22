@@ -179,12 +179,12 @@ const ItemDetail = ({ property }) => {
                 style={{ cursor: 'pointer' }}
                 onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
               />      
-              <FaEnvelope
+              <MailIcon
                 className="mx-2"
                 style={{ cursor: 'pointer' }}
                 onClick={shareByEmail} // Manejador para compartir por correo
               />
-               <FaPrint
+               <PrintIcon
                 className="mx-2"
                 style={{ cursor: 'pointer' }}
                 onClick={handlePrint} // Manejador para imprimir
@@ -219,22 +219,20 @@ const ItemDetail = ({ property }) => {
             <div className="property-info row">
               {age > 0 && (
                 <Col xs={4} className="info-item text-center">
-                  <FaHome className="icon" />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g transform="translate(237 23)"><rect width="24" height="24" transform="translate(-237 -23)" fill="none"/><path d="M15.795,7.963l-2.467-2.65V1.33h-2.39V2.923L8.144.157a.315.315,0,0,0-.443,0L.066,7.991a.315.315,0,0,0,.227.553H1.687v5.372H6.76V9.44H9.15v4.476h5.073V8.544h1.339a.315.315,0,0,0,.232-.581Zm-1.6-.077h-.642V13.2H9.726V8.771H6.185V13.2H2.351V7.886h-1.3L7.917.832l2.562,2.584,1.012,1V1.988h1.184V5.662l2.108,2.213Z" transform="translate(-232.957 -18.066)"/></g></svg>
                   <p className="text-muted">Antigüedad</p>
                   <span className="text-muted">{age} años</span>
                 </Col>
               )}
               {total_surface > 0 && (
                 <Col xs={4} className="info-item text-center">
-                  <FaRulerCombined className="icon me-3" />
                   <span className="text-muted">{total_surface}</span>
                   <p className="text-muted">M2 Totales</p>
                 </Col>
               )}
               {bedrooms > 0 && (
                 <Col xs={4} className="info-item text-center">
-                  <FaBed className="icon" />
-                  <p className="text-muted">Dormitorios</p>
+<img className="card-icons" src='/images/icons/prop_cuarto.svg' />                  <p className="text-muted">Dormitorios</p>
                   <span className="text-muted">{bedrooms}</span>
                 </Col>
               )}
@@ -247,8 +245,7 @@ const ItemDetail = ({ property }) => {
               )}
               {parking_lot_amount > 0 && (
                 <Col xs={4} className="info-item text-center">
-                  <FaCarAlt className="icon" />
-                  <p className="text-muted">Cochera</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><clipPath id="a"><rect width="20.644" height="8.135" fill="#fff"/></clipPath></defs><g transform="translate(-152 91)"><rect width="24" height="24" transform="translate(152 -91)" fill="none"/><g transform="translate(154 -83)" clip-path="url(#a)"><path d="M2.623,6.881H.337a.315.315,0,0,1-.31-.315V5a.309.309,0,0,1,.088-.221l1.1-1.091-1.15-2.3A.31.31,0,0,1,.337.939H2.53a.31.31,0,0,1,.261.138l.492.727L7.214.221A3.121,3.121,0,0,1,8.374,0h2.517a2.2,2.2,0,0,1,1.425.526l1.573,1.352h2.949a3.9,3.9,0,0,1,3.814,3.057.315.315,0,0,1-.034.231l-.939,1.563a.319.319,0,0,1-.27.152H18.033a1.878,1.878,0,0,1-3.539,0H6.137a1.878,1.878,0,0,1-3.539,0Zm-.108-.629a1.878,1.878,0,0,1,3.75,0H14.4a1.878,1.878,0,1,1,3.755,0h1.071l.782-1.3A3.279,3.279,0,0,0,16.833,2.5H13.776a.354.354,0,0,1-.207-.074L11.908,1A1.553,1.553,0,0,0,10.891.619H8.374A2.5,2.5,0,0,0,7.445.8L3.257,2.472a.315.315,0,0,1-.378-.113l-.531-.8H.829l1.027,2.05a.314.314,0,0,1-.059.359L.637,5.127V6.247ZM4.393,7.506a1.253,1.253,0,1,0-.886-.367A1.253,1.253,0,0,0,4.393,7.506Zm11.885,0a1.253,1.253,0,1,0-.886-.367A1.254,1.254,0,0,0,16.278,7.506Z" transform="translate(-0.014 0)"/></g></g></svg>                  <p className="text-muted">Cochera</p>
                   <span className="text-muted">{parking_lot_amount}</span>
                 </Col>
               )}

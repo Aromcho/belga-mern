@@ -1,23 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import Select from 'react-select';
+import { SearchIcon } from "../Icons/Icons";
 import { FaSearch, FaHome, FaBed, FaCity } from 'react-icons/fa';
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
 import './SearchHomeForm.css';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const SearchHomeForm = ({ handleSubmit }) => {
-  const { filters, updateFilters } = useContext(FiltersContext);
+  const { filters, updateFilters } = useContext(FiltersContext); // Obtenemos filtros y función de actualización del contexto
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
-  const [sticky, setSticky] = useState(false);
   const location = useLocation();
 
-  
-
   const isHome = location.pathname === "/";
-
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -51,7 +48,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
 
   const handleSearchChange = async (e) => {
     const query = e.target.value;
-    handleFormChange('searchQuery', query);  // Ahora actualiza 'searchQuery'
+    handleFormChange('searchQuery', query);  // Actualiza el contexto con el query
 
     if (query.length > 2) {
       try {
@@ -69,8 +66,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
   };
 
   const handleSuggestionSelect = (suggestion) => {
-    // Ahora actualiza 'searchQuery' cuando seleccionas una sugerencia
-    handleFormChange('searchQuery', suggestion.value);
+    handleFormChange('searchQuery', suggestion.value); // Actualiza 'searchQuery' en el contexto
     setAutocompleteSuggestions([]); // Limpiar sugerencias
   };
 
@@ -149,11 +145,11 @@ const SearchHomeForm = ({ handleSubmit }) => {
         <Row className="filter-row">
           <Col>
             <div className="input-icon-wrapper mb-3">
-              <FaSearch className="input-icon-placeholder" />
+              <SearchIcon className="input-icon-placeholder" />
               <Form.Control
                 type="text"
                 className="filter-input input-with-icon"
-                value={filters.searchQuery}  // Cambiado a 'searchQuery'
+                value={filters.searchQuery}  // Se usa el valor del contexto
                 placeholder="Buscar..."
                 onChange={handleSearchChange}
               />
@@ -165,7 +161,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
                         key={suggestion.value}
                         onClick={() => handleSuggestionSelect(suggestion)}
                       >
-                        {suggestion.value}
+                        {suggestion.value} {suggestion.secundvalue && ` - ${suggestion.secundvalue}`}
                       </li>
                     ))}
                   </ul>
@@ -177,7 +173,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
 
         <Row className="filter-row">
           <Col>
-            <div className="price-range-wrapper ">
+            <div className="price-range-wrapper">
               <MultiRangeSlider
                 customWidth={336}
                 min={0}
@@ -188,13 +184,13 @@ const SearchHomeForm = ({ handleSubmit }) => {
             </div>
           </Col>
           <Col md="auto">
-            <Button className="search-button" type="submit " >
+            <Button className="search-button" type="submit">
               BUSCAR
             </Button>
           </Col>
         </Row>
 
-        <Button className="button--vender me-3 px-5" variant= "outline-light">
+        <Button as={Link} to={"/quiero-vender"} className="button--vender me-3 px-5" variant="outline-light">
           quiero vender
         </Button>
       </Form>

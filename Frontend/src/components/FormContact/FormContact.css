@@ -1,16 +1,19 @@
 .contact-form-wrapper {
     width: 100%;
     max-width: 600px;
+    
     margin: 0 auto;
-    padding: 20px;
     background-color: #ffffff; /* Fondo blanco para el contenedor del formulario */
-    border-radius: 8px; /* Bordes redondeados para un estilo más moderno */
+    border-radius: 0; /* Bordes redondeados para un estilo más moderno */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar el formulario */
   }
   
   .contact-form {
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 80px;
   }
   
   .form-title {

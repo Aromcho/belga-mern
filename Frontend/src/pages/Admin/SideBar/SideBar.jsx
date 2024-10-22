@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -8,12 +8,52 @@ import NavBar from '../BlogAdmin/NavBar/NavBar';
 import UserManagement from '../UserManagement/UserManagement';
 import './SideBar.css';
 import { theme } from '../../../helpers/theme';
+import axios from 'axios';
+
 const SideBar = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get('/api/sessions/online', { withCredentials: true });
+        setUser(response.data.user);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('/api/sessions/logout', {}, { withCredentials: true });
+      // Redirigir al usuario a la página de inicio de sesión o a otra página
+      window.location.href = '/login';
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>; // O cualquier otro indicador de carga
+  }
+
+  if (!user) {
+    return <div>User not authenticated</div>; // Mostrar un mensaje si el usuario no está autenticado
+  }
+
+  const name = user.name;
+  const email = user.email;
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
@@ -47,9 +87,10 @@ const SideBar = () => {
     <Box className="d-flex">
       <Box className="sidebar-container" sx={{ bgcolor: '#f5f5f5', borderRight: 1, borderColor: 'divider' }}>
         <div className="user-section text-center p-4">
-          <Avatar alt="Camila Fella" src="/static/images/avatar/1.jpg" className="mx-auto" />
-          <Typography variant="h6">Camila Fella</Typography>
-          <Typography variant="body2">Administrador</Typography>
+          <Avatar alt={name} src="/static/images/avatar/1.jpg" className="mx-auto" />
+          <Typography variant="h6">{name}</Typography>
+          <Typography variant="body2">{email}</Typography>
+          <button className="w-100" onClick={handleLogout}>Logout</button>
         </div>
 
         <Tabs

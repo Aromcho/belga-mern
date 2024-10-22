@@ -10,7 +10,7 @@ import ConoceBelga from "./pages/ConoceBelga/ConoceBelga.jsx";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos.jsx";
 // import Favorites from "./pages/Favorites/Favorites.jsx";
 import QuieroVender from "./pages/QuieroVender/QuieroVender.jsx";
-// import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
+import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
 import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto de filtros
@@ -21,7 +21,8 @@ import Blog from "./pages/Blog/Blog.jsx";
 import Layout from "./components/Layout/Layout.jsx";
 import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail.jsx";
 import Print from "./components/Print/Print.jsx";
-import Login from "./components/Login/Login.jsx";
+import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
 
 function App() {
   return (
@@ -44,15 +45,16 @@ function App() {
               <Route path="/blog/:id" element={<BlogDetail />} />
               <Route path="/print" element={<Print />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               {/* Ruta catch-all para URLs no definidas */}
               <Route path="*" element={<Navigate to="/404" />} /> 
               <Route path="/conoce-belga" element={<ConoceBelga />} />
-
-              {/* Rutas comentadas */}
-              {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
-              <Route path="/favorites" element={<Favorites />} />
               <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
-              */}
+
+              {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
+              <Route path="/favorites" element={<Favorites />} /> */}
+               
+              
             </Routes>
           </Layout>
           <Footer/>

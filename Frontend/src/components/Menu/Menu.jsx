@@ -10,19 +10,36 @@ import {
   HeartIcon,
   BelgaIsoIcon,
   SearchIcon,
-  EmprendimientosIcon,
+  EmprendimientosIcon,  
+  WhatsappIcon,  // Asegúrate de que este ícono esté importado correctamente
 } from "../Icons/Icons.jsx";
 
 export const Menu = () => {
   const [sticky, setSticky] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [hideMenuInfo, setHideMenuInfo] = useState(false); // Nuevo estado para ocultar solo menu-info
   const location = useLocation();
 
   useEffect(() => {
+    let lastScrollTop = 0;
+
     const handleScroll = () => {
-      setSticky(window.pageYOffset > 0);
+      const scrollTop = window.pageYOffset;
+
+      if (scrollTop > lastScrollTop) {
+        // Si el usuario hace scroll hacia abajo
+        setHideMenuInfo(true);
+      } else {
+        // Si el usuario hace scroll hacia arriba
+        setHideMenuInfo(false);
+      }
+
+      setSticky(scrollTop > 0); // Mantener sticky el navbar principal
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Evitar valores negativos en el scroll
     };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -37,6 +54,20 @@ export const Menu = () => {
       fixed="top"
       className={`menu-container ${sticky || !isHome ? "sticky" : ""}`}
     >
+      <div className={`menu-info ${sticky || !isHome ? "hidden" : ""}`}>
+        <div className="menu-info-list">
+          <div className="menu-info-item">La imprenta</div>
+          <div className="menu-info-item">Belgrano C</div>
+          <div className="menu-info-item">Belgrano R</div>
+          <div className="menu-info-item">
+            <Link href="https://api.whatsapp.com/send?phone=5491152633393&text=Hola%20Belga!%20%F0%9F%91%8B%20Quisiera%20hacerles%20una%20consulta.">
+              <a className="info--link" target="_blank">
+                <WhatsappIcon /> +54 11 5263 3393
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
       <div className="nav-flex-container">
         <Navbar.Brand className="menu-brand-wrapper w-100" as={Link} to="/">
           {/* Cambiar el logo según la posición del scroll */}
@@ -66,17 +97,17 @@ export const Menu = () => {
             to="emprendimientos"
             className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
           >
-            <EmprendimientosIcon /> Emprendimientos
+            Emprendimientos
           </Nav.Link>
           <Nav.Link
             as={Link}
             to="blog"
             className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
           >
-            Blog
+            Noticias
           </Nav.Link>
           <Button
-            className={`button--menu me-3 ${
+            className={` button--menu me-3 ${
               sticky || !isHome ? "sticky-link" : ""
             }`}
             as={Link}

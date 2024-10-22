@@ -4,7 +4,7 @@
   }
   
   .back-wrapper {
-    display: table;
+    display: flex;
     margin-bottom: 40px;
   }
   
@@ -30,7 +30,7 @@
     transform: translateX(-5px);
   }
   
-  .title {
+  .title-t {
     width: 100%;
     color: #000;
     font-size: 20px;
@@ -46,13 +46,13 @@
     }
   }
   
-  .text-wrapper {
+  .text-t-wrapper {
     width: 100%;
     color: #000;
     margin-bottom: 80px;
   }
   
-  .text {
+  .text-t {
     width: 100%;
     font-size: 14px;
     line-height: 20px;

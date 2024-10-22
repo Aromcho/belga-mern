@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Register from "../../Register/Register.jsx";
 import './BlogDetail.css';
 
 const BlogDetail = () => {
@@ -45,6 +46,9 @@ const BlogDetail = () => {
 
       {/* Usamos dangerouslySetInnerHTML para renderizar el HTML */}
       <div dangerouslySetInnerHTML={{ __html: article.description }} />
+      <div>
+        <Register/>
+      </div>
     </div>
   );
 };

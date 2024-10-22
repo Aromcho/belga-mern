@@ -94,7 +94,7 @@ export const Footer = ({ small = true, id, backToTopFooter }) => {
           <div className="social-list">
             {socialInfo.map((i, k) => (
               <Link to={`${i?.link.toString()}`} key={k} target="_blank">
-                <span className="social--link">{i.icon}</span>
+                <span className="social--link text-white">{i.icon}</span>
               </Link>
             ))}
           </div>

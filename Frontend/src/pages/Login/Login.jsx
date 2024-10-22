@@ -17,21 +17,17 @@ const Login = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
+                credentials: 'include' // Importante: para incluir cookies con la solicitud
             });
 
             const data = await response.json();
-
-            if (response.ok) {
-                // Guardar el token en localStorage o en las cookies
-                localStorage.setItem('token', data.token);
-
-                // Redirigir a /admin
-                navigate('/admin');
-
+            console.log();
+            if (data.email.role === 'ADMIN') {	
+                // Pasa los datos del usuario a Admin usando navigate y state
+                navigate('/admin', { state: { user: data.user } });
                 console.log('Login successful:', data);
             } else {
-                // Manejar errores de autenticación
-                console.error('Login failed:', data.message);
+                navigate('/', { state: { user: data.user } });
             }
         } catch (error) {
             console.error('Error during login:', error);
@@ -40,29 +36,29 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>Iniciar Sesión</h2>
+            <form className='formulario' onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="email">Email:</label>
                     <input
                         type="email"
                         id="email"
+                        placeholder='Email:'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
                     <input
                         type="password"
                         id="password"
+                        placeholder='Contraseña:'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button className='login-button' type="submit">Ingesar</button>
             </form>
         </div>
     );

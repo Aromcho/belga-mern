@@ -1,6 +1,6 @@
 import React from "react";
-import './QuoteCard.css';
-import Rating from '@mui/material/Rating';  // Importar Rating de MUI
+import './QuoteCard.css'; // Asegúrate de tener este archivo CSS o convertirlo en styled components
+import Rating from '@mui/material/Rating'; // Importar Rating de MUI
 
 export const QuoteCard = ({
   className,
@@ -19,14 +19,14 @@ export const QuoteCard = ({
           value={rating}
           readOnly  // Hace que la calificación sea de solo lectura
           precision={0.5}  // Permite medios puntos si es necesario
+            sx={{ color: 'black' }}  // Cambia el color de las estrellas a negro
         />
       </div>
-      <div className="quote-text">{quote}</div>
-      <div className="quote-author">{author}</div>
+      <div className="quote-text"><p>{quote}</p></div>
+      <div className="quote-author"><p>{author}</p></div>
       <img src={logo} id={id} className="quote-logo" loading="lazy" alt="Quote Logo" />
     </a>
   );
 };
 
 export default QuoteCard;
-

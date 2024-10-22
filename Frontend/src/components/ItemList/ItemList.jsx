@@ -17,6 +17,7 @@ const ItemList = () => {
     if (currentPage < totalPages) {
       setOffset((currentPage) * limit);
       setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -24,12 +25,14 @@ const ItemList = () => {
     if (currentPage > 1) {
       setOffset((currentPage - 2) * limit);
       setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePageClick = (page) => {
     setOffset((page - 1) * limit);
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const getPagesToShow = () => {
@@ -84,35 +87,34 @@ const ItemList = () => {
       </div>
 
       <Row className="mt-3 mb-3 align-items-center justify-content-between">
-        <Col xs="auto" className="text-start"> {/* Usamos xs="auto" para ajustar mejor en pantallas pequeñas */}s
-    {currentPage > 1 && (
-      <FaChevronLeft
-        className="pagination-arrow"
-        onClick={handlePreviousPage}
-      />
-    )}
-  </Col>
-  <Col xs="auto" className="text-center">
-    {getPagesToShow().map((page) => (
-      <span
-        key={page}
-        className={`pagination-page ${page === currentPage ? 'active' : ''}`}
-        onClick={() => handlePageClick(page)}
-      >
-        {page}
-      </span>
-    ))}
-  </Col>
-  <Col xs="auto" className="text-end">
-    {currentPage < totalPages && (
-      <FaChevronRight
-        className="pagination-arrow"
-        onClick={handleNextPage}
-      />
-    )}
-  </Col>
-</Row>
-
+        <Col xs="auto" className="text-start">
+          {currentPage > 1 && (
+            <FaChevronLeft
+              className="pagination-arrow"
+              onClick={handlePreviousPage}
+            />
+          )}
+        </Col>
+        <Col xs="auto" className="text-center">
+          {getPagesToShow().map((page) => (
+            <span
+              key={page}
+              className={`pagination-page ${page === currentPage ? 'active' : ''}`}
+              onClick={() => handlePageClick(page)}
+            >
+              {page}
+            </span>
+          ))}
+        </Col>
+        <Col xs="auto" className="text-end">
+          {currentPage < totalPages && (
+            <FaChevronRight
+              className="pagination-arrow"
+              onClick={handleNextPage}
+            />
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 };

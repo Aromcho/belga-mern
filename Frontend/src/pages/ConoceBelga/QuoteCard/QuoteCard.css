@@ -1,40 +1,58 @@
 .quote-logo {
-    width: 100%;
-    max-width: 20px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  .quote-author {
-    font-size: 16px;
-    margin-bottom: 30px;
-    font-weight: 600;
-  }
-  
-  .quote-text {
-    width: 100%;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: justify;
-    margin-bottom: 30px;
-  }
-  
-  .quote-rating {
-    width: 100%;
-    margin-bottom: 30px;
-  }
-  
-  .quote-container {
-    width: 100%;
-    padding: 30px;
-    border: 1px solid var(--black-color);
-    color: var(--black-color);
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .quote-container:hover {
-    cursor: pointer;
-    transform: translateY(-8px);
-  }
-  
+  width: 100%;
+  max-width: 30px; /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.quote-author {
+  font-size: 16px;
+  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+  font-weight: 600;
+  text-align: center; /* Centra el texto */
+}
+
+.quote-text {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center; /* Cambia a center para centrar el texto */
+  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+}
+.quote-text p {
+  height: 100% ;
+  white-space: normal;
+  text-transform: none;
+  font-weight: normal;
+}
+.quote-rating {
+  width: 100%;
+  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+  display: flex;
+  justify-content: start; /* Centra el rating */
+}
+
+.quote-container {
+  width: 100%;
+  max-width: 300px; /* Ajusta el tamaño máximo según sea necesario */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 0;
+  padding: 20px; /* Ajusta el padding según sea necesario */
+  border: 1px solid var(--black-color);
+  color: var(--black-color);
+  transition: all 0.3s ease-in-out;
+  text-decoration: none; /* Elimina el subrayado del enlace */
+}
+
+.quote-container:hover {
+  cursor: pointer;
+  transform: translateY(-8px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra al hacer hover */
+}

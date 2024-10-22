@@ -1,5 +1,3 @@
-
-
 export const theme = {
   primary: '#F1B332',
   secondary: '#C62025',

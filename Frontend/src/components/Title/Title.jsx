@@ -16,7 +16,7 @@ const Title = ({
       <h2 className="title-text">{title}</h2>
       <div className="line" />
       <Button
-        className="button--title"
+        className="button--title text-decoration-none"
         text={textButton}
         type={buttonStyle}
         link={linkButton}

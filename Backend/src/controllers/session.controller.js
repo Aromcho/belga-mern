@@ -49,24 +49,46 @@ import UserManager from '../manager/user.manager.js';
     }
   }
 
-  const online = (req, res, next) => {
+  const online = async (req, res, next) => {
     try {
       const token = req.signedCookies.jwt;
       if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'Unauthorized', online: false });
       }
   
-      jwt.verify(token, process.env.SECRET, (error, decoded) => {
+      jwt.verify(token, process.env.SECRET, async (error, decoded) => {
         if (error) {
           return res.status(401).json({ message: 'Unauthorized' });
         }
   
-        res.json({ message: 'User is online!', user: decoded });
+        // Busca al usuario por su ID para obtener más detalles
+        const user = await UserManager.readByEmail(decoded.email);
+        if (!user) {
+          return res.status(404).json({ message: 'User not found!' });
+        }
+  
+        // Excluye campos sensibles como la contraseña
+        const { email, role, name, age, createdAt, updatedAt } = user;
+  
+        // Devuelve los detalles del usuario
+        res.json({
+          message: 'User is online!',
+          online: true,
+          user: {
+            email,
+            role,
+            name,
+            age,
+            createdAt,
+            updatedAt
+          }
+        });
       });
     } catch (error) {
       next(error);
     }
-  }
+  };
+  
 
   const logout = (req, res, next) => {
     try {

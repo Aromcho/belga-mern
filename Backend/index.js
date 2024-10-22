@@ -12,6 +12,7 @@ import pathHandler from './src/middelwares/pathHandler.mid.js';
 import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
 import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
+import { generateJSON } from './src/utils/jsonGenerator.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -58,8 +59,11 @@ cron.schedule('0 * * * *', () => {
   syncDevelopmentsWithTokko();
 });
 
-
-
+//ejecutar el jsonGenerator.js
+cron.schedule('0 * * * *', () => {
+  console.log('Running cron job to generate JSON');
+  generateJSON();
+});
 
 
 // Ruta catch-all para servir index.html

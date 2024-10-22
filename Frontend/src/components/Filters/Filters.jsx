@@ -13,8 +13,8 @@ const Filters = ({ onSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
-  const [query, setQuery] = useState(''); // Estado independiente del campo de búsqueda
-  const [sortOrder, setSortOrder] = useState('asc'); // Estado para manejar el orden del precio
+  const [query, setQuery] = useState(filters.searchQuery || ''); // Usamos el valor de 'filters' inicialmente
+  const [sortOrder, setSortOrder] = useState(filters.sortOrder || 'asc'); // Estado para manejar el orden del precio
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -55,12 +55,12 @@ const Filters = ({ onSubmit }) => {
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
-    setQuery(query); // Actualizamos el estado de búsqueda
-    debouncedSearch(query);
+    setQuery(query); // Actualizamos el estado local
+    debouncedSearch(query); // Llamamos a la búsqueda difusa
   };
 
   const handleSuggestionSelect = (suggestion) => {
-    updateFilters({ searchQuery: suggestion.value });
+    updateFilters({ searchQuery: suggestion.value }); // Actualizamos el contexto
     setAutocompleteSuggestions([]); // Limpiamos las sugerencias
     setQuery(suggestion.value); // Actualizamos el campo de búsqueda con la selección
   };
@@ -70,12 +70,11 @@ const Filters = ({ onSubmit }) => {
   };
 
   // Cambiar el orden de los precios
-const toggleSortOrder = () => {
-  const newOrder = sortOrder === 'ASC' ? 'DESC' : 'ASC';
-  setSortOrder(newOrder);
-  updateFilters({ sortOrder: newOrder }); // Actualizamos el estado en los filtros
-};
-
+  const toggleSortOrder = () => {
+    const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    setSortOrder(newOrder);
+    updateFilters({ sortOrder: newOrder }); // Actualizamos el estado en los filtros
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,7 +114,7 @@ const toggleSortOrder = () => {
                       key={suggestion.value}
                       onClick={() => handleSuggestionSelect(suggestion)}
                     >
-                      {suggestion.value}
+                     {suggestion.value} {suggestion.secundvalue && ` - ${suggestion.secundvalue}`}
                     </li>
                   ))}
                 </ul>
@@ -260,8 +259,6 @@ const toggleSortOrder = () => {
         </div>
       </Collapse>
 
-      
-
       {/* Filtros siempre visibles en escritorio */}
       <Row className="filter-row d-none d-md-flex mt-3">
         {/* Filtro por tipo de operación */}
@@ -372,20 +369,20 @@ const toggleSortOrder = () => {
           </div>
         </Col>
       </Row>
+
       {/* Ordenar por precio */}
       <Row className="filter-row d-none d-md-flex mt-3">
-      <Col>
-        <Button as={Link} to="/" variant="light" className="w-100 custom-button">
-              <FaArrowLeft className="me-2" />
-              Volver al inicio
-            </Button>
+        <Col>
+          <Button as={Link} to="/" variant="light" className="w-100 custom-button">
+            <FaArrowLeft className="me-2" />
+            Volver al inicio
+          </Button>
         </Col>
         <Col md="auto">
           <Button onClick={toggleSortOrder} variant="light" className="w-100 custom-button">
             Ordenar por precio {sortOrder === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
           </Button>
         </Col>
-        
       </Row>
     </Form>
   );

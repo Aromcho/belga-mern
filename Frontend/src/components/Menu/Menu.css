@@ -1,3 +1,51 @@
+/* Franja negra en la parte superior */
+/* Franja negra en la parte superior */
+.menu-info {
+  width: 100%;
+  height: 32px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+/* Clase para ocultar el menu-info al hacer scroll */
+.menu-info.hidden {
+  transform: translateY(-100%); /* Oculta la franja de info */
+}
+.menu-info-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.menu-info-item {
+  font-size: 12px;
+  text-transform: uppercase;
+  height: 100%;
+}
+
+.menu-info-item a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  
+  align-items: center;
+}
+
+.menu-info-item a:hover {
+  text-decoration: underline;
+}
+
+/* Menú general */
 .menu-container {
   width: 100vw;
   padding: 0;
@@ -6,19 +54,19 @@
   transition: all 0.4s cubic-bezier(0.74, 0.04, 0.24, 1.04);
   z-index: 999999999;
   position: fixed;
-  top: 0;
+  top: 32px; /* Ajustado para la franja */
   left: 0;
 }
 
 .menu-container.sticky {
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
   background-color: #fff;
+  top: 0;
 }
 
-/* Flex container para el layout */
 .nav-flex-container {
   display: flex;
-  justify-content: space-between ;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0 20px;
@@ -31,6 +79,7 @@
 .isobrand--img {
   width: 50px;
   height: 50px;
+  color: #C62025;
 }
 
 .menu-brand-wrapper {
@@ -48,9 +97,7 @@
 .menu-brand-wrapper:hover {
   background-color: #F1B332;
 }
-.isobrand--img {
-  color: #C62025;
-}
+
 .menu-nav .menu--link {
   margin-right: 20px;
   font-size: 16px;
@@ -94,14 +141,7 @@
   border-color: transparent;
 }
 
-.menu-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-/* Estilos para el botón de menú hamburguesa */
+/* Botón hamburguesa personalizado */
 .burger-button {
   width: 65px;
   height: 65px;
@@ -121,18 +161,16 @@
   position: relative;
 }
 
-/* Líneas del icono hamburguesa */
 .burger-cross-custom .line {
   width: 100%;
   height: 3px;
-  background-color: #fff; /* No cambio este color */
+  background-color: #fff;
   border-radius: 2px;
   position: absolute;
   left: 0;
   transition: all 0.3s ease-in-out;
 }
 
-/* Posicionamiento de las líneas */
 .burger-cross-custom .line:nth-child(1) {
   top: 0;
 }
@@ -145,13 +183,11 @@
   top: 22px;
 }
 
-/* Cambiar el color de las líneas cuando el fondo sea blanco (sticky) */
 .menu-container.sticky .burger-cross-custom .line,
 .menu-container.sticky .burger-button .line {
-  background-color: #333; /* No cambiaré esto tampoco */
+  background-color: #333;
 }
 
-/* Animación al hacer clic */
 .burger-cross-custom.cross .line:nth-child(1) {
   transform: rotate(45deg);
   top: 11px;
@@ -194,9 +230,6 @@
 .burger-menu-item {
   padding: 15px 20px;
 }
-.burger-menu-item .burger--menu-link {
-  max-width: 319px !important;
-}
 
 .burger-menu-item a {
   text-decoration: none;
@@ -237,9 +270,8 @@
     max-width: none;
   }
 
-  /* Líneas visibles en móvil */
   .burger-cross-custom .line {
-    background-color: #fff; /* Mantengo el color original */
-    display: block; /* Asegurar que se vea */
+    background-color: #fff;
+    display: block;
   }
 }

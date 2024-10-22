@@ -41,7 +41,6 @@ const ConoceBelga = observer(() => {
           <div className="cb-hero">
             <SocialSidebar />
           </div>
-          <Container>
             <div className="cb-menu-hero">
               <a className={classes({ active: activeSection === "historia" })} href="#historia">
                 <div className="cb-menu-hero-text">Historia</div>
@@ -59,7 +58,6 @@ const ConoceBelga = observer(() => {
                 <div className="cb-menu-hero-text">Oficinas</div>
               </a>
             </div>
-          </Container>
         </div>
 
         <Container>
@@ -94,8 +92,18 @@ const ConoceBelga = observer(() => {
                       Una <u>Historia</u> Belga
                     </div>
                     <p className="cb-historia-text">
-                      Belga comienza su historia con nuestro fundador Jorge Jooris en 1957...
+                    Belga comienza su historia con nuestro fundador Jorge Jooris en 1957. Recién llegado desde Bélgica con un puñado de costumbres y tradiciones familiares al barrio de Belgrano ubicado en la Ciudad Autónoma de Buenos Aires. Un hombre apasionado por su profesión que supo conectar a cientos de personas con los que terminarían siendo sus nuevos hogares. Una pasión que transmitió a la siguiente y actual generación.                    
                     </p>
+                    <p className="cb-historia-text">
+                    Belgrano y Palermo son las sedes dónde tenemos nuestras 3 casas, nuestros hogares, cómo nos gusta llamarles. Barrios que fueron y son testigos del esfuerzo, la dedicación y el compromiso que nos sigue haciendo crecer, y acompañando después de 65 años.                    
+                    </p>
+                    <p className="cb-historia-text">
+                    Hoy contamos con un cálido grupo humano de profesionales destacados que brindan al mercado un asesoramiento inmobiliario distinguido.                    
+                    </p>
+                    <p className="cb-historia-text">
+                    Somos el lugar donde nacen las historias.                    
+                    </p>
+                  
                   </div>
                 </div>
               </div>
@@ -108,19 +116,25 @@ const ConoceBelga = observer(() => {
               <div className="cb-valores-list">
                 <div className="cb-valores-wrapper">
                   <div className="cb-valores-list-title">Una tradición familiar.</div>
-                  <div className="cb-valores-list-text">Somos una empresa reconocida por su trato familiar...</div>
+                  <div className="cb-valores-list-text">Somos una empresa reconocida por su trato familiar. Una de nuestras prioridades es mantener un trato personalizado que nos permita entender y empatizar con cada situación, buscando como resultado que nuestros clientes se sientan acompañados en todas las etapas de cada operación.</div>
+                </div>
+                <div className="cb-valores-wrapper">
+                  <div className="cb-valores-list-title">Una puerta abierta.</div>
+                  <div className="cb-valores-list-text">Creemos fielmente que la confianza y la honestidad son los pilares fundamentales de cualquier forma de trabajo. Es por esto que, a través de todos estos años, hemos cosechado fuertes lazos con todos nuestros clientes, manteniendo absoluta transparencia en todas nuestras operaciones.</div>
+                </div>
+                <div className="cb-valores-wrapper">
+                  <div className="cb-valores-list-title">Un desarrollo constante.</div>
+                  <div className="cb-valores-list-text">El crecimiento siempre viene acompañado del aprendizaje. En un mundo donde los cambios son constantes, es imprescindible capacitarnos regularmente para estar conectados y actualizarnos con las últimas tendencias en tecnología. Es por eso que ofrecemos servicios de excelencia.</div>
                 </div>
               </div>
             </Container>
           </section>
 
           <section className="cb-quotes-section">
-            <Container>
               <div className="cb-quote-list">
-                <QuoteCard className="cb-quote" rating={4} quote={truncateWithEllipsis("Hoy 22/6 se concretó la operación...", 400)} author="Andrea Gallis" logo="/images/google_logo.png" link="#" />
-                <QuoteCard className="cb-quote" rating={5} quote={truncateWithEllipsis("Profesionalismo y calidez humana...", 400)} author="Favio Novello" logo="/images/google_logo.png" link="#" />
+                <QuoteCard className="cb-quote" rating={4} quote={"Hoy 22/6 se concretó la operación de compra-venta. Un Placer trabajar con Inmobiliaria Belga. Todo salió perfecto, a tiempo y lo mejor de todo es la gente que trabaja, que hace de la inmobiliaria un lugar de confianza y prestigio. Estoy muy agradecida a todos desde las chicas que te reciben en el local, hasta los agentes inmobiliarios especialmente Martín que fue el que acompañó el proceso. Graci..."} author="Andrea Gallis" logo="/images/google_logo.png" link="#" />
+                <QuoteCard className="cb-quote" rating={5} quote={"Profesionalismo y calidez humana. Desde el primer día que Lucas vino a tasar nuestro departamento hasta el ultimo cuando firmamos la escritura con Martin, la experiencia con todo el equipo de Belga fue excelente. Mica, Gonzalo, Alejandrina, Gabriela, siempre dispuestos a ayudar y poniendo la mejor onda, incluso en tiempos donde concretar una operación inmobiliaria no es nada sencillo. Sin dudas se..."} author="Favio Novello" logo="/images/google_logo.png" link="#" />
               </div>
-            </Container>
           </section>
 
           <section className="cb-somos-belga-section">
@@ -131,11 +145,18 @@ const ConoceBelga = observer(() => {
                   <div className="cb-left-content">
                     <span className="cb-name">Martín Gallegos</span>
                     <span className="cb-low-name cb-desktop">CEO | CUCICBA 5111 - CMCPSI 6528</span>
-                    <span className="cb-low-name cb-mobile">CEO</span>
-                    <span className="cb-low-name cb-mobile">CUCICBA 5111 - CMCPSI 6528</span>
                   </div>
                   <div className="cb-right-content">
                     <img className="cb-staff-image" src="/images/new/martin.png" loading="lazy" />
+                  </div>
+                </div>
+                <div className="cb-staff-item">
+                  <div className="cb-left-content">
+                    <span className="cb-name">Lucas Jooris</span>
+                    <span className="cb-low-name cb-desktop">CEO | CUCICBA 8347</span>
+                  </div>
+                  <div className="cb-right-content">
+                    <img className="cb-staff-image" src="/images/new/lucas.png" loading="lazy" />
                   </div>
                 </div>
               </div>

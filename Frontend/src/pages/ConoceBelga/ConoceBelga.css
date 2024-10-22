@@ -35,6 +35,7 @@
   width: 100%;
   height: 100px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   font-size: 14px;
   font-weight: 500;
@@ -42,7 +43,9 @@
   z-index: 5;
   position: relative;
 }
-
+.cb-menu-hero a {
+  text-decoration: none;
+}
 .cb-menu-hero-text {
   color: #ffffff;
   text-transform: uppercase;
@@ -182,7 +185,7 @@
 }
 
 .cb-valores-list-title {
-  font-weight: 100;
+  font-weight:lighter;
   font-size: 48px;
   margin-bottom: 20px;
 }
@@ -204,14 +207,18 @@
 .cb-quote-list {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-self: center;  
+  gap: 20px;
 }
 
 .cb-quote {
-  max-width: 450px;
-  margin: 0 auto;
+  max-width: 550px;
+  height: auto;
+  
 }
+
 
 .cb-somos-belga-section {
   width: 100%;
@@ -225,9 +232,15 @@
   display: flex;
   gap: 17px;
 }
-
+.cb-left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .cb-staff-item {
   display: flex;
+  justify-content: space-around;
   width: 50%;
   border-bottom: 1px solid #C62025;
 }

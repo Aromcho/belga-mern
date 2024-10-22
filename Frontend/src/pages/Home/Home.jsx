@@ -103,9 +103,7 @@ const Home = () => {
             buttonStyle="outline red"
           />
           <Button as={Link} to="/propertylist" className="button--mobile" text="Ver más" type="outline red" />
-          <div className="prop-list">
             <SelectionListContainer/>
-          </div>
         </div>
       </div>
       {/*inversion sectin*/}

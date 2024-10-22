@@ -247,7 +247,7 @@ const autocompleteProperties = async (req, res) => {
     }
 
     // Cargar el archivo JSON
-    const filePath = path.join(process.cwd(), 'src', 'utils', 'direcciones_y_barrios.json');
+    const filePath = path.join(process.cwd(), 'direcciones_y_barrios.json');
     const jsonData = fs.readFileSync(filePath, 'utf-8');
     const properties = JSON.parse(jsonData);
 
@@ -266,6 +266,7 @@ const autocompleteProperties = async (req, res) => {
     // Mapea los resultados a la estructura que necesitas para la respuesta
     const response = results.map(({ item }) => ({
       value: item.value,
+      secundvalue: item.secundvalue || ''  // Si no tiene secundvalue, dejamos vacío
     }));
 
     res.json(response);

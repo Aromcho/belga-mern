@@ -46,9 +46,13 @@ ul {
 }
 
 .contact-item .info--link {
+    margin-right: 10px;
     color: #fff;
     font-size: 14px;
     transition: color 0.3s ease; /* Añadir una transición suave al color */
+}
+.contact-item a {
+    justify-content: start !important;
 }
 
 li a {

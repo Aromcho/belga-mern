@@ -13,7 +13,7 @@ export const FiltersProvider = ({ children }) => {
     max_garages: undefined,
     price_from: undefined,
     price_to: undefined,
-    searchQuery: '',
+    searchQuery: '',  // Incluimos el 'searchQuery'
     barrio: '',
   });
 
@@ -46,10 +46,9 @@ export const FiltersProvider = ({ children }) => {
           minPrice: filters.price_from,
           maxPrice: filters.price_to,
           barrio: filters.barrio,
-          searchQuery: filters.searchQuery,
+          searchQuery: filters.searchQuery,  // Incluimos el 'searchQuery'
           limit,  // Incluyendo límite de resultados por página
           offset, // Offset para controlar el desplazamiento en paginación
-          order: filters.sortOrder, // Aquí enviamos el orden de los precios
         },
       });
       setProperties(response.data.objects); // Propiedades actuales para la página solicitada
@@ -60,7 +59,6 @@ export const FiltersProvider = ({ children }) => {
       setLoading(false);
     }
   }, [filters, limit, offset]);
-  
 
   // Llamada a fetchProperties cuando cambian los filtros o el offset
   useEffect(() => {

@@ -36,9 +36,7 @@ const SelectionListContainer = () => {
   }
 
   return (
-    <Container className="selection-list-container">
       <SelectionList properties={properties} />
-    </Container>
   );
 };
 
