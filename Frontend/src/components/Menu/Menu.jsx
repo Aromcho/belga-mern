@@ -99,13 +99,14 @@ export const Menu = () => {
           >
             Emprendimientos
           </Nav.Link>
-          <Nav.Link
+          {/* <Nav.Link
             as={Link}
             to="blog"
             className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
           >
             Noticias
-          </Nav.Link>
+          </Nav.Link> */}
+          
           <Button
             className={` button--menu me-3 ${
               sticky || !isHome ? "sticky-link" : ""

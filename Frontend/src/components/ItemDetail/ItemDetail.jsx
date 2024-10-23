@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';
 import Print from '../Print/Print';
+import FormContact from '../FormContact/FormContact';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
 
 // Custom arrows for the carousel
@@ -328,7 +329,6 @@ const ItemDetail = ({ property }) => {
       <Row>
         <div className="container seleccion--container mt-5 pt-5">
           <Title title="PROPIEDADES SIMILARES" linkButton="/highlighted" buttonStyle="outline red" />
-          <Button as={Link} to="/propertylist" className="button--mobile" text="Ver más" type="outline red" />
           <div className="prop-list">
             <SelectionListContainer />
           </div>
@@ -339,7 +339,10 @@ const ItemDetail = ({ property }) => {
       <div ref={printRef} className="d-none">
         <Print property={property} />
       </div>
-
+      <div className='form-detail-container'>
+      <FormContact/>
+      </div>
+      
     </Container>
   );
 };

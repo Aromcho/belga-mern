@@ -20,8 +20,9 @@ const ItemBlog = ({ id, title, date, imageUrl, subtitle }) => {
         <Card.Body className="custom-card-body">
           <div className="d-flex justify-content-between custom-body-blog h-100">
             <p className='subtitle-card-blog'>{subtitle}</p>
-            <p className="date-card text-dark">
-              <Calendar /> {date}
+            <p className="date-card text-dark gap-2 mt-1">
+              <Calendar />
+              {date}
             </p>
           </div>
         </Card.Body>

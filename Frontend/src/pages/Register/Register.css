@@ -1,0 +1,18 @@
+.form-register {
+    width: 100%;
+    gap: 10px;
+}
+.input-register {
+    margin-top: 0;
+    border-radius: 0;
+    border: 1px solid #000000;
+    border-radius: 0;
+}
+.btn-register {
+    color: #ffffff;
+    border: 1px solid #00000000;
+}
+.btn-register:hover {
+    color: #000000;
+    border: 1px solid #000000;
+}

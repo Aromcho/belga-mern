@@ -115,7 +115,7 @@ export const Footer = ({ small = true, id, backToTopFooter }) => {
         <div className="footer-right">
           <div className="legal-text">{legalInfo.text}</div>
           <div className="legal-link">
-            <Link to={legalInfo.link}>
+            <Link className="text-white" to={legalInfo.link}>
               <span>{legalInfo.linkText}</span>
             </Link>
           </div>

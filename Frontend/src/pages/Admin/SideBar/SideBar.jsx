@@ -36,7 +36,7 @@ const SideBar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/sessions/logout', {}, { withCredentials: true });
+      await axios.delete('/api/sessions/logout', {}, { withCredentials: true });
       // Redirigir al usuario a la página de inicio de sesión o a otra página
       window.location.href = '/login';
     } catch (error) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Register from "../../Register/Register.jsx";
+import { Skeleton, Box, Typography } from '@mui/material';
 import './BlogDetail.css';
 
 const BlogDetail = () => {
@@ -25,12 +26,34 @@ const BlogDetail = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className="blog-detail-container mt-5 pt-5">
+        <Box className="blog-detail-images">
+          <Skeleton variant="rectangular" width="100%" height={300} />
+        </Box>
+        <Typography variant="h2">
+          <Skeleton />
+        </Typography>
+        <Typography variant="h6">
+          <Skeleton />
+        </Typography>
+        <Typography variant="body2">
+          <Skeleton width="60%" />
+        </Typography>
+        <Typography variant="body2">
+          <Skeleton width="40%" />
+        </Typography>
+        <Box mt={2}>
+          <Skeleton variant="rectangular" width="100%" height={200} />
+        </Box>
+      </div>
+    );
   }
 
   if (!article) {
     return <div>Artículo no encontrado</div>;
   }
+
 
   return (
     <div className="blog-detail-container mt-5 pt-5">

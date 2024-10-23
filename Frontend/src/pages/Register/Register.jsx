@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { IoNewspaper } from "react-icons/io5";
+import './Register.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -28,50 +30,26 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Full Name:</label>
-                    <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
+        <div className='mt-4 pt'>
+            <div className='d-flex gap-2 justify-content-center pb-3'>
+
+            <IoNewspaper className='icon-register'/>
+            <h2>Suscribite para recibir todas las novedades</h2>
+            
+            </div>
+            
+            <form className='form-register d-flex mt-3' onSubmit={handleSubmit}>
                     <input
                         type="email"
                         name="email"
+                        placeholder='Igrese su email'
+                        className='input-register'
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Phone Number:</label>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Register</button>
+                
+                <button className='btn-register' type="submit">Register</button>
             </form>
         </div>
     );

@@ -15,6 +15,29 @@ const UserManagement = () => {
     email: '',
     role: ''
   });
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'user',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
+  };
+
+  const handleCreateUser = async () => {
+    try {
+      const response = await axios.post('/api/user', newUser);
+      console.log('Usuario creado:', response.data);
+      setShowCreateModal(false);
+      fetchUsers(); // Actualiza la lista de usuarios después de crear uno nuevo
+    } catch (error) {
+      console.error('Error al crear el usuario:', error);
+    }
+  };
 
   // Función para cargar los usuarios desde la API
   const fetchUsers = async () => {
@@ -71,6 +94,71 @@ const UserManagement = () => {
 
   return (
     <>
+      <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+        Crear Usuario
+      </Button>
+
+      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Crear Usuario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formName">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={newUser.name}
+                onChange={handleInputChange}
+                placeholder="Ingrese el nombre"
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={newUser.email}
+                onChange={handleInputChange}
+                placeholder="Ingrese el email"
+              />
+            </Form.Group>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={newUser.password}
+                onChange={handleInputChange}
+                placeholder="Ingrese la contraseña"
+              />
+            </Form.Group>
+            <Form.Group controlId="formRole">
+              <Form.Label>Rol</Form.Label>
+              <Form.Control
+                as="select"
+                name="role"
+                value={newUser.role}
+                onChange={handleInputChange}
+              >
+                <option value="user">Usuario</option>
+                <option value="admin">Admin</option>
+                <option value="moderator">Moderador</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowCreateModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={handleCreateUser}>
+            Crear Usuario
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Table striped bordered hover responsive>
         <thead>
           <tr>

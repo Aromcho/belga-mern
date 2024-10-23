@@ -160,6 +160,9 @@
   padding: 20px;
   border-radius: 10px;
 }
+.form-detail-container {          
+  margin-top: 20px; 
+}
 @media (max-width: 768px) {
   .nombre-precio-container, .barrio-compartir-container {
     flex-direction: column;

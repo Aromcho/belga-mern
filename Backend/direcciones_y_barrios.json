@@ -893,7 +893,7 @@
   },
   {
     "value": "Roosevelt al 2100 - Piso 14",
-    "secundvalue": "Belgrano C"
+    "secundvalue": "Belgrano"
   },
   {
     "value": "11 de septiembre al 1100 - Piso alto",
@@ -1226,5 +1226,9 @@
   {
     "value": "Freire al 1600 - Piso 2",
     "secundvalue": "Belgrano R"
+  },
+  {
+    "value": "Juramento al 1700 - Piso 9",
+    "secundvalue": "Belgrano Barrancas"
   }
 ]

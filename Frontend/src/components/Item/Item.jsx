@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { Card } from "react-bootstrap";
 import { FaBed, FaBath, FaCarAlt, FaHeart } from "react-icons/fa";
@@ -58,6 +59,7 @@ const PrevArrow = (props) => {
 };
 
 const Item = ({ property }) => {
+  const [isMobile, setIsMobile] = useState(false);
   const mainImages = property.photos?.slice(0, 5) || [{ image: 'default-image.jpg' }];
   const price = property.operations[0]?.prices[0]?.price ? property.operations[0].prices[0].price.toLocaleString('es-ES') : 'Precio no disponible';
   const operationType = property.operations[0]?.operation_type;
@@ -68,6 +70,7 @@ const Item = ({ property }) => {
   const address = property.address || 'Dirección no disponible'; 
   const barrio = property.location.name || 'Barrio no disponible'; 
   const propertyId = property.id;
+
   const settings = {
     dots: false, 
     infinite: true,
@@ -79,10 +82,21 @@ const Item = ({ property }) => {
     draggable: true, 
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Define el tamaño máximo para considerar como móvil
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Llama a la función una vez para establecer el estado inicial
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Card className="card-item shadow-lg  overflow-hidden text-black">
       {/* Pasar los datos de la propiedad con el estado */}
-      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full">
+      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full" >{/*target={isMobile ? '_self' : '_blank'}*/}
       <div className="head-prop d-flex justify-content-between m-2 px-4">
             <span>{operationType.toUpperCase()}</span>
             <span className="text-muted">USD {price}</span>
