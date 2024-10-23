@@ -5,7 +5,7 @@ import Menu from "./components/Menu/Menu.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer.jsx";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer.jsx";
-// import BusquedasGuardadas from "./pages/BusquedasGuardadas/BusquedasGuardadas.jsx";
+import BusquedasGuardadas from "./pages/BusquedasGuardadas/BusquedasGuardadas.jsx";
 import ConoceBelga from "./pages/ConoceBelga/ConoceBelga.jsx";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos.jsx";
 // import Favorites from "./pages/Favorites/Favorites.jsx";
@@ -34,7 +34,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/propertylist" element={<ItemListContainer />} />
-              <Route path="/propiedad/:propertyId" element={<ItemDetailContainer/>}/>
+              <Route path="/propiedad/:id" element={<ItemDetailContainer/>}/>
               <Route path="/404" element={<Error404 />} />
               <Route path="/500" element={<Error500 />} /> 
               <Route path="/quiero-vender" element={<QuieroVender />} />
@@ -51,8 +51,8 @@ function App() {
               <Route path="/conoce-belga" element={<ConoceBelga />} />
               <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
 
-              {/* <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
-              <Route path="/favorites" element={<Favorites />} /> */}
+               <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
+             {/*<Route path="/favorites" element={<Favorites />} />  */}
                
               
             </Routes>

@@ -51,6 +51,13 @@
 .property-detail h2 {
   font-size: 1.5rem;
 }
+.video-wrapper-detail {
+  position: relative;
+  left: -80px;
+  width: 97vw;
+  height: 600px; /* Ajusta la altura del contenedor */
+  overflow: hidden; /* Oculta las partes que sobresalgan */
+}
 .image-wrapper-detail {
   position: relative;
   left: -80px;
@@ -89,6 +96,10 @@
   margin: 0;
 }
 
+.info-item svg {
+  width: 50px;
+  height: 50px;
+}
 
 
 @media (max-width: 768px) {

@@ -52,7 +52,7 @@
                       <img key={index} src={item.src} alt={`Small property image ${index + 1}`} style={{ width: '100%', height: '30%' }} />
                     ))}
                     <QRCode size={80} value={`https://www.belga.com.ar/propiedad/${property.id.toString()}`} style={{ marginBottom: "30px" }} />
-                    <span className="marca-agua">BLEGA INMOBILIARIA S.A.</span>
+                    <span className="marca-agua">BELGA INMOBILIARIA S.A.</span>
                   </div>
                 </div>
                 <div className="center-header">

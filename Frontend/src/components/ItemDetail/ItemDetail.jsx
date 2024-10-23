@@ -3,12 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { FaBed, FaBath, FaCarAlt, FaHome, FaToilet, FaCompass, FaRulerCombined, FaBuilding, FaArrowLeft, FaHeart, FaWhatsapp, FaEnvelope, FaPrint } from 'react-icons/fa';
+import { FaBed, FaBath, FaCarAlt, FaToilet, FaCompass, FaRulerCombined, FaBuilding, FaArrowLeft, FaWhatsapp, FaEnvelope, FaPrint } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import Title from '../Title/Title';
 import SelectionListContainer from '../SelectionListContainer/SelectionListContainer';
-import Button from '../Button/Button';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';
@@ -16,7 +15,6 @@ import Print from '../Print/Print';
 import FormContact from '../FormContact/FormContact';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
 
-// Custom arrows for the carousel
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -71,6 +69,7 @@ const ItemDetail = ({ property }) => {
   const { suite_amount, location, photos, type, rich_description } = property;
 
   console.log('Propiedad:', property);  
+  const videos = Array.isArray(property.videos) ? property.videos : [];
   const idTokko = property.id;
   const total_surface = property.total_surface;
   const roofed_surface = property.roofed_surface;
@@ -81,9 +80,9 @@ const ItemDetail = ({ property }) => {
   const parking_lot_amount = property.parking_lot_amount;
   const age = property.age;
   const toilet_amount = property.toilet_amount;
-  const barrio = property.location.name;
+  const barrio = property.location ? property.location.name : '';
   const tags = property.tags;
-  const property_type = property.type.name;
+  const property_type = property.type ? property.type.name : '';
   const operations = property.operations && property.operations[0] ? property.operations : [];
   
   const navigate = useNavigate();
@@ -143,7 +142,6 @@ const ItemDetail = ({ property }) => {
       },
     ],
   };
-  
 
   return (
     <Container className="my-5 text-dark property-detail">
@@ -175,17 +173,17 @@ const ItemDetail = ({ property }) => {
           <div className="compartir-container">
             <span className="me-3">Enviar por:</span>
             <div>
-            <FaWhatsapp
+              <FaWhatsapp
                 className="mx-2"
                 style={{ cursor: 'pointer' }}
                 onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
-              />      
+              />
               <MailIcon
                 className="mx-2"
                 style={{ cursor: 'pointer' }}
                 onClick={shareByEmail} // Manejador para compartir por correo
               />
-               <PrintIcon
+              <PrintIcon
                 className="mx-2"
                 style={{ cursor: 'pointer' }}
                 onClick={handlePrint} // Manejador para imprimir
@@ -199,6 +197,17 @@ const ItemDetail = ({ property }) => {
       <Row className="align-items-center">
         <Col>
           <Slider {...sliderSettings} className="image-wrapper-detail">
+            {videos.map((video, index) => (
+              <div key={index} className="video-wrapper-detail">
+                <iframe
+                  src={video.player_url}
+                  title={`Video ${index}`}
+                  className="img-fluid rounded-3 mb-2 main-image"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  allowFullScreen
+                />
+              </div>
+            ))}
             {photos?.map((image, index) => (
               <div key={index} className="image-wrapper-detail">
                 <img
@@ -215,51 +224,55 @@ const ItemDetail = ({ property }) => {
 
       {/* Detalles de la propiedad */}
       <Row className="mt-3">
-      <Col md={6}>
-          <div className="property-features bg-white p-4 rounded-3">
-            <div className="property-info row">
-              {age > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g transform="translate(237 23)"><rect width="24" height="24" transform="translate(-237 -23)" fill="none"/><path d="M15.795,7.963l-2.467-2.65V1.33h-2.39V2.923L8.144.157a.315.315,0,0,0-.443,0L.066,7.991a.315.315,0,0,0,.227.553H1.687v5.372H6.76V9.44H9.15v4.476h5.073V8.544h1.339a.315.315,0,0,0,.232-.581Zm-1.6-.077h-.642V13.2H9.726V8.771H6.185V13.2H2.351V7.886h-1.3L7.917.832l2.562,2.584,1.012,1V1.988h1.184V5.662l2.108,2.213Z" transform="translate(-232.957 -18.066)"/></g></svg>
-                  <p className="text-muted">Antigüedad</p>
-                  <span className="text-muted">{age} años</span>
-                </Col>
-              )}
-              {total_surface > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <span className="text-muted">{total_surface}</span>
-                  <p className="text-muted">M2 Totales</p>
-                </Col>
-              )}
-              {bedrooms > 0 && (
-                <Col xs={4} className="info-item text-center">
-<img className="card-icons" src='/images/icons/prop_cuarto.svg' />                  <p className="text-muted">Dormitorios</p>
-                  <span className="text-muted">{bedrooms}</span>
-                </Col>
-              )}
-              {bathroom_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <FaBath className="icon" />
-                  <p className="text-muted">Baños</p>
-                  <span className="text-muted">{bathroom_amount}</span>
-                </Col>
-              )}
-              {parking_lot_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><clipPath id="a"><rect width="20.644" height="8.135" fill="#fff"/></clipPath></defs><g transform="translate(-152 91)"><rect width="24" height="24" transform="translate(152 -91)" fill="none"/><g transform="translate(154 -83)" clip-path="url(#a)"><path d="M2.623,6.881H.337a.315.315,0,0,1-.31-.315V5a.309.309,0,0,1,.088-.221l1.1-1.091-1.15-2.3A.31.31,0,0,1,.337.939H2.53a.31.31,0,0,1,.261.138l.492.727L7.214.221A3.121,3.121,0,0,1,8.374,0h2.517a2.2,2.2,0,0,1,1.425.526l1.573,1.352h2.949a3.9,3.9,0,0,1,3.814,3.057.315.315,0,0,1-.034.231l-.939,1.563a.319.319,0,0,1-.27.152H18.033a1.878,1.878,0,0,1-3.539,0H6.137a1.878,1.878,0,0,1-3.539,0Zm-.108-.629a1.878,1.878,0,0,1,3.75,0H14.4a1.878,1.878,0,1,1,3.755,0h1.071l.782-1.3A3.279,3.279,0,0,0,16.833,2.5H13.776a.354.354,0,0,1-.207-.074L11.908,1A1.553,1.553,0,0,0,10.891.619H8.374A2.5,2.5,0,0,0,7.445.8L3.257,2.472a.315.315,0,0,1-.378-.113l-.531-.8H.829l1.027,2.05a.314.314,0,0,1-.059.359L.637,5.127V6.247ZM4.393,7.506a1.253,1.253,0,1,0-.886-.367A1.253,1.253,0,0,0,4.393,7.506Zm11.885,0a1.253,1.253,0,1,0-.886-.367A1.254,1.254,0,0,0,16.278,7.506Z" transform="translate(-0.014 0)"/></g></g></svg>                  <p className="text-muted">Cochera</p>
-                  <span className="text-muted">{parking_lot_amount}</span>
-                </Col>
-              )}
-              {toilet_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <FaToilet className="icon" />
-                  <p className="text-muted">Toilettes</p>
-                  <span className="text-muted">{toilet_amount}</span>
-                </Col>
-              )}
-            </div>
-          </div>
-        </Col>
+  <Col md={6}>
+    <div className="property-features bg-white p-4 rounded-3">
+      <div className="property-info row">
+        {age > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_antiguedad.svg' alt="Antigüedad" />
+            <p className="text-muted">Antigüedad</p>
+            <span className="text-muted">{age === 0 ? 'A estrenar' : `${age} años`}</span>
+          </Col>
+        )}
+        {total_surface > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
+            <p className="text-muted">M2 Totales</p>
+            <span className="text-muted">{total_surface}</span>
+          </Col>
+        )}
+        {bedrooms > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
+            <p className="text-muted">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
+            <span className="text-muted">{bedrooms}</span>
+          </Col>
+        )}
+        {bathroom_amount > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
+            <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
+            <span className="text-muted">{bathroom_amount}</span>
+          </Col>
+        )}
+        {parking_lot_amount > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_cochera.svg' alt="Cochera" />
+            <p className="text-muted">{parking_lot_amount > 1 ? 'Cocheras' : 'Cochera'}</p>
+            <span className="text-muted">{parking_lot_amount}</span>
+          </Col>
+        )}
+        {toilet_amount > 0 && (
+          <Col xs={4} className="info-item text-center">
+            <img className="icon-image" src='/images/icons/prop_toilette.svg' alt="Toilettes" />
+            <p className="text-muted">Toilettes</p>
+            <span className="text-muted">{toilet_amount}</span>
+          </Col>
+        )}
+      </div>
+    </div>
+  </Col>
+
 
         <Col md={6}>
           <Row className="property-info p-4">
@@ -312,13 +325,13 @@ const ItemDetail = ({ property }) => {
         </Col>
 
         <Col>
-          <div className="property-description bg-white p-4 rounded-3 ">
+          <div className="property-description bg-white p-4 rounded-3">
             <h2>Descripción</h2>
             <p dangerouslySetInnerHTML={{ __html: rich_description }}></p>
           </div>
         </Col>
       </Row>
-      
+
       {/* Ubicación */}
       <Row className="mt-3">
         <h2>Ubicación</h2>
@@ -340,9 +353,8 @@ const ItemDetail = ({ property }) => {
         <Print property={property} />
       </div>
       <div className='form-detail-container'>
-      <FormContact/>
+        <FormContact />
       </div>
-      
     </Container>
   );
 };

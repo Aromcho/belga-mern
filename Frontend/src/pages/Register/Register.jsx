@@ -31,9 +31,8 @@ const Register = () => {
 
     return (
         <div className='mt-4 pt'>
-            <div className='d-flex gap-2 justify-content-center pb-3'>
+            <div className=' title-cont d-flex gap-2 justify-content-center pb-3'>
 
-            <IoNewspaper className='icon-register'/>
             <h2>Suscribite para recibir todas las novedades</h2>
             
             </div>

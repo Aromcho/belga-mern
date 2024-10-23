@@ -1,50 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import dynamic from "react-dynamic-import";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../store/UserStore.jsx";
-import { PATHS } from "../config";
-
-import { Layout, Container } from "../components/layout";
-import { ArrowBackIcon } from "../components/icons";
-
-const BusquedaCard = dynamic(() => import("../components/busquedacard").then((mod) => mod.BusquedaCard));
-const Status = dynamic(() => import("../components/status").then((mod) => mod.Status));
-const ContactForm = dynamic(() => import("../components/forms/contactform").then((mod) => mod.ContactForm));
-
-import {
-  BackWrapper,
-  BusquedasContainer,
-  FormWrapper,
-  Title,
-  BusquedasList,
-  Subtitle,
-} from "../components/pages/busquedasGuardadas.styles";
+//import { useStore } from "../../store/UserStore.jsx";
+import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
+//import BusquedaCard from "../components/BusquedaCard/BusquedaCard";
+//import Status from "../components/Status/Status";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"; // Icono de flecha hacia atrás
+import { Container } from "react-bootstrap";
+import { PATHS } from "../../../config/index.js";
+import './BusquedasGuardadas.css'; // Asegúrate de que el archivo CSS está bien importado
 
 const BusquedasGuardadas = observer(() => {
-  const {
-    rootStore: { userStore },
-  } = useStore();
-
-  const [saveSearch, setSaveSearch] = useState<number>(0);
-
-  useEffect(() => {
-    setSaveSearch(userStore?.searchs?.length);
-  }, [userStore, saveSearch]);
-
+  
+  const { saveSearch } = [1];
   return (
-    <Layout>
-      <BusquedasContainer>
+    <>
+      <div className="busquedas-container">
         <Container>
-          <BackWrapper>
-            <Link to={PATHS.ROOT}>
+          <div className="back-wrapper">
+            <Link to={PATHS.ROOT} className="back--link">
               <ArrowBackIcon />
               Volver al inicio
             </Link>
-          </BackWrapper>
+          </div>
         </Container>
+
         <Container>
-          {saveSearch === 0 && (
+          {saveSearch === 0 ? (
             <Status
               img="/images/empty_img_plus.gif"
               text="Tené a mano tus búsquedas."
@@ -52,38 +34,28 @@ const BusquedasGuardadas = observer(() => {
               buttonStyle="secondary shine"
               linkButton={PATHS.VENTA}
             />
-          )}
-
-          {saveSearch > 0 && (
+          ) : (
             <>
               <Container>
-                <Title>TUS BÚSQUEDAS GUARDADAS</Title>
+                <h2 className="title-busquedas">TUS BÚSQUEDAS GUARDADAS</h2>
               </Container>
 
-              <BusquedasList>
-                {userStore.searchs.slice().reverse()?.map((item, key) => (
-                  <BusquedaCard
-                    key={key}
-                    search={item}
-                    onRemove={() => {
-                      userStore.removeSearch(item),
-                        setSaveSearch(saveSearch > 0 ? saveSearch - 1 : 0);
-                    }}
-                  />
-                ))}
-              </BusquedasList>
+              <div className="busquedas-list">
+                
+              </div>
 
               <Container>
-                <Subtitle>Encontrá lo que estás buscando.</Subtitle>
+                <h3 className="subtitle-busquedas">Encontrá lo que estás buscando.</h3>
               </Container>
-              <FormWrapper>
+
+              <div className="form-wrapper">
                 <ContactForm full />
-              </FormWrapper>
+              </div>
             </>
           )}
         </Container>
-      </BusquedasContainer>
-    </Layout>
+      </div>
+    </>
   );
 });
 

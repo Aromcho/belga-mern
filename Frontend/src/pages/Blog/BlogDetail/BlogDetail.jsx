@@ -57,16 +57,16 @@ const BlogDetail = () => {
 
   return (
     <div className="blog-detail-container mt-5 pt-5">
+      
+      <h1>{article.title}</h1>
+      <h6 className="subtitle">{article.subtitle}</h6>
+      <p className="date">Fecha: {new Date(article.createdAt).toLocaleDateString()}</p>
+      <p className="author">Publicado por Belga Inmobiliaria</p>
       <div className="blog-detail-images">
         {article.photos.map((photo, index) => (
           <img key={index} src={photo} alt={`Imagen ${index + 1}`} className="blog-detail-img" />
         ))}
       </div>
-      <h1>{article.title}</h1>
-      <h6 className="subtitle">{article.subtitle}</h6>
-      <p className="date">Fecha: {new Date(article.createdAt).toLocaleDateString()}</p>
-      <p className="author">Publicado por Belga Inmobiliaria</p>
-
       {/* Usamos dangerouslySetInnerHTML para renderizar el HTML */}
       <div dangerouslySetInnerHTML={{ __html: article.description }} />
       <div>

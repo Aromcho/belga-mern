@@ -62,7 +62,7 @@ const FooterInfo = () => {
               <ul className="left-location">
                 {data.map(item => (
                   <li
-                    className="location-item"
+                    className="location-item mb-3"
                     key={item.id}
                     onMouseEnter={() => setHigh(item.id)}
                     onMouseLeave={() => setHigh(0)}

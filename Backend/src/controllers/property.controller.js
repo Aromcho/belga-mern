@@ -120,9 +120,12 @@ const getProperties = async (req, res) => {
 };
 
 
-const getPropertyById = async (req, res) =>    {
+const getPropertyById = async (req, res) => {
   try {
-    const property = await PropertyManager.readOne(req.params.id).lean(); // Usamos lean()
+    const { id } = req.params;
+
+    // Asumiendo que "id" es un campo en el documento que no es el ObjectId de MongoDB
+    const property = await PropertyManager.readByCustomId(id); // Usamos el método que busca por 'id'
 
     if (!property) {
       return res.status(404).json({ message: 'Propiedad no encontrada' });
@@ -130,9 +133,11 @@ const getPropertyById = async (req, res) =>    {
 
     res.json(property);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener la propiedad', error });
+    console.error('Error al obtener la propiedad:', error);
+    res.status(500).json({ message: 'Error al obtener la propiedad' });
   }
 };
+
 
 const getRelatedProperties = async (req, res) => {
   try {

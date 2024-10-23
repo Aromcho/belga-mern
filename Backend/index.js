@@ -60,10 +60,10 @@ cron.schedule('0 * * * *', () => {
 });
 
 //ejecutar el jsonGenerator.js
-cron.schedule('0 * * * *', () => {
-  console.log('Running cron job to generate JSON');
-  generateJSON();
-});
+//cron.schedule('0 * * * *', () => {
+//  console.log('Running cron job to generate JSON');
+//  generateJSON();
+//});
 
 
 // Ruta catch-all para servir index.html
