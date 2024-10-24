@@ -1,7 +1,7 @@
 .contact-form-wrapper {
     width: 100%;
-    max-width: 600px;
-    
+    font-family:'Montserrat', sans-serif;
+    max-width: 500px;
     margin: 0 auto;
     background-color: #ffffff; /* Fondo blanco para el contenedor del formulario */
     border-radius: 0; /* Bordes redondeados para un estilo más moderno */
@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px;
+    padding: 50px;
   }
   
   .form-title {
@@ -39,17 +39,25 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  .btn-form-footer-cont {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
   
-  button {
-    padding: 10px 15px;
-    background-color: #ff0000;
+  .btn-form-footer {
+    width: 65%;
+    padding: 8px 15px;
+    font-size: 14PX;
+    background-color: #ca1414;
     color: white;
     border: none;
     border-radius: 0;
     cursor: pointer;
   }
   
-  button:hover {
+  .btn-form-footer:hover {
     background-color: #ca1414;
   }
+
   

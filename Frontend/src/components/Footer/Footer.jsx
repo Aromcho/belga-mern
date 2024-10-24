@@ -112,11 +112,11 @@ export const Footer = ({ small = true, id, backToTopFooter }) => {
         </div>
 
         {/* Sección de términos y condiciones */}
-        <div className="footer-right">
+        <div className="footer-right ">
           <div className="legal-text">{legalInfo.text}</div>
           <div className="legal-link">
             <Link className="text-white" to={legalInfo.link}>
-              <span>{legalInfo.linkText}</span>
+              Términos y Condiciones
             </Link>
           </div>
           <div className="mp">{legalInfo.mp}</div>

@@ -8,10 +8,13 @@
 
 .quote-author {
   font-size: 16px;
-  margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+  margin-bottom: 10px;
   font-weight: 600;
-  text-align: center; /* Centra el texto */
+  display: flex;
+  justify-content: flex-start; /* Cambia el texto a la izquierda */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
+
 
 .quote-text {
   width: 100%;
@@ -23,6 +26,7 @@
 }
 .quote-text p {
   height: 100% ;
+  text-align: justify;
   white-space: normal;
   text-transform: none;
   font-weight: normal;

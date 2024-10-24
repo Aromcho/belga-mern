@@ -16,14 +16,14 @@ const FooterInfo = () => {
         },
         {
           id: 2,
-          name: "BELGRANO C",
+          name: "Sucursal BELGRANO C",
           direction: "Juramento 2102",
           direction_b: "1426 CABA",
           loc: { lat: -34.56051641836724, lon: -58.45384234503877 },
         },
         {
           id: 3,
-          name: "BELGRANO R",
+          name: "Sucursal BELGRANO R",
           direction: "Superí 1485",
           direction_b: "(Esquina Av. de los Incas)",
           loc: { lat: -34.5735786974359, lon: -58.46109912564103 },
@@ -37,24 +37,24 @@ const FooterInfo = () => {
               <ul className="left-contact">
                 <li className="contact-item">
                   <Link to="tel:+541152633393">
-                    <span className="info--link">
+                    <p className="info--link">
                       <TelIcon /> +54 11 5263 3393
-                    </span>
+                    </p>
                   </Link>
                 </li>
                 <li className="contact-item">
                   <Link to="https://api.whatsapp.com/send?phone=5491152633393&text=Hola%20Belga!%20%F0%9F%91%8B%20Quisiera%20hacerles%20una%20consulta.">
-                    <span className="info--link" target="_blank">
+                    <p className="info--link" target="_blank">
                       <WhatsappIcon /> +54 11 5263 3393
-                    </span>
+                    </p>
                   </Link>
                 </li>
                 <li className="contact-item">
                   <Link to="mailto:info@belga.com.ar">
-                    <span className="info--link mail">
+                    <p className="info--link mail">
                       <MailIcon />
                       info@belga.com.ar
-                    </span>
+                    </p>
                   </Link>
                 </li>
               </ul>

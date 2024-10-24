@@ -6,7 +6,7 @@ import './ItemListContainer.css';
 
 const ItemListContainer = () => {
   const { properties } = useContext(FiltersContext);
-
+  console.log(properties);
   // Restaurar la posición del scroll cuando el componente se monta
   useEffect(() => {
     const scrollPosition = sessionStorage.getItem('scrollPosition');

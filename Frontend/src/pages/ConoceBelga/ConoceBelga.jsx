@@ -200,19 +200,22 @@ const ConoceBelga = observer(() => {
               />
 
               <div className="cb-swiper-container-gallery">
-                <Swiper
-                  className="cb-swiper-services-gallery"
+              <Swiper
+                  className="cb-servicios-gallery"
                   modules={[]}
-                  loop={true}
-                  centeredSlides={false}
-                  allowTouchMove={true}
-                  loopAdditionalSlides={4}
-                  grabCursor={true}
-                  draggable={true}
-                  spaceBetween={20}
+                  loop={true} // Mantener el loop activo
+                  centeredSlides={false} // Deshabilitar la centralización de las diapositivas
+                  allowTouchMove={true} // Permitir desplazamiento táctil
+                  grabCursor={true} // Mostrar el cursor de "grabbing" al arrastrar
+                  spaceBetween={20} // Espacio entre diapositivas
+                  slidesPerView={2.5} // Muestra 2.5 diapositivas al mismo tiempo
                   breakpoints={{
-                    740: { slidesPerView: 2, autoplay: { delay: 4000 }, centeredSlides: true },
-                    992: { slidesPerView: 2.5 },
+                    740: {
+                      slidesPerView: 2, // Mostrar 2 diapositivas en pantallas más pequeñas
+                    },
+                    992: {
+                      slidesPerView: 3, // Mostrar 3 diapositivas en pantallas medianas
+                    },
                   }}
                 >
                   <SwiperSlide>
@@ -222,7 +225,32 @@ const ConoceBelga = observer(() => {
                         <iframe src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
                       </div>
                     </div>
-                  </SwiperSlide>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                    <div className="cb-service-wrapper">
+                      <div className="cb-service-title">fotos</div>
+                      <div className="cb-service-media">
+                        <img className="w-75" src="/images/servicios_fotos.jpg" />
+                      </div>
+                    </div>
+                     </SwiperSlide>
+                    <SwiperSlide>
+                    <div className="cb-service-wrapper">
+                      <div className="cb-service-title">Tour Virtual</div>
+                      <div className="cb-service-media">
+                      <iframe src="https://matterport.com/discover/space/BB1DiUzwnhk" />
+                      </div>
+                    </div> </SwiperSlide>
+                    <SwiperSlide><div className="cb-service-wrapper">
+                      <div className="cb-service-title">Planos</div>
+                      <div className="cb-service-media">
+                        <img className="w-50" src="/images/servicios_planos.jpg" />
+                      </div>
+                    </div> </SwiperSlide>
+
+                    
+                    
+                    
                   <SwiperSlide onClick={() => { setModalContent({ open: true }); setCurrentIndex(0); }}>
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Fotos</div>
@@ -242,9 +270,22 @@ const ConoceBelga = observer(() => {
                     <img className="cb-portal-img" src="/images/portales_zonaprop.png" />
                     <div className="cb-portal-name">Zona Prop</div>
                   </div>
+                  <div className="cb-portal-item">
+                    <img className="cb-portal-img" src="/images/portales_meli.png" />
+                    <div className="cb-portal-name">Mercado Libre</div>
+                  </div>
+                  <div className="cb-portal-item">
+                    <img className="cb-portal-img" src="/images/portales_argenprop.png" />
+                    <div className="cb-portal-name">Argenprop</div>
+                  </div>
+                  <div className="cb-portal-item">
+                    <img className="cb-portal-img" src="/images/portales_properati.png" />
+                    <div className="cb-portal-name">Properati</div>
+                  </div>
                 </div>
                 <div className="cb-portales-footer">PUBLICACIÓN EN PORTALES</div>
               </div>
+              
             </Container>
           </section>
 
@@ -259,7 +300,7 @@ const ConoceBelga = observer(() => {
                 <div className="cb-office-text-wrapper">
                   <div className="cb-office-text-name">La Imprenta</div>
                   <div className="cb-office-text-loc">Gorostiaga 1601</div>
-                  <div className="cb-office-text">Nuestra oficina sede, nuestra casa central...</div>
+                  <div className="cb-office-text">Nuestra oficina sede, nuestra casa central. La más jóven de las 3 oficinas se encuentra ubicada en el corazón de La Imprenta, en Palermo. Un gran equipo te espera, ¡Vení a conocerla!</div>
                 </div>
               </div>
             </div>

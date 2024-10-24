@@ -17,7 +17,7 @@ const MultiRangeSlider = ({ min, max, step, onChange }) => {
   return (
     <Box className="multi-range-slider">
       <Typography className="price-text" gutterBottom>
-        <FaDollarSign className="price-icon" /> Precio
+         Precio
       </Typography>
       <div><Slider
         value={value}
@@ -41,19 +41,23 @@ const MultiRangeSlider = ({ min, max, step, onChange }) => {
         className="slider-custom"
       />
       <div className="price-input-wrapper">
+        <div className='input--price-conatiner '>
         <input
-          className="input--price w-25"
+          className="input--price w-75"
           type="text"
-          value={formatNumber(value[0])} // Formatear con puntos
+          value={"USD " + formatNumber(value[0])} // Formatear con puntos
           readOnly
-        />
+        /></div>
+        
         <div className="input-divider" />
+        <div className='input--price-conatiner '> 
         <input
-          className="input--price w-25"
+          className="input--price w-75"
           type="text"
-          value={formatNumber(value[1])} // Formatear con puntos
+          value={"USD + " + formatNumber(value[1])} // Formatear con puntos
           readOnly
-        />
+        /></div>
+       
       </div></div>
     </Box>
   );

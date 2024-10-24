@@ -1,5 +1,6 @@
 .pagination-arrow {
-  font-size: 2rem;      /* Aumenta el tamaño para ser más visibles en móvil */
+  font-size: 24px;      /* Aumenta el tamaño para ser más visibles en móvil */
+  font-weight: normal;
   color: black;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -32,7 +33,7 @@
   margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 3rem;
 }
 .gost {
   max-width: 100vw;
@@ -40,6 +41,9 @@
   grid-template-columns: 2fr;
   grid-row: 2fr ;  
   gap: 1rem;
+}
+.pagination-cont {
+  font-family: 'Montserrat', sans-serif;
 }
 @media (min-width: 768px) {
   .item-list {

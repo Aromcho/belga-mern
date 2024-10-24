@@ -1,9 +1,15 @@
 .quiero-vender-container {
   width: 100%;
   padding: 100px 0 80px;
-  background-color: #f7f7f7;
-}
+  background-color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
 
+}
+.volver {
+  font-size: 14px;
+  font-weight: 600;
+
+}
 .back-wrapper {
   display: flex;
   justify-content: flex-start;

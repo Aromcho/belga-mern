@@ -3,6 +3,7 @@ import "./FormContact.css"; // Asegúrate de que el archivo CSS también esté c
 import { BelgaIsoIcon } from "../Icons/Icons.jsx";
 import { TitleWithIcon } from "../TitleWithIcon/TitleWithIcon.jsx";
 import { Input } from "../Input/Input.jsx";
+import { Textarea } from "../Textarea/Textarea.jsx";
 const FormContact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -37,50 +38,47 @@ const FormContact = () => {
       <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
 
 
-        <label>
-          Nombre:
+        
           <Input
             type="text"
             name="name"
+            placeHolder={"Nombre *"}
             value={formData.name}
             onChange={handleChange}
             required
           />
-        </label>
 
-        <label>
-          Correo Electrónico:
+        
           <Input
             type="email"
             name="email"
+            placeHolder={"Email *"}
             value={formData.email}
             onChange={handleChange}
             required
           />
-        </label>
-
-        <label>
-          Teléfono:
+        
           <Input
             type="tel"
             name="phone"
+            placeHolder={"Teléfono *"}
             value={formData.phone}
             onChange={handleChange}
             required
           />
-        </label>
 
-        <label>
-          Mensaje:
-          <textarea
+
+          <Textarea
+            className="h-100"
             name="message"
             value={formData.message}
+            placeHolder={"Mensaje"}
             onChange={handleChange}
             required
-          ></textarea>
-        </label>
-
-        <button  type="submit">Enviar</button>
+          />
+          <div className="btn-form-footer-cont">        
+            <button className="btn-form-footer" type="submit">ENVIAR</button>
+          </div>
       </form>
 
       {showWarning && (

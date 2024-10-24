@@ -23,7 +23,7 @@ export const QuoteCard = ({
         />
       </div>
       <div className="quote-text"><p>{quote}</p></div>
-      <div className="quote-author"><p>{author}</p></div>
+      <div className="quote-author">{author}</div>
       <img src={logo} id={id} className="quote-logo" loading="lazy" alt="Quote Logo" />
     </a>
   );

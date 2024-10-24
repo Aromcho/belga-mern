@@ -93,7 +93,7 @@ const Filters = ({ onSubmit }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="filter-form">
+    <Form onSubmit={handleSubmit} className="filter-form pt-5">
       {/* Input para búsqueda general */}
       <Row>
         <Col>
@@ -371,12 +371,13 @@ const Filters = ({ onSubmit }) => {
       </Row>
 
       {/* Ordenar por precio */}
-      <Row className="filter-row d-none d-md-flex mt-3">
+      <Row className="filter-row d-none d-md-flex my-3 mx-5">
         <Col>
           <Button as={Link} to="/" variant="light" className="w-100 custom-button">
             <FaArrowLeft className="me-2" />
             Volver al inicio
           </Button>
+          <p className='mx-5 text-mute'>313 Resultados</p>
         </Col>
         <Col md="auto">
           <Button onClick={toggleSortOrder} variant="light" className="w-100 custom-button">

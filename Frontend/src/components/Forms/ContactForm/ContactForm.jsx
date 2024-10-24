@@ -96,7 +96,7 @@ const ContactForm = ({ className = "", full = false }) => {
         <div className="wrapper-inputs">
           <Input
             className="input--form "
-            placeholder="Nombre *"
+            placeHolder="Nombre *"
             type="text"
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.currentTarget.value })}
@@ -106,7 +106,7 @@ const ContactForm = ({ className = "", full = false }) => {
 
           <Input
             className="input--form"
-            placeholder="Email *"
+            placeHolder="Email *"
             type="email"
             value={data.email}
             onChange={(e) => setData({ ...data, email: e.currentTarget.value })}
@@ -116,7 +116,7 @@ const ContactForm = ({ className = "", full = false }) => {
 
           <Input
             className="input--form"
-            placeholder="Teléfono *"
+            placeHolder="Teléfono *"
             type="tel"
             value={data.phone}
             onChange={(e) => setData({ ...data, phone: e.currentTarget.value })}
@@ -127,7 +127,7 @@ const ContactForm = ({ className = "", full = false }) => {
 
         <Textarea
           className="textarea--form"
-          placeholder="Mensaje"
+          placeHolder="Mensaje"
           value={data.message}
           onChange={(e) => setData({ ...data, message: e.currentTarget.value })}
         />

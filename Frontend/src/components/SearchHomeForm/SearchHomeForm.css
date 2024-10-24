@@ -40,17 +40,20 @@
 
 /* Botón de búsqueda */
 .search-button {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
   background-color: #C62025;
   border: none;
   border-radius: 0;
   height: 40px;
   width: 100%; /* Hacer el botón más ancho en mobile */
   color: #ffffff;
-  font-weight: bold;
 }
 
 .search-button:hover {
-  background-color: #c9302c;
+  background-color: #C62025;
+  text-shadow: #ccc 0 2px 10px;
 }
 
 /* Sistema de precios */

@@ -1,5 +1,7 @@
 .footer-info {
     width: 100%;
+    font-family: "Montserrat", sans-serif;
+
 }
 
 .body-location {
@@ -14,12 +16,13 @@
     width: 100%;
     max-width: 330px;
     margin: 0 auto;
+    padding-top: 25px;
 
 }
 
 .left-contact {
     width: 100%;
-    margin: 70px 0 60px;
+    margin: 30px 0 40px;
 }
 
 /* Quitar los puntitos de la lista */
@@ -32,9 +35,9 @@ ul {
 .head-location {
     font-size: 14px; /* Tamaño de fuente más grande para títulos */
     font-weight: bold; /* Resaltar el título */
-    text-transform: uppercase; /* Convertir el texto en mayúsculas */
+    text-transform: none; /* Convertir el texto en mayúsculas */
     color: #fff; /* Añadir un color dorado para resaltar el título */
-    margin-bottom: 5px; /* Espacio entre el título y el contenido */
+    margin-bottom: 10px; /* Espacio entre el título y el contenido */
     display: flex; /* Para alinear ícono y texto en fila */
     align-items: center; /* Alinear verticalmente */
 }
@@ -50,6 +53,11 @@ ul {
     color: #fff;
     font-size: 14px;
     transition: color 0.3s ease; /* Añadir una transición suave al color */
+    text-transform: none;
+    font-family: "Montserrat", sans-serif;
+}
+.contact-item .info--link:hover {
+    color: #f7b731; /* Cambiar el color al pasar el cursor */
 }
 .contact-item a {
     justify-content: start !important;

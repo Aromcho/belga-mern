@@ -8,6 +8,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './Item.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { HeartIcon } from "../Icons/Icons";
 
 // Custom arrows for the carousel
 const NextArrow = (props) => {
@@ -70,6 +71,11 @@ const Item = ({ property }) => {
   const address = property.address || 'Dirección no disponible'; 
   const barrio = property.location.name || 'Barrio no disponible'; 
   const propertyId = property.id;
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorited(!isFavorited);
+  };
 
   const settings = {
     dots: false, 
@@ -97,9 +103,9 @@ const Item = ({ property }) => {
     <Card className="card-item shadow-lg  overflow-hidden text-black">
       {/* Pasar los datos de la propiedad con el estado */}
       <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full" >{/*target={isMobile ? '_self' : '_blank'}*/}
-      <div className="head-prop d-flex justify-content-between m-2 px-4">
-            <span>{operationType.toUpperCase()}</span>
-            <span className="text-muted">USD {price}</span>
+      <div className="head-prop d-flex justify-content-between m-2 px-4 py-2">
+            <span className="type-item">{operationType.toUpperCase()}</span>
+            <span className="price-item">USD {price}</span>
           </div>
         <Slider {...settings} className="image-wrapper">
           {mainImages.map((img, index) => (
@@ -113,36 +119,39 @@ const Item = ({ property }) => {
           ))}
         </Slider>
 
-        <Card.Body>
-          <div className="card-header-item mt-3 p-2">
+        <Card.Body className="py-4 ">
+          <div className="card-header-item">
             <div className="direction-container">
-              <h5 className="card-title-bold  text-dark">{barrio}</h5>
-              <p className="location-text text-muted ">{address}</p>
+              <h5 className="barrio-item">{barrio}</h5>
+              <p className="direccion-item">{address}</p>
             </div>
-            <FaHeart className="text-dark" />
+            <FaHeart
+      className={`heart-icon ${isFavorited ? 'favorited' : ''}`}
+      onClick={toggleFavorite}
+    />
           </div>
-          <div className="property-info d-flex justify-content-around">
+          <div className="property-info d-flex justify-content-between">
             {size > 0 && (
               <div className="info-item d-flex flex-column">
-                <span className="text-muted">{size}</span>
+                <span className="number-info-item">{size.toString().slice(0, -2)}</span>
                 <img className="card-icons" src='/images/icons/prop_m2.svg' />
               </div>
             )}
             {bedrooms > 0 && (
               <div className="info-item d-flex flex-column">
-                <span className="text-muted">{bedrooms}</span>
+                <span className="number-info-item">{bedrooms}</span>
                 <img className="card-icons" src='/images/icons/prop_cuarto.svg' />
               </div>
             )}
             {bathrooms > 0 && (
               <div className="info-item d-flex flex-column">
-                <span className="text-muted">{bathrooms}</span>
+                <span className="number-info-item">{bathrooms}</span>
                 <img className="card-icons" src='/images/icons/prop_ducha.svg' />
               </div>
             )}
             {parkingLots > 0 && (
               <div className="info-item d-flex flex-column">
-                <span className="text-muted">{parkingLots}</span>
+                <span className="number-info-item">{parkingLots}</span>
                 <img className="card-icons" src='/images/icons/prop_cochera.svg' />
               </div>
             )}

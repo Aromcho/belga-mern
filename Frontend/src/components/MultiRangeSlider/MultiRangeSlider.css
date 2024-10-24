@@ -26,11 +26,12 @@
 }
 
 .input--price {
-  width: 180px;
+  width: 280px;
   text-align: center;
   padding: 5px;
-  border: 1px solid #F1B332; /* Borde con el color personalizado */
-  border-radius: 4px;
+  padding-top: 0;
+  border-bottom: 2px solid #ffffff !important; /* Borde con el color personalizado */
+  border-radius: 0;
   background-color: transparent;
   color: #333; /* Color del texto */
 }

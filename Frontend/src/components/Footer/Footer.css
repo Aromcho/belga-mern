@@ -22,6 +22,8 @@
 .footer-left,
 .footer-center,
 .footer-right {
+  font-family: 'Montserrat', sans-serif;
+
   height: 30vh;
   flex: 1; /* Espacio equitativo para cada columna */
   padding: 0 20px;
@@ -44,9 +46,9 @@
 }
 
 .footer-right .legal-text {
-  font-size: 0.7rem;
+  font-size: 10px;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .social-list {
@@ -71,13 +73,19 @@
   color: #f00; /* Cambia de color cuando el usuario pasa el mouse */
 }
 
-.legal-link a {
-  color: #f00;
-  text-decoration: none;
+.legal-link .text-white {
+  text-decoration: none !important;
+  text-transform: none;
+  justify-content: start;
+  font-size: 14px;
 }
 
 .legal-link a:hover {
   text-decoration: underline;
+  color: #F1B332;
+}
+.footer-right .mp {
+  font-size: 12px;
 }
 
 /* Ajustes para pantallas medianas (max-width: 768px) */

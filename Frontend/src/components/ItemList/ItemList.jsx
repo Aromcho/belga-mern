@@ -4,6 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Item from '../Item/Item.jsx';
 import Filters from '../Filters/Filters.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
+import VenderForm from '../Forms/VenderForm/VenderForm.jsx';
 import Skeleton from '@mui/material/Skeleton'; 
 import './ItemList.css';
 
@@ -55,9 +56,10 @@ const ItemList = () => {
   };
 
   return (
-    <Container className="p-0 mb-1">
-      <Filters onSubmit={updateFilters} />
-      <div className="item-list">
+    <>
+    <Filters className="p-0 mb-1 pt-5 mt-5" onSubmit={updateFilters} />
+    <Container className='px-0 ' >
+      <div className="item-list ">
         {loading ? (
           // Skeleton mientras carga
           <>
@@ -86,7 +88,7 @@ const ItemList = () => {
         )}
       </div>
 
-      <Row className="mt-3 mb-3 align-items-center justify-content-between">
+      <Row className="pagination-cont my-5 align-items-center justify-content-between">
         <Col xs="auto" className="text-start">
           {currentPage > 1 && (
             <FaChevronLeft
@@ -116,6 +118,9 @@ const ItemList = () => {
         </Col>
       </Row>
     </Container>
+    <VenderForm className="mt-5 pt-5"/>
+
+    </>
   );
 };
 
