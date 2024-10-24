@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../Button/Button.jsx";
 import { Input } from "../../Input/Input.jsx";
-import {Textarea} from "../../Textarea/Textarea.jsx";
+import { Textarea } from "../../Textarea/Textarea.jsx";
 import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
 import { propertiesSelectOptions } from "../../../helpers/tokko.js";
-import Select from 'react-select';  // Importar react-select
+import Select from 'react-select'; // Importar react-select
 import "./VenderForm.css";
 
 export const VenderForm = ({ className = "" }) => {
@@ -79,8 +79,8 @@ export const VenderForm = ({ className = "" }) => {
       <div className="form-wrapper">
         <div className="wrapper-inputs">
           <Input
-            className="input--form"
-            placeholder="Nombre *"
+            className="input--from"
+            placeHolder="Nombre *"
             type="text"
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.currentTarget.value })}
@@ -89,8 +89,8 @@ export const VenderForm = ({ className = "" }) => {
           />
 
           <Input
-            className="input--form"
-            placeholder="Email *"
+            className="input--from"
+            placeHolder="Email *"
             type="email"
             value={data.email}
             onChange={(e) => setData({ ...data, email: e.currentTarget.value })}
@@ -99,8 +99,8 @@ export const VenderForm = ({ className = "" }) => {
           />
 
           <Input
-            className="input--form"
-            placeholder="Teléfono *"
+            className="input--from"
+            placeHolder="Teléfono *"
             type="tel"
             value={data.phone}
             onChange={(e) => setData({ ...data, phone: e.currentTarget.value })}
@@ -112,24 +112,24 @@ export const VenderForm = ({ className = "" }) => {
         <div className="wrapper-inputs">
           <Input
             className="input--form half"
-            placeholder="Dirección"
+            placeHolder="Dirección"
             type="text"
             value={data.direction}
             onChange={(e) => setData({ ...data, direction: e.currentTarget.value })}
           />
 
-          <Select
-            className="input--form"
+            <Input
+            className="input--form half"
             options={propertiesSelectOptions}
             isSearchable={false}
-            placeholder="Tipo de Propiedad"
+            placeHolder="Tipo de Propiedad"
             onChange={(opt) => setData({ ...data, property: opt.label })}
           />
-        </div>
+          </div>
 
         <Textarea
           className="textarea--form"
-          placeholder="Mensaje"
+          placeHolder="Mensaje"
           value={data.message}
           onChange={(e) => setData({ ...data, message: e.currentTarget.value })}
         />
@@ -138,6 +138,8 @@ export const VenderForm = ({ className = "" }) => {
           <FeedbackMsg className={status.status} msg={status.text} />
         )}
       </div>
+
+      {/* Botón posicionado sobre el marco */}
       <Button
         text="Enviar"
         type="button"
