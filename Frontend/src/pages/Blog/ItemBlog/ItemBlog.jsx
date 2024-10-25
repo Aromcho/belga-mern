@@ -2,10 +2,23 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Calendar } from 'react-bootstrap-icons';
-
+import Skeleton from '@mui/material/Skeleton'; // Importar Skeleton de Material-UI
 import './ItemBlog.css';
 
-const ItemBlog = ({ id, title, date, imageUrl, subtitle }) => {
+const ItemBlog = ({ id, title, date, imageUrl, subtitle, isLoading }) => {
+  if (isLoading) {
+    // Mostrar el Skeleton cuando isLoading es true
+    return (
+      <Card className="mb-4 custom-card">
+        <Skeleton variant="rectangular" width="100%" height={200} className="mb-3" />
+        <Card.Body className="custom-card-body">
+          <Skeleton variant="text" width="60%" />
+          <Skeleton variant="text" width="80%" />
+          <Skeleton variant="text" width="40%" className="mt-2" />
+        </Card.Body>
+      </Card>
+    );
+  }
 
   return (
     <Card className="mb-4 custom-card">

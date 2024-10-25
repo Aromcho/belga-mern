@@ -41,14 +41,14 @@ const Register = () => {
                     <input
                         type="email"
                         name="email"
-                        placeholder='Igrese su email'
+                        placeholder='Ingrese su email'
                         className='input-register'
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
                 
-                <button className='btn-register' type="submit">Register</button>
+                <button className='btn-register' type="submit">Registrarse</button>
             </form>
         </div>
     );
