@@ -5,28 +5,29 @@ import axios from "axios";
 import { Row, Col, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import Skeleton from '@mui/material/Skeleton';
+import './Emprendimientos.css'; // Asegúrate de tener un archivo CSS para los estilos
 
 const Emprendimientos = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [devProperties, setDevProperties] = useState([]);
 
   useEffect(() => {
     fetchDevProperty();
-  }, []);  // Se ejecuta cuando el componente se monta
+  }, []);
 
   const fetchDevProperty = async () => {
-    setLoading(true);
     try {
       const response = await axios.get(`/api/development`);
-      setDevProperties(response.data); // Asegúrate de acceder a `response.data`
-      setLoading(false);
+      setTimeout(() => {
+        setDevProperties(response.data);
+        setLoading(false);
+      }, 100); // Retraso de 8 segundos
     } catch (error) {
       console.error('Error al obtener propiedades:', error);
       setLoading(false);
     }
   };
-
-  console.log('Propiedades de desarrollos:', devProperties);
 
   return (
     <div className="mt-5 p-5">
@@ -35,13 +36,21 @@ const Emprendimientos = () => {
         Volver al inicio
       </Button>
 
-      {/* Mostrar la cantidad de resultados */}
-      <p className="m-4">{devProperties.length} Resultados</p>
+      <p className="m-4">{loading ? "Cargando..." : `${devProperties.length} Resultados`}</p>
 
       <Row>
-        {devProperties.map((devProperty) => (
-          <Col key={devProperty.id} xs={12} sm={6} md={4} lg={4}>
-            <DevelopmentItem development={devProperty} />
+        {(loading ? Array.from(new Array(6)) : devProperties).map((devProperty, index) => (
+          <Col key={devProperty?.id || index} xs={12} sm={6} md={4} lg={4} className="mb-4">
+            {loading ? (
+              // Contenedor oscuro para el Skeleton
+              <div className="skeleton-container">
+                <Skeleton variant="rectangular" height={400} width="100%" />
+                <Skeleton variant="text" height={40} className="mt-2" />
+                <Skeleton variant="text" height={20} />
+              </div>
+            ) : (
+              <DevelopmentItem development={devProperty} />
+            )}
           </Col>
         ))}
       </Row>
