@@ -12,6 +12,11 @@ import './BusquedasGuardadas.css'; // Asegúrate de que el archivo CSS está bie
 
 const BusquedasGuardadas = observer(() => {
   
+  const redirectToPropertyList = () => {
+    window.location.href = PATHS.PROPERTY_LIST;
+  };
+
+
   const { saveSearch } = [1];
   return (
     <>
@@ -26,6 +31,9 @@ const BusquedasGuardadas = observer(() => {
         </Container>
 
         <Container>
+          <div className="img-cont-busquedas">         
+             <img className="" src="/images/empty_img_plus.gif" alt="" />
+          </div>
           {saveSearch === 0 ? (
             <Status
               img="/images/empty_img_plus.gif"
@@ -37,7 +45,7 @@ const BusquedasGuardadas = observer(() => {
           ) : (
             <>
               <Container>
-                <h2 className="title-busquedas">TUS BÚSQUEDAS GUARDADAS</h2>
+                <h2 className="title-busquedas"></h2>
               </Container>
 
               <div className="busquedas-list">
@@ -45,7 +53,10 @@ const BusquedasGuardadas = observer(() => {
               </div>
 
               <Container>
-                <h3 className="subtitle-busquedas">Encontrá lo que estás buscando.</h3>
+                <h3 className="subtitle-busquedas">Tené a mano tus búsquedas.</h3>
+              </Container>
+              <Container className="img-cont-busquedas" >
+                <button onClick={redirectToPropertyList} className="btn-busquedas-guardadas">AGREGA TUS BUSQUEDAS</button>
               </Container>
 
               <div className="form-wrapper">

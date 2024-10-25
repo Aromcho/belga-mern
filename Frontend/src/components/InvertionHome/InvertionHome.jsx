@@ -33,12 +33,11 @@ const InversionSection = ({}) => {
     return (
         <div className="inversion-section">
             <div className="inversion">
-                <SocialSidebar color="black" />
                 <BackToTop color="black" />
             </div>
             <div className="container inversion--container">
-                <div className="inversion-list">
-                    <div className="inversion-item item--text ">
+                <div className="inversion-list gap-5">
+                    <div className="inversion-item item--text">
                         <Title
                             title="TU PRÓXIMA INVERSIÓN"
                             buttonStyle="outline black"

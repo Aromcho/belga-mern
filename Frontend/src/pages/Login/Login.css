@@ -41,6 +41,7 @@
     cursor: pointer;
     border: 1px solid black;
     font-weight: bold;
+    background-color: #ca1414;
   }
   
   .login-button:hover {

@@ -36,9 +36,6 @@ const FormContact = () => {
     <div className="contact-form-wrapper">
       <form onSubmit={handleSubmit} className="contact-form">
       <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
-
-
-        
           <Input
             type="text"
             name="name"
@@ -47,8 +44,6 @@ const FormContact = () => {
             onChange={handleChange}
             required
           />
-
-        
           <Input
             type="email"
             name="email"
@@ -57,7 +52,6 @@ const FormContact = () => {
             onChange={handleChange}
             required
           />
-        
           <Input
             type="tel"
             name="phone"
@@ -66,8 +60,6 @@ const FormContact = () => {
             onChange={handleChange}
             required
           />
-
-
           <Textarea
             className="h-100"
             name="message"

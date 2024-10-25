@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { Input } from "../../Input/Input";
-import { Textarea } from "../../Textarea/Textarea";
-import { FeedbackMsg } from "../FeedbackMsg/FeedbackMsg";
-import { TitleWithIcon } from "../../TitleWithIcon/TitleWithIcon";
+import Button from "../../Button/Button.jsx";
+import { Input } from "../../Input/Input.jsx";
+import { Textarea } from "../../Textarea/Textarea.jsx";
+import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
+import { propertiesSelectOptions } from "../../../helpers/tokko.js";
+import {TitleWithIcon} from "../../TitleWithIcon/TitleWithIcon.jsx";
 import "./ContactForm.css";
-
-const ContactForm = ({ className = "", full = false }) => {
-  const [state, setState] = useState("send");
-  const [display, setDisplay] = useState(false);
-
+export const VenderForm = ({ className = "" }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -18,7 +15,7 @@ const ContactForm = ({ className = "", full = false }) => {
     property: "",
     message: "",
     url: "",
-    subject: "Contacto desde la web",
+    subject: "Quiero vender",
   });
 
   const [error, setError] = useState({
@@ -34,7 +31,6 @@ const ContactForm = ({ className = "", full = false }) => {
 
   useEffect(() => {
     setData({ ...data, url: window.location.href });
-    setDisplay(true);
   }, []);
 
   const handleSubmit = (e) => {
@@ -51,10 +47,8 @@ const ContactForm = ({ className = "", full = false }) => {
       });
       return;
     }
-    setState("sending");
     sendContact(data)
       .then(() => {
-        setState("sent");
         setStatus({
           status: "success",
           text: "Tu contacto ha sido enviado",
@@ -67,7 +61,7 @@ const ContactForm = ({ className = "", full = false }) => {
           property: "",
           message: "",
           url: "",
-          subject: "Contacto desde la web",
+          subject: "Quiero vender",
         });
       })
       .catch(() => {
@@ -75,27 +69,17 @@ const ContactForm = ({ className = "", full = false }) => {
           status: "error",
           text: "Ha ocurrido un error, reintente en unos minutos",
         });
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setState("gone");
-          setTimeout(() => {
-            setState("send");
-          }, 1000);
-        }, 1500);
       });
   };
 
-  if (!display) return null;
-
   return (
-    <div className={`contact-form-container ${className} ${full ? 'full' : ''}`}>
-      <div className="contact-form-wrapper ">
-      <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
+    <div className={`form-container ${className}`}>
+      <div className="form-wrapper-v2">
+      <TitleWithIcon text="¿Cómo te podemos ayudar?" className=" black" />
 
         <div className="wrapper-inputs">
           <Input
-            className="input--form "
+            className="input--from-v2"
             placeHolder="Nombre *"
             type="text"
             value={data.name}
@@ -105,7 +89,7 @@ const ContactForm = ({ className = "", full = false }) => {
           />
 
           <Input
-            className="input--form"
+            className="input--from"
             placeHolder="Email *"
             type="email"
             value={data.email}
@@ -115,7 +99,7 @@ const ContactForm = ({ className = "", full = false }) => {
           />
 
           <Input
-            className="input--form"
+            className="input--from"
             placeHolder="Teléfono *"
             type="tel"
             value={data.phone}
@@ -125,6 +109,7 @@ const ContactForm = ({ className = "", full = false }) => {
           />
         </div>
 
+        
         <Textarea
           className="textarea--form"
           placeHolder="Mensaje"
@@ -135,16 +120,17 @@ const ContactForm = ({ className = "", full = false }) => {
         {status.status && (
           <FeedbackMsg className={status.status} msg={status.text} />
         )}
-         <Button
-        className="search-button"
-        sendStatus={state}
+      </div>
+
+      {/* Botón posicionado sobre el marco */}
+      <Button
+        text="Enviar"
+        type="button"
+        className="button--send"
         onClick={handleSubmit}
       />
-      </div>
- 
-     
     </div>
   );
 };
 
-export default ContactForm;
+export default VenderForm;

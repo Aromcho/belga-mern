@@ -90,7 +90,7 @@ const SideBar = () => {
           <Avatar alt={name} src="/static/images/avatar/1.jpg" className="mx-auto" />
           <Typography variant="h6">{name}</Typography>
           <Typography variant="body2">{email}</Typography>
-          <button className="w-100" onClick={handleLogout}>Logout</button>
+          <button className="btn-logout w-100" onClick={handleLogout}>Logout</button>
         </div>
 
         <Tabs

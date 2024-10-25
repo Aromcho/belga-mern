@@ -12,6 +12,7 @@ export const PATHS = {
   CONTACTO: "#contacto",
   TERMINOS: "/terminos-y-condiciones",
   CONOCEBELGA: "/conoce-belga",
+  PROPERTY_LIST: "/propertylist",
 };
 
 export const SOCIAL = {

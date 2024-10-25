@@ -133,7 +133,7 @@ const Item = ({ property }) => {
           <div className="property-info d-flex justify-content-between">
             {size > 0 && (
               <div className="info-item d-flex flex-column">
-                <span className="number-info-item">{size.toString().slice(0, -2)}</span>
+                <span className="number-info-item">{size.toString().slice(0, -3)}</span>
                 <img className="card-icons" src='/images/icons/prop_m2.svg' />
               </div>
             )}

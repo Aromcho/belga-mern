@@ -6,7 +6,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { FaBed, FaBath, FaCarAlt, FaToilet, FaCompass, FaRulerCombined, FaBuilding, FaArrowLeft, FaWhatsapp, FaEnvelope, FaPrint } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import Title from '../Title/Title';
-import SelectionListContainer from '../SelectionListContainer/SelectionListContainer';
+import RelatedListContainer from '../RelatedListContainer/RelatedListContainer';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,6 +14,7 @@ import './ItemDetail.css';
 import Print from '../Print/Print';
 import FormContact from '../FormContact/FormContact';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
+import VenderForm from '../Forms/VenderForm/VenderForm';
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -343,7 +344,12 @@ const ItemDetail = ({ property }) => {
         <div className="container seleccion--container mt-5 pt-5">
           <Title title="PROPIEDADES SIMILARES" linkButton="/highlighted" buttonStyle="outline red" />
           <div className="prop-list">
-            <SelectionListContainer />
+          <RelatedListContainer
+         id={idTokko}
+         price={operations[0].prices[0].price}
+         location={barrio}
+         propertyType={property_type}
+      />
           </div>
         </div>
       </Row>
@@ -353,7 +359,7 @@ const ItemDetail = ({ property }) => {
         <Print property={property} />
       </div>
       <div className='form-detail-container'>
-        <FormContact />
+        <VenderForm />
       </div>
     </Container>
   );

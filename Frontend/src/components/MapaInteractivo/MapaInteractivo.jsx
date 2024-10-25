@@ -37,7 +37,7 @@ const MapaInteractivo = ({ property }) => {
       <MapContainer
         center={[position.lat, position.lng]}
         zoom={17}
-        style={{ height: "500px", width: window.innerWidth <= 768 ? "100%" : "80vw" }}
+        style={{ height: "500px", width: window.innerWidth <= 768 ? "100%" : "100%" }}
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"

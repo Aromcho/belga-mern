@@ -1,4 +1,4 @@
-import property from '../models/Property.model.js';
+import Property from '../models/Property.model.js';
 import PropertyManager from '../manager/property.manager.js';
 import Fuse from 'fuse.js';
 import fs from 'fs';
@@ -141,19 +141,77 @@ const getPropertyById = async (req, res) => {
 
 const getRelatedProperties = async (req, res) => {
   try {
+    const { id } = req.params;
     const { price, location, propertyType } = req.query;
 
-    const properties = await PropertyManager.read({
-      price: { $lte: price * 1.2, $gte: price * 0.8 },
-      "location.city": location,
-      "custom_tags.name": propertyType,
-    }).lean(); // Usamos lean()
+    // 1. Buscar la propiedad de referencia usando el campo 'id' (no '_id')
+    const currentProperty = await Property.findOne({ id: parseInt(id) }).lean();
+    if (!currentProperty) {
+      return res.status(404).json({ message: 'Propiedad no encontrada' });
+    }
 
-    res.status(200).json(properties);
+    const currentPrice = currentProperty.operations[0].prices[0].price;
+    const currentLocation = currentProperty.location.name;
+    const currentType = currentProperty.type.name;
+
+    // 2. Configurar un margen de tolerancia para los precios (por ejemplo, ± 20%)
+    const priceTolerance = 0.2; // 20% de margen
+    const minPrice = currentPrice * (1 - priceTolerance);
+    const maxPrice = currentPrice * (1 + priceTolerance);
+
+    // 3. Intentar encontrar propiedades que coincidan en precio, ubicación y tipo
+    let relatedProperties = await Property.find({
+      "operations.prices.price": { $gte: minPrice, $lte: maxPrice },
+      "location.name": currentLocation,
+      "type.name": currentType,
+      id: { $ne: currentProperty.id } // Excluir la propiedad actual
+    }).lean();
+
+    // 4. Si no encontramos propiedades, relajamos los criterios progresivamente
+    if (relatedProperties.length === 0) {
+      // Buscar solo por precio y tipo
+      relatedProperties = await Property.find({
+        "operations.prices.price": { $gte: minPrice, $lte: maxPrice },
+        "type.name": currentType,
+        id: { $ne: currentProperty.id }
+      }).lean();
+    }
+
+    // 5. Si aún no hay resultados, relajamos aún más, buscando solo por precio
+    if (relatedProperties.length === 0) {
+      relatedProperties = await Property.find({
+        "operations.prices.price": { $gte: minPrice, $lte: maxPrice },
+        id: { $ne: currentProperty.id }
+      }).lean();
+    }
+
+    // 6. Aplicar "puntuación" de coincidencia (cuantos más criterios coinciden, mayor es la puntuación)
+    relatedProperties = relatedProperties.map((property) => {
+      let score = 0;
+      if (property.type.name === currentType) score += 2; // Coincidencia de tipo tiene más peso
+      if (property.location.name === currentLocation) score += 1; // Coincidencia de ubicación
+      return { ...property, score };
+    });
+
+    // 7. Ordenar las propiedades por la puntuación de coincidencia
+    relatedProperties.sort((a, b) => b.score - a.score);
+
+    // 8. Limitar el número de propiedades a devolver (por ejemplo, 5 propiedades)
+    const maxResults = 5;
+    const topRelatedProperties = relatedProperties.slice(0, maxResults);
+
+    // 9. Enviar el resultado de las propiedades relacionadas
+    res.status(200).json(topRelatedProperties);
   } catch (error) {
+    console.error('Error al obtener propiedades relacionadas:', error);
     res.status(500).json({ message: 'Error al obtener propiedades relacionadas', error });
   }
 };
+
+
+
+
+
 
 const getNeighborhoods = async (req, res) => {
   try {

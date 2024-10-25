@@ -7,7 +7,6 @@ import FooterInfo from "../../components/FooterInfo/FooterInfo.jsx"
 import Title from "../../components/Title/Title.jsx";
 import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
-import SocialSidebar from "../../components/SocialSidebar/SocialSidebar.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
 import Button from "../../components/Button/Button.jsx";
 import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
@@ -83,9 +82,6 @@ const Home = () => {
         {/* Imagen de superposición que siempre cubre el video o la imagen */}
         
         <div className="overlay"></div>
-        <div className="hero">
-          <SocialSidebar />
-        </div>
         <div className="container-form-serch align--center">
           <SearchHomeForm formData={filters} setFormData={updateFilters} handleSubmit={handleSubmit} />
         </div>
@@ -93,7 +89,6 @@ const Home = () => {
 
       <div className="seleccion-section">
         <div className="seleccion">
-          <SocialSidebar color="red" />
           <BackToTop color="red" />
         </div>
         <div className="container seleccion--container">

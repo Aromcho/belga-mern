@@ -4,15 +4,22 @@
   color: #fff;  /* Texto blanco */
   min-height: 100vh;
   padding: 40px 20px;
+  font-family:'Montserrat', sans-serif;
 }
 
 /* Título del desarrollo */
-.development-detail-title {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  color: #f2d8a7;  /* Color de acento */
-  text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
+.address-dev {
+  font-family:'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+}
+.image-wrapper-detail-dev {
+  position: relative;
+  left: -180px;
+  width: 97vw;
+  height: 600px; /* Ajusta la altura del contenedor */
+  overflow: hidden; /* Oculta las partes que sobresalgan */
 }
 
 /* Ubicación */

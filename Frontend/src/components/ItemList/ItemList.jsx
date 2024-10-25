@@ -118,7 +118,7 @@ const ItemList = () => {
         </Col>
       </Row>
     </Container>
-    <VenderForm className="mt-5 pt-5"/>
+    <VenderForm className="my-5 py-5 "/>
 
     </>
   );

@@ -13,9 +13,17 @@
   position: relative;
   border-radius: 0;
 }
-
+.form-wrapper-v2 {
+  margin: 20px 0;
+}
+.form-wrapper-v2 .textarea--form{
+  padding: 0;
+  margin:  0;
+  margin-bottom: 20px;
+}
 .wrapper-inputs {
   width: 100%;
+
 }
 
 .button--send {
@@ -41,9 +49,9 @@
   margin-bottom: 15px;
 }
 
-.input--form {
+.input--form-v2 {
   width: 100%;
-  margin-bottom: 15px;
+  margin: 0 !important;
 }
 
 .textarea--form {

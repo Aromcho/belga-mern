@@ -12,8 +12,10 @@ import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import { MemberCard } from "./MemberCard/MemberCard.jsx";
 import { QuoteCard } from "./QuoteCard/QuoteCard.jsx";
 import FormContact from "../../components/FormContact/FormContact.jsx";
+import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Container } from "react-bootstrap";
+import { VenderForm } from "../../components/Forms/VenderForm/VenderForm.jsx";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -222,7 +224,7 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Video Drone</div>
                       <div className="cb-service-media">
-                        <iframe src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
+                        <iframe className="w-100" src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
                       </div>
                     </div>
                     </SwiperSlide>
@@ -230,7 +232,7 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">fotos</div>
                       <div className="cb-service-media">
-                        <img className="w-75" src="/images/servicios_fotos.jpg" />
+                        <img className="w-100" src="/images/servicios_fotos.jpg" />
                       </div>
                     </div>
                      </SwiperSlide>
@@ -238,27 +240,20 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Tour Virtual</div>
                       <div className="cb-service-media">
-                      <iframe src="https://matterport.com/discover/space/BB1DiUzwnhk" />
+                      <iframe className="w-100" src="https://matterport.com/discover/space/BB1DiUzwnhk" />
                       </div>
                     </div> </SwiperSlide>
                     <SwiperSlide><div className="cb-service-wrapper">
                       <div className="cb-service-title">Planos</div>
                       <div className="cb-service-media">
-                        <img className="w-50" src="/images/servicios_planos.jpg" />
+                        <img className="w-100" src="/images/servicios_planos.jpg" />
                       </div>
                     </div> </SwiperSlide>
 
                     
                     
                     
-                  <SwiperSlide onClick={() => { setModalContent({ open: true }); setCurrentIndex(0); }}>
-                    <div className="cb-service-wrapper">
-                      <div className="cb-service-title">Fotos</div>
-                      <div className="cb-service-media">
-                        <div className="cb-service-media-img" style={{ backgroundImage: `url(/images/servicios_fotos.jpg)` }}></div>
-                      </div>
-                    </div>
-                  </SwiperSlide>
+                  
                 </Swiper>
               </div>
             </Container>
@@ -310,7 +305,12 @@ const ConoceBelga = observer(() => {
                 <div className="cb-office-text-wrapper">
                   <div className="cb-office-text-name">BELGRANO C</div>
                   <div className="cb-office-text-loc">Juramento 2102</div>
-                  <div className="cb-office-text">Te esperamos en el centro de Belgrano...</div>
+                  <div className="cb-office-text">Te esperamos en el centro de Belgrano, a 2 cuadras del reconocido cruce de Av. Cabildo con Juramento.</div>
+                </div>
+                <div className="cb-office-text-wrapper">
+                  <div className="cb-office-text-name">BELGRANO R</div>
+                  <div className="cb-office-text-loc">Superí 1485</div>
+                  <div className="cb-office-text">Nos encontramos a metros de una de las calles más hermosas de Belgrano, Av. de los Incas. ¡Vení a visitarnos!</div>
                 </div>
               </div>
             </div>
@@ -318,7 +318,7 @@ const ConoceBelga = observer(() => {
 
           <div className="cb-form-wrapper">
             <Container>
-              <FormContact full />
+              <ContactForm />
             </Container>
           </div>
         </div>

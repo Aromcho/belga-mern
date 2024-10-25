@@ -410,3 +410,12 @@
   margin: 30px auto 100px;
   display: block;
 }
+.cb-office-list-item {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.cb-office-text-wrapper {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}

@@ -9,7 +9,7 @@ const DevelopmentItem = ({ development }) => {
     return (
         <Card className="development-item">
             <Link className="link-full" to={`/emprendimientos/${development.id}`} state={{ development }}>
-                <div className="development-image">
+                <div className="development-image my-5">
                     {hasPhotos ? (
                         <img src={development.photos[0].image} alt={development.name} />
                     ) : (

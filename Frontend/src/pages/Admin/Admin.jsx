@@ -34,7 +34,7 @@ const Admin = () => {
   }, [navigate]);
   
   return (
-    <div className="admin-container d-flex mt-5">
+    <div className="admin-container d-flex mt-5 pt-5">
       {isOnline ? (
         <>
           {/* Pasamos los datos del usuario como props al componente SideBar */}

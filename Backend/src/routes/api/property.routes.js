@@ -20,7 +20,7 @@ propertyDetail.get('/properties', getProperties);
 propertyDetail.get('/propertyDetail/:id', getpropertyById);
 propertyDetail.get('/neighborhoods', getNeighborhoods);
 propertyDetail.get('/:id', getPropertyById);
-propertyDetail.get('/related', getRelatedProperties);
+propertyDetail.get('/propertyDetail/:id/related', getRelatedProperties);
 propertyDetail.get('/favorites', getFavorites);
 propertyDetail.post('/contact', sendContactEmail);
 propertyDetail.get('/properties/ids', getAllPropertyIds);
