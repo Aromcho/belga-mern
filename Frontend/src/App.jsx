@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom"; // Quitamos Router aquí
 import Home from "./pages/Home/Home.jsx";
 import Menu from "./components/Menu/Menu.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -13,8 +13,8 @@ import QuieroVender from "./pages/QuieroVender/QuieroVender.jsx";
 import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
-import { FiltersProvider } from './context/FiltersContext'; // Importar el contexto de filtros
-import { AuthProvider } from './context/AuthContext'; // Importar el contexto de autenticación
+import { FiltersProvider } from './context/FiltersContext';
+import { AuthProvider } from './context/AuthContext';
 import DevelopmentsDetail from "./components/DevelopmentsDetail/DevelopmentsDetail.jsx";
 import Admin from "./pages/Admin/Admin.jsx";
 import Blog from "./pages/Blog/Blog.jsx";
@@ -23,42 +23,45 @@ import BlogDetail from "./pages/Blog/BlogDetail/BlogDetail.jsx";
 import Print from "./components/Print/Print.jsx";
 import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
+import ReactGA from 'react-ga4'; // Importa ReactGA
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Enviar una vista de página a Google Analytics cada vez que cambie la ruta
+    ReactGA.send({ hitType: "pageview", page: location.pathname });
+  }, [location]);
+
   return (
     <AuthProvider>
       <FiltersProvider>
-        <Router>
-          <Menu/>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/propertylist" element={<ItemListContainer />} />
-              <Route path="/propiedad/:id" element={<ItemDetailContainer/>}/>
-              <Route path="/404" element={<Error404 />} />
-              <Route path="/500" element={<Error500 />} /> 
-              <Route path="/quiero-vender" element={<QuieroVender />} />
-              <Route path="/emprendimientos" element={<Emprendimientos />} />
-              <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
-              <Route path="/admin" element={<Admin/>} />
-              <Route path="/blog" element={<Blog/>} />
-              <Route path="/blog/:id" element={<BlogDetail />} />
-              <Route path="/print" element={<Print />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              {/* Ruta catch-all para URLs no definidas */}
-              <Route path="*" element={<Navigate to="/404" />} /> 
-              <Route path="/conoce-belga" element={<ConoceBelga />} />
-              <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
-
-               <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
-             <Route path="/favorites" element={<Favorites />} />  
-               
-              
-            </Routes>
-          </Layout>
-          <Footer/>
-        </Router>
+        <Menu />
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/propertylist" element={<ItemListContainer />} />
+            <Route path="/propiedad/:id" element={<ItemDetailContainer />} />
+            <Route path="/404" element={<Error404 />} />
+            <Route path="/500" element={<Error500 />} /> 
+            <Route path="/quiero-vender" element={<QuieroVender />} />
+            <Route path="/emprendimientos" element={<Emprendimientos />} />
+            <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetail />} />
+            <Route path="/print" element={<Print />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/venta/todos" element={<ItemListContainer />} />
+            <Route path="*" element={<Navigate to="/404" />} />
+            <Route path="/conoce-belga" element={<ConoceBelga />} />
+            <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
+            <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
+            <Route path="/favorites" element={<Favorites />} />  
+          </Routes>
+        </Layout>
+        <Footer />
       </FiltersProvider>
     </AuthProvider>
   );

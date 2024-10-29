@@ -338,4 +338,5 @@ The following partitions can't be recovered:
      Linux                  148 131 48 13188 135 27  209487832 [cloudimg-rootfs]
      ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
      Linux                  152  86 63 13192  90 42  209487832 [cloudimg-rootfs]
-     ext4 blocksize=4096 Large_file Sparse
+     ext4 blocksize=4096 Large_file Sparse_SB Recover, 107 GB / 99 GiB
+SIGHUP detected! TestDisk has been killed.

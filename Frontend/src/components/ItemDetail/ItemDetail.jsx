@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
-import { FaBed, FaBath, FaCarAlt, FaToilet, FaCompass, FaRulerCombined, FaBuilding, FaArrowLeft, FaWhatsapp, FaEnvelope, FaPrint } from 'react-icons/fa';
+import { FaBed, FaBath, FaCarAlt, FaToilet, FaCompass, FaRulerCombined, FaBuilding, FaArrowLeft, FaWhatsapp, FaEnvelope, FaPrint, FaHeart } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import Title from '../Title/Title';
 import RelatedListContainer from '../RelatedListContainer/RelatedListContainer';
@@ -17,8 +16,9 @@ import FormContact from '../FormContact/FormContact';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
 import VenderForm from '../Forms/VenderForm/VenderForm';
 import ContacForm from '../Forms/ContactForm/ContactForm';
-import { Skeleton } from '@mui/material';
-import { FaHeart } from 'react-icons/fa';
+import { Skeleton, Dialog, DialogContent, IconButton } from '@mui/material';
+import Lightbox from 'react-spring-lightbox';
+import { Close as CloseIcon } from '@mui/icons-material';
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -71,10 +71,11 @@ const PrevArrow = (props) => {
 const ItemDetail = ({ property }) => {
   const printRef = useRef();
   const [isFavorited, setIsFavorited] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Estado para controlar Lightbox
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const { suite_amount, location, photos, type, rich_description } = property;
 
-  console.log('Propiedad:', property);  
   const videos = Array.isArray(property.videos) ? property.videos : [];
   const idTokko = property.id;
   const total_surface = property.total_surface;
@@ -107,7 +108,7 @@ const ItemDetail = ({ property }) => {
     const subject = `Interesante propiedad en ${address}`;
     const body = `Te comparto esta propiedad en ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price}. Mira más detalles aquí: https://belga.com.ar/propiedad/${idTokko}`;
     const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
+    window.location = mailtoLink;
   };
 
   const handlePrint = () => {
@@ -148,6 +149,7 @@ const ItemDetail = ({ property }) => {
       },
     ],
   };
+
   const toggleFavorite = async () => {
     try {
       const product = {
@@ -203,42 +205,58 @@ const ItemDetail = ({ property }) => {
     };
     checkIfFavorited();
   }, [property.id]);
+
+  // Crear un array de objetos de imágenes para el lightbox
+  const lightboxImages = photos.map((image, index) => ({
+    src: image.image || "/path/to/default-image.jpg",
+    alt: `Property Image ${index + 1}`,
+    style: {
+      width: '100%',
+      height: 'auto',
+      objectFit: 'cover',
+    }
+  }));
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prevIndex) => (prevIndex === 0 ? photos.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prevIndex) => (prevIndex === photos.length - 1 ? 0 : prevIndex + 1));
+  };
   return (
     <Container className="my-5 text-dark property-detail">
       {/* Botón de regreso */}
       <button onClick={goBack} variant="primary" className="btn-go-back custom-button mt-5">
         <FaArrowLeft className="me-2" />
-
         VOLVER A LA BUSQUEDA
       </button>
 
-      { /* Encabezado */}
-        <Row className="encabezado my-5">
-          <Col className="barra" md={12}>
-            <div className="nombre-precio-container">
-          <div className="d-flex align-items-center">
-            <h1 className="address-title-details">{address}</h1>
-            <FaHeart
+      {/* Encabezado */}
+      <Row className="encabezado my-5">
+        <Col className="barra" md={12}>
+          <div className="nombre-precio-container">
+            <div className="d-flex align-items-center">
+              <h1 className="address-title-details">{address}</h1>
+              <FaHeart
                 className={`heart-icon ${isFavorited ? 'favorited' : ''}`}
                 onClick={toggleFavorite}
               />
-          </div>
-          <h2 className="price-details">
-            {operations[0].prices[0].currency === 'USD' ? 'Venta USD' : 'Venta ARS'}{' '}
-            {operations[0].prices[0].price.toLocaleString('es-ES')}
-          </h2>
             </div>
-          </Col>
-         
-          <Col className="barrio-compartir-container">
-            <p className="property-type-details mt">{property_type} en {barrio}</p>
-            <div className="compartir-container">
-          <span className="me-3">Enviar por:</span>
-          <div>
-            <FaWhatsapp
-              className="mx-2"
-              style={{ cursor: 'pointer' }}
-              onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
+            <h2 className="price-details">
+              {operations[0].prices[0].currency === 'USD' ? 'Venta USD' : 'Venta ARS'}{' '}
+              {operations[0].prices[0].price.toLocaleString('es-ES')}
+            </h2>
+          </div>
+        </Col>
+        <Col className="barrio-compartir-container">
+          <p className="property-type-details mt">{property_type} en {barrio}</p>
+          <div className="compartir-container">
+            <span className="me-3">Enviar por:</span>
+            <div>
+              <FaWhatsapp
+                className="mx-2"
+                style={{ cursor: 'pointer' }}
+                onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
               />
               <MailIcon
                 className="mx-2"
@@ -277,6 +295,10 @@ const ItemDetail = ({ property }) => {
                   alt={`Property Image ${index}`}
                   className="img-fluid rounded-3 mb-2 main-image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onClick={() => {
+                    setSelectedImageIndex(index);
+                    setIsOpen(true);
+                  }}
                 />
               </div>
             ))}
@@ -284,56 +306,94 @@ const ItemDetail = ({ property }) => {
         </Col>
       </Row>
 
+      {/* Lightbox */}
+        {isOpen && (
+          <Dialog open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
+            <DialogContent style={{ padding: 0 }}>
+          <div style={{ position: 'relative', textAlign: 'center' }}>
+            {/* Botón cerrar */}
+              <IconButton
+                style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
+                onClick={() => setIsOpen(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+
+              {/* Botones de navegación */}
+              <IconButton
+                style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
+                onClick={handlePrevImage}
+              >
+                <ArrowBackIos />
+              </IconButton>
+              <IconButton
+                style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
+                onClick={handleNextImage}
+              >
+                <ArrowForwardIos />
+              </IconButton>
+
+              {/* Imagen actual */}
+              <img
+                src={photos[selectedImageIndex].image}
+                alt={`Property Image ${selectedImageIndex}`}
+                style={{ width: '100%', height: 'auto', maxHeight: '90vh' }}
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+
       {/* Detalles de la propiedad */}
       <Row className="mt-3">
-  <Col md={6}>
-    <div className="property-features bg-white p-4 rounded-3">
-      <div className="property-info row">
-        {age > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_antiguedad.svg' alt="Antigüedad" />
-            <p className="text-muted">Antigüedad</p>
-            <span className="text-muted">{age === 0 ? 'A estrenar' : `${age} años`}</span>
-          </Col>
-        )}
-        {total_surface > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
-            <p className="text-muted">M2 Totales</p>
-            <span className="text-muted">{total_surface}</span>
-          </Col>
-        )}
-        {bedrooms > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
-            <p className="letras-">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
-            <span className="">{bedrooms}</span>
-          </Col>
-        )}
-        {bathroom_amount > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
-            <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
-            <span className="text-muted">{bathroom_amount}</span>
-          </Col>
-        )}
-        {parking_lot_amount > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_cochera.svg' alt="Cochera" />
-            <p className="text-muted">{parking_lot_amount > 1 ? 'Cocheras' : 'Cochera'}</p>
-            <span className="text-muted">{parking_lot_amount}</span>
-          </Col>
-        )}
-        {toilet_amount > 0 && (
-          <Col xs={4} className="info-item text-center">
-            <img className="icon-image" src='/images/icons/prop_toilette.svg' alt="Toilettes" />
-            <p className="text-muted">Toilettes</p>
-            <span className="text-muted">{toilet_amount}</span>
-          </Col>
-        )}
-      </div>
-    </div>
-    <Row className="property-info p-4 mb-5">
+        <Col md={6}>
+          <div className="property-features bg-white p-4 rounded-3">
+            <div className="property-info row">
+              {age > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_antiguedad.svg' alt="Antigüedad" />
+                  <p className="text-muted">Antigüedad</p>
+                  <span className="text-muted">{age === 0 ? 'A estrenar' : `${age} años`}</span>
+                </Col>
+              )}
+              {total_surface > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
+                  <p className="text-muted">M2 Totales</p>
+                  <span className="text-muted">{total_surface}</span>
+                </Col>
+              )}
+              {bedrooms > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
+                  <p className="letras-">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
+                  <span className="">{bedrooms}</span>
+                </Col>
+              )}
+              {bathroom_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
+                  <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
+                  <span className="text-muted">{bathroom_amount}</span>
+                </Col>
+              )}
+              {parking_lot_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_cochera.svg' alt="Cochera" />
+                  <p className="text-muted">{parking_lot_amount > 1 ? 'Cocheras' : 'Cochera'}</p>
+                  <span className="text-muted">{parking_lot_amount}</span>
+                </Col>
+              )}
+              {toilet_amount > 0 && (
+                <Col xs={4} className="info-item text-center">
+                  <img className="icon-image" src='/images/icons/prop_toilette.svg' alt="Toilettes" />
+                  <p className="text-muted">Toilettes</p>
+                  <span className="text-muted">{toilet_amount}</span>
+                </Col>
+              )}
+            </div>
+          </div>
+          <Row className="property-info p-4 mb-5">
             <h2 className="mb-4 text-dark">Información</h2>
             <div className="info-details d-flex flex-column gap-4">
               {property.disposition && (
@@ -363,36 +423,26 @@ const ItemDetail = ({ property }) => {
             </div>
           </Row>
           <Row>
-          {tags && tags.length > 0 && (
-            <div className="property-tags bg-white p-4  ">
-              <h2 className="mb-4">Adicionales</h2>
-              <Row>
-                {tags.map((tag, index) => (
-                  <Col xs={6} key={index} className=" bg-white p-1 rounded mb-1">
-                    {tag.name}
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          )}
-        </Row>
-  
-  </Col>
-
-  <Col>
+            {tags && tags.length > 0 && (
+              <div className="property-tags bg-white p-4">
+                <h2 className="mb-4">Adicionales</h2>
+                <Row>
+                  {tags.map((tag, index) => (
+                    <Col xs={6} key={index} className="bg-white p-1 rounded mb-1">
+                      {tag.name}
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            )}
+          </Row>
+        </Col>
+        <Col>
           <div className="property-description bg-white p-4 rounded-3">
             <h2>Descripción</h2>
             <p className='' dangerouslySetInnerHTML={{ __html: rich_description }}></p>
           </div>
         </Col>
-        
-      </Row>
-
-      {/* Descripción y etiquetas */}
-      <Row className="mt-3">
-        
-
-        
       </Row>
 
       {/* Ubicación */}
@@ -405,12 +455,12 @@ const ItemDetail = ({ property }) => {
         <div className="container seleccion--container mt-5 pt-5">
           <Title title="PROPIEDADES SIMILARES" linkButton="/highlighted" buttonStyle="outline red" />
           <div className="prop-list">
-          <RelatedListContainer
-         id={idTokko}
-         price={operations[0].prices[0].price}
-         location={barrio}
-         propertyType={property_type}
-      />
+            <RelatedListContainer
+              id={idTokko}
+              price={operations[0].prices[0].price}
+              location={barrio}
+              propertyType={property_type}
+            />
           </div>
         </div>
       </Row>

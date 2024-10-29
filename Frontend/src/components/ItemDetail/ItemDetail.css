@@ -96,6 +96,17 @@
   border-radius: 10px;
   padding: 0 10px; /* Añade un padding para un efecto de separación entre imágenes */
 }
+/* Asegúrate de que todas las imágenes dentro del Lightbox tengan el mismo tamaño */
+.react-spring-lightbox img {
+  width: 100%;
+  max-width: 90vw;  /* Ajusta el ancho máximo al viewport */
+  max-height: 80vh;  /* Ajusta la altura máxima al viewport */
+  height: auto;
+  object-fit: cover; /* Esto asegurará que las imágenes mantengan sus proporciones sin distorsionarse */
+  margin: 0 auto;
+  border-radius: 10px;  /* Bordes redondeados opcionales */
+  display: block;
+}
 .property-info {
   background-color: #ffffff;
   padding: 20px;
