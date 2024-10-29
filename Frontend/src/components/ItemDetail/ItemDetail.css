@@ -8,7 +8,12 @@
   margin-bottom: 1rem;
   cursor: pointer;
 }
-
+.barra {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000000;
+  
+}
 .img-thumbnail-small.active {
   border: 2px solid #F2D8A7;
 }
@@ -35,19 +40,37 @@
 }
 .btn-go-back {
   background-color: transparent !important;
-
+  font-family:'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
 }
 .property-price {
   justify-content: end;
 }
+
 .property-features, .property-info, .property-description {
   margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
 }
 
-.property-detail h1 {
-  font-size: 2rem;
+.address-title-details {
+  font-family: 'Montserrat', sans-serif;
+  font-size:24px;
+  font-weight: 500;
 }
-
+.price-details {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.property-type-details {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
 .property-detail h2 {
   font-size: 1.5rem;
 }
@@ -55,14 +78,14 @@
   position: relative;
   left: -80px;
   width: 97vw;
-  height: 600px; /* Ajusta la altura del contenedor */
+  height: 450px; /* Ajusta la altura del contenedor */
   overflow: hidden; /* Oculta las partes que sobresalgan */
 }
 .image-wrapper-detail {
   position: relative;
   left: -80px;
   width: 97vw;
-  height: 600px; /* Ajusta la altura del contenedor */
+  height: 450px; /* Ajusta la altura del contenedor */
   overflow: hidden; /* Oculta las partes que sobresalgan */
 }
 
@@ -160,6 +183,9 @@
 }
 
 .tag-item {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
   background-color: #f8f9fa;
   border-radius: 8px;
   padding: 10px;
@@ -167,6 +193,7 @@
 }
 
 .property-tags {
+  
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;

@@ -316,6 +316,12 @@
 }
 /* Ajustes para pantallas pequeñas */
 @media screen and (max-width: 768px) {
+  
+  .menu-brand-wrapper.sticky {
+    height: 55px;
+    position: relative;
+    top: -5px;
+  }
   .emp {
     display: block;
   }

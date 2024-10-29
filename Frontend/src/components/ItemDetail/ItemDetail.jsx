@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
@@ -15,6 +16,9 @@ import Print from '../Print/Print';
 import FormContact from '../FormContact/FormContact';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
 import VenderForm from '../Forms/VenderForm/VenderForm';
+import ContacForm from '../Forms/ContactForm/ContactForm';
+import { Skeleton } from '@mui/material';
+import { FaHeart } from 'react-icons/fa';
 
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -66,6 +70,7 @@ const PrevArrow = (props) => {
 
 const ItemDetail = ({ property }) => {
   const printRef = useRef();
+  const [isFavorited, setIsFavorited] = useState(false);
 
   const { suite_amount, location, photos, type, rich_description } = property;
 
@@ -118,8 +123,8 @@ const ItemDetail = ({ property }) => {
   const sliderSettings = {
     dots: false, // Desactiva los puntitos
     infinite: true,
-    speed: 500,
-    slidesToShow: 1.5,
+    speed: 1500,
+    slidesToShow: 2.1,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -143,41 +148,97 @@ const ItemDetail = ({ property }) => {
       },
     ],
   };
-
+  const toggleFavorite = async () => {
+    try {
+      const product = {
+        id: property.id,
+        name: property.publication_title || property.address || 'Producto sin nombre', // Usar un campo relevante para el nombre
+        price: property.operations[0]?.prices[0]?.price || 0, // Precio del producto
+        photos: property.photos?.[0]?.image || 'default-image.jpg' // Imagen del producto
+      };
+  
+      if (!isFavorited) {
+        // Si no está en favoritos, agregarlo
+        const response = await fetch('/api/cookies/set-product', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ product }), // Usar el producto real
+          credentials: 'include'
+        });
+        if (!response.ok) {
+          throw new Error('Error al guardar el producto en la cookie');
+        }
+      } else {
+        // Si ya está en favoritos, eliminarlo
+        const response = await fetch(`/api/cookies/delete-product/${product.id}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+        if (!response.ok) {
+          throw new Error('Error al eliminar el producto de la cookie');
+        }
+      }
+      setIsFavorited(!isFavorited);
+    } catch (error) {
+      console.error('Error al manejar la cookie del producto:', error);
+    }
+  };
+  
+  useEffect(() => {
+    const checkIfFavorited = async () => {
+      try {
+        const response = await fetch('/api/cookies/get-products');
+        if (!response.ok) {
+          throw new Error('Error al obtener las cookies de productos');
+        }
+        const data = await response.json();
+        const favoritedProducts = data.products || [];
+        const isFav = favoritedProducts.some(prod => prod.id === property.id);
+        setIsFavorited(isFav);
+      } catch (error) {
+        console.error('Error al obtener las cookies de productos:', error);
+      }
+    };
+    checkIfFavorited();
+  }, [property.id]);
   return (
     <Container className="my-5 text-dark property-detail">
       {/* Botón de regreso */}
-      <button onClick={goBack} variant="primary" className="btn-go-back custom-button">
+      <button onClick={goBack} variant="primary" className="btn-go-back custom-button mt-5">
         <FaArrowLeft className="me-2" />
-        Volver a la lista
+
+        VOLVER A LA BUSQUEDA
       </button>
 
-      {/* Encabezado */}
-      <Row className="encabezado my-5">
-        <Col md={12}>
-          <div className="nombre-precio-container">
-            <div className="d-flex align-items-center">
-              <h4 className="display-6 me-3">{address}</h4>
-              <FavoriteBorderIcon className="icon" />
-            </div>
-            <h2 className="fw-light">
-              {operations[0].prices[0].currency === 'USD' ? 'Venta USD' : 'Venta ARS'}{' '}
-              {operations[0].prices[0].price.toLocaleString('es-ES', { minimumFractionDigits: 2 })}
-            </h2>
+      { /* Encabezado */}
+        <Row className="encabezado my-5">
+          <Col className="barra" md={12}>
+            <div className="nombre-precio-container">
+          <div className="d-flex align-items-center">
+            <h1 className="address-title-details">{address}</h1>
+            <FaHeart
+                className={`heart-icon ${isFavorited ? 'favorited' : ''}`}
+                onClick={toggleFavorite}
+              />
           </div>
-        </Col>
-        <Col md={12}>
-          <hr className="my-3" />
-        </Col>
-        <Col className="barrio-compartir-container">
-          <h5 className="text-muted mt">{property_type} en {barrio}</h5>
-          <div className="compartir-container">
-            <span className="me-3">Enviar por:</span>
-            <div>
-              <FaWhatsapp
-                className="mx-2"
-                style={{ cursor: 'pointer' }}
-                onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
+          <h2 className="price-details">
+            {operations[0].prices[0].currency === 'USD' ? 'Venta USD' : 'Venta ARS'}{' '}
+            {operations[0].prices[0].price.toLocaleString('es-ES')}
+          </h2>
+            </div>
+          </Col>
+         
+          <Col className="barrio-compartir-container">
+            <p className="property-type-details mt">{property_type} en {barrio}</p>
+            <div className="compartir-container">
+          <span className="me-3">Enviar por:</span>
+          <div>
+            <FaWhatsapp
+              className="mx-2"
+              style={{ cursor: 'pointer' }}
+              onClick={shareOnWhatsApp} // Manejador para compartir en WhatsApp
               />
               <MailIcon
                 className="mx-2"
@@ -245,8 +306,8 @@ const ItemDetail = ({ property }) => {
         {bedrooms > 0 && (
           <Col xs={4} className="info-item text-center">
             <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
-            <p className="text-muted">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
-            <span className="text-muted">{bedrooms}</span>
+            <p className="letras-">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
+            <span className="">{bedrooms}</span>
           </Col>
         )}
         {bathroom_amount > 0 && (
@@ -272,11 +333,7 @@ const ItemDetail = ({ property }) => {
         )}
       </div>
     </div>
-  </Col>
-
-
-        <Col md={6}>
-          <Row className="property-info p-4">
+    <Row className="property-info p-4 mb-5">
             <h2 className="mb-4 text-dark">Información</h2>
             <div className="info-details d-flex flex-column gap-4">
               {property.disposition && (
@@ -305,37 +362,41 @@ const ItemDetail = ({ property }) => {
               )}
             </div>
           </Row>
-        </Col>
-      </Row>
-
-      {/* Descripción y etiquetas */}
-      <Row className="mt-3">
-        <Col>
+          <Row>
           {tags && tags.length > 0 && (
-            <div className="property-tags bg-white p-4 rounded-3">
+            <div className="property-tags bg-white p-4  ">
               <h2 className="mb-4">Adicionales</h2>
               <Row>
                 {tags.map((tag, index) => (
-                  <Col xs={6} key={index} className="tag-item bg-light p-2 rounded mb-2">
+                  <Col xs={6} key={index} className=" bg-white p-1 rounded mb-1">
                     {tag.name}
                   </Col>
                 ))}
               </Row>
             </div>
           )}
-        </Col>
+        </Row>
+  
+  </Col>
 
-        <Col>
+  <Col>
           <div className="property-description bg-white p-4 rounded-3">
             <h2>Descripción</h2>
-            <p dangerouslySetInnerHTML={{ __html: rich_description }}></p>
+            <p className='' dangerouslySetInnerHTML={{ __html: rich_description }}></p>
           </div>
         </Col>
+        
+      </Row>
+
+      {/* Descripción y etiquetas */}
+      <Row className="mt-3">
+        
+
+        
       </Row>
 
       {/* Ubicación */}
       <Row className="mt-3">
-        <h2>Ubicación</h2>
         <MapaInteractivo property={property} />
       </Row>
 
@@ -359,7 +420,7 @@ const ItemDetail = ({ property }) => {
         <Print property={property} />
       </div>
       <div className='form-detail-container'>
-        <VenderForm />
+        <ContacForm />
       </div>
     </Container>
   );

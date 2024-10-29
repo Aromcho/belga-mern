@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "components/button";
+import { Button } from "react-bootstrap";
 import "./Status.css";
 
 export const Status = ({

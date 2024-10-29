@@ -64,7 +64,7 @@ const ConoceBelga = observer(() => {
 
         <Container>
           <div className="cb-back-wrapper">
-            <Link to={PATHS.ROOT}>
+            <Link className="text-black" to={PATHS.ROOT}>
               <ArrowBackIcon />
               Volver al inicio
             </Link>

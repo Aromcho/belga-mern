@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { Card } from "react-bootstrap";
-import { FaBed, FaBath, FaCarAlt, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import './Item.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { HeartIcon } from "../Icons/Icons";
 
 // Custom arrows for the carousel
 const NextArrow = (props) => {
@@ -60,7 +58,55 @@ const PrevArrow = (props) => {
 };
 
 const Item = ({ property }) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const toggleFavorite = async () => {
+    try {
+      if (!isFavorited) {
+        // Si no está en favoritos, agregarlo
+        const response = await fetch('/api/cookies/set-product', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ product: property }),
+        });
+        if (!response.ok) {
+          throw new Error('Error al guardar el producto en la cookie');
+        }
+      } else {
+        // Si ya está en favoritos, eliminarlo
+        const response = await fetch(`/api/cookies/delete-product/${property.id}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          throw new Error('Error al eliminar el producto de la cookie');
+        }
+      }
+      setIsFavorited(!isFavorited);
+    } catch (error) {
+      console.error('Error al manejar la cookie del producto:', error);
+    }
+  };
+
+  useEffect(() => {
+    const checkIfFavorited = async () => {
+      try {
+        const response = await fetch('/api/cookies/get-products');
+        if (!response.ok) {
+          throw new Error('Error al obtener las cookies de productos');
+        }
+        const data = await response.json();
+        const favoritedProducts = data.products || [];
+        const isFav = favoritedProducts.some(prod => prod.id === property.id);
+        setIsFavorited(isFav);
+      } catch (error) {
+        console.error('Error al obtener las cookies de productos:', error);
+      }
+    };
+    checkIfFavorited();
+  }, [property.id]);
+
   const mainImages = property.photos?.slice(0, 5) || [{ image: 'default-image.jpg' }];
   const price = property.operations[0]?.prices[0]?.price ? property.operations[0].prices[0].price.toLocaleString('es-ES') : 'Precio no disponible';
   const operationType = property.operations[0]?.operation_type;
@@ -71,11 +117,6 @@ const Item = ({ property }) => {
   const address = property.address || 'Dirección no disponible'; 
   const barrio = property.location.name || 'Barrio no disponible'; 
   const propertyId = property.id;
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
-  };
 
   const settings = {
     dots: false, 
@@ -88,25 +129,13 @@ const Item = ({ property }) => {
     draggable: true, 
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Define el tamaño máximo para considerar como móvil
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Llama a la función una vez para establecer el estado inicial
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <Card className="card-item shadow-lg  overflow-hidden text-black">
-      {/* Pasar los datos de la propiedad con el estado */}
-      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full" >{/*target={isMobile ? '_self' : '_blank'}*/}
-      <div className="head-prop d-flex justify-content-between m-2 px-4 py-2">
-            <span className="type-item">{operationType.toUpperCase()}</span>
-            <span className="price-item">USD {price}</span>
-          </div>
+    <Card className="card-item shadow-lg overflow-hidden text-black">
+      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full">
+        <div className="head-prop d-flex justify-content-between m-2 px-4 py-2">
+          <span className="type-item">{operationType.toUpperCase()}</span>
+          <span className="price-item">USD {price}</span>
+        </div>
         <Slider {...settings} className="image-wrapper">
           {mainImages.map((img, index) => (
             <div key={index}>
@@ -119,16 +148,19 @@ const Item = ({ property }) => {
           ))}
         </Slider>
 
-        <Card.Body className="py-4 ">
+        <Card.Body className="py-4">
           <div className="card-header-item">
             <div className="direction-container">
               <h5 className="barrio-item">{barrio}</h5>
               <p className="direccion-item">{address}</p>
             </div>
             <FaHeart
-      className={`heart-icon ${isFavorited ? 'favorited' : ''}`}
-      onClick={toggleFavorite}
-    />
+              className={`heart-icon ${isFavorited ? 'favorited' : ''}`}
+              onClick={(e) => {
+                e.preventDefault(); // Evitar que el enlace redirija
+                toggleFavorite();
+              }}
+            />
           </div>
           <div className="property-info d-flex justify-content-between">
             {size > 0 && (

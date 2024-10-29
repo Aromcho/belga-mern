@@ -133,7 +133,7 @@ export const Menu = () => {
             </Link>
           </li>
           <li className="burger-menu-item">
-            <Link to={PATHS.FAVORITES} className="burger--menu-link">
+            <Link to="/favorites" className="burger--menu-link">
             <FavoriteBorderIcon className="icon" />
             <span className="link-text">Favoritas</span>
             </Link>

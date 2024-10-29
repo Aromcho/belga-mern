@@ -1,61 +1,40 @@
-.title {
-  width: 100%;
-  color: #000000;
-  font-size: 20px;
-  font-weight: 600;
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.favorite-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 250px;
   text-align: center;
-  text-transform: uppercase;
-  margin: 0 auto -100px;
+  transition: transform 0.3s ease;
 }
 
-@media screen and (max-width: 992px) {
-  .title {
-    margin: 0 auto -50px;
-  }
-}
-
-.formWrapper {
+.favorite-item img {
   width: 100%;
-  margin: 30px auto 100px;
-  display: block;
+  height: 150px;
+  object-fit: cover;
 }
 
-.backWrapper {
-  display: table;
-  margin-bottom: 40px;
+.favorite-item:hover {
+  transform: scale(1.05);
 }
 
-.backLink {
-  align-items: center;
-  display: inline-flex;
-  color: #000000;
-  cursor: pointer;
-  font-size: 14px;
+.property-info {
+  padding: 15px;
+}
+
+.property-info h2 {
+  font-size: 18px;
   font-weight: 600;
-  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.backLink svg {
-  width: 24px;
-  height: auto;
-  display: block;
-  transition: all 0.3s ease-in-out;
-  margin-right: 5px;
-}
-
-.backLink:hover svg {
-  transform: translateX(-5px);
-}
-
-.favoritesContainer {
-  width: 100%;
-  min-height: 80vh;
-  height: auto;
-  padding-top: 150px;
-}
-
-@media screen and (max-width: 840px) {
-  .favoritesContainer {
-    padding-top: 100px;
-  }
+.property-info p {
+  font-size: 16px;
+  color: #333;
 }

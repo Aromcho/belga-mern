@@ -175,20 +175,21 @@
 .cb-valores-list {
   width: 100%;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: flex-start; /* Alineación de los elementos */
+  justify-content: space-between; /* Espacio uniforme entre los elementos */
 }
 
 .cb-valores-wrapper {
   width: 100%;
   max-width: 330px;
   color: #000000;
+  margin: 0 10px; /* Espacio horizontal entre elementos */
 }
 
 .cb-valores-list-title {
-  font-weight:lighter;
+  font-weight: lighter;
   font-size: 48px;
-  margin-bottom: 20px;
+  margin-bottom: 10px; /* Espaciado inferior */
 }
 
 .cb-valores-list-text {
@@ -197,6 +198,7 @@
   font-size: 14px;
   line-height: 18px;
 }
+
 
 .cb-quotes-section {
   width: 100%;
@@ -418,4 +420,128 @@
 .cb-office-text-wrapper {
   padding-top: 80px;
   padding-bottom: 80px;
+}
+/* Versión Móvil */
+@media screen and (max-width: 992px) {
+  .cb-hero-wrapper {
+    display: none;
+  }
+  .cb-back-wrapper .text-black {
+    text-decoration: none;
+  }
+  .cb-container {
+    padding-top: 115px; /* Ajuste de padding para móviles */
+  }
+  .cb-historia-wrapper {
+    display: flex;
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    gap: 20px; /* Espacio entre elementos */
+  }
+  .cb-hero-wrapper {
+    height: calc(100vh - 115px); /* Ajuste de altura para móviles */
+  }
+
+  .cb-menu-hero {
+    height: 80px; /* Menú más compacto en móviles */
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+  }
+
+  .cb-menu-hero a {
+    width: 25%; /* Ancho ajustado para los enlaces en móviles */
+  }
+
+  .cb-historia-section {
+    padding: 60px 10px; /* Ajuste de padding en la sección historia */
+  }
+
+  .cb-historia-left,
+  .cb-historia-right {
+    width: 100%; /* Ambas columnas ocupan el 100% en móviles */
+    margin: 0; /* Eliminar margen para evitar espacio innecesario */
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    align-items: center; /* Centrar elementos en la sección historia */
+  }
+
+  .cb-historia-gif {
+    max-width: 100%; /* Asegurar que el GIF no desborde */
+    height: auto; /* Ajustar altura automáticamente */
+  }
+
+  .cb-underline-title {
+    font-size: 20px; /* Tamaño de fuente más pequeño para móviles */
+    text-align: center; /* Centrar título */
+  }
+
+  .cb-valores-list {
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    align-items: center; /* Centrar elementos */
+    padding: 0 10px; /* Espaciado horizontal para evitar desbordes */
+  }
+
+  .cb-valores-wrapper {
+    width: 100%; /* Ancho completo para evitar desbordes */
+    max-width: 90%; /* Ajustar ancho para móviles */
+    margin-bottom: 20px; /* Espacio entre elementos */
+  }
+
+  .cb-valores-list-title {
+    font-size: 36px; /* Tamaño de fuente más pequeño para móviles */
+    text-align: center; /* Centrar título */
+  }
+
+  .cb-valores-list-text {
+    font-size: 14px; /* Ajustar tamaño de texto para que sea más legible */
+    line-height: 20px; /* Mejora de line-height para legibilidad */
+    text-align: justify; /* Justificar texto */
+  }
+
+  .cb-quote-list {
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    align-items: center; /* Centrar elementos */
+  }
+
+  .cb-staff-item {
+    flex-direction: column; /* Cambiar a columna para el personal */
+    align-items: center; /* Centrar elementos */
+    width: 100%; /* Ancho completo en móviles */
+  }
+
+  .cb-left-content,
+  .cb-right-content {
+    width: 100%; /* Ajustar ancho de las secciones */
+  }
+
+  .cb-servicios-gallery {
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+  }
+
+  .cb-portales-list {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en móviles */
+  }
+
+  .cb-main-office {
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    width: 100%; /* Asegurar que ocupe el ancho completo */
+  }
+
+  .cb-main-office-img,
+  .cb-office-main-text {
+    width: 100%; /* Asegurar que ambos ocupen el ancho completo */
+    height: auto; /* Permitir que la altura se ajuste automáticamente */
+  }
+
+  .cb-office-text-wrapper {
+    padding: 20px; /* Ajustar padding para el texto de las oficinas */
+  }
+
+  .cb-form-wrapper {
+    margin: 20px auto; /* Ajustar márgenes para el formulario */
+    padding: 0 10px; /* Espaciado horizontal para evitar desbordes */
+  }
+
+  .cb-office-list-item {
+    flex-direction: column; /* Cambiar a columna para apilar elementos */
+    align-items: center; /* Centrar elementos */
+    margin-bottom: 10px; /* Espacio entre elementos */
+  }
 }
