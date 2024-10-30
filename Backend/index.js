@@ -49,15 +49,15 @@ app.use(express.static('public'));
 app.use('/api', router);
 
 // Configurar los cron jobs para sincronización
-cron.schedule('0 * * * *', () => {
-  console.log('Running cron job to sync with Tokko');
-  syncWithTokko();
-});
+//cron.schedule('0 * * * *', () => {
+//  console.log('Running cron job to sync with Tokko');
+//  syncWithTokko();
+//});
 // Configurar los cron jobs para sincronización Development
-cron.schedule('0 * * * *', () => {
-  console.log('Running cron job to sync with Tokko');
-  syncDevelopmentsWithTokko();
-});
+//cron.schedule('0 * * * *', () => {
+//  console.log('Running cron job to sync with Tokko');
+//  syncDevelopmentsWithTokko();
+//});
 
 //ejecutar el jsonGenerator.js
 //cron.schedule('0 * * * *', () => {

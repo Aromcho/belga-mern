@@ -62,22 +62,29 @@ const Item = ({ property }) => {
 
   const toggleFavorite = async () => {
     try {
+      const product = {
+        id: property.id,
+        name: property.publication_title || property.address || 'Producto sin nombre',
+        price: property.operations[0]?.prices[0]?.price || 0,
+        photos: property.photos?.[0]?.image || 'default-image.jpg'
+      };
+  
       if (!isFavorited) {
-        // Si no está en favoritos, agregarlo
         const response = await fetch('/api/cookies/set-product', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ product: property }),
+          body: JSON.stringify({ product }),
+          credentials: 'include',
         });
         if (!response.ok) {
           throw new Error('Error al guardar el producto en la cookie');
         }
       } else {
-        // Si ya está en favoritos, eliminarlo
-        const response = await fetch(`/api/cookies/delete-product/${property.id}`, {
+        const response = await fetch(`/api/cookies/delete-product/${product.id}`, {
           method: 'DELETE',
+          credentials: 'include',
         });
         if (!response.ok) {
           throw new Error('Error al eliminar el producto de la cookie');

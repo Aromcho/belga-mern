@@ -5,6 +5,7 @@ export const syncWithTokko = async () => {
   const limit = 20;
   let offset = 0;
   let total_count = 0;
+  const syncedIds = new Set(); // Set para almacenar los IDs sincronizados
 
   try {
     console.log('Iniciando sincronización con Tokko...');
@@ -28,6 +29,8 @@ export const syncWithTokko = async () => {
       console.log(`Obtenidas ${properties.length} propiedades de un total de ${total_count}.`);
 
       const operations = properties.map(property => {
+        syncedIds.add(property.id); // Almacena el ID de la propiedad sincronizada
+
         // Procesamiento de imágenes
         if (property.photos && Array.isArray(property.photos)) {
           property.photos = property.photos.map(img => ({
@@ -85,7 +88,12 @@ export const syncWithTokko = async () => {
 
     } while (offset < total_count);
 
-    console.log('Sincronización completada');
+    // Después de la sincronización, eliminar las propiedades que no están en Tokko
+    await Property.deleteMany({
+      id: { $nin: Array.from(syncedIds) } // Elimina las propiedades que no fueron sincronizadas
+    });
+
+    console.log('Sincronización completada y propiedades eliminadas si es necesario.');
   } catch (error) {
     console.error('Error al sincronizar con Tokko:', error);
   }
