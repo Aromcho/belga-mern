@@ -94,10 +94,9 @@ const Home = () => {
         <div className="container seleccion--container">
           <Title
             title="NUESTRA SELECCIÓN"
-            linkButton="/highlighted"
             buttonStyle="outline red"
+            linkButton="/propertylist"
           />
-          <Button as={Link} to="/propertylist" className="button--mobile" text="Ver más" type="outline red" />
             <SelectionListContainer/>
         </div>
       </div>

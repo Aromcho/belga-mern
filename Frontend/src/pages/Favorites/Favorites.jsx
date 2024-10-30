@@ -17,12 +17,7 @@ const Favorites = () => {
           throw new Error('Error al obtener los favoritos');
         }
         const data = await response.json();
-        if (data.products.length > 0) {
-          setFavorites(data.products);
-          setStatus("finish");
-        } else {
-          setStatus("empty");
-        }
+        console.log(data);
       } catch (error) {
         console.error("Error al obtener favoritos:", error);
         setStatus("empty");

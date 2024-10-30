@@ -309,17 +309,15 @@ const ItemDetail = ({ property }) => {
       {/* Lightbox */}
         {isOpen && (
           <Dialog open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
-            <DialogContent style={{ padding: 0 }}>
-          <div style={{ position: 'relative', textAlign: 'center' }}>
-            {/* Botón cerrar */}
+          <DialogContent style={{ padding: 0 }}>
+            <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
               <IconButton
                 style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
                 onClick={() => setIsOpen(false)}
               >
                 <CloseIcon />
               </IconButton>
-
-              {/* Botones de navegación */}
+        
               <IconButton
                 style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
                 onClick={handlePrevImage}
@@ -332,8 +330,7 @@ const ItemDetail = ({ property }) => {
               >
                 <ArrowForwardIos />
               </IconButton>
-
-              {/* Imagen actual */}
+        
               <img
                 src={photos[selectedImageIndex].image}
                 alt={`Property Image ${selectedImageIndex}`}
@@ -342,6 +339,7 @@ const ItemDetail = ({ property }) => {
             </div>
           </DialogContent>
         </Dialog>
+        
       )}
 
       {/* Detalles de la propiedad */}

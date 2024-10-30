@@ -83,11 +83,33 @@
 }
 .image-wrapper-detail {
   position: relative;
-  left: -80px;
-  width: 97vw;
-  height: 450px; /* Ajusta la altura del contenedor */
-  overflow: hidden; /* Oculta las partes que sobresalgan */
+  left: 50%; /* Centra el elemento horizontalmente */
+  transform: translateX(-50%); /* Ajusta la posición para que quede centrado */
+  width: calc(97vw - 40px); /* Resta 40px para considerar márgenes, ajusta según sea necesario */
+  height: 450px;
+  overflow: hidden;
 }
+/* Asegura que no haya margen/padding debajo de la imagen */
+.dialog-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0; /* Elimina cualquier padding */
+  margin: 0;  /* Elimina cualquier margen */
+}
+
+.dialog-image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100%; /* Asegura que la imagen no sobrepase la altura disponible */
+  object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+  margin: 0; /* Elimina cualquier margen que pueda tener la imagen */
+  padding: 0; /* Elimina cualquier padding que pueda tener la imagen */
+}
+
 
 .main-image {
   width: 100%;
@@ -213,6 +235,7 @@
   margin-top: 20px; 
 }
 @media (max-width: 768px) {
+  
   .nombre-precio-container, .barrio-compartir-container {
     flex-direction: column;
     align-items: flex-start;
@@ -239,5 +262,29 @@
 
   .icon {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-wrapper-detail {
+    left: 0; /* Elimina el desplazamiento hacia la izquierda */
+    transform:translateX(-1.5%); /* Elimina el translateX en pantallas pequeñas */
+    width: calc(100vw - 30px); /* Ajusta el ancho a la pantalla completa con márgenes */
+    height: 300px; /* Ajusta la altura para pantallas móviles */
+    margin: auto; /* Asegura que esté centrado horizontalmente */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  .image-wrapper-detail {
+    width: calc(97vw - 30px); /* Ajuste específico para tamaños de pantalla medianos */
+    height: 400px; /* Ajusta la altura según tus necesidades */
+  }
+}
+
+@media (min-width: 1200px) {
+  .image-wrapper-detail {
+    width: calc(97vw - 50px); /* Ajuste para pantallas grandes */
+    height: 450px;
   }
 }

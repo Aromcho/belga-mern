@@ -4,8 +4,11 @@ import developmentRoutes from './api/Development.routes.js';
 import userRouter from './api/User.router.js';
 import articuleRouter from './api/Articule.router.js';
 import sessionsRouter from './api/session.router.js'; // Aquí importas el router de sesiones
+import cookiesRouter from './api/Cookies.router.js';
+
 const router = express.Router();
 
+router.use('/cookies', cookiesRouter);
 router.use('/property', propertyRoutes);
 router.use('/development', developmentRoutes);
 router.use('/sessions', sessionsRouter); // Aquí asegúrate de tener las rutas para sesiones
