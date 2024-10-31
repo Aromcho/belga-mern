@@ -48,7 +48,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
 
   const handleSearchChange = async (e) => {
     const query = e.target.value;
-    handleFormChange('searchQuery', query);  // Actualiza el contexto con el query
+    updateFilters({ searchQuery: query });  // Actualiza el contexto con el query
 
     if (query.length > 2) {
       try {

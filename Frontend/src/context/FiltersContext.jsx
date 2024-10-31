@@ -15,6 +15,7 @@ export const FiltersProvider = ({ children }) => {
     price_to: undefined,
     searchQuery: '',  // Incluimos el 'searchQuery'
     barrio: '',
+    order: 'desc',
   });
 
   const [properties, setProperties] = useState([]); // Propiedades actuales
@@ -47,6 +48,7 @@ export const FiltersProvider = ({ children }) => {
           maxPrice: filters.price_to,
           barrio: filters.barrio,
           searchQuery: filters.searchQuery,  // Incluimos el 'searchQuery'
+          order: filters.order,
           limit,  // Incluyendo límite de resultados por página
           offset, // Offset para controlar el desplazamiento en paginación
         },
@@ -65,6 +67,11 @@ export const FiltersProvider = ({ children }) => {
     fetchProperties();
   }, [filters, fetchProperties, limit, offset]);
 
+  const handleSuggestionSelect = (suggestion) => {
+    updateFilters({ searchQuery: suggestion.value });  // Actualiza el contexto directamente
+    setAutocompleteSuggestions([]); // Limpiar sugerencias
+  };
+  
   return (
     <FiltersContext.Provider value={{
       filters, 

@@ -13,8 +13,7 @@ const Filters = ({ onSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
-  const [query, setQuery] = useState(filters.searchQuery || ''); // Usamos el valor de 'filters' inicialmente
-  const [sortOrder, setSortOrder] = useState(filters.sortOrder || 'asc'); // Estado para manejar el orden del precio
+  const [order, setOrder] = useState(filters.sortOrder || 'desc'); // Estado para manejar el orden del precio
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -36,8 +35,7 @@ const Filters = ({ onSubmit }) => {
     if (query.length > 2) {
       try {
         const response = await axios.get('/api/property/autocomplete', {
-          params: {
-            query: query
+          params: { query
           },
         });
         setAutocompleteSuggestions(response.data);
@@ -55,14 +53,15 @@ const Filters = ({ onSubmit }) => {
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
-    setQuery(query); // Actualizamos el estado local
-    debouncedSearch(query); // Llamamos a la búsqueda difusa
+    updateFilters({ searchQuery: query }); // Actualizamos directamente en el contexto
+    debouncedSearch(query);
   };
+  
+  
 
   const handleSuggestionSelect = (suggestion) => {
     updateFilters({ searchQuery: suggestion.value }); // Actualizamos el contexto
     setAutocompleteSuggestions([]); // Limpiamos las sugerencias
-    setQuery(suggestion.value); // Actualizamos el campo de búsqueda con la selección
   };
 
   const handleFormChange = (field, value) => {
@@ -71,9 +70,9 @@ const Filters = ({ onSubmit }) => {
 
   // Cambiar el orden de los precios
   const toggleSortOrder = () => {
-    const newOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-    setSortOrder(newOrder);
-    updateFilters({ sortOrder: newOrder }); // Actualizamos el estado en los filtros
+    const newOrder = order === 'asc' ? 'desc' : 'asc';
+    setOrder(newOrder);
+    updateFilters({ order: newOrder }); // Actualizamos el estado en los filtros
   };
 
   const handleSubmit = (e) => {
@@ -102,7 +101,7 @@ const Filters = ({ onSubmit }) => {
             <Form.Control
               type="text"
               className="filter-input input-with-icon"
-              value={query} // Usamos el estado local "query"
+              value={filters.searchQuery} // Usamos el estado local "query"
               placeholder="Buscar dirección, título, barrio, etc..."
               onChange={handleSearchChange}
             />
@@ -381,7 +380,7 @@ const Filters = ({ onSubmit }) => {
         </Col>
         <Col md="auto">
           <Button onClick={toggleSortOrder} variant="light" className="w-100 custom-button">
-            Ordenar por precio {sortOrder === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
+            Ordenar por precio {order === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
           </Button>
         </Col>
       </Row>

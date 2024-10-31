@@ -90,7 +90,7 @@ const getProperties = async (req, res) => {
     }
 
     // Ordenar por precio
-    const sortObj = order === 'DESC' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
+    const sortObj = order === 'desc' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
 
     const properties = await PropertyManager.paginate({
       filter: filterObj,
