@@ -3,6 +3,7 @@
     min-height: 80vh;
     height: auto;
     padding-top: 150px;
+    font-family: 'Montserrat', sans-serif;
   }
   .img-cont-busquedas {
     width: 100vw;
@@ -15,6 +16,13 @@
   .img-cont-busquedas img{
     width: 100px;
   }
+  
+  .busqueda-card {
+    margin-bottom: 20px;
+
+    border: 1px solid #000;
+  }
+  
   @media screen and (max-width: 840px) {
     .busquedas-container {
       padding-top: 100px;

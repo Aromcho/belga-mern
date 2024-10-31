@@ -3,6 +3,7 @@ import { Form, Button, Row, Col, Collapse } from 'react-bootstrap';
 import Select from 'react-select';
 import { FaHome, FaCity, FaBed, FaCar, FaSearch, FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { FiltersContext } from '../../context/FiltersContext';
+import {FaSave} from 'react-icons/fa';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 import './Filters.css';
@@ -89,6 +90,17 @@ const Filters = ({ onSubmit }) => {
         borderColor: '#ccc',
       },
     }),
+  };
+  console.log(filters);
+  const handleSaveSearch = async () => {
+    try {
+      const searchData = { ...filters, id: Date.now().toString() }; // Genera un ID único para la búsqueda
+      await axios.post('/api/cookies/set-search', { search: searchData });
+      
+      console.log('Búsqueda guardada en cookies');
+    } catch (error) {
+      console.error('Error al guardar búsqueda:', error);
+    }
   };
 
   return (
@@ -379,6 +391,14 @@ const Filters = ({ onSubmit }) => {
           <p className='mx-5 text-mute'>313 Resultados</p>
         </Col>
         <Col md="auto">
+        <Row>
+        <Col md="auto">
+          <Button onClick={handleSaveSearch} variant="light" className="w-100 custom-button">
+            <FaSave className="me-2" />
+            Guardar búsqueda
+          </Button>
+        </Col>
+      </Row>
           <Button onClick={toggleSortOrder} variant="light" className="w-100 custom-button">
             Ordenar por precio {order === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
           </Button>
