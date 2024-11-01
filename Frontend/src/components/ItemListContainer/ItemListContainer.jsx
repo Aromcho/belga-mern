@@ -3,9 +3,12 @@ import { Container } from 'react-bootstrap';
 import { FiltersContext } from '../../context/FiltersContext';
 import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = () => {
   const { properties } = useContext(FiltersContext);
+  const { tipo } = useParams();
+  console.log(tipo);
   console.log(properties);
   // Restaurar la posición del scroll cuando el componente se monta
   useEffect(() => {

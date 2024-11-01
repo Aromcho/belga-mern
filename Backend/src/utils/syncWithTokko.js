@@ -1,4 +1,4 @@
-import axios from 'axios'; 
+import axios from 'axios';  
 import Property from '../models/Property.model.js';
 
 export const syncWithTokko = async () => {
@@ -23,7 +23,7 @@ export const syncWithTokko = async () => {
         },
       });
 
-      const properties = response.data.objects;
+      const properties = response.data.objects.filter(property => property.id !== 4260629); // Excluir propiedad con ID 4260629
       total_count = response.data.meta.total_count;
 
       console.log(`Obtenidas ${properties.length} propiedades de un total de ${total_count}.`);

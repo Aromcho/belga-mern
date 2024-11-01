@@ -294,7 +294,8 @@
 }
 
 .cb-swiper-container-gallery {
-  width: 100%;
+  width: 97vw;
+  transform:translateX(-6.5%);
   display: flex;
   margin: 0 auto 15px;
 }
@@ -309,10 +310,14 @@
 }
 .cb-service-media {
   width: 100%;
-  height: 100%;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cb-service-wrapper {
+  width: 100%;
+  height: 100%;
 }
 .cb-portales-container {
   width: 100%;
@@ -340,6 +345,14 @@
   justify-content: center;
 }
 
+.cb-portales-footer {
+  width: 100%;
+  height: 100px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .cb-portal-img {
   width: 100%;
   max-width: 100px;

@@ -3,9 +3,10 @@ import Button from "../../Button/Button.jsx";
 import { Input } from "../../Input/Input.jsx";
 import { Textarea } from "../../Textarea/Textarea.jsx";
 import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
-import { propertiesSelectOptions } from "../../../helpers/tokko.js";
-import {TitleWithIcon} from "../../TitleWithIcon/TitleWithIcon.jsx";
+import { TitleWithIcon } from "../../TitleWithIcon/TitleWithIcon.jsx";
+import axios from 'axios'; // Importamos axios para la solicitud
 import "./ContactForm.css";
+
 export const VenderForm = ({ className = "" }) => {
   const [data, setData] = useState({
     name: "",
@@ -32,6 +33,17 @@ export const VenderForm = ({ className = "" }) => {
   useEffect(() => {
     setData({ ...data, url: window.location.href });
   }, []);
+
+  // Función para enviar el formulario al backend
+  const sendContact = async (contactData) => {
+    try {
+      const response = await axios.post('/api/contact', contactData);
+      return response.data;
+    } catch (error) {
+      console.error("Error al enviar el formulario de contacto:", error);
+      throw error;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +72,7 @@ export const VenderForm = ({ className = "" }) => {
           direction: "",
           property: "",
           message: "",
-          url: "",
+          url: window.location.href,
           subject: "Quiero vender",
         });
       })
@@ -75,7 +87,7 @@ export const VenderForm = ({ className = "" }) => {
   return (
     <div className={`form-container ${className}`}>
       <div className="form-wrapper-v2">
-      <TitleWithIcon text="¿Cómo te podemos ayudar?" className=" black" />
+        <TitleWithIcon text="¿Cómo te podemos ayudar?" className="black" />
 
         <div className="wrapper-inputs">
           <Input
@@ -109,7 +121,6 @@ export const VenderForm = ({ className = "" }) => {
           />
         </div>
 
-        
         <Textarea
           className="textarea--form"
           placeHolder="Mensaje"

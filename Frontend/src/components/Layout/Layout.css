@@ -40,6 +40,11 @@
     .head-footer-link.wsp {
         background-color: #25D366; /* Color de WhatsApp */
     }
-    
+    .hero-footer a {
+        width: 98px;
+        min-width: 50px;
+        max-width: 219px;
+        
+    }
 }
 

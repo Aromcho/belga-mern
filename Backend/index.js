@@ -17,7 +17,7 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = 8001;
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,10 +49,10 @@ app.use(express.static('public'));
 app.use('/api', router);
 
 // Configurar los cron jobs para sincronización
-//cron.schedule('0 * * * *', () => {
-//  console.log('Running cron job to sync with Tokko');
-//  syncWithTokko();
-//});
+cron.schedule('*/5 * * * *', () => {
+  console.log('Ejecutando sincronización con Tokko cada 5 minutos');
+  syncWithTokko();
+});
 // Configurar los cron jobs para sincronización Development
 //cron.schedule('0 * * * *', () => {
 //  console.log('Running cron job to sync with Tokko');

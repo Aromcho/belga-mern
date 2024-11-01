@@ -123,15 +123,16 @@ const ItemDetail = ({ property }) => {
 
   const sliderSettings = {
     dots: false, // Desactiva los puntitos
+    initialSlide: 1, // Posicionamiento inicial
     infinite: true,
-    speed: 1500,
+    speed: 500,
     slidesToShow: 2.1,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     centerMode: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 15000,
     responsive: [
       {
         breakpoint: 768,
@@ -278,7 +279,7 @@ const ItemDetail = ({ property }) => {
         <Col>
           <Slider {...sliderSettings} className="image-wrapper-detail">
             {videos.map((video, index) => (
-              <div key={index} className="video-wrapper-detail">
+              <div key={index} className="image-wrapper-detail">
                 <iframe
                   src={video.player_url}
                   title={`Video ${index}`}

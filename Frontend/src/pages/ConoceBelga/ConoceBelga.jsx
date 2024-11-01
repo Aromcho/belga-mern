@@ -210,13 +210,13 @@ const ConoceBelga = observer(() => {
                   allowTouchMove={true} // Permitir desplazamiento táctil
                   grabCursor={true} // Mostrar el cursor de "grabbing" al arrastrar
                   spaceBetween={20} // Espacio entre diapositivas
-                  slidesPerView={2.5} // Muestra 2.5 diapositivas al mismo tiempo
+                  slidesPerView={3.5} // Muestra 3.5 diapositivas al mismo tiempo
                   breakpoints={{
                     740: {
-                      slidesPerView: 2, // Mostrar 2 diapositivas en pantallas más pequeñas
+                      slidesPerView: 2.5, // Mostrar 2 diapositivas en pantallas más pequeñas
                     },
                     992: {
-                      slidesPerView: 3, // Mostrar 3 diapositivas en pantallas medianas
+                      slidesPerView: 3.5, // Mostrar 3 diapositivas en pantallas medianas
                     },
                   }}
                 >
@@ -224,15 +224,15 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Video Drone</div>
                       <div className="cb-service-media">
-                        <iframe className="w-100" src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
+                        <iframe className="w-100 h-100" src="https://www.youtube.com/embed/Yc8pUaq8Zsg" />
                       </div>
                     </div>
                     </SwiperSlide>
                     <SwiperSlide>
                     <div className="cb-service-wrapper">
-                      <div className="cb-service-title">fotos</div>
+                      <div className="cb-service-title">Fotos</div>
                       <div className="cb-service-media">
-                        <img className="w-100" src="/images/servicios_fotos.jpg" />
+                        <img className="w-100 h-100" src="/images/servicios_fotos.jpg" />
                       </div>
                     </div>
                      </SwiperSlide>
@@ -240,13 +240,13 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Tour Virtual</div>
                       <div className="cb-service-media">
-                      <iframe className="w-100" src="https://matterport.com/discover/space/BB1DiUzwnhk" />
+                      <iframe className="w-100 h-100" src="https://matterport.com/discover/space/BB1DiUzwnhk" />
                       </div>
                     </div> </SwiperSlide>
                     <SwiperSlide><div className="cb-service-wrapper">
                       <div className="cb-service-title">Planos</div>
                       <div className="cb-service-media">
-                        <img className="w-100" src="/images/servicios_planos.jpg" />
+                        <img className="w-100 h-100" src="/images/servicios_planos.jpg" />
                       </div>
                     </div> </SwiperSlide>
 

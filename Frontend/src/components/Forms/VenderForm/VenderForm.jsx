@@ -3,8 +3,7 @@ import Button from "../../Button/Button.jsx";
 import { Input } from "../../Input/Input.jsx";
 import { Textarea } from "../../Textarea/Textarea.jsx";
 import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
-import { propertiesSelectOptions } from "../../../helpers/tokko.js";
-import Select from 'react-select'; // Importar react-select
+import axios from 'axios';
 import "./VenderForm.css";
 
 export const VenderForm = ({ className = "" }) => {
@@ -34,6 +33,16 @@ export const VenderForm = ({ className = "" }) => {
     setData({ ...data, url: window.location.href });
   }, []);
 
+  const sendContact = async (contactData) => {
+    try {
+      const response = await axios.post('/api/contact', contactData);
+      return response.data;
+    } catch (error) {
+      console.error("Error al enviar contacto:", error);
+      throw error;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError({
@@ -61,7 +70,7 @@ export const VenderForm = ({ className = "" }) => {
           direction: "",
           property: "",
           message: "",
-          url: "",
+          url: window.location.href,
           subject: "Quiero vender",
         });
       })
@@ -118,14 +127,14 @@ export const VenderForm = ({ className = "" }) => {
             onChange={(e) => setData({ ...data, direction: e.currentTarget.value })}
           />
 
-            <Input
+          <Input
             className="input--form half"
-            options={propertiesSelectOptions}
-            isSearchable={false}
             placeHolder="Tipo de Propiedad"
-            onChange={(opt) => setData({ ...data, property: opt.label })}
-          />
-          </div>
+            type="text"
+            value={data.property}
+            onChange={(e) => setData({ ...data, property: e.currentTarget.value })}
+          />    
+        </div>
 
         <Textarea
           className="textarea--form"
@@ -139,7 +148,6 @@ export const VenderForm = ({ className = "" }) => {
         )}
       </div>
 
-      {/* Botón posicionado sobre el marco */}
       <Button
         text="Enviar"
         type="button"

@@ -6,6 +6,7 @@ export const Textarea = ({
   label,
   placeHolder,
   value,
+  name, // Asegúrate de agregar la prop `name`
   bottomText,
   className,
   error,
@@ -19,6 +20,7 @@ export const Textarea = ({
       <textarea
         className="textarea-styled"
         value={value}
+        name={name}
         placeholder={placeHolder}
         onChange={onChange}
         autoComplete="off"
