@@ -135,10 +135,14 @@ const Item = ({ property }) => {
     prevArrow: <PrevArrow />,
     draggable: true, 
   };
+  const handleItemClick = () => {
+    // Desplázate a la parte superior antes de cambiar de página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <Card className="card-item shadow-lg overflow-hidden text-black">
-      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full">
+      <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full" onClick={handleItemClick}>
         <div className="head-prop d-flex justify-content-between m-2 px-4 py-2">
           <span className="type-item">{operationType.toUpperCase()}</span>
           <span className="price-item">USD {price}</span>

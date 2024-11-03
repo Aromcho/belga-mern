@@ -1,51 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail.jsx';
-import './ItemDetailContainer.css';
+import { Skeleton } from '@mui/material';
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 const ItemDetailContainer = () => {
-  const { id } = useParams();  // Captura el ID desde la URL
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [property, setProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  
+  // Estado inicial: usa la propiedad si viene en el state
+  const [property, setProperty] = useState(location.state?.property || null);
+  const [loading, setLoading] = useState(!location.state?.property);
   const [error, setError] = useState(null);
 
-  // Mover el scroll a la parte superior cuando la página se cargue
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]); // Esto asegura que cada vez que se cambie de propiedad, haga scroll al inicio
 
-  // Solicitar la propiedad por ID
   useEffect(() => {
-    const fetchProperty = async () => {
-      try {
-        const response = await fetch(`/api/property/${id}`);  // Asegúrate que este endpoint sea correcto
-        const data = await response.json();
+    // Si no hay datos de la propiedad en el state, carga del backend
+    if (!property || property.id !== parseInt(id)) {
+      const fetchProperty = async () => {
+        setLoading(true); // Mostrar loading al iniciar nueva carga
+        try {
+          const response = await fetch(`/api/property/${id}`);
+          const data = await response.json();
 
-        if (response.ok) {
-          setProperty(data);
-        } else {
-          setError('Propiedad no encontrada');
+          if (response.ok) {
+            setProperty(data);
+          } else {
+            setError('Propiedad no encontrada');
+          }
+        } catch (error) {
+          setError('Error al cargar la propiedad');
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        setError('Error al cargar la propiedad');
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    if (id) {
-      fetchProperty();  // Solo busca la propiedad si existe un ID
+      fetchProperty();
     }
-  }, [id]);
+  }, [id, property]);
 
-  // Si está cargando
   if (loading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className='cargando mt-5 pt-5'>
+        <Container className="my-5 text-dark property-detail">
+        <Skeleton variant="text" width={200} height={40} />
+        <Skeleton variant="rectangular" width="100%" height={300} className="my-4" />
+        <Row>
+          <Col md={6}>
+            <Skeleton variant="text" width="100%" height={30} className="mb-2" />
+            <Skeleton variant="text" width="80%" height={30} className="mb-2" />
+            <Skeleton variant="text" width="60%" height={30} />
+          </Col>
+          <Col md={6}>
+            <Skeleton variant="text" width="100%" height={150} className="my-4" />
+          </Col>
+        </Row>
+      </Container>
+      </div>
+    );
   }
+  
+  
 
-  // Si hubo un error
   if (error) {
     return (
       <div>
@@ -55,17 +76,6 @@ const ItemDetailContainer = () => {
     );
   }
 
-  // Si no se encontró la propiedad
-  if (!property) {
-    return (
-      <div>
-        <p>No se encontró la propiedad. Volviendo a la lista de propiedades...</p>
-        <button onClick={() => navigate(-1)}>Volver a la lista</button>
-      </div>
-    );
-  }
-
-  // Mostrar el detalle de la propiedad
   return (
     <div className="item-detail-container pt-5">
       <ItemDetail property={property} />

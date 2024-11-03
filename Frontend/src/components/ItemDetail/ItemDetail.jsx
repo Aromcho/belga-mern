@@ -95,7 +95,7 @@ const ItemDetail = ({ property }) => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1); // Función para volver a la página anterior
+    navigate('/propertylist'); // Función para navegar a la lista de propiedades
   };
 
   const shareOnWhatsApp = () => {

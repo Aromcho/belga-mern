@@ -49,10 +49,11 @@ app.use(express.static('public'));
 app.use('/api', router);
 
 // Configurar los cron jobs para sincronización
-cron.schedule('*/5 * * * *', () => {
-  console.log('Ejecutando sincronización con Tokko cada 5 minutos');
+cron.schedule('0 * * * *', () => {
+  console.log('Ejecutando sincronización con Tokko cada hora');
   syncWithTokko();
 });
+
 // Configurar los cron jobs para sincronización Development
 //cron.schedule('0 * * * *', () => {
 //  console.log('Running cron job to sync with Tokko');

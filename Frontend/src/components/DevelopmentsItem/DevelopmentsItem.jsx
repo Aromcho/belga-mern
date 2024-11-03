@@ -5,10 +5,13 @@ import { Card } from 'react-bootstrap';
 
 const DevelopmentItem = ({ development }) => {
     const hasPhotos = development.photos && development.photos.length > 0;
-
+    const handleItemClick = () => {
+        // Desplázate a la parte superior antes de cambiar de página
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
     return (
         <Card className="development-item">
-            <Link className="link-full" to={`/emprendimientos/${development.id}`} state={{ development }}>
+            <Link className="link-full" to={`/emprendimientos/${development.id}`} state={{ development }} onClick={handleItemClick}>
                 <div className="development-image my-5">
                     {hasPhotos ? (
                         <img src={development.photos[0].image} alt={development.name} />
