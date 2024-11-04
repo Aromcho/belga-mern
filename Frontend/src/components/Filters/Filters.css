@@ -68,7 +68,7 @@
 }
 
 .separator {
-  margin: 0 5px;
+  margin: 0;
   font-size: 18px;
   color: #6c757d;
 }
@@ -171,13 +171,13 @@
 }
 
 .separator {
-  margin: 0 5px;
+  margin: 0 !important;
   font-size: 18px;
   color: #6c757d;
 }
 
 .min-max-input {
-  width: 75px;
+  width: 100px;
   height: 38px;
   border-radius: 0;
   font-size: 14px;
