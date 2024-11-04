@@ -21,6 +21,7 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false); // Nuevo estado para detectar si es mobile
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Función para verificar el tamaño de la pantalla
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 992); // Definir si es mobile con ancho <= 992px
@@ -39,6 +40,7 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sessionStorage.setItem('fromHome', 'true');
     navigate("/propertylist", { state: { filters } }); // Redirigir a la lista de propiedades
   };
 

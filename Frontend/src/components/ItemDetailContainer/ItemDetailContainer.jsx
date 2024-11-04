@@ -49,12 +49,13 @@ const ItemDetailContainer = () => {
       <div className='cargando mt-5 pt-5'>
         <Container className="my-5 text-dark property-detail">
         <Skeleton variant="text" width={200} height={40} />
-        <Skeleton variant="rectangular" width="100%" height={300} className="my-4" />
+        
         <Row>
           <Col md={6}>
             <Skeleton variant="text" width="100%" height={30} className="mb-2" />
             <Skeleton variant="text" width="80%" height={30} className="mb-2" />
             <Skeleton variant="text" width="60%" height={30} />
+            <Skeleton variant="rectangular" width="100%" height={300} className="my-4" />
           </Col>
           <Col md={6}>
             <Skeleton variant="text" width="100%" height={150} className="my-4" />

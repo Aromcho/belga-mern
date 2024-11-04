@@ -95,9 +95,8 @@ const ItemDetail = ({ property }) => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/propertylist'); // Función para navegar a la lista de propiedades
+    navigate('/propertylist');
   };
-
   const shareOnWhatsApp = () => {
     const message = `Mira esta propiedad: ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price} https://belga.com.ar/propiedad/${idTokko}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;

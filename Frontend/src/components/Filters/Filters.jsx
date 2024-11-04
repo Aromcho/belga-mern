@@ -104,7 +104,7 @@ const Filters = ({ onSubmit }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="filter-form pt-5">
+    <Form onSubmit={handleSubmit} className="filter-form">
       {/* Input para búsqueda general */}
       <Row>
         <Col>
@@ -404,6 +404,20 @@ const Filters = ({ onSubmit }) => {
           </Button>
         </Col>
       </Row>
+      <div className='btn-list-mobile'>
+        <div>
+          <Button as={Link} to="/" variant="light" className="w-100 custom-button p-0 pt-2">
+            <FaArrowLeft className="me-2" />
+            Volver al inicio
+          </Button>
+          <p className='px-4'>313 Resultados</p>
+          </div>
+          <div className='price-order-mobile'>
+          <Button onClick={toggleSortOrder} variant="light" className="custom-button w-100 p-0">
+            Ordenar por precio {order === 'asc' ? <FaArrowUp /> : <FaArrowDown />}
+      </Button>
+          </div>
+      </div>
     </Form>
   );
 };

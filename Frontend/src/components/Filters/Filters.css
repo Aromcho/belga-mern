@@ -1,3 +1,7 @@
+.filter-form {
+  padding-top: 3rem;
+}
+
 .input-icon-wrapper {
   position: relative;
   width: 100%;
@@ -181,9 +185,24 @@
   color: #6c757d;
   text-align: center;
 }
+.btn-list-mobile {
+  display: none;
+}
 /* mobile */
 
 @media (max-width: 768px) {
+  .filter-form {
+    padding-top: 0;
+  }
+
+  .btn-list-mobile {
+    display: flex;
+    
+  }
+ .price-order-mobile {
+  display: flex;
+  align-items: end;
+ }
   .search-button-filter {
     display: none !important;
   }
