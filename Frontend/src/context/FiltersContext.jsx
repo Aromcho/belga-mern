@@ -7,7 +7,7 @@ export const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState({
     operation_type: [],  
     property_type: [],   
-    min_rooms: 1,
+    min_rooms: undefined,
     max_rooms: undefined,
     min_garages: undefined,
     max_garages: undefined,
