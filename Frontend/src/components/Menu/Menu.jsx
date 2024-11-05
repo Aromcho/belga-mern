@@ -112,9 +112,8 @@ export const Menu = () => {
         >
           <div className="icon-wrapper">
             <div
-              className={`burger-cross-custom ${
-                showMenu ? "cross" : "burger"
-              } ${!isHome && !showMenu ? "burger-dark" : ""}`}  // Cambia el color fuera del home
+              className={`burger-cross-custom ${showMenu ? "cross burger-dark" : " burger"
+                } ${(!isHome || sticky) && !showMenu ? "burger-dark" : ""}`}  // Cambia el color según la condición
             >
               <div className="line" />
               <div className="line" />
@@ -147,7 +146,7 @@ export const Menu = () => {
           <li className="burger-menu-item">
             <Link to={PATHS.CONOCEBELGA} className="burger--menu-link">
               <BelgaIsoIcon />
-              <span className="link-text">Conocé Belga</span>
+              <span className="link-text" spellCheck="false">Conocé Belga</span>
             </Link>
           </li>
           <li

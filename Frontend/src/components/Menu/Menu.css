@@ -271,8 +271,7 @@
   margin: 0;
 }
 
-.burger-menu-item {
-}
+
 
 .burger-menu-item a {
   text-decoration: none;
@@ -356,4 +355,8 @@
     background-color: #fff;
     display: block;
   }
+  .burger-dark .line {
+    background-color: #333;
+  }
+  
 }
