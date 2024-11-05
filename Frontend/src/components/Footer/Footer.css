@@ -91,24 +91,58 @@
 /* Ajustes para pantallas medianas (max-width: 768px) */
 @media (max-width: 768px) {
   .footer-wrapper {
-    flex-direction: column-reverse; /* Para pantallas más pequeñas, organizar en una sola columna en orden inverso */
+    flex-direction: column; /* Para pantallas más pequeñas, organizar en una sola columna */
     text-align: center;
   }
 
   .footer-left,
   .footer-center,
   .footer-right {
-    padding: 10px;
+    order: unset; /* Permitir que los elementos se intercalen */
+  }
+  .footer-right
+   {
+    order: 1; /* Asegurar que footer-left esté arriba */
+  }
+
+  .footer-center,
+  .footer-left
+   {
+    order: 2; /* Ordenar footer-center y footer-right después */
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    padding: 20px;
     flex: 100%;
     height: auto; /* Ajustar la altura automáticamente */
   }
 
   .social-list {
-    justify-content: center;
+    width: 85vw;
+    justify-content:space-between;
   }
 
   .footer-center img {
     width: 70%; /* Ajustar el tamaño de la imagen */
+  }
+  .footer-right .legal-text {
+    text-align: start;
+    font-size: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  .legal-link .text-white {
+    text-decoration: none !important;
+    text-transform: none;
+    justify-content: start;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .footer-right .mp {
+    text-align: start;
+
   }
 }
 

@@ -70,6 +70,11 @@
   background-color: #C62025;
   border-color: transparent;
 }
+.dorms-dropdowns, .garages-dropdowns {
+  display: flex;
+  justify-content: space-between;
+  gap: 0; /* Reducir espacio para evitar que se salga */
+}
 /* Ocultar rango de precios en móviles */
 @media screen and (max-width: 768px) {
   .price-range-wrapper {
@@ -82,10 +87,10 @@
   }
 
   /* Ajuste de los dropdowns para habitaciones */
-  .dorms-dropdowns {
+  .dorms-dropdowns, .garages-dropdowns {
     display: flex;
-    justify-content: space-between;
-    gap: 5px; /* Reducir espacio para evitar que se salga */
+    justify-content: space-evenly;
+    gap: 0; /* Reducir espacio para evitar que se salga */
   }
 
   .min-max-input {
