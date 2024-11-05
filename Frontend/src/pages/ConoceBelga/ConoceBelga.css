@@ -527,7 +527,10 @@
   .cb-servicios-gallery {
     flex-direction: column; /* Cambiar a columna para apilar elementos */
   }
-
+  .cb-service-wrapper, .swiper-slide {
+    width: 80vw !important;
+    height: 100%;
+  }
   .cb-portales-list {
     grid-template-columns: repeat(2, 1fr); /* Dos columnas en móviles */
   }
