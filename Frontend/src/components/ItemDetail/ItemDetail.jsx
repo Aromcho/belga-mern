@@ -20,6 +20,7 @@ import { Skeleton, Dialog, DialogContent, IconButton } from '@mui/material';
 import Lightbox from 'react-spring-lightbox';
 import { Close as CloseIcon } from '@mui/icons-material';
 
+
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -74,7 +75,9 @@ const ItemDetail = ({ property }) => {
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar Lightbox
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
+
   const { suite_amount, location, photos, type, rich_description } = property;
+  const totalImages = photos.length;
 
   const videos = Array.isArray(property.videos) ? property.videos : [];
   const idTokko = property.id;
@@ -91,6 +94,7 @@ const ItemDetail = ({ property }) => {
   const tags = property.tags;
   const property_type = property.type ? property.type.name : '';
   const operations = property.operations && property.operations[0] ? property.operations : [];
+  const expenses = property?.expenses || 0;
   
   const navigate = useNavigate();
 
@@ -223,6 +227,24 @@ const ItemDetail = ({ property }) => {
   const handleNextImage = () => {
     setSelectedImageIndex((prevIndex) => (prevIndex === photos.length - 1 ? 0 : prevIndex + 1));
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (isOpen) {
+        if (event.key === 'ArrowLeft') {
+          handlePrevImage();
+        } else if (event.key === 'ArrowRight') {
+          handleNextImage();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]); 
+
   return (
     <Container className="my-5 text-dark property-detail">
       {/* Botón de regreso */}
@@ -308,35 +330,50 @@ const ItemDetail = ({ property }) => {
 
       {/* Lightbox */}
         {isOpen && (
-          <Dialog open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
-          <DialogContent style={{ padding: 0 }}>
-            <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
-              <IconButton
-                style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
-                onClick={() => setIsOpen(false)}
-              >
-                <CloseIcon />
-              </IconButton>
-        
-              <IconButton
-                style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
-                onClick={handlePrevImage}
-              >
-                <ArrowBackIos />
-              </IconButton>
-              <IconButton
-                style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
-                onClick={handleNextImage}
-              >
-                <ArrowForwardIos />
-              </IconButton>
-        
-              <img
-                src={photos[selectedImageIndex].image}
-                alt={`Property Image ${selectedImageIndex}`}
-                style={{ width: '100%', height: 'auto', maxHeight: '90vh' }}
-              />
-            </div>
+          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
+          <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
+          <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
+    {/* Contador de imágenes */}
+    <div style={{
+      position: 'absolute',
+      top: '10px',
+      left: '20px',
+      color: 'white',
+      fontSize: '18px',
+      fontWeight: 'bold',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      padding: '5px 10px',
+      borderRadius: '5px'
+    }}>
+      {selectedImageIndex + 1}/{totalImages}
+    </div>
+
+    <IconButton
+      style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
+      onClick={() => setIsOpen(false)}
+    >
+      <CloseIcon />
+    </IconButton>
+
+    <IconButton
+      style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
+      onClick={handlePrevImage}
+    >
+      <ArrowBackIos />
+    </IconButton>
+    <IconButton
+      style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
+      onClick={handleNextImage}
+    >
+      <ArrowForwardIos />
+    </IconButton>
+
+    <img
+      src={photos[selectedImageIndex].image}
+      alt={`Property Image ${selectedImageIndex}`}
+      style={{ width: '100vw', height: '100%', maxHeight: '90vh' }}
+    />
+  </div>
           </DialogContent>
         </Dialog>
         
@@ -389,6 +426,13 @@ const ItemDetail = ({ property }) => {
                   <span className="text-muted">{toilet_amount}</span>
                 </Col>
               )}
+              {expenses > 0 && (
+                  <Col xs={4} className="info-item text-center">
+                    <img className="icon-image" src="/images/icons/prop_expensas.svg" />
+                    <p className="text-muted">Expensas</p>
+                    <span className="text-muted">{expenses.toLocaleString("es-ES")}</span>
+                  </Col>
+                )}
             </div>
           </div>
           <Row className="property-info p-4 mb-5">
