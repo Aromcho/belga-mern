@@ -371,7 +371,7 @@ const ItemDetail = ({ property }) => {
     <img
       src={photos[selectedImageIndex].image}
       alt={`Property Image ${selectedImageIndex}`}
-      style={{ width: '100vw', height: '100%', maxHeight: '90vh' }}
+      style={{ width: '100vw', height: 'auto', maxHeight: '90vh' }}
     />
   </div>
           </DialogContent>
