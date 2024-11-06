@@ -292,7 +292,7 @@
   .dialog-image-container img {
     display: block;
     width: 100vw !important;
-    height: 60vh !important; /* Ajusta la altura de la imagen */
+    height: 60vh; /* Ajusta la altura de la imagen */
     max-height: 90vh; /* Asegura que la imagen no sobrepase la altura disponible */
     object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
     margin: 0; /* Elimina cualquier margen que pueda tener la imagen */
