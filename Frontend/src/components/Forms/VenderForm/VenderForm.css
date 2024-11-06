@@ -116,7 +116,8 @@
 @media screen and (max-width: 992px) {
   .wrapper-inputs {
       flex-direction: column;
-      gap: 5px;
+      margin-bottom: 0;
+      gap: 0px;
   }
 
   .input--form {
@@ -126,4 +127,8 @@
   .form-container, .form-wrapper, .textarea--form {
       max-width: 100%;
   }
+  .input--form.half {
+    margin-top: 5px;
+    padding: 0px;
+}
 }

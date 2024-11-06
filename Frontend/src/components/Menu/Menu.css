@@ -75,7 +75,7 @@
   margin: 0;
   background-color: transparent;
   transition: all 0.4s cubic-bezier(0.74, 0.04, 0.24, 1.04);
-  z-index: 999999999;
+  z-index: 10000000;
   position: fixed;
   top: 32px; /* Ajustado para la franja */
   left: 0;
