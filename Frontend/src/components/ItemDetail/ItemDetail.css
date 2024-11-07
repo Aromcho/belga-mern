@@ -266,23 +266,25 @@
     font-size: 1.2rem;
   }
   .slick-list {
-    width: 100vw;
     padding: 0 !important;
-    margin: 0;
+    overflow: hidden; /* Evita el scroll horizontal */
   }
   .main-image {
-    padding: 0; /* Elimina cualquier padding */
-    margin: 0;  /* Elimina cualquier margen */
-    }
+    padding: 0;
+    margin: 0;
+    width: 100vw; /* Ancho completo de la pantalla */
+    height: 300px; /* Ajusta la altura según sea necesario */
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+  }
 }
 
 @media (max-width: 768px) {
   .image-wrapper-detail {
-    left: 0; /* Elimina el desplazamiento hacia la izquierda */
-    transform:translateX(-3.8%); /* Elimina el translateX en pantallas pequeñas */
-    width: calc(100vw - 0px); /* Ajusta el ancho a la pantalla completa con márgenes */
-    height: 300px; /* Ajusta la altura para pantallas móviles */
-    margin: auto; /* Asegura que esté centrado horizontalmente */
+    left: 0;
+    transform: translateX(-3%); /* Elimina el desplazamiento */
+    width: 100vw; /* Usa el ancho completo de la pantalla */
+    height: 300px; /* Ajusta la altura según sea necesario */
+    margin: 0 auto;
   }
   .dialog-image-container {
     display: flex;

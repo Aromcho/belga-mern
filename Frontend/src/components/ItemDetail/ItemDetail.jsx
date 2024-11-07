@@ -332,7 +332,7 @@ const ItemDetail = ({ property }) => {
 
       {/* Lightbox */}
         {isOpen && (
-          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
+          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="lg">
           <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
           <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
     {/* Contador de imágenes */}
