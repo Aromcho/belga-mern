@@ -140,6 +140,7 @@ const ItemDetail = ({ property }) => {
       {
         breakpoint: 768,
         settings: {
+          initialSlide: 0,
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
@@ -148,6 +149,7 @@ const ItemDetail = ({ property }) => {
       {
         breakpoint: 480,
         settings: {
+          initialSlide: 0,
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: false,
@@ -299,8 +301,8 @@ const ItemDetail = ({ property }) => {
 
       {/* Carrusel de imágenes */}
       <Row className="align-items-center">
-        <Col>
-          <Slider {...sliderSettings} className="image-wrapper-detail">
+        <Col className="p-0 m-0">
+          <Slider {...sliderSettings} className="image-wrapper-detail-container">
             {videos.map((video, index) => (
               <div key={index} className="image-wrapper-detail">
                 <iframe
