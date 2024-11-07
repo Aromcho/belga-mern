@@ -336,14 +336,14 @@ const ItemDetail = ({ property }) => {
         {isOpen && (
           <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="lg">
           <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
-          <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
+          <div className="dialog-image-container p-0 m-0" style={{ position: 'relative', textAlign: 'center' }}>
     {/* Contador de imágenes */}
     <div style={{
       position: 'absolute',
       top: '10px',
       left: '20px',
       color: 'white',
-      fontSize: '18px',
+      fontSize: '14px',
       fontWeight: 'bold',
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       padding: '5px 10px',
