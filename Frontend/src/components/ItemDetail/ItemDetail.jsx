@@ -140,8 +140,9 @@ const ItemDetail = ({ property }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: false,
         },
       },
       {
@@ -149,6 +150,7 @@ const ItemDetail = ({ property }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: false,
         },
       },
     ],
@@ -304,7 +306,7 @@ const ItemDetail = ({ property }) => {
                 <iframe
                   src={video.player_url}
                   title={`Video ${index}`}
-                  className="img-fluid rounded-3 mb-2 main-image"
+                  className="img-fluid mb-2 main-image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   allowFullScreen
                 />
@@ -315,7 +317,7 @@ const ItemDetail = ({ property }) => {
                 <img
                   src={image.image || "/path/to/default-image.jpg"}
                   alt={`Property Image ${index}`}
-                  className="img-fluid rounded-3 mb-2 main-image"
+                  className="img-fluid mb-2 main-image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   onClick={() => {
                     setSelectedImageIndex(index);
@@ -330,7 +332,7 @@ const ItemDetail = ({ property }) => {
 
       {/* Lightbox */}
         {isOpen && (
-          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
+          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="lg">
           <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
           <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
     {/* Contador de imágenes */}
