@@ -1,6 +1,17 @@
 import axios from 'axios';  
 import Property from '../models/Property.model.js';
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+// Función para dividir el array en lotes de un tamaño específico
+const chunkArray = (array, size) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+};
+
 export const syncWithTokko = async () => {
   const limit = 20;
   let offset = 0;
@@ -28,6 +39,7 @@ export const syncWithTokko = async () => {
 
       console.log(`Obtenidas ${properties.length} propiedades de un total de ${total_count}.`);
 
+      // Preparar las operaciones para bulkWrite
       const operations = properties.map(property => {
         syncedIds.add(property.id); // Almacena el ID de la propiedad sincronizada
 
@@ -81,8 +93,13 @@ export const syncWithTokko = async () => {
         };
       });
 
-      const result = await Property.bulkWrite(operations);
-      console.log(`Actualizadas ${result.modifiedCount} propiedades, insertadas ${result.upsertedCount} propiedades.`);
+      // Dividir las operaciones en lotes de 100 y ejecutar cada lote
+      const operationsChunks = chunkArray(operations, 100);
+      for (const chunk of operationsChunks) {
+        const result = await Property.bulkWrite(chunk);
+        console.log(`Actualizadas ${result.modifiedCount} propiedades, insertadas ${result.upsertedCount} propiedades.`);
+        await delay(1000); // Agregar una espera de 1 segundo entre lotes para evitar sobrecargar la base de datos
+      }
 
       offset += limit;
 
