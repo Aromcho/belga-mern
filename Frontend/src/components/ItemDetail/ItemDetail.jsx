@@ -19,6 +19,7 @@ import ContacForm from '../Forms/ContactForm/ContactForm';
 import { Skeleton, Dialog, DialogContent, IconButton } from '@mui/material';
 import Lightbox from 'react-spring-lightbox';
 import { Close as CloseIcon } from '@mui/icons-material';
+import Contenido from './Contenido/Contenido';
 
 
 const NextArrow = (props) => {
@@ -83,6 +84,7 @@ const ItemDetail = ({ property }) => {
   const idTokko = property.id;
   const total_surface = property.total_surface;
   const roofed_surface = property.roofed_surface;
+  const semiroofed_surface = property?.semiroofed_surface || 0;
   const room_amount = property.room_amount;
   const address = property.address;
   const bathroom_amount = property.bathroom_amount;
@@ -95,7 +97,14 @@ const ItemDetail = ({ property }) => {
   const property_type = property.type ? property.type.name : '';
   const operations = property.operations && property.operations[0] ? property.operations : [];
   const expenses = property?.expenses || 0;
+  const disposition = property?.disposition;
+  const orientation = property?.orientation;
+  const property_condition = property?.property_condition;
+
   
+  console.log(property);
+
+
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -334,7 +343,7 @@ const ItemDetail = ({ property }) => {
 
       {/* Lightbox */}
         {isOpen && (
-          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="lg">
+          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
           <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
           <div className="dialog-image-container p-0 m-0" style={{ position: 'relative', textAlign: 'center' }}>
     {/* Contador de imágenes */}
@@ -384,112 +393,26 @@ const ItemDetail = ({ property }) => {
       )}
 
       {/* Detalles de la propiedad */}
-      <Row className="mt-3">
-        <Col md={6}>
-          <div className="property-features bg-white p-4 rounded-3">
-            <div className="property-info row">
-              {age > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_antiguedad.svg' alt="Antigüedad" />
-                  <p className="text-muted">Antigüedad</p>
-                  <span className="text-muted">{age === 0 ? 'A estrenar' : `${age} años`}</span>
-                </Col>
-              )}
-              {total_surface > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
-                  <p className="text-muted">M2 Totales</p>
-                  <span className="text-muted">{total_surface}</span>
-                </Col>
-              )}
-              {bedrooms > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
-                  <p className="letras-">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
-                  <span className="">{bedrooms}</span>
-                </Col>
-              )}
-              {bathroom_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
-                  <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
-                  <span className="text-muted">{bathroom_amount}</span>
-                </Col>
-              )}
-              {parking_lot_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_cochera.svg' alt="Cochera" />
-                  <p className="text-muted">{parking_lot_amount > 1 ? 'Cocheras' : 'Cochera'}</p>
-                  <span className="text-muted">{parking_lot_amount}</span>
-                </Col>
-              )}
-              {toilet_amount > 0 && (
-                <Col xs={4} className="info-item text-center">
-                  <img className="icon-image" src='/images/icons/prop_toilette.svg' alt="Toilettes" />
-                  <p className="text-muted">Toilettes</p>
-                  <span className="text-muted">{toilet_amount}</span>
-                </Col>
-              )}
-              {expenses > 0 && (
-                  <Col xs={4} className="info-item text-center">
-                    <img className="icon-image" src="/images/icons/prop_expensas.svg" />
-                    <p className="text-muted">Expensas</p>
-                    <span className="text-muted">{expenses.toLocaleString("es-ES")}</span>
-                  </Col>
-                )}
-            </div>
-          </div>
-          <Row className="property-info p-4 mb-5">
-            <h2 className="mb-4 text-dark">Información</h2>
-            <div className="info-details d-flex flex-column gap-4">
-              {property.disposition && (
-                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
-                  <FaRulerCombined className="icon me-3" />
-                  <p className="mb-0">
-                    <strong>Disposición: </strong>{property.disposition}
-                  </p>
-                </div>
-              )}
-              {property.orientation && (
-                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
-                  <FaCompass className="icon me-3" />
-                  <p className="mb-0">
-                    <strong>Orientación: </strong>{property.orientation}
-                  </p>
-                </div>
-              )}
-              {property.property_condition && (
-                <div className="info-item-b p-3 d-flex align-items-center rounded shadow hover-effect">
-                  <FaBuilding className="icon me-3" />
-                  <p className="mb-0">
-                    <strong>Condición: </strong>{property.property_condition}
-                  </p>
-                </div>
-              )}
-            </div>
-          </Row>
-          <Row>
-            {tags && tags.length > 0 && (
-              <div className="property-tags bg-white p-4">
-                <h2 className="mb-4">Adicionales</h2>
-                <Row>
-                  {tags.map((tag, index) => (
-                    <Col xs={6} key={index} className="bg-white p-1 rounded mb-1">
-                      {tag.name}
-                    </Col>
-                  ))}
-                </Row>
-              </div>
-            )}
-          </Row>
-        </Col>
-        <Col>
-          <div className="property-description bg-white p-4 rounded-3">
-            <h2>Descripción</h2>
-            <p className='' dangerouslySetInnerHTML={{ __html: rich_description }}></p>
-          </div>
-        </Col>
-      </Row>
+      <Contenido
+        age={age}
+        total_surface={total_surface}
+        room_amount={room_amount}
+        address={address}
+        bathroom_amount={bathroom_amount}
+        bedrooms={bedrooms}
+        parking_lot_amount={parking_lot_amount}
+        toilet_amount={toilet_amount}
+        expenses={expenses}
+        tags={tags}
+        roofed_surface={roofed_surface}
+        semiroofed_surface={semiroofed_surface}
+        rich_description={rich_description}
+        disposition={disposition}
+        orientation={orientation}
+        property_condition={property_condition}
+        property
+      />
+
 
       {/* Ubicación */}
       <Row className="mt-3">

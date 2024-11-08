@@ -23,8 +23,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const isPrimary = cluster.isPrimary;
 const numCPUs = cpus().length;
+connectDB();
 
 if (isPrimary) {
+  cron.schedule('*/5 * * * *', () => {
+    console.log('Ejecutando sincronización con Tokko cada 5 minutos');
+    syncWithTokko();
+  });
   for (let i = 1; i <=numCPUs; i++){
     cluster.fork();
   }
@@ -33,7 +38,7 @@ if (isPrimary) {
   console.log('proseso worker');
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    connectDB();
+    
   });
 }
 
@@ -50,10 +55,7 @@ app.use('/api', router);
 
 // Configurar los cron jobs para sincronización
 // Configurar los cron jobs para sincronización cada 5 minutos
-cron.schedule('*/5 * * * *', () => {
-  console.log('Ejecutando sincronización con Tokko cada 5 minutos');
-  syncWithTokko();
-});
+
 
 // Configurar los cron jobs para sincronización Development
 //cron.schedule('0 * * * *', () => {
