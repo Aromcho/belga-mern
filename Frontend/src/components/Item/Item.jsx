@@ -115,7 +115,7 @@ const Item = ({ property }) => {
   }, [property.id]);
 
   const mainImages = property.photos?.slice(0, 5) || [{ image: 'default-image.jpg' }];
-  const price = property.operations[0]?.prices[0]?.price ? property.operations[0].prices[0].price.toLocaleString('es-ES') : 'Precio no disponible';
+  const price = property.operations[0]?.prices[0]?.price? `${property.operations[0].prices[0].currency} ${property.operations[0].prices[0].price.toLocaleString('es-ES')}`: 'Precio no disponible';
   const operationType = property.operations[0]?.operation_type;
   const bedrooms = property.suite_amount || 0;
   const bathrooms = property.bathroom_amount || 0;
@@ -124,6 +124,8 @@ const Item = ({ property }) => {
   const address = property.address || 'Dirección no disponible'; 
   const barrio = property.location.name || 'Barrio no disponible'; 
   const propertyId = property.id;
+  
+
 
   const settings = {
     dots: false, 
@@ -145,7 +147,7 @@ const Item = ({ property }) => {
       <Link to={`/propiedad/${propertyId}`} state={{ property }} className="link-full" onClick={handleItemClick}>
         <div className="head-prop d-flex justify-content-between m-2 px-4 py-2">
           <span className="type-item">{operationType.toUpperCase()}</span>
-          <span className="price-item">USD {price}</span>
+          <span className="price-item">{price}</span>
         </div>
         <Slider {...settings} className="image-wrapper">
           {mainImages.map((img, index) => (

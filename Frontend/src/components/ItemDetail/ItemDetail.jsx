@@ -102,8 +102,6 @@ const ItemDetail = ({ property }) => {
   const property_condition = property?.property_condition;
   const operationType = property.operations[0]?.operation_type;
 
-
-  
   console.log(property);
 
 
@@ -280,8 +278,8 @@ const ItemDetail = ({ property }) => {
               />
             </div>
             <h2 className="price-details">
-              {operationType}
-              {operations[0].prices[0].currency === ' USD' ? ' USD' : ' ARS'}{' '}
+            {operationType}
+              {operations[0].prices[0].currency === 'USD' ? ' USD' : ' ARS'}{' '}
               {operations[0].prices[0].price.toLocaleString('es-ES')}
             </h2>
           </div>
