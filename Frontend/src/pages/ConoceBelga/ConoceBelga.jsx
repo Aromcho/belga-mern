@@ -210,13 +210,14 @@ const ConoceBelga = observer(() => {
                   allowTouchMove={true} // Permitir desplazamiento táctil
                   grabCursor={true} // Mostrar el cursor de "grabbing" al arrastrar
                   spaceBetween={20} // Espacio entre diapositivas
-                  slidesPerView={3.5} // Muestra 3.5 diapositivas al mismo tiempo
+                  slidesToScroll={1} // Número de diapositivas a desplazar
+                  slidesPerView={2} // Ajustar para evitar el error de loop
                   breakpoints={{
                     740: {
-                      slidesPerView: 2.5, // Mostrar 2 diapositivas en pantallas más pequeñas
+                      slidesPerView: 1.5, // Ajustar para pantallas más pequeñas
                     },
                     992: {
-                      slidesPerView: 3.5, // Mostrar 3 diapositivas en pantallas medianas
+                      slidesPerView: 2, // Ajustar para pantallas medianas
                     },
                   }}
                 >
