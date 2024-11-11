@@ -85,9 +85,8 @@
         grid-template-columns: 1fr 1fr; /* Una sola columna para etiquetas */
     }
 
-    .info-item,
-    .tag-item {
-        text-align: left; /* Alineación de texto a la izquierda en elementos */
+    .info-item{
+        text-align:center; /* Alineación de texto a la izquierda en elementos */
     }
     .info-section {
         margin-bottom: 25px;
