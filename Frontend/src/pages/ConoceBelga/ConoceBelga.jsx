@@ -204,20 +204,20 @@ const ConoceBelga = observer(() => {
               <div className="cb-swiper-container-gallery">
               <Swiper
                   className="cb-servicios-gallery"
-                  modules={[]}
-                  loop={true} // Mantener el loop activo
-                  centeredSlides={false} // Deshabilitar la centralización de las diapositivas
-                  allowTouchMove={true} // Permitir desplazamiento táctil
-                  grabCursor={true} // Mostrar el cursor de "grabbing" al arrastrar
-                  spaceBetween={20} // Espacio entre diapositivas
-                  slidesToScroll={1} // Número de diapositivas a desplazar
-                  slidesPerView={2} // Ajustar para evitar el error de loop
+                  loop={true} 
+                  centeredSlides={false} // Centrar los elementos para un deslizamiento más natural
+                  spaceBetween={10} // Reducir el espacio entre elementos
+                  slidesPerView={1.5} // Mostrar un elemento y medio, cambiando dinámicamente
+                  grabCursor={true} 
+                  touchRatio={1.5} // Ajustar la sensibilidad del arrastre
+                  resistance={true} // Añadir resistencia al final del arrastre
+                  resistanceRatio={0.85} // Ratio de resistencia para suavidad
                   breakpoints={{
                     740: {
-                      slidesPerView: 1.5, // Ajustar para pantallas más pequeñas
+                      slidesPerView: 1.2, // Ajuste para pantallas medianas
                     },
                     992: {
-                      slidesPerView: 2, // Ajustar para pantallas medianas
+                      slidesPerView: 2.5, // Ajuste para pantallas grandes
                     },
                   }}
                 >

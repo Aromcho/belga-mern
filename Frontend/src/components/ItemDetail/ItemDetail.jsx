@@ -143,7 +143,7 @@ const ItemDetail = ({ property }) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     centerMode: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 15000,
     responsive: [
       {
@@ -279,7 +279,7 @@ const ItemDetail = ({ property }) => {
             </div>
             <h2 className="price-details">
             {operationType}
-              {operations[0].prices[0].currency === 'USD' ? ' USD' : ' ARS'}{' '}
+              {operations[0].prices[0].currency === 'USD' ? ' USD' : ' $'}{' '}
               {operations[0].prices[0].price.toLocaleString('es-ES')}
             </h2>
           </div>
