@@ -3,8 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail.jsx';
 import { Skeleton } from '@mui/material';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Helmet } from 'react-helmet';
-
+import { Helmet } from 'react-helmet-async'; // Cambia a react-helmet-async
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
@@ -69,8 +68,6 @@ const ItemDetailContainer = () => {
     );
   }
   
-  
-
   if (error) {
     return (
       <div>
@@ -82,7 +79,7 @@ const ItemDetailContainer = () => {
 
   return (
     <div className="item-detail-container pt-5">
-       <Helmet>
+      <Helmet>
         <title>{property.address} | Belga Inmobiliaria</title>
         <meta property="og:title" content={`${property.publication_title} - ${property.address}`} />
         <meta property="og:description" content={`Descubre esta propiedad en ${property.address}. Haz clic para ver detalles y más fotos.`} />
@@ -90,7 +87,7 @@ const ItemDetailContainer = () => {
         <meta property="og:url" content={`https://belga.com.ar/propiedad/${property.id}`} />
         <meta property="og:type" content="website" />
       </Helmet>
-      <ItemDetail property={property} planos={planos}/>
+      <ItemDetail property={property} planos={planos} />
     </div>
   );
 };
