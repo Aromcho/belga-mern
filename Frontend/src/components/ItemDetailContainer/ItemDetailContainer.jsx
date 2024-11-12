@@ -84,7 +84,7 @@ const ItemDetailContainer = () => {
         <meta property="og:title" content={`${property.publication_title} - ${property.address}`} />
         <meta property="og:description" content={`Descubre esta propiedad en ${property.address}. Haz clic para ver detalles y más fotos.`} />
         <meta property="og:image" content={property.photos[0]?.image || 'https://belga.com.ar/default-image.jpg'} />
-        <meta property="og:url" content={`https://belga.com.ar/propiedad/${property.id}`} />
+        <meta property="og:url" content={`http://belga.com.ar:8080/propiedad/${property.id}`} />
         <meta property="og:type" content="website" />
       </Helmet>
       <ItemDetail property={property} planos={planos} />
