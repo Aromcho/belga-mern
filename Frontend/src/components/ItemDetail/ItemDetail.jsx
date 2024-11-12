@@ -70,7 +70,7 @@ const PrevArrow = (props) => {
   );
 };
 
-const ItemDetail = ({ property }) => {
+const ItemDetail = ({ property, planos }) => {
   const printRef = useRef();
   const [isFavorited, setIsFavorited] = useState(false);
   const [isOpen, setIsOpen] = useState(false); // Estado para controlar Lightbox
@@ -258,6 +258,7 @@ const ItemDetail = ({ property }) => {
     };
   }, [isOpen]); 
 
+
   return (
     <Container className="my-5 text-dark property-detail">
       {/* Botón de regreso */}
@@ -412,6 +413,7 @@ const ItemDetail = ({ property }) => {
         orientation={orientation}
         property_condition={property_condition}
         property
+        planos={planos}
       />
 
 
