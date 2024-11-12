@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail.jsx';
 import { Skeleton } from '@mui/material';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 
 
 const ItemDetailContainer = () => {
@@ -44,6 +45,8 @@ const ItemDetailContainer = () => {
     }
   }, [id, property]);
 
+  const planos = property?.photos?.filter(photo => photo.is_blueprint) || [];
+
   if (loading) {
     return (
       <div className='cargando mt-5 pt-5'>
@@ -79,7 +82,15 @@ const ItemDetailContainer = () => {
 
   return (
     <div className="item-detail-container pt-5">
-      <ItemDetail property={property} />
+       <Helmet>
+        <title>{property.address} | Belga Inmobiliaria</title>
+        <meta property="og:title" content={`${property.publication_title} - ${property.address}`} />
+        <meta property="og:description" content={`Descubre esta propiedad en ${property.address}. Haz clic para ver detalles y más fotos.`} />
+        <meta property="og:image" content={property.photos[0]?.image || 'https://belga.com.ar/default-image.jpg'} />
+        <meta property="og:url" content={`https://belga.com.ar/propiedad/${property.id}`} />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      <ItemDetail property={property} planos={planos}/>
     </div>
   );
 };

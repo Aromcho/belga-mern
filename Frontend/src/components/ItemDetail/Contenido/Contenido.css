@@ -58,7 +58,17 @@
   font-size: 14px;
   font-weight: 600;
 }
-
+.button-planos-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button-planos:hover {
+    background-color: #C62025 !important;
+    
+}
 @media (max-width: 768px) {
     .property-container {
         grid-template-columns: 1fr; /* Una sola columna */

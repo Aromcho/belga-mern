@@ -17,7 +17,7 @@ import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
-const PORT = 8001;
+const PORT = 8080;
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
