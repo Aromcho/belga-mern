@@ -135,7 +135,7 @@ const ItemDetail = ({ property, planos }) => {
 
   const sliderSettings = {
     dots: false, // Desactiva los puntitos
-    initialSlide: 1, // Posicionamiento inicial
+    initialSlide: 0, // Posicionamiento inicial
     infinite: true,
     speed: 500,
     slidesToShow: 2.1,

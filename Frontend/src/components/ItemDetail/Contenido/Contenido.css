@@ -69,6 +69,10 @@
     background-color: #C62025 !important;
     
 }
+.info-item{
+    align-items: center;
+    text-align:center; /* Alineación de texto a la izquierda en elementos */
+}
 @media (max-width: 768px) {
     .property-container {
         grid-template-columns: 1fr; /* Una sola columna */
@@ -96,6 +100,7 @@
     }
 
     .info-item{
+        align-items: center;
         text-align:center; /* Alineación de texto a la izquierda en elementos */
     }
     .info-section {
