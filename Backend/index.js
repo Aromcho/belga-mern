@@ -13,6 +13,7 @@ import path from 'path';
 import { fileURLToPath } from 'url'; // Para obtener __dirname si usas módulos ES6
 import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
 import { generateJSON } from './src/utils/jsonGenerator.js';
+import renderPropertySEO from './src/controllers/SEO.controller.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -52,6 +53,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.static('public'));
 app.use('/api', router);
+app.get('/propiedad/:id', renderPropertySEO);
+
 
 // Configurar los cron jobs para sincronización
 // Configurar los cron jobs para sincronización cada 5 minutos
