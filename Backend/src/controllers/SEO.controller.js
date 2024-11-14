@@ -10,6 +10,12 @@ const renderPropertySEO = async (req, res) => {
       return res.status(404).send('Propiedad no encontrada');
     }
 
+    // Seleccionar la imagen adecuada
+    const ogImage =
+      property.photos.find(photo => photo.is_front_cover)?.image || 
+      property.photos[0]?.image || 
+      "https://belga.com.ar/images/og_image.png";
+
     // Genera el HTML con metaetiquetas dinámicas y redirige al frontend
     const html = `
       <!DOCTYPE html>
@@ -19,9 +25,9 @@ const renderPropertySEO = async (req, res) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${property.address} | Belga Inmobiliaria</title>
         <meta property="og:title" content="${property.address} | Belga Inmobiliaria">
-        <meta property="og:description" content="${property.publication_title}">
-        <meta property="og:image" content="${property.photos?.[0]?.image || 'https://belga.com.ar/default-image.jpg'}">
-        <meta property="og:url" content="https://belga.com.ar/propiedad/${property.id}">
+        <meta property="og:description" content="${property.publication_title} ">
+        <meta property="og:image" content="${ogImage}">
+        <meta property="og:url" content="http://belga.com.ar:8080/propiedad/${property.id}">
         <meta property="og:type" content="website">
         <meta http-equiv="refresh" content="0;url=/propertyDetail/${id}" />
       </head>
@@ -38,3 +44,4 @@ const renderPropertySEO = async (req, res) => {
 };
 
 export default renderPropertySEO;
+
