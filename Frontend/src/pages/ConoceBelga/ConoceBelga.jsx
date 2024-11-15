@@ -217,7 +217,7 @@ const ConoceBelga = observer(() => {
                       slidesPerView: 1.2, // Ajuste para pantallas medianas
                     },
                     992: {
-                      slidesPerView: 2.5, // Ajuste para pantallas grandes
+                      slidesPerView: 3.5, // Ajuste para pantallas grandes
                     },
                   }}
                 >

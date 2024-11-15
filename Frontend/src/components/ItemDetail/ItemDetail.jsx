@@ -142,7 +142,7 @@ const ItemDetail = ({ property, planos }) => {
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    centerMode: true,
+    centerMode: false,
     autoplay: false,
     autoplaySpeed: 15000,
     responsive: [
@@ -344,55 +344,80 @@ const ItemDetail = ({ property, planos }) => {
       </Row>
 
       {/* Lightbox */}
-        {isOpen && (
-          <Dialog style={{ zIndex:100000001 }} open={isOpen} onClose={() => setIsOpen(false)} maxWidth="md">
-          <DialogContent style={{margin:0, padding: 0, overflow: "hidden" }}>
-          <div className="dialog-image-container p-0 m-0" style={{ position: 'relative', textAlign: 'center' }}>
-    {/* Contador de imágenes */}
-    <div style={{
-      position: 'absolute',
-      top: '10px',
-      left: '20px',
-      color: 'white',
-      fontSize: '14px',
-      fontWeight: 'bold',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      padding: '5px 10px',
-      borderRadius: '5px'
-    }}>
-      {selectedImageIndex + 1}/{totalImages}
-    </div>
-
-    <IconButton
-      style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
-      onClick={() => setIsOpen(false)}
+      {isOpen && (
+  <Dialog
+    style={{ zIndex: 100000001 }}
+    open={isOpen}
+    onClose={() => setIsOpen(false)}
+    maxWidth="lg"
+    PaperProps={{
+      style: {
+        backgroundColor: 'transparent', // Fondo del contenido transparente
+        boxShadow: 'none',
+      },
+    }}
+    BackdropProps={{
+      style: {
+        backgroundColor: 'rgba(0, 0, 0, 0.98)', // Fondo negro oscuro
+      },
+    }}
+  >
+    <DialogContent
+      style={{
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
+        backgroundColor: 'transparent', // Fondo transparente dentro del contenido
+      }}
     >
-      <CloseIcon />
-    </IconButton>
+      <div className="dialog-image-container p-0 m-0" style={{ position: 'relative', textAlign: 'center' }}>
+        {/* Contador de imágenes */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '20px',
+            color: 'white',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            padding: '5px 10px',
+            borderRadius: '5px',
+          }}
+        >
+          {selectedImageIndex + 1}/{totalImages}
+        </div>
 
-    <IconButton
-      style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
-      onClick={handlePrevImage}
-    >
-      <ArrowBackIos />
-    </IconButton>
-    <IconButton
-      style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
-      onClick={handleNextImage}
-    >
-      <ArrowForwardIos />
-    </IconButton>
+        <IconButton
+          style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
+          onClick={() => setIsOpen(false)}
+        >
+          <CloseIcon />
+        </IconButton>
 
-    <img
-      src={photos[selectedImageIndex].image}
-      alt={`Property Image ${selectedImageIndex}`}
-      style={{ width: '100vw', height: 'auto', maxHeight: '90vh' }}
-    />
-  </div>
-          </DialogContent>
-        </Dialog>
-        
-      )}
+        <IconButton
+          style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
+          onClick={handlePrevImage}
+        >
+          <ArrowBackIos />
+        </IconButton>
+        <IconButton
+          style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
+          onClick={handleNextImage}
+        >
+          <ArrowForwardIos />
+        </IconButton>
+
+        <img
+          src={photos[selectedImageIndex].image}
+          alt={`Property Image ${selectedImageIndex}`}
+          style={{ width: 'auto', height: 'auto', maxHeight: '90vh' }}
+        />
+      </div>
+    </DialogContent>
+  </Dialog>
+)}
+
 
       {/* Detalles de la propiedad */}
       <Contenido

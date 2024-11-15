@@ -184,7 +184,7 @@ const Item = ({ property }) => {
               }}
             />
           </div>
-          <div className="property-info d-flex justify-content-between">
+          <div className="property-info d-flex justify-content-around">
             {size > 0 && (
               <div className="info-item d-flex flex-column">
                 <span className="number-info-item">{size.toString().slice(0, -3)}</span>
