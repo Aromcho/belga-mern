@@ -174,6 +174,7 @@ const Filters = ({ onSubmit }) => {
                     selected.map(option => option.value)
                   )}
                   styles={customStyles}
+                  isSearchable={false}
                 />
               </div>
             </Col>
@@ -193,6 +194,7 @@ const Filters = ({ onSubmit }) => {
                     selected.map(option => option.value)
                   )}
                   styles={customStyles}
+                  isSearchable={false}
                 />
               </div>
             </Col>
@@ -287,6 +289,7 @@ const Filters = ({ onSubmit }) => {
                 selected.map(option => option.value)
               )}
               styles={customStyles}
+              isSearchable={false}
             />
           </div>
         </Col>
@@ -306,6 +309,7 @@ const Filters = ({ onSubmit }) => {
                 selected.map(option => option.value)
               )}
               styles={customStyles}
+              isSearchable={false}
             />
           </div>
         </Col>

@@ -88,6 +88,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
                   selected.map(option => option.value)
                 )}
                 styles={customStyles}
+                isSearchable={false}
               />
             </div>
           </Col>
@@ -105,6 +106,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
                   selected.map(option => option.value)
                 )}
                 styles={customStyles}
+                isSearchable={false}
               />
             </div>
           </Col>
@@ -175,14 +177,16 @@ const SearchHomeForm = ({ handleSubmit }) => {
           <Col>
             <div className="price-range-wrapper">
               <MultiRangeSlider
-                customWidth={336}
                 min={0}
                 max={3000000}
                 step={20000}
-                onChange={({ 0: minVal, 1: maxVal }) => {
-                  handleFormChange('price_from', minVal);
-                  handleFormChange('price_to', maxVal);
-                }}/>
+                defaultValue={[filters.price_from || 0, filters.price_to || 3000000]} // Inicializa con valores del contexto
+                onChange={(newValue) => {
+                  handleFormChange('price_from', newValue[0]); // Actualiza el filtro mínimo
+                  handleFormChange('price_to', newValue[1]);   // Actualiza el filtro máximo
+                }}
+              />
+
             </div>
           </Col>
           <Col md="auto">
