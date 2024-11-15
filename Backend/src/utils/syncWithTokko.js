@@ -44,15 +44,20 @@ export const syncWithTokko = async () => {
         syncedIds.add(property.id); // Almacena el ID de la propiedad sincronizada
 
         // Procesamiento de imágenes
-        if (property.photos && Array.isArray(property.photos)) {
-          property.photos = property.photos.map(img => ({
-            image: img.image || '',
-            description: img.description || '',
-            is_blueprint: img.is_blueprint || false,
-          }));
-        } else {
-          property.photos = [];
-        }
+if (property.photos && Array.isArray(property.photos)) {
+  property.photos = property.photos.map(img => ({
+    image: img.image || '',
+    description: img.description || '',
+    is_blueprint: img.is_blueprint || false,
+    is_front_cover: img.is_front_cover || false, // Agregar is_front_cover
+    order: img.order || 0, // Asegurar el orden de las imágenes
+    original: img.original || '',
+    thumb: img.thumb || '',
+  }));
+} else {
+  property.photos = [];
+}
+
 
         // Validación y procesamiento de operations
         if (property.operations && Array.isArray(property.operations)) {

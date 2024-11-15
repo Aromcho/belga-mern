@@ -179,8 +179,10 @@ const SearchHomeForm = ({ handleSubmit }) => {
                 min={0}
                 max={3000000}
                 step={20000}
-                onChange={({ minVal, maxVal }) => handleFormChange('price_from', minVal, 'price_to', maxVal)}
-              />
+                onChange={({ 0: minVal, 1: maxVal }) => {
+                  handleFormChange('price_from', minVal);
+                  handleFormChange('price_to', maxVal);
+                }}/>
             </div>
           </Col>
           <Col md="auto">
