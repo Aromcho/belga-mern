@@ -42,49 +42,58 @@ const Contenido = ({
       <div className="property-features bg-white">
       <div className="property-info flex-row-wrap">
       {age > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span ><strong>{age === 0 ? 'A estrenar' : `${age}`}</strong></span>
         <img className="icon-image" src='/images/icons/prop_antiguedad.svg' alt="Antigüedad" />
         <p className="text-muted">Antigüedad</p>
         </div>
       )}
-      {total_surface > 0 && (
-        <div className="info-item text-center d-flex flex-column ">
-        <span><strong>{Math.round(total_surface)}</strong></span>
+      {roofed_surface > 0 && (
+        <div className="info-item text-center d-flex flex-column mb-5">
+        <span><strong>{roofed_surface.slice(0, -3)}</strong></span>
         <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
-        <p className="text-muted">M2 Totales</p>
+        <p className="text-muted">Sup. Cub.</p>
         </div>
       )}
+
+      {total_surface > 0 && (
+        <div className="info-item text-center d-flex flex-column mb-5">
+        <span><strong>{Math.round(total_surface)}</strong></span>
+        <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
+        <p className="text-muted">sub. Total</p>
+        </div>
+      )}
+
       {bedrooms > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span><strong>{bedrooms}</strong></span>
         <img className="icon-image" src='/images/icons/prop_cuarto.svg' alt="Dormitorios" />
         <p className="text-muted">{bedrooms > 1 ? 'Dormitorios' : 'Dormitorio'}</p>
         </div>
       )}
       {bathroom_amount > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span className="text-muted"><strong>{bathroom_amount}</strong></span>
         <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
         <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
         </div>
       )}
       {parking_lot_amount > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span><strong>{parking_lot_amount}</strong></span>
         <img className="icon-image" src='/images/icons/prop_cochera.svg' alt="Cochera" />
         <p className="text-muted">{parking_lot_amount > 1 ? 'Cocheras' : 'Cochera'}</p>
         </div>
       )}
       {toilet_amount > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span ><strong>{toilet_amount}</strong></span>
         <img className="icon-image" src='/images/icons/prop_toilette.svg' alt="Toilettes" />
         <p className="text-muted">Toilettes</p>
         </div>
       )}
       {expenses > 0 && (
-        <div className="info-item text-center  d-flex flex-column ">
+        <div className="info-item text-center  d-flex flex-column mb-5">
         <span><strong>{expenses.toLocaleString("es-ES")}</strong></span>
         <img className="icon-image" src="/images/icons/prop_expensas.svg" alt="Expensas" />
         <p className="text-muted">Expensas</p>
@@ -103,7 +112,11 @@ const Contenido = ({
       </div>
       )}
       {/* Modal de planos */}
-      <Dialog style={{ zIndex:100000001 }} open={isModalOpen} onClose={handleModalClose} maxWidth="md">
+      <Dialog BackdropProps={{
+      style: {
+        backgroundColor: 'rgba(0, 0, 0, 0.98)', // Fondo negro oscuro
+      },}}
+       style={{ zIndex:100000001 }} open={isModalOpen} onClose={handleModalClose} maxWidth="md">
       <DialogContent style={{ padding: 0, overflow: "hidden"  }}>
         <div className="dialog-image-container" style={{ position: 'relative', textAlign: 'center' }}>
         {/* Contador de imágenes */}

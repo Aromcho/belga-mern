@@ -102,6 +102,7 @@
 }
 /* Asegura que no haya margen/padding debajo de la imagen */
 .dialog-image-container {
+  background-color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
