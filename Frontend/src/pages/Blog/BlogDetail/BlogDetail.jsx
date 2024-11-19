@@ -68,7 +68,7 @@ const BlogDetail = () => {
         ))}
       </div>
       {/* Usamos dangerouslySetInnerHTML para renderizar el HTML */}
-      <div dangerouslySetInnerHTML={{ __html: article.description }} />
+      <div className='rich-content' dangerouslySetInnerHTML={{ __html: article.description }} />
       <div>
         <Register/>
       </div>
