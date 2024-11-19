@@ -27,7 +27,7 @@
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 16px;
   color: #6c757d;
   background-color: #fff;
 }
@@ -100,6 +100,8 @@
   /* Hacer que los inputs ocupen el ancho completo */
   .filter-input {
     width: 100%;
+    font-size: 16px;
+
   }
 
   /* Alinear el botón de búsqueda centrado */
