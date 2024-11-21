@@ -80,7 +80,7 @@ const FormContact = () => {
           required
         />
         <Textarea
-          className="h-100"
+          className=""
           name="message"
           value={formData.message}
           placeHolder={"Mensaje"}
