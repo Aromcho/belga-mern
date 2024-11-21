@@ -14,6 +14,7 @@ import HomeMap from "../../components/HomeMap/HomeMap.jsx";
 import { Container } from "react-bootstrap";
 import InversionSection from "../../components/InvertionHome/InvertionHome.jsx";
 import FromContact from "../../components/FormContact/FormContact.jsx";
+import Register from "../Register/Register.jsx";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -105,6 +106,7 @@ const Home = () => {
       {/*inversion sectin*/}
 
       <InversionSection/>
+      <Register />
       <div className="contact-section">
         <FooterInfo/>
         <HomeMap/>
