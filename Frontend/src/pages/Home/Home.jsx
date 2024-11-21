@@ -94,6 +94,7 @@ const Home = () => {
         <div className="seleccion">
           <BackToTop color="red" />
         </div>
+
         <div className="container seleccion--container">
           <Title
             title="NUESTRA SELECCIÓN"
@@ -101,12 +102,11 @@ const Home = () => {
             linkButton="/propertylist"
           />
             <SelectionListContainer/>
+
         </div>
       </div>
       {/*inversion sectin*/}
-
       <InversionSection/>
-      <Register />
       <div className="contact-section">
         <FooterInfo/>
         <HomeMap/>

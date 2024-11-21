@@ -2,11 +2,33 @@
     display: flex;
 }
 
+.register-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+  }
+.form-register-home {
+    font-family: 'Montserrat', sans-serif;
+    width: 70vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    gap: 10px;
+}
 @media (max-width: 768px) {
     
     .dev-item-container {
         width: 80vw;
 
         flex-direction: column;
+    }
+    .form-register-home {
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
     }
 }

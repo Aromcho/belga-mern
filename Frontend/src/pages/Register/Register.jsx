@@ -48,7 +48,7 @@ const Register = () => {
                         required
                     />
                 
-                <button className='btn-register' type="submit">Register</button>
+                <button className='btn-register' type="submit">Registrar</button>
             </form>
         </div>
     );
