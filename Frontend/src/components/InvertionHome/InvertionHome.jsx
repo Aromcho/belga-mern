@@ -6,6 +6,7 @@ import SocialSidebar from '../SocialSidebar/SocialSidebar';
 import BackToTop from '../BackToTop/BackToTop';
 import Title from '../Title/Title';
 import Button from '../Button/Button';
+import Register from '../../pages/Register/Register';
 import './InvertionHome.css';
 
 const InversionSection = ({}) => {
@@ -30,8 +31,32 @@ const InversionSection = ({}) => {
 
     console.log('Propiedades de desarrollos:', devProperties);
 
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        password: '',
+        phoneNumber: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/api/user', formData);
+            console.log('User registered:', response.data);
+        } catch (error) {
+            console.error('Error registering user:', error);
+        }
+    };
     return (
-        <div className="inversion-section">
+        <div className="inversion-section  pb-0">
             <div className="inversion">
                 <BackToTop color="black" />
             </div>
@@ -51,6 +76,27 @@ const InversionSection = ({}) => {
                     
                 </div>
                 <Button className="button--mobile" text="Ver más" type="outline black" link="/emprendimientos" />
+            </div>
+            <div className='register-home p-5'>
+                <div className=' title-cont d-flex gap-2 justify-content-center pb-3'>
+
+                    <h2>Suscribite para recibir todas las novedades</h2>
+
+                </div>
+
+                <form className='form-register-home d-flex mt-3' onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder='Igrese su email'
+                        className='input-register'
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <button className='btn-register' type="submit">Registrar</button>
+                </form>
             </div>
         </div>
     );
