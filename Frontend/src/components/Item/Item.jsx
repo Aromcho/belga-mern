@@ -162,7 +162,7 @@ const Item = ({ property }) => {
           {mainImages.map((img, index) => (
             <div key={index}>
               <img
-                className="d-block w-100 img-rounded"
+                className="  img-rounded"
                 src={img.image}
                 alt={`Slide ${index}`}
               />
