@@ -9,7 +9,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './ItemBlogAdmin.css';
 
-const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
+const ItemBlogAdmin = ({ id, title, createdAt, fakeDate, imageUrl, onDelete }) => {
   const navigate = useNavigate();
   const [showEditModal, setShowEditModal] = useState(false);
   const [editFormData, setEditFormData] = useState({
@@ -17,6 +17,7 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
     subtitle: '',
     description: '',
     category: '',
+    fakeDate: '', // Añadido para la fecha falsa
   });
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -27,9 +28,9 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
   const fetchArticuleData = async () => {
     try {
       const response = await axios.get(`/api/articule/${id}`);
-      const { title, subtitle, description, category, photos } = response.data;
+      const { title, subtitle, description, category, photos, fakeDate } = response.data;
 
-      setEditFormData({ title, subtitle, description, category });
+      setEditFormData({ title, subtitle, description, category, fakeDate });
 
       if (photos.length > 0) {
         setPreviewImage1(photos[0]);
@@ -78,15 +79,20 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
       description: value,
     });
   };
+
   const handleView = () => {
-    navigate(`/blog/${id}`); // Redirige a la página de detalles del artículo
+    navigate(`/blog/${id}`);
   };
+
   const handleUpdate = async () => {
     const data = new FormData();
     data.append('title', editFormData.title);
     data.append('subtitle', editFormData.subtitle);
     data.append('description', editFormData.description);
     data.append('category', editFormData.category);
+    if (editFormData.fakeDate) {
+      data.append('fakeDate', editFormData.fakeDate);
+    }
 
     if (image1) data.append('photos', image1);
     if (image2) data.append('photos', image2);
@@ -142,6 +148,11 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
     }
   };
 
+  // Asegurarse de que `fakeDate` esté disponible y mostrarlo en la tarjeta
+  const displayDate = fakeDate ? fakeDate : new Date(createdAt).toLocaleDateString();
+
+  console.log('fakeDate:', fakeDate);
+
   return (
     <>
       <Card className="mb-4 custom-card">
@@ -150,7 +161,9 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
           <div className="image-overlay"></div>
           <div className="text-overlay">
             <h5 className="title">{title}</h5>
-            <p className="date"><i className="bi bi-calendar"></i> {date}</p>
+            <p className="date">
+              <i className="bi bi-calendar"></i> {fakeDate}
+            </p>
           </div>
         </div>
         <Card.Body className="custom-card-body">
@@ -169,7 +182,7 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
       </Card>
 
       {/* Modal de Edición */}
-      <Modal className='modal-flotador mt-3' show={showEditModal} onHide={() => setShowEditModal(false)} centered>
+      <Modal className="modal-flotador mt-3" show={showEditModal} onHide={() => setShowEditModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Editar publicación</Modal.Title>
         </Modal.Header>
@@ -177,12 +190,7 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
           <Row className="mb-4">
             <Col md={6}>
               <div className="image-upload-container">
-                <input
-                  type="file"
-                  name="photos1"
-                  onChange={handleImageChange1}
-                  className="image-upload-input"
-                />
+                <input type="file" name="photos1" onChange={handleImageChange1} className="image-upload-input" />
                 {previewImage1 ? (
                   <div className="preview-overlay">
                     <img src={previewImage1} alt="preview1" className="preview-image" />
@@ -198,12 +206,7 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
             </Col>
             <Col md={6}>
               <div className="image-upload-container">
-                <input
-                  type="file"
-                  name="photos2"
-                  onChange={handleImageChange2}
-                  className="image-upload-input"
-                />
+                <input type="file" name="photos2" onChange={handleImageChange2} className="image-upload-input" />
                 {previewImage2 ? (
                   <div className="preview-overlay">
                     <img src={previewImage2} alt="preview2" className="preview-image" />
@@ -240,11 +243,7 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
               />
             </Form.Group>
             <Form.Group controlId="formDescription" className="mt-3">
-              <ReactQuill
-                value={editFormData.description}
-                onChange={handleDescriptionChange}
-                className="form-input"
-              />
+              <ReactQuill value={editFormData.description} onChange={handleDescriptionChange} className="form-input" />
             </Form.Group>
             <Form.Group controlId="formCategory" className="mt-3">
               <Form.Control
@@ -252,6 +251,17 @@ const ItemBlogAdmin = ({ id, title, date, imageUrl, onDelete }) => {
                 placeholder="Categoría..."
                 name="category"
                 value={editFormData.category}
+                onChange={handleInputChange}
+                className="form-input"
+              />
+            </Form.Group>
+            <Form.Group controlId="formFakeDate" className="mt-3">
+              <Form.Label>Fecha de Publicación Falsa</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ingrese la fecha de publicación falsa..."
+                name="fakeDate"
+                value={editFormData.fakeDate}
                 onChange={handleInputChange}
                 className="form-input"
               />

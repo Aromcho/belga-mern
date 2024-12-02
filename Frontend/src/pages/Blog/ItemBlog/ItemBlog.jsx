@@ -6,7 +6,7 @@ import Skeleton from '@mui/material/Skeleton'; // Importar Skeleton de Material-
 
 import './ItemBlog.css';
 
-const ItemBlog = ({ id, title, date, imageUrl, subtitle, isLoading }) => {
+const ItemBlog = ({ id, title, date, imageUrl, subtitle, isLoading, fakeDate }) => {
   return (
     <Card className="mb-4 custom-card">
       <Link to={`/blog/${id}`} className="item-link-blog">
@@ -29,7 +29,7 @@ const ItemBlog = ({ id, title, date, imageUrl, subtitle, isLoading }) => {
               {isLoading ? <Skeleton width="100%" height={40} /> : subtitle}
             </p>
             <p className="date-card text-dark">
-              <Calendar /> {isLoading ? <Skeleton width={80} /> : date}
+              <Calendar /> {isLoading ? <Skeleton width={80} /> : fakeDate}
             </p>
           </div>
         </Card.Body>

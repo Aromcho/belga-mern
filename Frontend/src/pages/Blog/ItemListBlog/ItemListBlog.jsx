@@ -39,6 +39,7 @@ const ItemListBlog = () => {
               title={post?.title}
               subtitle={post?.subtitle}
               date={post ? new Date(post.createdAt).toLocaleDateString() : ''}
+              fakeDate={post?.fakeDate}
               imageUrl={post?.photos ? post.photos[0] : ''}
               summary={post?.summary}
               isLoading={isLoading} // Pasar el estado de carga al componente ItemBlog

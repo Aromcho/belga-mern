@@ -2,6 +2,7 @@ import ArticuleManager from "../manager/articule.manager.js";
 import upload from "../middelwares/multer.mid.js"; // Importamos la configuración de Multer
 
 // Crear un artículo
+// Crear un artículo
 export const createArticule = (req, res, next) => {
     upload(req, res, async (err) => {
         if (err) {
@@ -18,10 +19,13 @@ export const createArticule = (req, res, next) => {
             const baseUrl = req.protocol + '://' + req.get('host');
             const photos = req.files.map(file => `${baseUrl}/uploads/${file.filename}`);
 
-            const articule = await ArticuleManager.create({
+            const articuleData = {
                 ...data,
-                photos
-            });
+                photos,
+                ...(data.fakeDate && { fakeDate: new Date(data.fakeDate) }) // Si se proporciona fakeDate, lo incluimos
+            };
+
+            const articule = await ArticuleManager.create(articuleData);
 
             res.status(201).json({
                 message: 'Artículo creado con éxito',
@@ -32,6 +36,7 @@ export const createArticule = (req, res, next) => {
         }
     });
 };
+
 
 // Obtener todos los artículos
 export const getArticules = async (req, res, next) => {
@@ -71,7 +76,8 @@ export const updateArticule = async (req, res, next) => {
 
             const updatedData = {
                 ...data,
-                ...(photos.length && { photos }) 
+                ...(photos.length && { photos }),
+                fakeDate: data.fakeDate || '' // Guardamos fakeDate tal cual
             };
 
             const updatedArticule = await ArticuleManager.update(id, updatedData);
@@ -85,6 +91,8 @@ export const updateArticule = async (req, res, next) => {
         }
     });
 };
+
+
 
 // Eliminar un artículo
 export const deleteArticule = async (req, res, next) => {
