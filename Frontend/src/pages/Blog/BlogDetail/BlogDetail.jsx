@@ -79,7 +79,7 @@ const BlogDetail = () => {
       <h1>{article.title}</h1>
       <h6 className="subtitle">{article.subtitle}</h6>
       <p className="date">
-        Fecha: {new Date(article.createdAt).toLocaleDateString()}
+        Fecha: {article.fakeDate}
       </p>
       <p className="author">
         Publicado por Belga Inmobiliaria

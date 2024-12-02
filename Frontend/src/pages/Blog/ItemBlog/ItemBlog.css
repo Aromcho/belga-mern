@@ -27,6 +27,9 @@
     text-align: left;
 
   }
+  .date-card {
+    gap: 10px;
+  }
   @media (max-width: 480px) {
     .subtitle-card-blog {
       width: 80%;

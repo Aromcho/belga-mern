@@ -15,6 +15,7 @@ const AddCard = ({ onAdd }) => {
     subtitle: '',
     description: '',
     category: '',
+    fakeDate: '',  // Nuevo campo para la fecha de publicación
   });
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -62,6 +63,9 @@ const AddCard = ({ onAdd }) => {
     data.append('subtitle', formData.subtitle);
     data.append('description', formData.description);
     data.append('category', formData.category);
+    if (formData.fakeDate) {
+      data.append('fakeDate', formData.fakeDate);
+    }
 
     if (image1) data.append('photos', image1);
     if (image2) data.append('photos', image2);
@@ -190,6 +194,16 @@ const AddCard = ({ onAdd }) => {
                 placeholder="Categoría..."
                 name="category"
                 value={formData.category}
+                onChange={handleInputChange}
+                className="form-input"
+              />
+            </Form.Group>
+            <Form.Group controlId="formFakeDate" className="mt-3">
+              <Form.Label>Fecha de Publicación Falsa</Form.Label>
+              <Form.Control
+                type="date"
+                name="fakeDate"
+                value={formData.fakeDate}
                 onChange={handleInputChange}
                 className="form-input"
               />

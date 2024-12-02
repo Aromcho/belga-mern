@@ -5,8 +5,9 @@ const schema = new Schema({
     title: { type: String, required: true, unique: true, index: true },
     subtitle: { type: String, required: true },
     description: { type: String, required: true },
-    photos: [{ type: String, required: false }], // Cambiado para ser un array de URLs de imágenes
+    photos: [{ type: String, required: false }],
     category: { type: String, required: true },
+    fakeDate: { type: String, required: false }, // Cambiado a String
 }, {
     timestamps: true
 });

@@ -37,6 +37,7 @@ const ItemListBlogAdmin = () => {
             id={post._id}
             title={post.title}
             date={post.createdAt} // Asegúrate de ajustar la fecha según el formato de tu respuesta
+            fakeDate={post.fakeDate} // Añadido para la fecha falsa
             imageUrl={post.photos[0]} // Si estás usando varias fotos, usa la primera
             onDelete={handleDelete} // Pasamos la función handleDelete para borrar
           />
