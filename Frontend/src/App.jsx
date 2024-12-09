@@ -11,6 +11,7 @@ import ConoceBelga from "./pages/ConoceBelga/ConoceBelga.jsx";
 import Emprendimientos from "./pages/Emprendimientos/Emprendimientos.jsx";
 import Favorites from "./pages/Favorites/Favorites.jsx";
 import QuieroVender from "./pages/QuieroVender/QuieroVender.jsx";
+import ItemListSelectedContainer from "./components/ItemSelectedListContainer/ItemSelectedListContainer.jsx";
 import TerminosYCondiciones from "./pages/Terminos/TerminosYCondiciones.jsx";
 import Error404 from "./pages/404/404.jsx";
 import Error500 from "./pages/500/500.jsx";
@@ -68,6 +69,7 @@ function App() {
               <Route path="/terminos-y-condiciones" element={<TerminosYCondiciones />} />
               <Route path="/busquedas-guardadas" element={<BusquedasGuardadas />} />
               <Route path="/favorites" element={<Favorites />} />  
+              <Route path="/destacados" element={<ItemListSelectedContainer/>} />
             </Routes>
           </Layout>
           <Footer />

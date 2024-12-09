@@ -30,7 +30,7 @@ const getProperties = async (req, res) => {
   try {
     const {
       operation_type, property_type, minRooms, maxRooms, minPrice, maxPrice,
-      barrio, searchQuery, garages, limit = 10, offset = 0, order = 'DESC'
+      barrio, searchQuery, garages, limit = 10, offset = 0, order = 'DESC', is_starred
     } = req.query;
 
     // Crear un objeto con los filtros a aplicar
@@ -89,6 +89,9 @@ const getProperties = async (req, res) => {
       filterObj['parking_lot_amount'] = parseInt(garages);
     }
 
+    if (is_starred === 'true') {
+      filterObj.is_starred_on_web = true;
+    }
     // Ordenar por precio
     const sortObj = order === 'desc' ? { 'operations.prices.price': -1 } : { 'operations.prices.price': 1 };
 

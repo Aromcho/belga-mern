@@ -45,6 +45,15 @@
   justify-content: end;
   align-items: center;
 }
+.menu-info-item-phone a {
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  min-width: 0px !important;
+  max-width: none !important;
+  padding-right: 5px;
+  
+}
 .logo-ws {
   padding: 2px;
   margin-right: 6px;
@@ -143,6 +152,7 @@
   position: relative;
   transition: color 0.3s ease-in-out;
 }
+ 
 
 .menu-container.sticky .menu-nav .menu--link,
 .menu-container.sticky .button--menu,
@@ -155,14 +165,14 @@
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: #f1b332;
-  left: 0;
-  bottom: -1px;
+  background-color: #fff;
+  left: 37px;
+  bottom: 1px;
   transition: width 0.3s ease-in-out;
 }
 
 .menu-nav .menu--link:hover::after {
-  width: 100%;
+  width: 146px;
 }
 
 .button--menu {
@@ -314,7 +324,9 @@
   display: none;
 }
 /* Ajustes para pantallas pequeñas */
-@media screen and (max-width: 768px) {
+
+
+@media screen and (max-width: 999px) {
   
   .menu-brand-wrapper.sticky {
     height: 55px;

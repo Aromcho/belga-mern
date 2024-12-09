@@ -99,7 +99,7 @@ const Home = () => {
           <Title
             title="NUESTRA SELECCIÓN"
             buttonStyle="outline red"
-            linkButton="/propertylist"
+            linkButton="/destacados"
           />
             <SelectionListContainer/>
 

@@ -70,7 +70,7 @@ const MultiRangeSlider = ({ min, max, step, defaultValue, onChange }) => {
             <input
               className="input--price w-75"
               type="text"
-              value={`USD ${formatNumber(value[1])}`} // Formatear con puntos
+              value={`USD+${formatNumber(value[1])}`} // Formatear con puntos
               readOnly
             />
           </div>

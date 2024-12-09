@@ -71,7 +71,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
   };
 
   return (
-    <Container className="search-form w-75">
+    <Container className="search-form">
       <Form onSubmit={handleSubmit} className="filter-form">
         <Row className="filter-row mb-2">
           <Col>

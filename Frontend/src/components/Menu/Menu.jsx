@@ -59,7 +59,12 @@ export const Menu = () => {
           <div className="menu-info-item">Belgrano C</div>
           <div className="menu-info-item">Belgrano R</div>
           <div className="menu-info-item-phone ">
-            <WhatsappIcon className="logo-ws" /> +54 11 5263 3393
+           <a
+          href="https://api.whatsapp.com/send?phone=5491152633393&text=Hola%20Belga!%20%F0%9F%91%8B%20Quisiera%20hacerles%20una%20consulta."
+          className="menu-info-item-phone-a"
+          target="_blank"
+          rel="noopener noreferrer"
+        ><WhatsappIcon className="logo-ws" /> +54 11 5263 3393</a> 
           </div>
         </div>
       </div>
@@ -112,7 +117,7 @@ export const Menu = () => {
         >
           <div className="icon-wrapper">
             <div
-              className={`burger-cross-custom ${showMenu ? "cross burger-dark" : " burger"
+              className={`burger-cross-custom ${showMenu ? "cross " : " burger"
                 } ${(!isHome || sticky) && !showMenu ? "burger-dark" : ""}`}  // Cambia el color según la condición
             >
               <div className="line" />

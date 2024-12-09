@@ -13,9 +13,11 @@ const SelectionListContainer = () => {
         const response = await axios.get('/api/property/properties', {
           params: {
             order: 'desc', // Parámetro de orden descendente (ajusta si la API requiere otro nombre, como sortOrder o similar)
+            is_starred: true,
             limit: 2 // Si tu API permite limitar los resultados desde la solicitud
           }
         });
+        
         setProperties(response.data.objects);
       } catch (error) {
         console.error('Error fetching properties:', error);
