@@ -4,12 +4,14 @@
   margin: auto;
   display: flex;
   gap: 20px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .price-text {
   display: flex;
   align-items: center;
-  font-size: 1.2rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0 30px;
 
@@ -24,6 +26,12 @@
   display: flex;
   justify-content: space-between;
 }
+.input--price-conatiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
 
 .input--price {
   width: 280px;
@@ -34,11 +42,14 @@
   border-radius: 0;
   background-color: transparent;
   color: #333; /* Color del texto */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .input-divider {
-  width: 10px;
+  width: 5px;
   height: 2px;
   margin: 0 10px;
-  background-color: #F1B332; /* Color del separador */
+  background-color: #fff; /* Color del separador */
 }
