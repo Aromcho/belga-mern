@@ -103,7 +103,7 @@ const InversionSection = ({}) => {
                     <input
                         type="email"
                         name="email"
-                        placeholder='Ingresá tu correo electronico'
+                        placeholder='Ingresá tu correo electrónico'
                         className='input-register'
                         value={formData.email}
                         onChange={handleChange}
