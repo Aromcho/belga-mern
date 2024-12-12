@@ -160,20 +160,6 @@
   color: #000000;
 }
 
-.menu-nav .menu--link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background-color: #fff;
-  left: 37px;
-  bottom: 1px;
-  transition: width 0.3s ease-in-out;
-}
-
-.menu-nav .menu--link:hover::after {
-  width: 146px;
-}
 
 .button--menu {
   border-radius: 0;
@@ -183,6 +169,26 @@
   color: #fff;
   display: flex;
   align-items: center;
+}
+/* Líneas debajo de los enlaces en el menú */
+.menu-nav .menu--link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #fff; /* Color predeterminado */
+  left: 37px;
+  bottom: 1px;
+  transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.menu-container.sticky .menu-nav .menu--link::after,
+.menu-nav .menu--link.black-line::after {
+  background-color: #000; /* Cambia a negro en sticky o fuera del inicio */
+}
+
+.menu-nav .menu--link:hover::after {
+  width: 146px;
 }
 
 .button--menu:hover {

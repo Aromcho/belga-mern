@@ -88,7 +88,7 @@
   position: relative;
   left: 50%; /* Centra el elemento horizontalmente */
   transform: translateX(-50%); /* Ajusta la posición para que quede centrado */
-  width: calc(97vw - 40px); /* Resta 40px para considerar márgenes, ajusta según sea necesario */
+  width: calc(100vw - 17px); /* Resta 40px para considerar márgenes, ajusta según sea necesario */
   height: 450px;
   overflow: hidden;
 }
@@ -315,9 +315,9 @@
 @media (min-width: 1200px) {
   .image-wrapper-detail {
     width: calc(97vw - 0px); /* Ajuste para pantallas grandes */
-    height: 55vh;
+    height: 61vh;
   }
   .image-wrapper-detail-container {
-    height: 55vh;
+    height: 61vh;
   }
 }

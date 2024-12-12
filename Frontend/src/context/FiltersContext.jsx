@@ -13,26 +13,31 @@ export const FiltersProvider = ({ children }) => {
     max_garages: undefined,
     price_from: undefined,
     price_to: undefined,
-    searchQuery: '',  // Incluimos el 'searchQuery'
+    searchQuery: '',
     barrio: '',
     order: 'desc',
+    is_starred: undefined,
   });
 
-  const [properties, setProperties] = useState([]); // Propiedades actuales
-  const [totalProperties, setTotalProperties] = useState(0); // Total de propiedades devueltas por la API
+  const [properties, setProperties] = useState([]);
+  const [totalProperties, setTotalProperties] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(10); // Límite de propiedades por página
-  const [offset, setOffset] = useState(0); // Índice de desplazamiento para paginación
+  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
 
-  // Función para actualizar los filtros
+  // Estado adicional para manejar filtros exclusivos como destacados
+  const [starredFilterActive, setStarredFilterActive] = useState(false);
+
+  // Función para actualizar filtros globales
   const updateFilters = (newFilters) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       ...newFilters,
     }));
+    setOffset(0);
   };
 
-  // Solicitud de búsqueda de propiedades centralizada
+  // Solicitud de búsqueda de propiedades
   const fetchProperties = useCallback(async () => {
     setLoading(true);
     try {
@@ -47,42 +52,39 @@ export const FiltersProvider = ({ children }) => {
           minPrice: filters.price_from,
           maxPrice: filters.price_to,
           barrio: filters.barrio,
-          searchQuery: filters.searchQuery,  // Incluimos el 'searchQuery'
+          searchQuery: filters.searchQuery,
           order: filters.order,
-          limit,  // Incluyendo límite de resultados por página
-          offset, // Offset para controlar el desplazamiento en paginación
+          is_starred: starredFilterActive ? true : filters.is_starred,
+          limit,
+          offset,
         },
       });
-      setProperties(response.data.objects); // Propiedades actuales para la página solicitada
-      setTotalProperties(response.data.meta.total_count); // Total de propiedades de la API
+      setProperties(response.data.objects);
+      setTotalProperties(response.data.meta.total_count);
     } catch (error) {
       console.error('Error al obtener propiedades:', error);
     } finally {
       setLoading(false);
     }
-  }, [filters, limit, offset]);
+  }, [filters, limit, offset, starredFilterActive]);
 
-  // Llamada a fetchProperties cuando cambian los filtros o el offset
+  // Llamar a `fetchProperties` cuando los filtros cambien
   useEffect(() => {
     fetchProperties();
   }, [filters, fetchProperties, limit, offset]);
 
-  const handleSuggestionSelect = (suggestion) => {
-    updateFilters({ searchQuery: suggestion.value });  // Actualiza el contexto directamente
-    setAutocompleteSuggestions([]); // Limpiar sugerencias
-  };
-  
   return (
     <FiltersContext.Provider value={{
-      filters, 
-      updateFilters, 
-      properties, 
-      totalProperties, 
-      loading, 
-      limit, 
-      offset, 
-      setLimit, 
-      setOffset 
+      filters,
+      updateFilters,
+      properties,
+      totalProperties,
+      loading,
+      limit,
+      offset,
+      setLimit,
+      setOffset,
+      setStarredFilterActive, // Exponemos el estado de destacados
     }}>
       {children}
     </FiltersContext.Provider>
