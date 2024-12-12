@@ -11,6 +11,7 @@ const ItemListContainer = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     const fromHome = sessionStorage.getItem('fromHome');
 
     if (!fromHome) {

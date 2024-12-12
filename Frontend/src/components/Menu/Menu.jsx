@@ -70,7 +70,7 @@ export const Menu = () => {
       </div>
       <div className="nav-flex-container">
         <Navbar.Brand className={`menu-brand-wrapper w-100 ${sticky  ? "sticky" : ""}`} as={Link} to="/">
-          {!sticky && isHome ? (
+          {!sticky  ? (
             <img
               className="logo-img"
               src="/images/brand_red.svg"
@@ -82,21 +82,22 @@ export const Menu = () => {
         </Navbar.Brand>
 
         <Nav className="menu-nav">
-          <Nav.Link
-            as={Link}
-            to="propertylist"
-            className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
-          >
-            Quiero comprar
-          </Nav.Link>
-          
-          <Nav.Link
-            as={Link}
-            to="emprendimientos"
-            className={`menu--link ${sticky || !isHome ? "sticky-link" : ""}`}
-          >
-            Emprendimientos
-          </Nav.Link>
+        <Nav.Link
+  as={Link}
+  to="propertylist"
+  className={`menu--link ${sticky || !isHome ? "black-line sticky-link" : ""}`}
+>
+  Quiero comprar
+</Nav.Link>
+
+<Nav.Link
+  as={Link}
+  to="emprendimientos"
+  className={`menu--link ${sticky || !isHome ? "black-line sticky-link" : ""}`}
+>
+  Emprendimientos
+</Nav.Link>
+
           
           <Button
             className={` button--menu me-3 ${

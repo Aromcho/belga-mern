@@ -7,6 +7,7 @@ import { FiltersContext } from '../../context/FiltersContext';
 import VenderForm from '../Forms/VenderForm/VenderForm.jsx';
 import Skeleton from '@mui/material/Skeleton'; 
 import './ItemList.css';
+import FormList from '../Forms/FormList/FormList.jsx';
 
 const ItemList = () => {
   const { properties, loading, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
@@ -123,7 +124,7 @@ const ItemList = () => {
           </Col>
         </Row>
       </Container>
-      <VenderForm className="my-5 py-5 "/>
+      <FormList className="my-5 "/>
     </>
   );
 };
