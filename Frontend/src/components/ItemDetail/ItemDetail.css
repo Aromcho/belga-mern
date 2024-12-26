@@ -94,7 +94,7 @@
 }
 .image-wrapper-detail {
   position: relative;
-  left: 50%; /* Centra el elemento horizontalmente */
+  left: 58%; /* Centra el elemento horizontalmente */
   transform: translateX(-50%); /* Ajusta la posición para que quede centrado */
   width: calc(97vw - 40px); /* Resta 40px para considerar márgenes, ajusta según sea necesario */
   height: 450px;

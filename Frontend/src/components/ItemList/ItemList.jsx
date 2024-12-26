@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Item from '../Item/Item.jsx';
 import Filters from '../Filters/Filters.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
-import VenderForm from '../Forms/VenderForm/VenderForm.jsx';
 import Skeleton from '@mui/material/Skeleton'; 
 import './ItemList.css';
 import FormList from '../Forms/FormList/FormList.jsx';
@@ -12,37 +11,52 @@ import FormList from '../Forms/FormList/FormList.jsx';
 const ItemList = () => {
   const { properties, loading, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
 
-  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(totalProperties / limit);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  /**
+   * Sincroniza currentPage con offset.
+   * Si offset cambia, actualiza currentPage.
+   */
+  useEffect(() => {
+    setCurrentPage(Math.floor(offset / limit) + 1);
+  }, [offset, limit]);
+
+  /**
+   * Desplaza al inicio de la página después de cambiar de página.
+   */
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
+
+  /**
+   * Maneja el cambio a la siguiente página.
+   */
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setOffset((currentPage) * limit);
-      setCurrentPage(currentPage + 1);
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
+      setOffset(currentPage * limit);
     }
   };
 
+  /**
+   * Maneja el cambio a la página anterior.
+   */
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setOffset((currentPage - 2) * limit);
-      setCurrentPage(currentPage - 1);
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
     }
   };
 
+  /**
+   * Maneja el clic en una página específica.
+   */
   const handlePageClick = (page) => {
     setOffset((page - 1) * limit);
-    setCurrentPage(page);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
   };
 
+  /**
+   * Genera las páginas visibles en la paginación.
+   */
   const getPagesToShow = () => {
     const pages = [];
     const maxPagesToShow = 4;
@@ -65,7 +79,7 @@ const ItemList = () => {
   return (
     <>
       <Filters className="p-0 mb-1 pt-5 mt-5" onSubmit={updateFilters} />
-      <Container className='px-0 ' >
+      <Container className='px-0'>
         <div className="item-list">
           {loading ? (
             <>
@@ -124,7 +138,7 @@ const ItemList = () => {
           </Col>
         </Row>
       </Container>
-      <FormList className="my-5 "/>
+      <FormList className="my-5" />
     </>
   );
 };

@@ -10,7 +10,27 @@
     margin-top: 20px;
     
 }
-
+.text-info-cont {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+.info-details {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    
+}
+.info-details-item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.strong {
+    
+    font-weight: 600;
+}
 .property-features {
     grid-area: features;
     border-bottom: 1px solid #000000;

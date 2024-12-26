@@ -4,6 +4,7 @@ import { TitleWithIcon } from "../../TitleWithIcon/TitleWithIcon.jsx";
 import { Input } from "../../Input/Input.jsx";
 import { Textarea } from "../../Textarea/Textarea.jsx";
 import Button from "../../Button/Button.jsx";
+import FeedbackMsg from "../FeedbackMsg/FeedbackMsg.jsx";
 import axios from "axios";
 
 const FormList = ({ className = "" }) => {
@@ -11,8 +12,6 @@ const FormList = ({ className = "" }) => {
         name: "",
         email: "",
         phone: "",
-        direction: "",
-        property: "",
         message: "",
         url: "",
         subject: "Quiero vender",
@@ -67,8 +66,6 @@ const FormList = ({ className = "" }) => {
               name: "",
               email: "",
               phone: "",
-              direction: "",
-              property: "",
               message: "",
               url: window.location.href,
               subject: "Quiero vender",
@@ -88,7 +85,7 @@ const FormList = ({ className = "" }) => {
           <div className="form-wrapper">
             <div className="wrapper-inputs">
               <Input
-                className="input--from"
+                className="input-list"
                 placeHolder="Nombre *"
                 type="text"
                 value={data.name}
@@ -98,7 +95,7 @@ const FormList = ({ className = "" }) => {
               />
     
               <Input
-                className="input--from"
+                className="input-list"
                 placeHolder="Email *"
                 type="email"
                 value={data.email}
@@ -108,7 +105,7 @@ const FormList = ({ className = "" }) => {
               />
     
               <Input
-                className="input--from"
+                className="input-list"
                 placeHolder="Teléfono *"
                 type="tel"
                 value={data.phone}
@@ -118,23 +115,7 @@ const FormList = ({ className = "" }) => {
               />
             </div>
     
-            <div className="wrapper-inputs">
-              <Input
-                className="input--form half"
-                placeHolder="Dirección"
-                type="text"
-                value={data.direction}
-                onChange={(e) => setData({ ...data, direction: e.currentTarget.value })}
-              />
-    
-              <Input
-                className="input--form half"
-                placeHolder="Tipo de Propiedad"
-                type="text"
-                value={data.property}
-                onChange={(e) => setData({ ...data, property: e.currentTarget.value })}
-              />    
-            </div>
+            
     
             <Textarea
               className="textarea--form"

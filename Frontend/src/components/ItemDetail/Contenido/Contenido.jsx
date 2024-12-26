@@ -73,7 +73,7 @@ const Contenido = ({
       )}
       {bathroom_amount > 0 && (
         <div className="info-item text-center  d-flex flex-column mb-5">
-        <span className="text-muted"><strong>{bathroom_amount}</strong></span>
+        <span><strong>{bathroom_amount}</strong></span>
         <img className="icon-image" src='/images/icons/prop_ducha.svg' alt="Baños" />
         <p className="text-muted">{bathroom_amount > 1 ? 'Baños' : 'Baño'}</p>
         </div>
@@ -163,28 +163,27 @@ const Contenido = ({
       {/* Información de detalles y descripción */}
       <div className="property-details p-4 ">
       <div className="info-section">
-      <h2 className="mb-4 text-dark">Información</h2>
+      <p className="mb-4 text-info-cont">INFORMACIÓN</p>
       <div className="info-details">
-        {bathroom_amount > 0 && <p>Ambientes: {bathroom_amount}</p>}
-        {disposition && <p>Disposición: {disposition}</p>}
-        {orientation && <p>Orientación: {orientation}</p>}
-        {property_condition && <p>Condición: {property_condition}</p>}
+        {bathroom_amount > 0 && <p className='info-details-item'><div className='strong'>Ambientes: </div>{bathroom_amount}</p>}
+        {orientation && <p className='info-details-item'><p className='strong'>Orientación: </p>{orientation}</p>}
+        {property_condition && <p className='info-details-item'><p className='strong'>Condición: </p>{property_condition}</p>}
       </div>
       </div>
       
       <div className="info-section">
-      <h2 className="mb-4 text-dark">Superficies</h2>
+      <p className="mb-4 text-info-cont">SUPERFICIES</p>
       <div className="info-details">
-        {roofed_surface > 0 && <p>Sup. Cubierta: {roofed_surface.slice(0, -3)} m2</p>}
-        {semiroofed_surface > 0 && <p>Sup. Semicubierta: {semiroofed_surface.slice(0, -3)} m2</p>}
-        {total_surface > 0 && <p>Sup. Total: {total_surface.slice(0, -3)} m2</p>}
+        {roofed_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Cubierta: </p> {roofed_surface.slice(0, -3)} m2</p>}
+        {semiroofed_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Semicubierta:</p> {semiroofed_surface.slice(0, -3)} m2</p>}
+        {total_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Total:</p> {total_surface.slice(0, -3)} m2</p>}
       </div>
       </div>
       </div>
       
       {tags && tags.length > 0 && (
       <div className="property-tags bg-white p-4">
-      <h2 className="mb-4">Adicionales</h2>
+      <p className="mb-4 text-info-cont">ADICIONALES</p>
       <div className="tags-container flex-row-wrap">
           {tags.map((tag, index) => (
           <div key={index} className="tag-item">{tag.name}</div>
@@ -194,7 +193,7 @@ const Contenido = ({
       )}
       
       <div className="property-description bg-white p-4 rounded-3">
-        <h2 className='mb-3'>Descripción</h2>
+        <p className='mb-3 text-info-cont'>DESCRIPCION</p>
         <p dangerouslySetInnerHTML={{ __html: rich_description }}></p>
       </div>
       </div>
