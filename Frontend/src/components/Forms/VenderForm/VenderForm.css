@@ -53,8 +53,8 @@
 
 /* Estilo específico para .input--form.half */
 .input--form.half {
-  margin-top: -20px;
-  padding: 5px;
+  margin: -15px -5px 20px -5px;
+  width: calc(100% + 10px);
 }
 
 /* Estilo para el input en focus */
@@ -127,8 +127,9 @@
   .form-container, .form-wrapper, .textarea--form {
       max-width: 100%;
   }
-  .input--form.half {
-    margin-top: 5px;
-    padding: 0px;
-}
+    .input--form.half {
+      margin: -15px -5px 35px -5px;
+      width: calc(100% + 10px);
+    }
+
 }
