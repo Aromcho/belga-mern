@@ -96,10 +96,10 @@ const InversionSection = ({}) => {
                 <Button className="button--mobile" text="Ver más" type="outline black" link="/emprendimientos" />
             </div>
             <div className='register-home p-5'>
-                <div className='title-cont d-flex gap-2 justify-content-center pb-3'>
+                <div className='title-cont d-flex gap-2 justify-content-center pb-3 pt-5 mt-5'>
                     <h2 className='text-center'>Suscribite para recibir todas las novedades</h2>
                 </div>
-                <form className='form-register-home d-flex mt-3' onSubmit={handleSubmit}>
+                <form className='form-register-home d-flex mt-3 pb-5 mb-5' onSubmit={handleSubmit}>
                     <input
                         type="email"
                         name="email"
@@ -109,7 +109,7 @@ const InversionSection = ({}) => {
                         onChange={handleChange}
                         required
                     />
-                    <button className='btn-register' type="submit">Registrar</button>
+                    <button className='btn-register' type="submit">REGISTRAR</button>
                 </form>
             </div>
         </div>

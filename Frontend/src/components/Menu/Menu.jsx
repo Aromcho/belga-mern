@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { PATHS } from "../../../config/index.js";
@@ -20,6 +21,8 @@ export const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [hideMenuInfo, setHideMenuInfo] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     let lastScrollTop = 0;
@@ -43,6 +46,16 @@ export const Menu = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+  
 
   const isHome = location.pathname === "/";
 
@@ -157,10 +170,19 @@ export const Menu = () => {
           </li>
           <li
             className="burger-menu-item"
-            onClick={() => setShowMenu(false)}
+            onClick={() => {
+              setShowMenu(false); // Cierra el menú hamburguesa
+              if (location.pathname === "/") {
+                // Si ya estás en Home, simplemente desplázate
+                document.getElementById("contact-section")?.scrollIntoView({ behavior: "smooth" });
+              } else {
+                // Si no estás en Home, navega y luego desplázate
+                navigate("/", { state: { scrollTo: "contact-section" } });
+              }
+            }}
           >
             <Link
-              to={`${PATHS.ROOT}${PATHS.CONTACTO}`}
+
               className="burger--menu-link"
             >
               <TelIcon />

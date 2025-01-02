@@ -142,9 +142,9 @@ const UserManagement = () => {
                 value={newUser.role}
                 onChange={handleInputChange}
               >
-                <option value="user">Usuario</option>
-                <option value="admin">Admin</option>
-                <option value="moderator">Moderador</option>
+                <option value="USER">Usuario</option>
+                <option value="ADMIN">Admin</option>
+                <option value="MODERATOR">Moderador</option>
               </Form.Control>
             </Form.Group>
           </Form>

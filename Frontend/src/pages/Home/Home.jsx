@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Corregir el import de Link
+import { useNavigate, Link, useLocation } from "react-router-dom"; // Corregir el import de Link
 import { FiltersContext } from '../../context/FiltersContext';
 import 'leaflet/dist/leaflet.css';
 import "./Home.css";
@@ -20,6 +20,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { filters, updateFilters } = useContext(FiltersContext);
   const [isMobile, setIsMobile] = useState(false); // Nuevo estado para detectar si es mobile
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,6 +45,15 @@ const Home = () => {
     sessionStorage.setItem('fromHome', 'true');
     navigate("/propertylist", { state: { filters } }); // Redirigir a la lista de propiedades
   };
+
+  useEffect(() => {
+    if (location.state?.scrollTo === "contact-section") {
+      const element = document.getElementById("contact-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   const data = [
     {
@@ -106,8 +116,8 @@ const Home = () => {
         </div>
       </div>
       {/*inversion sectin*/}
-      <InversionSection/>
-      <div className="contact-section">
+      <InversionSection />
+      <div id="contact-section" className="contact-section">
         <FooterInfo/>
         <HomeMap/>
         <FromContact/>
