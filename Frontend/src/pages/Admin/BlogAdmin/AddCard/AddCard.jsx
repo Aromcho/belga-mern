@@ -16,6 +16,7 @@ const AddCard = ({ onAdd }) => {
     description: '',
     category: '',
     fakeDate: '',  // Nuevo campo para la fecha de publicación
+    author:""
   });
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -63,6 +64,8 @@ const AddCard = ({ onAdd }) => {
     data.append('subtitle', formData.subtitle);
     data.append('description', formData.description);
     data.append('category', formData.category);
+    data.append('author', formData.author); // Nuevo campo para autor
+
     if (formData.fakeDate) {
       data.append('fakeDate', formData.fakeDate);
     }
@@ -179,6 +182,15 @@ const AddCard = ({ onAdd }) => {
                 value={formData.subtitle}
                 onChange={handleInputChange}
                 className="form-input"
+              />
+            </Form.Group>
+            <Form.Group controlId="formAuthor" className="mt-3">
+              <Form.Control
+                type="text"
+                placeholder="Autor..."
+                name="author"
+                value={formData.author}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group controlId="formDescription" className="mt-3">

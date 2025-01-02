@@ -2,7 +2,8 @@
 .blog-card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-transform: none;
-    
+    font-family: 'Montserrat', sans-serif;
+
   }
   .custom-body-blog {
     flex-direction: column;
@@ -25,6 +26,14 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     text-align: left;
+
+  }
+  .text-overlay .title {
+    font-family: 'Montserrat', sans-serif;
+
+  }
+  .subtitle-card-blog {
+    font-family: 'Montserrat', sans-serif;
 
   }
   .date-card {

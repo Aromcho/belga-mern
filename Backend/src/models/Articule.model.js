@@ -8,6 +8,7 @@ const schema = new Schema({
     photos: [{ type: String, required: false }],
     category: { type: String, required: true },
     fakeDate: { type: String, required: false }, // Cambiado a String
+    author: { type: String, required: true },
 }, {
     timestamps: true
 });

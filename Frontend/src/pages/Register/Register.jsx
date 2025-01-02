@@ -31,24 +31,24 @@ const Register = () => {
 
     return (
         <div className='mt-4 pt'>
-            <div className=' title-cont d-flex gap-2 justify-content-center pb-3'>
+            <div className=' title-cont d-flex gap-2 justify-content-center pb-3 mt-5'>
 
             <h2>Suscribite para recibir todas las novedades</h2>
             
             </div>
             
-            <form className='form-register d-flex mt-3' onSubmit={handleSubmit}>
+            <form className='form-register d-flex mt-3 mb-5' onSubmit={handleSubmit}>
                     <input
                         type="email"
                         name="email"
-                        placeholder='Igrese su email'
+                        placeholder='Igresá tu correo electrónico'
                         className='input-register'
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
                 
-                <button className='btn-register' type="submit">Registrar</button>
+                <button className='btn-register' type="submit">REGISTRAR</button>
             </form>
         </div>
     );

@@ -5,6 +5,15 @@ import { Helmet } from 'react-helmet-async'; // Importa Helmet
 import Register from "../../Register/Register.jsx";
 import { Skeleton, Box, Typography, Button } from '@mui/material';
 import { FaWhatsapp } from 'react-icons/fa'; // Importa el icono de WhatsApp
+import { PATHS, SOCIAL } from "../../../../config/index.js"; // Importa las rutas y redes sociales
+import {
+  FacebookCircleIcon,
+  InstaCircleIcon,
+  LinkedinCircleIcon,
+  MessengerCircleIcon,
+  YoutubeCircleIcon,
+  WhatsappIcon,
+} from "../../../components/Icons/Icons.jsx"; // Iconos Importados
 import './BlogDetail.css';
 
 const BlogDetail = () => {
@@ -27,6 +36,10 @@ const BlogDetail = () => {
     fetchArticle();
   }, [id]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleShare = () => {
     const shareUrl = `http://www.belga.com.ar:8080/noticia/${id}`;
     const shareText = `¡Mira este artículo sobre "${article?.title}" en Belga Inmobiliaria! `;
@@ -35,6 +48,13 @@ const BlogDetail = () => {
     window.open(whatsappUrl, '_blank');
   };
 
+  const socialInfo = [
+    { link: `${SOCIAL.INSTA}`, icon: <InstaCircleIcon /> },
+        { link: `${SOCIAL.FACEBOOK}`, icon: <FacebookCircleIcon /> },
+        { link: `${SOCIAL.YOUTUBE}`, icon: <YoutubeCircleIcon /> },
+        { link: `${SOCIAL.LINKEDIN}`, icon: <LinkedinCircleIcon /> },
+        { link: `${SOCIAL.MESSENGER}`, icon: <MessengerCircleIcon /> },
+      ];
   if (loading) {
     return (
       <div className="blog-detail-container mt-5 pt-5">
@@ -76,36 +96,48 @@ const BlogDetail = () => {
         <meta property="og:image" content={article.photos?.[0] || "https://belga.com.ar/images/og_image.png"} />
       </Helmet>
 
-      <h1>{article.title}</h1>
+      <h1 className='mt-3'>{article.title}</h1>
       <h6 className="subtitle">{article.subtitle}</h6>
       <p className="date">
         Fecha: {article.fakeDate}
       </p>
+      
       <p className="author">
-        Publicado por Belga Inmobiliaria
+        Publicado por {article.author}
+        <div className="social-icons-container-blog">
+        <p></p>
+        {socialInfo.map((i, k) => (
+          <a href={i.link} key={k} target="_blank" rel="noopener noreferrer" className="social-icon-link-blog">
+            {i.icon}
+          </a>
+        ))}
+      </div>
+      |
         <Button
-          variant="contained"
-          color="success"
-          startIcon={<FaWhatsapp />}
+          color="white"
+          startIcon={<WhatsappIcon />}
           onClick={handleShare}
           className="share-button"
-          sx={{
-            ml: 2,
-            '&:hover': {
-              backgroundColor: '#4caf50', // Verde un poco más claro
-            },
-          }}
+          
+          
         >
           Compartir en WhatsApp
         </Button>
+        
       </p>
+      
+      
       <div className="blog-detail-images">
+        
         {article.photos.map((photo, index) => (
           <img key={index} src={photo} alt={`Imagen ${index + 1}`} className="blog-detail-img" />
         ))}
       </div>
-      {/* Usamos dangerouslySetInnerHTML para renderizar el HTML */}
+
       <div className='rich-content' dangerouslySetInnerHTML={{ __html: article.description }} />
+      
+      
+      
       <div>
         <Register />
       </div>
