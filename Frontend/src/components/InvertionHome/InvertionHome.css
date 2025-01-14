@@ -7,7 +7,12 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
+    font-family: 'Montserrat', sans-serif;
+
   }
+  .text-of-register {
+    text-transform: uppercase;
+}
 .form-register-home {
     font-family: 'Montserrat', sans-serif;
     width: 70vw;

@@ -97,7 +97,7 @@ const InversionSection = ({}) => {
             </div>
             <div className='register-home p-5'>
                 <div className='title-cont d-flex gap-2 justify-content-center pb-3 pt-5 mt-5'>
-                    <h2 className='text-center'>Suscribite para recibir todas las novedades</h2>
+                    <h2 className='text-of-register text-center'>Suscribite para recibir todas las novedades</h2>
                 </div>
                 <form className='form-register-home d-flex mt-3 pb-5 mb-5' onSubmit={handleSubmit}>
                     <input

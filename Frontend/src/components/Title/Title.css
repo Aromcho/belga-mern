@@ -3,6 +3,7 @@
     align-items: center;
     display: flex;
     margin: 0 auto 70px;
+    font-family: 'Montserrat', sans-serif;
   }
   
   @media screen and (max-width: 992px) {
