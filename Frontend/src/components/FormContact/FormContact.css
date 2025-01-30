@@ -5,7 +5,6 @@
     margin: 0 auto;
     background-color: #ffffff; /* Fondo blanco para el contenedor del formulario */
     border-radius: 0; /* Bordes redondeados para un estilo más moderno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar el formulario */
   }
   
   .contact-form {

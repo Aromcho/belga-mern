@@ -8,10 +8,12 @@
     justify-content: center;
     align-self: center;
     font-family: 'Montserrat', sans-serif;
+    background-color:#f8f8f8;
 
   }
   .text-of-register {
     text-transform: uppercase;
+    font-size: 18px;
 }
 .form-register-home {
     font-family: 'Montserrat', sans-serif;

@@ -95,11 +95,11 @@ const InversionSection = ({}) => {
                 </div>
                 <Button className="button--mobile" text="Ver más" type="outline black" link="/emprendimientos" />
             </div>
-            <div className='register-home p-5'>
-                <div className='title-cont d-flex gap-2 justify-content-center pb-3 pt-5 mt-5'>
-                    <h2 className='text-of-register text-center'>Suscribite para recibir todas las novedades</h2>
+            <div className='register-home p-0'>
+                <div className='title-cont d-flex gap-2 justify-content-center pb-3 pt-3 mt-5'>
+                    <p className='text-of-register text-center'>Suscribite para recibir todas las novedades</p>
                 </div>
-                <form className='form-register-home d-flex mt-3 pb-5 mb-5' onSubmit={handleSubmit}>
+                <form className='form-register-home d-flex mt-3 pb-3 mb-5' onSubmit={handleSubmit}>
                     <input
                         type="email"
                         name="email"
