@@ -26,7 +26,7 @@ const renderPropertySEO = async (req, res) => {
         <title>${property.address} | Belga Inmobiliaria</title>
         <meta property="og:title" content="${property.address} | Belga Inmobiliaria">
         <meta property="og:description" content="${property.publication_title || property.address}">
-        <meta property="og:url" content="http://www.belga.com.ar:8080/propiedad/${property.id}">
+        <meta property="og:url" content="https://www.belga.com.ar/propiedad/${property.id}">
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="Belga Inmobiliaria" />
         <meta property="og:image" content="${ogImage}">

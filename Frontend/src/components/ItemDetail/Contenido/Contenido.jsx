@@ -60,7 +60,7 @@ const Contenido = ({
         <div className="info-item text-center d-flex flex-column mb-5">
         <span><strong>{Math.round(total_surface)}</strong></span>
         <img className="icon-image" src='/images/icons/prop_m2.svg' alt="Superficie Total" />
-        <p className="text-muted">sub. Total</p>
+        <p className="text-muted">Sup. Total</p>
         </div>
       )}
 

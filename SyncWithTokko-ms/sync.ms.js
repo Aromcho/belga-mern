@@ -25,7 +25,10 @@ cron.schedule('*/1 * * * *', () => {
   console.log('Ejecutando sincronización con Tokko cada 5 minutos');
   syncWithTokko();
 });
-
+cron.schedule('*/2 * * * *', () => {
+  console.log('Running cron job to sync with Tokko');
+  syncDevelopmentsWithTokko();
+});
 // Endpoint manual de sincronización
 app.get('/sync', async (req, res) => {
   await syncWithTokko();
