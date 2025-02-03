@@ -28,7 +28,7 @@ const SearchHomeForm = ({ handleSubmit }) => {
     { value: 'Terreno', label: 'Terrenos' },
     { value: 'Oficina', label: 'Oficinas' },
     { value: 'Cochera', label: 'Cocheras' },
-    { value: 'Locale', label: 'Locales' },
+    { value: 'Local', label: 'Locales' },
   ];
 
   const handleFormChange = (field, value) => {

@@ -12,6 +12,7 @@ const Contenido = ({
     toilet_amount,
     expenses,
     bedrooms,
+    room_amount,
     tags,
     roofed_surface,
     semiroofed_surface,
@@ -165,7 +166,7 @@ const Contenido = ({
       <div className="info-section">
       <p className="mb-4 text-info-cont">INFORMACIÓN</p>
       <div className="info-details">
-        {bathroom_amount > 0 && <p className='info-details-item'><div className='strong'>Ambientes: </div>{bathroom_amount}</p>}
+        {room_amount > 0 && <p className='info-details-item'><div className='strong'>Ambientes: </div>{room_amount}</p>}
         {orientation && <p className='info-details-item'><p className='strong'>Orientación: </p>{orientation}</p>}
         {property_condition && <p className='info-details-item'><p className='strong'>Condición: </p>{property_condition}</p>}
       </div>
@@ -176,7 +177,7 @@ const Contenido = ({
       <div className="info-details">
         {roofed_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Cubierta: </p> {roofed_surface.slice(0, -3)} m2</p>}
         {semiroofed_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Semicubierta:</p> {semiroofed_surface.slice(0, -3)} m2</p>}
-        {total_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Total:</p> {total_surface.slice(0, -3)} m2</p>}
+        {total_surface > 0 && <p className='info-details-item'><p className='strong'>Sup. Total:</p> {Math.round(total_surface)} m2</p>}
       </div>
       </div>
       </div>
