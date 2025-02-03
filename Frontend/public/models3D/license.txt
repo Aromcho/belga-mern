@@ -1,0 +1,11 @@
+Model Information:
+* title:	LIBERTAD - EDIFICIO C
+* source:	https://sketchfab.com/3d-models/libertad-edificio-c-05a3eef6f63148938549d5b1bfd6bda4
+* author:	cirric (https://sketchfab.com/cirric)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "LIBERTAD - EDIFICIO C" (https://sketchfab.com/3d-models/libertad-edificio-c-05a3eef6f63148938549d5b1bfd6bda4) by cirric (https://sketchfab.com/cirric) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

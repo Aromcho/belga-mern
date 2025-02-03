@@ -6,6 +6,7 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { FaWhatsapp, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import ContactForm from '../Forms/ContactForm/ContactForm';
+import Model3D from '../Model3D/Model3D';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './DevelopmentsDetail.css';  // Estilos personalizados
@@ -169,6 +170,9 @@ const DevelopmentsDetail = () => {
           </Col>
         </Row>
 
+<Row className="container-3d">
+  < Model3D />
+</Row>
         {/* Carrusel de imágenes */}
         <Row className="align-items-center">
           <Col>
