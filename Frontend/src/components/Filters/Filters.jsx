@@ -15,6 +15,8 @@ const Filters = ({ onSubmit }) => {
   const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
   const [order, setOrder] = useState(filters.sortOrder || 'desc'); // Estado para manejar el orden del precio
+  const [inputValue, setInputValue] = useState(filters.searchQuery || '');
+
 
   const operationTypeOptions = [
     { value: 'Venta', label: 'Venta' },
@@ -53,17 +55,19 @@ const Filters = ({ onSubmit }) => {
   }, 500), []);
 
   const handleSearchChange = (e) => {
-    const query = e.target.value;
-    updateFilters({ searchQuery: query }); // Actualizamos directamente en el contexto
-    debouncedSearch(query);
+    setInputValue(e.target.value);
+    debouncedSearch(e.target.value);
   };
   
   
 
   const handleSuggestionSelect = (suggestion) => {
-    updateFilters({ searchQuery: suggestion.value }); // Actualizamos el contexto
-    setAutocompleteSuggestions([]); // Limpiamos las sugerencias
+    setInputValue(suggestion.value);
+    updateFilters({ searchQuery: suggestion.value });
+    setAutocompleteSuggestions([]);
+    onSubmit({ ...filters, searchQuery: suggestion.value });
   };
+
 
   const handleFormChange = (field, value) => {
     updateFilters({ [field]: value });
@@ -113,9 +117,10 @@ const Filters = ({ onSubmit }) => {
             <Form.Control
               type="text"
               className="filter-input input-with-icon"
-              value={filters.searchQuery} // Usamos el estado local "query"
+              value={inputValue} // Usamos el estado local "query"
               placeholder="Buscar dirección, título, barrio, etc..."
               onChange={handleSearchChange}
+              onFocus={(e) => debouncedSearch(e.target.value)}
             />
             {autocompleteSuggestions.length > 0 && (
               <div className="autocomplete-suggestions">

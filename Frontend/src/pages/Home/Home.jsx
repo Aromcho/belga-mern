@@ -50,7 +50,7 @@ const Home = () => {
     if (location.state?.scrollTo === "contact-section") {
       const element = document.getElementById("contact-section");
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: "instant" });
       }
     }
   }, [location]);

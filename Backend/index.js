@@ -51,6 +51,19 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.static('public'));
 app.use('/api', router);
+app.get('/propertyDetail/:id', (req, res) => {
+  const userAgent = req.headers["user-agent"] || "";
+  const isBot = /bot|crawl|spider|slurp|facebook|whatsapp|telegram|twitter|linkedin/i.test(userAgent);
+
+  // Si es un bot, redirigir a la ruta correcta para generar el SEO
+  if (isBot) {
+    return res.redirect(301, `/propiedad/${req.params.id}`);
+  }
+
+  // Si es un usuario normal, servir el frontend (React)
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+});
+
 app.get('/propiedad/:id', renderPropertySEO);
 app.get('/noticia/:id', renderArticuleSEO);
 

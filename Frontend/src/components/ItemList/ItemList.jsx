@@ -26,7 +26,7 @@ const ItemList = () => {
    * Desplaza al inicio de la página después de cambiar de página.
    */
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [currentPage]);
 
   /**

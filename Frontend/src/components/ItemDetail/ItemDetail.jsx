@@ -12,13 +12,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './ItemDetail.css';
 import Print from '../Print/Print';
-import FormContact from '../FormContact/FormContact';
+import ImageLightbox from '../ImageLightbox/ImageLightbox';
 import { HeartIcon, MailIcon, PrintIcon, WhatsappIcon } from '../Icons/Icons';
-import VenderForm from '../Forms/VenderForm/VenderForm';
 import ContacForm from '../Forms/ContactForm/ContactForm';
-import { Skeleton, Dialog, DialogContent, IconButton } from '@mui/material';
-import Lightbox from 'react-spring-lightbox';
-import { Close as CloseIcon } from '@mui/icons-material';
 import Contenido from './Contenido/Contenido';
 
 
@@ -108,8 +104,9 @@ const ItemDetail = ({ property, planos }) => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/propertylist');
+    navigate('/propertylist', { state: { fromDetail: true } });
   };
+  
   const shareOnWhatsApp = () => {
     const message = `Mira esta propiedad: ${address}. Precio: ${operations[0].prices[0].currency} ${operations[0].prices[0].price} https://belga.com.ar/propiedad/${idTokko}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
@@ -343,80 +340,14 @@ const ItemDetail = ({ property, planos }) => {
         </Col>
       </Row>
 
-      {/* Lightbox */}
-      {isOpen && (
-  <Dialog
-    style={{ zIndex: 100000001 }}
-    open={isOpen}
-    onClose={() => setIsOpen(false)}
-    maxWidth="lg"
-    PaperProps={{
-      style: {
-        backgroundColor: 'transparent', // Fondo del contenido transparente
-        boxShadow: 'none',
-      },
-    }}
-    BackdropProps={{
-      style: {
-        backgroundColor: 'rgba(0, 0, 0, 0.98)', // Fondo negro oscuro
-      },
-    }}
-  >
-    <DialogContent
-      style={{
-        margin: 0,
-        padding: 0,
-        overflow: 'hidden',
-        backgroundColor: 'transparent', // Fondo transparente dentro del contenido
-      }}
-    >
-      <div className="dialog-image-container p-0 m-0" style={{ position: 'relative', textAlign: 'center' }}>
-        {/* Contador de imágenes */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '20px',
-            color: 'white',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: '5px 10px',
-            borderRadius: '5px',
-          }}
-        >
-          {selectedImageIndex + 1}/{totalImages}
-        </div>
+      <ImageLightbox
+  isOpen={isOpen}
+  setIsOpen={setIsOpen}
+  photos={photos}
+  selectedImageIndex={selectedImageIndex}
+  setSelectedImageIndex={setSelectedImageIndex}
+/>
 
-        <IconButton
-          style={{ position: 'absolute', top: 0, right: 0, color: 'white' }}
-          onClick={() => setIsOpen(false)}
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <IconButton
-          style={{ position: 'absolute', top: '50%', left: 0, color: 'white' }}
-          onClick={handlePrevImage}
-        >
-          <ArrowBackIos />
-        </IconButton>
-        <IconButton
-          style={{ position: 'absolute', top: '50%', right: 0, color: 'white' }}
-          onClick={handleNextImage}
-        >
-          <ArrowForwardIos />
-        </IconButton>
-
-        <img
-          src={photos[selectedImageIndex].image}
-          alt={`Property Image ${selectedImageIndex}`}
-          style={{ width: 'auto', height: 'auto', maxHeight: '90vh' }}
-        />
-      </div>
-    </DialogContent>
-  </Dialog>
-)}
 
 
       {/* Detalles de la propiedad */}

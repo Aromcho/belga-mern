@@ -18,7 +18,7 @@ const ItemListContainer = () => {
       // Restaurar la posición del scroll solo si no viene desde Home
       const scrollPosition = parseInt(sessionStorage.getItem('scrollPosition'), 10);
       if (scrollPosition && !isNaN(scrollPosition)) {
-        window.scrollTo(0, scrollPosition);
+        window.scrollTo({ top: scrollPosition, behavior: 'instant' });
       }
     } else {
       // Remover la bandera después de la primera navegación

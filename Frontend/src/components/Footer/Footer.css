@@ -169,3 +169,40 @@
     font-size: 1.2rem; /* Reducir tamaño de los iconos sociales */
   }
 }
+/* Ajustes para pantallas de tablet (min-width: 481px) and (max-width: 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .footer-container {
+    padding: 20px 0; /* Ajustar padding para tablets */
+    height: auto; /* Ajustar la altura automáticamente */
+  }
+
+  .footer-wrapper {
+    flex-direction: row; /* Organizar en fila para tablets */
+    height: auto; /* Ajustar la altura automáticamente */
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    padding: 20px;
+    flex: 1; /* Espacio equitativo para cada columna */
+    height: auto; /* Ajustar la altura automáticamente */
+  }
+
+  .footer-center {
+    padding: 40px 20px; /* Ajustar padding */
+  }
+
+  .footer-center img {
+    width: 50%; /* Ajustar tamaño de la imagen para tablets */
+  }
+
+  .social-list {
+    width: 70vw;
+    justify-content: space-between;
+  }
+
+  .social--link {
+    font-size: 1.4rem; /* Ajustar tamaño de los iconos sociales */
+  }
+}

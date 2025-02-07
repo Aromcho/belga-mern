@@ -99,7 +99,7 @@ const QuieroVender = () => {
     <div className="quiero-vender-container">
       <button  variant="primary" className=" btn-go-back custom-button m-5 mb-0">
         
-        <p className="volver"><FaArrowLeft className="me-2" />VOLVER AL INICIO</p>
+        <p className="volver"> <Link to="/" > <FaArrowLeft className="me-2" />VOLVER AL INICIO</Link></p>
       </button>
     <VenderForm className="mt-5 pt-5"/>
     {/*

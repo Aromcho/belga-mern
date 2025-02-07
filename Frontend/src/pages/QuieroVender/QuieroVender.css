@@ -8,7 +8,11 @@
 .volver {
   font-size: 14px;
   font-weight: 600;
+}
 
+.volver a {
+  color: #000 !important;
+  text-decoration: none;
 }
 .back-wrapper {
   display: flex;

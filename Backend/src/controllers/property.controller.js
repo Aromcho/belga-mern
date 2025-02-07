@@ -80,7 +80,6 @@ const getProperties = async (req, res) => {
         { address: { $regex: searchQuery, $options: 'i' } },  // Buscar por dirección
         { 'location.full_location': { $regex: searchQuery, $options: 'i' } },  // Buscar por ubicación completa
         { 'location.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por barrio
-        { 'publication_title': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por título
         { 'real_address': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por dirección real
       ];
     }

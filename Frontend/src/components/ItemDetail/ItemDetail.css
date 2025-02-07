@@ -301,14 +301,26 @@
     padding: 0; /* Elimina cualquier padding que pueda tener la imagen */
   }
 }
+@media (min-width: 550px) and (max-width: 760px) {
+    .image-wrapper-detail-container{
+      width: calc(97vw - 0px); /* Ajuste específico para tamaños de pantalla medianos */
+      height: 300px; /* Ajusta la altura como prefieras */
+      left: -14%;
+      right: 0;
+      transform: none; /* Elimina cualquier desplazamiento */
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
 
 @media (min-width: 768px) and (max-width: 1200px) {
+  
   .image-wrapper-detail {
     width: calc(97vw - 0px); /* Ajuste específico para tamaños de pantalla medianos */
-    height: 350px; /* Ajusta la altura según tus necesidades */
+    height: 60vh; /* Ajusta la altura según tus necesidades */
   }
   .image-wrapper-detail-container {
-    height: 350px;
+    height: 60vh;
   }
 }
 

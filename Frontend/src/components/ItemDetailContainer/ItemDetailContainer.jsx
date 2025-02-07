@@ -16,7 +16,7 @@ const ItemDetailContainer = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [id]); // Esto asegura que cada vez que se cambie de propiedad, haga scroll al inicio
 
   useEffect(() => {
