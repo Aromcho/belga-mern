@@ -84,7 +84,6 @@ const getProperties = async (req, res) => {
       filterObj.$or = searchQuery.map(query => ({
         $or: [
           { address: { $regex: query, $options: 'i' } },  
-          { 'location.full_location': { $regex: query, $options: 'i' } },  
           { 'location.name': { $regex: query, $options: 'i' } },  
           { 'real_address': { $regex: query, $options: 'i' } }  
         ]
