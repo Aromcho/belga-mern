@@ -9,13 +9,12 @@ import debounce from 'lodash.debounce';
 import './Filters.css';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Filters = ({ onSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext);
-  const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
   const [order, setOrder] = useState(filters.sortOrder || 'desc'); // Estado para manejar el orden del precio
-  const [inputValue, setInputValue] = useState(filters.searchQuery || '');
 
 
   const operationTypeOptions = [
@@ -54,19 +53,7 @@ const Filters = ({ onSubmit }) => {
     performSearch(query);
   }, 500), []);
 
-  const handleSearchChange = (e) => {
-    setInputValue(e.target.value);
-    debouncedSearch(e.target.value);
-  };
   
-  
-
-  const handleSuggestionSelect = (suggestion) => {
-    setInputValue(suggestion.value);
-    updateFilters({ searchQuery: suggestion.value });
-    setAutocompleteSuggestions([]);
-    onSubmit({ ...filters, searchQuery: suggestion.value });
-  };
 
 
   const handleFormChange = (field, value) => {
@@ -110,41 +97,7 @@ const Filters = ({ onSubmit }) => {
   return (
     <Form onSubmit={handleSubmit} className="filter-form">
       {/* Input para búsqueda general */}
-      <Row>
-        <Col>
-          <div className="input-icon-wrapper">
-            <FaSearch className="input-icon-placeholder" />
-            <Form.Control
-              type="text"
-              className="filter-input input-with-icon"
-              value={inputValue} // Usamos el estado local "query"
-              placeholder="Buscar dirección, título, barrio, etc..."
-              onChange={handleSearchChange}
-              onFocus={(e) => debouncedSearch(e.target.value)}
-            />
-            {autocompleteSuggestions.length > 0 && (
-              <div className="autocomplete-suggestions">
-                <ul>
-                  {autocompleteSuggestions.map((suggestion) => (
-                    <li
-                      key={suggestion.value}
-                      onClick={() => handleSuggestionSelect(suggestion)}
-                    >
-                     {suggestion.value} {suggestion.secundvalue && ` - ${suggestion.secundvalue}`}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </Col>
-
-        <Col md="auto">
-          <Button className="search-button search-button-filter" type="submit">
-            BUSCAR
-          </Button>
-        </Col>
-      </Row>
+      <SearchBar onSubmit={onSubmit}/>
 
       {/* Botón para mostrar/ocultar filtros en versión móvil */}
       <Row className="d-md-none mt-3">

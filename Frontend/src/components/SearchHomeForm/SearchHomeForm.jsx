@@ -8,6 +8,7 @@ import { FiltersContext } from '../../context/FiltersContext';
 import './SearchHomeForm.css';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import SearchBar from '../SearchBar/SearchBar.jsx';
 
 const SearchHomeForm = ({ handleSubmit }) => {
   const { filters, updateFilters } = useContext(FiltersContext); // Obtenemos filtros y función de actualización del contexto
@@ -144,36 +145,9 @@ const SearchHomeForm = ({ handleSubmit }) => {
             </div>
           </Col>
         </Row>
-        <Row className="filter-row">
-          <Col>
-            <div className="input-icon-wrapper mb-3">
-              <SearchIcon className="input-icon-placeholder" />
-              <Form.Control
-                type="text"
-                className="filter-input input-with-icon"
-                value={filters.searchQuery}  // Se usa el valor del contexto
-                placeholder="Buscar..."
-                onChange={handleSearchChange}
-              />
-              {autocompleteSuggestions.length > 0 && (
-                <div className="autocomplete-suggestions">
-                  <ul>
-                    {autocompleteSuggestions.map((suggestion) => (
-                      <li
-                        key={suggestion.value}
-                        onClick={() => handleSuggestionSelect(suggestion)}
-                      >
-                        {suggestion.value} {suggestion.secundvalue && ` - ${suggestion.secundvalue}`}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </Col>
-        </Row>
+        <SearchBar/>
 
-        <Row className="filter-row">
+        <Row className="filter-row mt-3">
           <Col>
             <div className="price-range-wrapper">
               <MultiRangeSlider

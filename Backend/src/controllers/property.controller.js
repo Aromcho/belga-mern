@@ -75,13 +75,20 @@ const getProperties = async (req, res) => {
     }
 
     // Filtro de búsqueda general
-    if (searchQuery && searchQuery.length > 0) {
-      filterObj.$or = [
-        { address: { $regex: searchQuery, $options: 'i' } },  // Buscar por dirección
-        { 'location.full_location': { $regex: searchQuery, $options: 'i' } },  // Buscar por ubicación completa
-        { 'location.name': { $regex: searchQuery, $options: 'i' } },  // Buscar por barrio
-        { 'real_address': { $regex: searchQuery, $options: 'i' } }, // Búsqueda por dirección real
-      ];
+    if (searchQuery) {
+      if (!Array.isArray(searchQuery)) {
+        searchQuery = [searchQuery]; // Convertirlo en array si es un string único
+      }
+
+      // Aplicar la búsqueda en diferentes campos con `$or`
+      filterObj.$or = searchQuery.map(query => ({
+        $or: [
+          { address: { $regex: query, $options: 'i' } },  
+          { 'location.full_location': { $regex: query, $options: 'i' } },  
+          { 'location.name': { $regex: query, $options: 'i' } },  
+          { 'real_address': { $regex: query, $options: 'i' } }  
+        ]
+      }));
     }
 
     // Filtro por cocheras (garages)
