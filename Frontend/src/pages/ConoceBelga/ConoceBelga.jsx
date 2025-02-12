@@ -241,7 +241,7 @@ const ConoceBelga = observer(() => {
                     <div className="cb-service-wrapper">
                       <div className="cb-service-title">Tour Virtual</div>
                       <div className="cb-service-media">
-                      <iframe className="w-100 h-100" src="https://matterport.com/discover/space/BB1DiUzwnhk" />
+                      <iframe className="w-100 h-100" src="https://my.matterport.com/show/?m=S5uGw8irJFo" />
                       </div>
                     </div> </SwiperSlide>
                     <SwiperSlide><div className="cb-service-wrapper">

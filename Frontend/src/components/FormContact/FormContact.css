@@ -1,8 +1,10 @@
 .contact-form-wrapper {
     width: 100%;
     max-width: 550px;
+    min-width: 33vw;
+
     font-family:'Montserrat', sans-serif;
-    margin: 0 auto;
+    margin: 0 !important;
     background-color: #ffffff; /* Fondo blanco para el contenedor del formulario */
     border-radius: 0; /* Bordes redondeados para un estilo más moderno */
   }

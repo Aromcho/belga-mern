@@ -8,13 +8,10 @@ import Title from "../../components/Title/Title.jsx";
 import BackToTop from "../../components/BackToTop/BackToTop.jsx";
 import SearchHomeForm from "../../components/SearchHomeForm/SearchHomeForm.jsx";
 import SelectionListContainer from "../../components/SelectionListContainer/SelectionListContainer.jsx";
-import Button from "../../components/Button/Button.jsx";
-import ContactForm from "../../components/Forms/ContactForm/ContactForm.jsx";
 import HomeMap from "../../components/HomeMap/HomeMap.jsx";
-import { Container } from "react-bootstrap";
 import InversionSection from "../../components/InvertionHome/InvertionHome.jsx";
 import FromContact from "../../components/FormContact/FormContact.jsx";
-import Register from "../Register/Register.jsx";
+import {Helmet} from "react-helmet-async";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -80,6 +77,9 @@ const Home = () => {
   ];
   return (
     <div className="layout transparent">
+      <Helmet>
+        <title>Belga Inmobiliaria</title>
+      </Helmet>
       <div className="hero-wrapper">
         {!isMobile ? (
           <video autoPlay muted loop className="video" src="/home-video.mp4">

@@ -147,7 +147,7 @@ const ItemDetail = ({ property, planos }) => {
         breakpoint: 768,
         settings: {
           initialSlide: 0,
-          slidesToShow: 1,
+          slidesToShow: 2.1,
           slidesToScroll: 1,
           centerMode: false,
         },
