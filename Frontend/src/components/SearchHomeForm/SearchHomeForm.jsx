@@ -1,18 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import Select from 'react-select';
-import { SearchIcon } from "../Icons/Icons";
-import { FaSearch, FaHome, FaBed, FaCity } from 'react-icons/fa';
+import { FaHome, FaBed, FaCity } from 'react-icons/fa';
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider.jsx';
 import { FiltersContext } from '../../context/FiltersContext';
 import './SearchHomeForm.css';
 import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 
 const SearchHomeForm = ({ handleSubmit }) => {
-  const { filters, updateFilters } = useContext(FiltersContext); // Obtenemos filtros y función de actualización del contexto
-  const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
+  const { filters, updateFilters } = useContext(FiltersContext); // Solo contexto, sin estados locales
   const location = useLocation();
 
   const isHome = location.pathname === "/";
@@ -45,30 +42,6 @@ const SearchHomeForm = ({ handleSubmit }) => {
         borderColor: '#ccc',
       },
     }),
-  };
-
-  const handleSearchChange = async (e) => {
-    const query = e.target.value;
-    updateFilters({ searchQuery: query });  // Actualiza el contexto con el query
-
-    if (query.length > 2) {
-      try {
-        const response = await axios.get('/api/property/autocomplete', {
-          params: { query }
-        });
-        setAutocompleteSuggestions(response.data);
-        console.log('Sugerencias de autocompletado:', response.data);
-      } catch (error) {
-        console.error('Error en el autocompletado:', error);
-      }
-    } else {
-      setAutocompleteSuggestions([]);
-    }
-  };
-
-  const handleSuggestionSelect = (suggestion) => {
-    handleFormChange('searchQuery', suggestion.value); // Actualiza 'searchQuery' en el contexto
-    setAutocompleteSuggestions([]); // Limpiar sugerencias
   };
 
   return (
@@ -145,7 +118,12 @@ const SearchHomeForm = ({ handleSubmit }) => {
             </div>
           </Col>
         </Row>
-        <SearchBar/>
+
+        {/* Se mantiene solo el SearchBar sin estados extra */}
+        <SearchBar onSubmit={(updatedFilters) => {
+updateFilters(updatedFilters);
+}} />
+
 
         <Row className="filter-row mt-3">
           <Col>
@@ -160,7 +138,6 @@ const SearchHomeForm = ({ handleSubmit }) => {
                   handleFormChange('price_to', newValue[1]);   // Actualiza el filtro máximo
                 }}
               />
-
             </div>
           </Col>
           <Col md="auto">

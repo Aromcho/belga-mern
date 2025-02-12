@@ -44,12 +44,20 @@ const SearchBar = ({ onSubmit }) => {
     if (!selectedItems.includes(suggestion.value)) {
       const newSelection = [...selectedItems, suggestion.value];
       setSelectedItems(newSelection);
-      updateFilters({ searchQuery: newSelection });
+      updateFilters({ searchQuery: newSelection }); // 🔥 Actualiza los filtros globales correctamente
       onSubmit({ ...filters, searchQuery: newSelection });
     }
-    setInputValue('');
-    setAutocompleteSuggestions([]);
+  
+    setInputValue(""); // 🔥 Limpia el input después de seleccionar una sugerencia
+    setAutocompleteSuggestions([]); // 🔥 Limpia la lista de autocompletado
+  
+    // 🔥 Fuerza la actualización del input eliminando el foco
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
   };
+  
+  
 
   const handleRemoveItem = (item) => {
     const updatedSelection = selectedItems.filter((i) => i !== item);
