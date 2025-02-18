@@ -23,7 +23,7 @@
     align-items: center;
     flex-wrap: wrap;
     min-height: 40px;
-    padding: 0px 40px;
+    padding: 0 0 0 40px;
     border: 1px solid #000;
     background: white;
     position: relative;
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    margin-right: 5px;
+    margin: 5px 3px 5px 0px;
   }
   .selected-item p{
     padding: 3px 0px 3px 10px;
@@ -65,7 +65,7 @@
     font-size: 14px;
     color: #6c757d;
     background: transparent;
-    min-width: 120px;
+    min-width: 12px;
     margin-top: 0 !important;
   }
   
