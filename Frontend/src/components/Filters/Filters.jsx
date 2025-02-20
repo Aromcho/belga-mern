@@ -12,7 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Filters = ({ onSubmit }) => {
-  const { filters, updateFilters, properties } = useContext(FiltersContext);
+  const { filters, updateFilters, properties, totalProperties } = useContext(FiltersContext);
   const [showFilters, setShowFilters] = useState(false); // Estado para manejar el colapso en móvil
   const [order, setOrder] = useState(filters.sortOrder || 'desc'); // Estado para manejar el orden del precio
 
@@ -350,7 +350,7 @@ const Filters = ({ onSubmit }) => {
             <FaArrowLeft className="me-2" />
             Volver al inicio
           </Button>
-          <p className='mx-5 text-mute'>{properties.length} Resultados</p>        </Col>
+          <p className='mx-5 text-mute'>{totalProperties} Resultados</p>        </Col>
         <Col md="auto">
         <Row>
         <Col md="auto">
