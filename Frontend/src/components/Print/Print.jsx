@@ -33,7 +33,7 @@
                 <div className="main-title-container">
                   <div className="title-new">
                     <span className="address-title">{property.address}</span>
-                    <p className="address-secundary-title">{property.type.name}<span></span> {property.location?.name}</p>
+                    <p className="address-secundary-title">{property.type.name} en <span></span> {property.location?.name}</p>
                   </div>
                   <div className="main-price-container">
                     <span className="main-price">
