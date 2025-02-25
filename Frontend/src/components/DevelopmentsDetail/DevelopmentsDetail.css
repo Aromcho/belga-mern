@@ -6,7 +6,15 @@
   padding: 40px 20px;
   font-family:'Montserrat', sans-serif;
 }
+.property-dev-detail {
 
+}
+.btn-go-back-dev {
+  font-family:'Montserrat', sans-serif;
+  border: none;
+  background-color: transparent;
+  margin-top: 100px;
+}
 /* Título del desarrollo */
 .address-dev {
   font-family:'Montserrat', sans-serif;
@@ -16,7 +24,7 @@
 }
 .image-wrapper-detail-dev {
   position: relative;
-  left: -180px;
+  left: -95px;
   width: 97vw;
   height: 600px; /* Ajusta la altura del contenedor */
   overflow: hidden; /* Oculta las partes que sobresalgan */
@@ -114,4 +122,56 @@
   text-align: center;
   font-size: 20px;
   color: #ff4c4c;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .development-detail-container {
+    padding: 20px 10px;
+  }
+  .btn-go-back-dev {
+    font-family:'Montserrat', sans-serif;
+    border: none;
+    background-color: transparent;
+    margin-top: 50px;
+  }
+
+  .address-dev {
+    font-size: 14px;
+  }
+
+  .image-wrapper-detail-dev {
+    left: -10px;
+    width: 100vw;
+    height: 300px;
+  }
+
+  .development-detail-location {
+    font-size: 16px;
+  }
+
+  .development-features, .development-description {
+    padding: 15px;
+  }
+
+  .feature-title, .description-title {
+    font-size: 20px;
+  }
+
+  .feature-list li {
+    font-size: 16px;
+  }
+
+  .custom-arrow {
+    padding: 8px;
+  }
+
+  .back-button {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .error-message {
+    font-size: 18px;
+  }
 }

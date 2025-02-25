@@ -15,6 +15,7 @@ import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko
 import { generateJSON } from './src/utils/jsonGenerator.js';
 import renderPropertySEO from './src/controllers/SEO.controller.js';
 import renderArticuleSEO from './src/controllers/renderArticuleSEO.controller.js';
+import renderDevelopmentSEO from './src/controllers/renderDevelopmentSEO.controller.js'
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -49,7 +50,7 @@ app.use(cookieParser(process.env.SECRET));
 // Servir la carpeta de imágenes de manera estática
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use(express.static('public'));
+app.use(express.static('dist'));
 app.use('/api', router);
 app.get('/propertyDetail/:id', (req, res) => {
   const userAgent = req.headers["user-agent"] || "";
@@ -61,9 +62,21 @@ app.get('/propertyDetail/:id', (req, res) => {
   }
 
   // Si es un usuario normal, servir el frontend (React)
-  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
+app.get('/emprendimientosDetail/:id', (req, res) => {
+  const userAgent = req.headers["user-agent"] || "";
+  const isBot = /bot|crawl|spider|slurp|facebook|whatsapp|telegram|twitter|linkedin/i.test(userAgent);
 
+  // Si es un bot, redirigir a la ruta correcta para generar el SEO
+  if (isBot) {
+    return res.redirect(301, `/propiedad/${req.params.id}`);
+  }
+
+  // Si es un usuario normal, servir el frontend (React)
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+});
+app.get('/emprendimientos/:id', renderDevelopmentSEO);
 app.get('/propiedad/:id', renderPropertySEO);
 app.get('/noticia/:id', renderArticuleSEO);
 
@@ -73,7 +86,7 @@ app.get('/noticia/:id', renderArticuleSEO);
 
 
 // Configurar los cron jobs para sincronización Development
-//cron.schedule('0 * * * *', () => {
+//cron.schedule('*/1 * * * *', () => {
 //  console.log('Running cron job to sync with Tokko');
 //  syncDevelopmentsWithTokko();
 //});
@@ -87,7 +100,7 @@ app.get('/noticia/:id', renderArticuleSEO);
 
 // Ruta catch-all para servir index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
 // Manejo de errores

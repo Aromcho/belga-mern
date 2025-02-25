@@ -59,8 +59,6 @@ export const FiltersProvider = ({ children }) => {
           offset,
         },
       });
-      console.log('Propiedades obtenidas:', response.data.meta.total_count);
-
       setProperties(response.data.objects);
       setTotalProperties(response.data.meta.total_count);
     } catch (error) {

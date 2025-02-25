@@ -57,6 +57,7 @@ function App() {
               <Route path="/quiero-vender" element={<QuieroVender />} />
               <Route path="/emprendimientos" element={<Emprendimientos />} />
               <Route path="/emprendimientos/:id" element={<DevelopmentsDetail />} />
+              <Route path="/emprendimientosDetail/:id" element={<DevelopmentsDetail />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogDetail />} />

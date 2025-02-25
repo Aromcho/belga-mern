@@ -1,3 +1,4 @@
+import Development from '../models/Development.model.js';  // Asegúrate de que esta ruta sea correcta
 import DevelopmentManager from '../manager/development.manager.js';  // Asegúrate de que esta ruta sea correcta
 
 export const createDevelopment = async (req, res) => {
@@ -37,8 +38,10 @@ export const getDevelopments = async (req, res) => {
 
 
 export const getDevelopmentById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const development = await DevelopmentManager.readOne(req.params.id);
+    const numericId = parseInt(id, 10);
+    const development = await Development.findOne({ id: numericId }).lean();
     if (!development) {
       return res.status(404).json({ message: 'Desarrollo no encontrado' });
     }

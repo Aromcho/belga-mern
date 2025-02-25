@@ -1,16 +1,17 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Slider from 'react-slick';
+import { Helmet } from 'react-helmet-async';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import { FaWhatsapp, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
 import MapaInteractivo from '../MapaInteractivo/MapaInteractivo';
 import ContactForm from '../Forms/ContactForm/ContactForm';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './DevelopmentsDetail.css';  // Estilos personalizados
+import './DevelopmentsDetail.css';
 
-// Flechas personalizadas para el carrusel
+// Flechas personalizadas para el carrusel (NO SE CAMBIA EL DISEÑO)
 const NextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -59,7 +60,7 @@ const PrevArrow = (props) => {
   );
 };
 
-// Función para decodificar entidades HTML
+// Decodificar HTML en la descripción
 const decodeHtmlEntities = (text) => {
   const element = document.createElement('div');
   if (text) {
@@ -68,35 +69,76 @@ const decodeHtmlEntities = (text) => {
   }
   return text;
 };
+const goBack = () => {
+  navigate(-1); // Función para volver a la página anterior
+};
+
+const shareOnWhatsApp = () => {
+  const message = `Mira esta propiedad: ${development.address}.`;
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+};
+
+const shareByEmail = () => {
+  const subject = `Interesante propiedad en ${development.address}`;
+  const body = `Te comparto esta propiedad en ${development.address}. Mira más detalles aquí.`;
+  const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoLink;
+};
 
 const DevelopmentsDetail = () => {
+  const { id } = useParams();
   const location = useLocation();
-  const { development } = location.state || {};  // Extraer 'development' desde 'location.state'
-  console.log(development);
-  if (!development) {
-    return <div className="text-light">No se encontraron detalles del desarrollo.</div>;
-  }
-
-  const description = decodeHtmlEntities(development.description);  // Decodificar la descripción
-
   const navigate = useNavigate();
 
-  const goBack = () => {
-    navigate(-1); // Función para volver a la página anterior
-  };
+  // Estado inicial: usa el desarrollo si viene en el `state`
+  const [development, setDevelopment] = useState(location.state?.development || null);
+  const [loading, setLoading] = useState(!location.state?.development);
+  const [error, setError] = useState(null);
 
-  const shareOnWhatsApp = () => {
-    const message = `Mira esta propiedad: ${development.address}.`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [id]);
 
-  const shareByEmail = () => {
-    const subject = `Interesante propiedad en ${development.address}`;
-    const body = `Te comparto esta propiedad en ${development.address}. Mira más detalles aquí.`;
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
+  useEffect(() => {
+    // Si no hay datos del desarrollo en el `state`, carga desde el backend
+    if (!development || development.id !== parseInt(id)) {
+      const fetchDevelopment = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`/api/development/${id}`);
+          const data = await response.json();
+
+          if (response.ok) {
+            setDevelopment(data);
+          } else {
+            setError('Emprendimiento no encontrado');
+          }
+        } catch (error) {
+          setError('Error al cargar el emprendimiento');
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchDevelopment();
+    }
+  }, [id, development]);
+
+  if (loading) {
+    return <div className="text-light">Cargando...</div>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>{error}. Volviendo a la lista de emprendimientos...</p>
+        <button onClick={() => navigate(-1)}>Volver a la lista</button>
+      </div>
+    );
+  }
+
+  const description = decodeHtmlEntities(development.description);
 
   const sliderSettings = {
     dots: true,
@@ -126,13 +168,12 @@ const DevelopmentsDetail = () => {
       },
     ],
   };
-
   return (
     <>
-      <button onClick={goBack} className="btn-go-back custom-button mt-5 pt-5 mx-5 px-5">
+      <button onClick={goBack} className="btn-go-back-dev">
         <p className="me-2 p-5"><FaArrowLeft className="me-2" /> Volver a la lista</p>
       </button>
-      <Container className="w-75 my-3 pt-3 text-light property-detail bg-black">
+      <Container className="text-light property-dev-detail bg-black">
         {/* Información del inmueble */}
         <Row className="my-1 shadow p-3">
           <Col md={12}>
