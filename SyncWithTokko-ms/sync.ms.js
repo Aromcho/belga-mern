@@ -5,6 +5,7 @@ import cron from 'node-cron';
 import cors from 'cors'; 
 import connectDB from './src/utils/db.js';
 import { syncWithTokko } from './src/utils/syncWithTokko.js';
+import { syncDevelopmentsWithTokko } from './src/utils/syncDevelopmentsWithTokko.js';
 import pathHandler from './src/middelwares/pathHandler.mid.js';
 import cookieParser from 'cookie-parser';
 
