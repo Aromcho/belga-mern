@@ -81,21 +81,11 @@ app.get('/propiedad/:id', renderPropertySEO);
 app.get('/noticia/:id', renderArticuleSEO);
 
 
-// Configurar los cron jobs para sincronización
-// Configurar los cron jobs para sincronización cada 5 minutos
-
-
-// Configurar los cron jobs para sincronización Development
-//cron.schedule('*/1 * * * *', () => {
-//  console.log('Running cron job to sync with Tokko');
-//  syncDevelopmentsWithTokko();
-//});
-
-//ejecutar el jsonGenerator.js
-//cron.schedule('0 * * * *', () => {
-//  console.log('Running cron job to generate JSON');
-//  generateJSON();
-//});
+//ejecutar el jsonGenerator.js para ubicaciones del buscador
+cron.schedule('*/5  * * * *', () => {
+ console.log('Running cron job to generate JSON');
+  generateJSON();
+});
 
 
 // Ruta catch-all para servir index.html
