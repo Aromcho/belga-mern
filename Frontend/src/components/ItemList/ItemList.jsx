@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Item from '../Item/Item.jsx';
@@ -9,11 +10,24 @@ import './ItemList.css';
 import FormList from '../Forms/FormList/FormList.jsx';
 
 const ItemList = () => {
-  const { properties, loading, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
+  const { properties, loading, filters, updateFilters, totalProperties, limit, offset, setOffset } = useContext(FiltersContext);
 
   const totalPages = Math.ceil(totalProperties / limit);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  useEffect(() => {
+    const operation = filters.operation_type.join('-').toLowerCase() || 'propiedades';
+    const property = filters.property_type.join('-').toLowerCase() || 'todas';
+    
+    const newUrl = `/${operation}/${property}`;
+
+    // Evita navegación innecesaria si ya estás en la ruta actual
+    if (location.pathname !== newUrl && location.pathname !== "/") {
+      navigate(newUrl, { replace: true });
+    }
+  }, [filters.operation_type, filters.property_type]);
   /**
    * Sincroniza currentPage con offset.
    * Si offset cambia, actualiza currentPage.
